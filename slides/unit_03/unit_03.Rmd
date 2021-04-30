@@ -1,0 +1,562 @@
+---
+title: "w241: Experiments and Causality"
+subtitle: "Unit 3"
+author: "David Reiley, David Broockman, D. Alex Hughes"
+institute: "UC Berkeley, School of Information"
+date: "Updated: `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, echo=FALSE, message=FALSE, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(patchwork)
+library(data.table)
+
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(echo = TRUE, dpi = 300)
+
+
+theme_set(theme_minimal())
+```
+
+---
+
+class: inverse, center, middle
+
+# Sampling Distribution and Randomization Inference
+
+---
+
+# Standard Errors 
+
+- Standard deviation of the sampling distribution 
+- How spread out is the sampling distribution? 
+- How large are the typical chance differences? 
+- Later, we'll examine statistical power 
+  - The spread of the sampling distribution is the standard error 
+  - In what kinds of experiments are large and small differences likely to arise by chance? 
+  
+---
+
+# Sampling Distributions and Randomization Inference
+
+- First, read GG 3.0, 3.1, 3.4.
+- Groups may differ by chance, even if the treatment has no effect.
+  - How much would the groups differ if the treatment had no effect?
+  - How large of an "effect estimate" would we reach by chance?
+- Distribution of estimates one would reach if treatment had no effect.
+  - How likely is this estimate to have just arisen by
+chance?
+- Similar to observational studies, but:
+  - Intuition easy to see in experiments.
+  - Testing a hypothesis about our sample, not a population.
+  - Example code to walk through intuition on slides to follow  
+  
+---
+
+# Example: An Experiment with no Effect
+
+- Does eating soybeans affect estrogen levels?
+- 40 individuals: 20 men, 20 women.
+- Simulate the potential outcomes of the control group. 
+- Simulate the potential outcomes of the treatment group. 
+- A simulated experiment with no effect.
+
+---
+
+```{r make potential outcomes} 
+group <- c(rep("Man",20),rep("Woman",20))
+
+po_control <- c(
+  seq(from = 1, to = 20), 
+  seq(from = 51, to = 70)) 
+
+## Suppose there is no effect. 
+## Then, the potential outcomes to control are equal 
+## to the potential outcomes to treatment. 
+po_treatment <- po_control 
+```
+
+---
+
+```{r plot outcomes, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'} 
+ggplot() + 
+  aes(x=po_control, color = group) +
+  geom_density() + 
+  labs(
+    title = "Distribution of Potential Outcomes", 
+    subtitle = "Man identifiers have lower estrogen",
+    x = 'Potential Outcomes', 
+    y = 'Density', 
+    color = 'Identity Group'
+  )
+```
+
+---
+
+# Random Assignment 
+
+- Define function to randomly assign units to treatment and control.
+- Randomly pick 20 for treatment and 20 for control. 
+- Concatenate the two vectors.
+- Get a different vector when you run it again.
+
+---
+
+# Random Assignment
+
+```{r define randomizaton function}
+randomize <- function(units_per_group) { 
+  ## an (unnecessary) function to randomize units into 
+  ## treatment and control 
+  ## ---
+  ## args: 
+  ##  - units_per_group: how many zero and one should be returned
+  
+  assignment_vector <- rep(c('Control', 'Treatment'), each = units_per_group)
+  sample(assignment_vector)
+} 
+
+randomize(units_per_group = 4) 
+randomize(units_per_group = 4) 
+```
+
+---
+
+# Realized Outcomes 
+
+- Treatment outcome for those randomized to treatment and control outcome for those randomized to control.
+- Assign for each person in the vector.
+- Same because we had an experiment with no effect.
+- R code is often written in a compact manner; could also have been done separately for each group.
+- Why are we doing this when there is no treatment effect?
+- Because it should also work when there is one. We're looking at what happens when we randomly assign people to control and treatment groups.
+
+---
+
+# Realized Outcomes
+
+```{r assign treatment}
+treatment_assigned <- randomize() 
+
+outcomes <- po_treatment * I(treatment_assigned == "Treatment") + 
+  po_control * I(treatment_assigned == "Control")
+
+outcomes
+```
+
+---
+
+# Function to Estimate the Average Treatment Effect (ATE) 
+
+- Subtract the mean outcome for the control group from the mean outcome of the treatment group.
+- How much higher is the average in the treatment group versus the control group?
+- We may have randomly selected someone with a higher or lower level of estrogen.
+- Even though we know the effect is 0, we see chance differences.
+
+---
+
+# Function to Estimate the Average Treatment Effect (ATE) 
+
+```{r estimate ate }
+estimate_ate <- function(y_values, treatment) { 
+  
+  treatment_group_mean <- mean(outcomes[treatment == 'Treatment'])
+  control_group_mean   <- mean(outcomes[treatment == 'Control'])
+  
+  ate <- treatment_group_mean - control_group_mean
+  
+  return(
+    list(
+      "tg_mean" = treatment_group_mean, 
+      "cg_mean" = control_group_mean, 
+      "ate" = ate)
+  )
+}
+
+# In fact, there is _no_ effect, but... sampling! 
+estimate_ate(y_values = outcomes, treatment = treatment_assigned) 
+```
+
+---
+
+class: inverse, center, middle
+
+# The Null Hypothesis
+
+---
+
+# Rhetorical Posture of the Null Hypothesis
+- You want to argue against a skeptic that a treatment has an effect.
+- Assume the skeptic is right.
+
+> Treatment has no effect.
+
+- What is the chance that we would see this estimate by chance in that scenario?
+
+> This is p-value.
+
+- We’ll see where it comes from visually.
+
+---
+
+# Average Size of the Difference
+
+- Simulate this a few times to get a sense of how much our treatment effect estimate would vary by chance.
+- We created an estimate function with the outcomes and the treatment group.
+- Outcome vector will look the same regardless of the treatment vector.
+
+```{r a few experiments}
+treatment_assigned_one <- randomize(units_per_group = 20)
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_one) 
+
+treatment_assigned_two <- randomize(units_per_group = 20)
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_two) 
+
+treatment_assigned_three <- randomize(units_per_group = 20)
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_three) 
+```
+
+---
+
+# Outcome With Different Assignments
+
+- Similar to re-sampling from a population.
+- Re-randomizing from within the original population. Testing the null hypothesis from within the sample we already have.
+- Re-shuffle the 40 people between treatment and control. Assuming the treatment effect for everyone is zero. 
+- **Sharp null hypothesis**: For every unit, there is no effect.
+- Repeat this process to generate a synthetic distribution of effects if the sharp null hypothesis *were true*. 
+
+- Randomly sample the vector of assignments 5,000 times to generate an unbiased sample of all the effects.
+- Literally, replicate 5,000 times, and save to a vector.
+
+---
+
+```{r}
+## going to move the randomization inside the `estimate_ate` function 
+## for compactness 
+
+sharp_null <- replicate(
+  n = 5000, 
+  expr = estimate_ate(
+    y_value = outcomes, 
+    treatment = randomize(units_per_group = 20))
+)
+```
+
+---
+
+```{r sharp null distribution, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'} 
+ggplot() + 
+  aes(x = sharp_null) + 
+  geom_histogram() + 
+  labs(
+    title = "Distribution of Treatment Effects Under Sharp Null", 
+    subtitle = "Distribution is Centered at Zero, And Symmetric", 
+    x = "Estimated Average Treatment Effect", 
+    y = "Count"
+  )
+```
+
+---
+
+# Size of the Observed Difference
+
+- The p-value.
+- How often did I get a randomization under the sharp null where the estimate was larger than my actual estimate?
+- For each, is it larger than the average treatment effect estimate?
+- This is a sampling distribution.
+- How big is my estimate relative to the distribution of estimates?
+
+---
+
+# Size of the Observed Difference 
+
+In this particular case, 
+
+```{r estimate p-value}
+experimental_randomization <- randomize(units_per_group = 20)
+experimental_ate <- estimate_ate(
+  y_values = outcomes, 
+  treatment = experimental_randomization)
+
+sharp_null <- replicate(
+  n = 5000, 
+  expr = estimate_ate(
+    y_value = outcomes, 
+    treatment = randomize(units_per_group = 20))
+)
+
+mean(abs(sharp_null) > abs(experimental_ate))
+```
+
+---
+
+# Size of the Observed Difference 
+
+```{r make no effect histogram}
+histogram_no_effect <- ggplot() + 
+  aes(x = sharp_null) + 
+  geom_histogram() + 
+  geom_vline(xintercept = experimental_ate, color = 'darkorange') + 
+  labs(
+    title = "No Effect: Distribution of Treatment Effects Under Sharp Null", 
+    subtitle = "Distribution is Centered at Zero, And Symmetric", 
+    x = "Estimated Average Treatment Effect", 
+    y = "Count"
+  )
+
+```
+
+---
+
+# Size of the Observed Difference 
+
+```{r plot sharpnull and experimental ate, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'} 
+histogram_no_effect
+```
+
+---
+
+class: inverse, center, middle
+
+# P-Values and Hypothesis Tests
+
+---
+
+# P-Values 
+
+- If the treatment had no effect, how likely is it that the data would generate  a difference this extreme, *just by chance*?
+- What is the difference between the mean in the control and treatment groups?
+- Different from how likely it is the treatment has an effect
+- Convention is to reject the null with p-value under 0.05.
+- p-values don't tell you for sure that the treatment has an effect.
+- They just tell you how likely it is you would have gotten that result by chance.
+- The sampling distribution tells us how large the differences are we find by chance.
+- Can find p-values < 0.05 even when the null hypothesis is correct.
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+- Vector of outcomes and control
+- 40-row table with potential outcomes in control and treatment. 
+- This time, with a difference of 25
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+```{r big effect}
+po_control   <- c(1:20, 51:70)
+po_treatment <- po_control + 25
+
+treatment_assigned <- randomize(units_per_group = 20)
+
+outcomes <- po_treatment * I(treatment_assigned == "Treatment") + 
+  po_control * I(treatment_assigned == "Control")
+
+experimental_ate_big_effect <- estimate_ate(
+  y_values = outcomes, 
+  treatment = treatment_assigned
+  )
+```
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+```{r}
+sharp_null_big_effect <- replicate(
+  n = 5000, 
+  expr = estimate_ate(
+    y_values = outcomes, 
+    treatment = randomize(units_per_group = 20)
+  )
+)
+```
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+```{r make big effect histogram} 
+histogram_big_effect <- ggplot() + 
+  aes(x = sharp_null_big_effect) + 
+  geom_histogram() + 
+  geom_vline(xintercept = experimental_ate_big_effect, color = 'darkorange') + 
+  labs(
+    title = "Big Effect: Distribution of Treatment Effects Under Sharp Null", 
+    subtitle = "Distribution is Centered at Zero, And Symmetric", 
+    x = "Estimated Average Treatment Effect", 
+    y = "Count"
+  )
+```
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+```{r plot sharpnull and experimental ate big effect experiment, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'} 
+histogram_big_effect
+```
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+```{r}
+mean(abs(sharp_null_big_effect) > abs(experimental_ate))
+```
+
+---
+
+# Compare Big Effect and No Effect Sharp Null Disributions 
+
+```{r, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
+histogram_big_effect / histogram_no_effect
+```
+
+---
+
+class: inverse, center, middle
+
+# Statistical Power 
+
+---
+
+# Detecting Non-Zero Treatmetn Effects
+
+Suppose the treatment effect is 10. 
+
+---
+
+# Create Whole Study Function 
+
+```{r define simulate study function} 
+simulate_study <- function(effect_size, units_per_group) { 
+  # requires all functions to date
+  
+  # generate world
+  po_control   <- c(1:20, 51:70)
+  po_treatment <- po_control + effect_size
+  
+  # assign treatment and measure outcomes
+  treatment_assigned <- randomize(units_per_group)
+  outcomes <- po_treatment * I(treatment_assigned == "Treatment") + 
+    po_control * I(treatment_assigned == "Control") 
+  
+  # estimate ate   
+  estimated_ate <- estimate_ate(y_values = outcomes, treatment = treatment_assigned)
+  
+  # generate sharp null distribution
+  sharp_null <- replicate(
+    n = 300, 
+    expr = estimate_ate(y_values = outcomes, treatment = randomize(units_per_group)
+    )
+  )
+  
+  p_value <- mean(abs(sharp_null) > abs(estimated_ate))
+  return(list(
+    'estimated_ate' = estimated_ate,
+    'mean_sharp_null' = mean(sharp_null), 
+    'p_value' = p_value)
+  )
+}
+
+simulate_study(effect_size = 40, units_per_group = 20)
+
+estimate_ate
+```
+
+--- 
+
+# Create Whole Study Function 
+
+```{r}
+simulate_study(effect_size = 100, units_per_group = 20)
+```
+
+---
+
+# Generate P-Value, Effect Size 10 
+
+```{r conduct power analysis effect size 10}
+# notice: we now have two loops: 
+  # - We're running 1,000 simulations;
+  # - In each simulation, there are 5,000 sharp nulls drawn out
+  # - So get some coffee if you're running this at home
+distribution_of_p_values_10 <- replicate(
+  n = 1000, 
+  expr = simulate_study(
+    effect_size = 10, 
+    units_per_group = 20
+  )
+)
+
+simulate_study
+
+```
+
+---
+
+# Plot Distribution of P-Values Effect Size 10 
+
+```{r plot pvalues for effect size 10}
+histogram_pvalues_10 <- ggplot() + 
+  aes(x = distribution_of_p_values_10) + 
+  geom_histogram() + 
+  labs(
+    title = "Distribution of P-Values", 
+    subtitle = paste0("Percent P-Values < 0.05: ", round(mean(distribution_of_p_values_10 < 0.05) * 100), "%"), 
+    x = 'P-Value'
+  )
+```
+
+---
+
+# Plot Distribution of P-Values, Effect Size 10 
+
+```{r plot pvalues for effect size 10, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
+histogram_pvalues_10
+```
+
+---
+
+```{r conduct power analysis effect size 20}
+distribution_of_p_values_20 <- replicate(
+  n = 1000, 
+  expr = simulate_study(
+    effect_size = 40, 
+    units_per_group = 20
+  )
+)
+```
+
+---
+
+```{r plot pvalues for effect size 20}
+histogram_pvalues_20 <- ggplot() + 
+  aes(x = distribution_of_p_values_20) + 
+  geom_histogram() + 
+  labs(
+    title = "Distribution of P-Values", 
+    subtitle = paste0("Percent P-Values < 0.05: ", round(mean(distribution_of_p_values_10 < 0.05) * 100), "%"), 
+    x = 'P-Value'
+  )
+```
+
+---
+
+```{r plot pvalues for effect size 20, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
+histogram_pvalues_20
+```
+

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>w241: Experiments and Causality</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="David Reiley, David Broockman, D. Alex Hughes" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# w241: Experiments and Causality
+## Unit 3
+### David Reiley, David Broockman, D. Alex Hughes
+### UC Berkeley, School of Information
+### Updated: 2021-04-29
+
+---
+
+
+
+
+---
+
+class: inverse, center, middle
+
+# Sampling Distribution and Randomization Inference
+
+---
+
+# Standard Errors 
+
+- Standard deviation of the sampling distribution 
+- How spread out is the sampling distribution? 
+- How large are the typical chance differences? 
+- Later, we'll examine statistical power 
+  - The spread of the sampling distribution is the standard error 
+  - In what kinds of experiments are large and small differences likely to arise by chance? 
+  
+---
+
+# Sampling Distributions and Randomization Inference
+
+- First, read GG 3.0, 3.1, 3.4.
+- Groups may differ by chance, even if the treatment has no effect.
+  - How much would the groups differ if the treatment had no effect?
+  - How large of an "effect estimate" would we reach by chance?
+- Distribution of estimates one would reach if treatment had no effect.
+  - How likely is this estimate to have just arisen by
+chance?
+- Similar to observational studies, but:
+  - Intuition easy to see in experiments.
+  - Testing a hypothesis about our sample, not a population.
+  - Example code to walk through intuition on slides to follow  
+  
+---
+
+# Example: An Experiment with no Effect
+
+- Does eating soybeans affect estrogen levels?
+- 40 individuals: 20 men, 20 women.
+- Simulate the potential outcomes of the control group. 
+- Simulate the potential outcomes of the treatment group. 
+- A simulated experiment with no effect.
+
+---
+
+
+```r
+group &lt;- c(rep("Man",20),rep("Woman",20))
+
+po_control &lt;- c(
+  seq(from = 1, to = 20), 
+  seq(from = 51, to = 70)) 
+
+## Suppose there is no effect. 
+## Then, the potential outcomes to control are equal 
+## to the potential outcomes to treatment. 
+po_treatment &lt;- po_control 
+```
+
+---
+
+&lt;img src="unit_03_files/figure-html/plot outcomes-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Random Assignment 
+
+- Define function to randomly assign units to treatment and control.
+- Randomly pick 20 for treatment and 20 for control. 
+- Concatenate the two vectors.
+- Get a different vector when you run it again.
+
+---
+
+# Random Assignment
+
+
+```r
+randomize &lt;- function(units_per_group) { 
+  ## an (unnecessary) function to randomize units into 
+  ## treatment and control 
+  ## ---
+  ## args: 
+  ##  - units_per_group: how many zero and one should be returned
+  
+  assignment_vector &lt;- rep(c('Control', 'Treatment'), each = units_per_group)
+  sample(assignment_vector)
+} 
+
+randomize(units_per_group = 4) 
+```
+
+```
+## [1] "Treatment" "Treatment" "Treatment" "Control"   "Control"   "Control"  
+## [7] "Treatment" "Control"
+```
+
+```r
+randomize(units_per_group = 4) 
+```
+
+```
+## [1] "Control"   "Treatment" "Control"   "Control"   "Treatment" "Treatment"
+## [7] "Treatment" "Control"
+```
+
+---
+
+# Realized Outcomes 
+
+- Treatment outcome for those randomized to treatment and control outcome for those randomized to control.
+- Assign for each person in the vector.
+- Same because we had an experiment with no effect.
+- R code is often written in a compact manner; could also have been done separately for each group.
+- Why are we doing this when there is no treatment effect?
+- Because it should also work when there is one. We're looking at what happens when we randomly assign people to control and treatment groups.
+
+---
+
+# Realized Outcomes
+
+
+```r
+treatment_assigned &lt;- randomize() 
+
+outcomes &lt;- po_treatment * I(treatment_assigned == "Treatment") + 
+  po_control * I(treatment_assigned == "Control")
+
+outcomes
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 51 52 53 54 55
+## [26] 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70
+```
+
+---
+
+# Function to Estimate the Average Treatment Effect (ATE) 
+
+- Subtract the mean outcome for the control group from the mean outcome of the treatment group.
+- How much higher is the average in the treatment group versus the control group?
+- We may have randomly selected someone with a higher or lower level of estrogen.
+- Even though we know the effect is 0, we see chance differences.
+
+---
+
+# Function to Estimate the Average Treatment Effect (ATE) 
+
+
+```r
+estimate_ate &lt;- function(y_values, treatment) { 
+  
+  treatment_group_mean &lt;- mean(outcomes[treatment == 'Treatment'])
+  control_group_mean   &lt;- mean(outcomes[treatment == 'Control'])
+  
+  ate &lt;- treatment_group_mean - control_group_mean
+  
+  return(ate)
+}
+
+# In fact, there is _no_ effect, but... sampling! 
+estimate_ate(y_values = outcomes, treatment = treatment_assigned) 
+```
+
+```
+## [1] 1
+```
+
+---
+
+class: inverse, center, middle
+
+# The Null Hypothesis
+
+---
+
+# Rhetorical Posture of the Null Hypothesis
+- You want to argue against a skeptic that a treatment has an effect.
+- Assume the skeptic is right.
+
+&gt; Treatment has no effect.
+
+- What is the chance that we would see this estimate by chance in that scenario?
+
+&gt; This is p-value.
+
+- We’ll see where it comes from visually.
+
+---
+
+# Average Size of the Difference
+
+- Simulate this a few times to get a sense of how much our treatment effect estimate would vary by chance.
+- We created an estimate function with the outcomes and the treatment group.
+- Outcome vector will look the same regardless of the treatment vector.
+
+
+```r
+treatment_assigned_one &lt;- randomize(units_per_group = 20)
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_one) 
+```
+
+```
+## [1] 1.7
+```
+
+```r
+treatment_assigned_two &lt;- randomize(units_per_group = 20)
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_two) 
+```
+
+```
+## [1] 13.5
+```
+
+```r
+treatment_assigned_three &lt;- randomize(units_per_group = 20)
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_three) 
+```
+
+```
+## [1] 8.3
+```
+
+---
+
+# Outcome With Different Assignments
+
+- Similar to re-sampling from a population.
+- Re-randomizing from within the original population. Testing the null hypothesis from within the sample we already have.
+- Re-shuffle the 40 people between treatment and control. Assuming the treatment effect for everyone is zero. 
+- **Sharp null hypothesis**: For every unit, there is no effect.
+- Repeat this process to generate a synthetic distribution of effects if the sharp null hypothesis *were true*. 
+
+- Randomly sample the vector of assignments 5,000 times to generate an unbiased sample of all the effects.
+- Literally, replicate 5,000 times, and save to a vector.
+
+---
+
+
+```r
+## going to move the randomization inside the `estimate_ate` function 
+## for compactness 
+
+sharp_null &lt;- replicate(
+  n = 5000, 
+  expr = estimate_ate(
+    y_value = outcomes, 
+    treatment = randomize(units_per_group = 20))
+)
+```
+
+---
+
+&lt;img src="unit_03_files/figure-html/sharp null distribution-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Size of the Observed Difference
+
+- The p-value.
+- How often did I get a randomization under the sharp null where the estimate was larger than my actual estimate?
+- For each, is it larger than the average treatment effect estimate?
+- This is a sampling distribution.
+- How big is my estimate relative to the distribution of estimates?
+
+---
+
+# Size of the Observed Difference 
+
+In this particular case, 
+
+
+```r
+experimental_randomization &lt;- randomize(units_per_group = 20)
+experimental_ate &lt;- estimate_ate(
+  y_values = outcomes, 
+  treatment = experimental_randomization)
+
+sharp_null &lt;- replicate(
+  n = 5000, 
+  expr = estimate_ate(
+    y_value = outcomes, 
+    treatment = randomize(units_per_group = 20))
+)
+
+mean(abs(sharp_null) &gt; abs(experimental_ate))
+```
+
+```
+## [1] 0.5616
+```
+
+---
+
+# Size of the Observed Difference 
+
+
+```r
+histogram_no_effect &lt;- ggplot() + 
+  aes(x = sharp_null) + 
+  geom_histogram() + 
+  geom_vline(xintercept = experimental_ate, color = 'darkorange') + 
+  labs(
+    title = "No Effect: Distribution of Treatment Effects Under Sharp Null", 
+    subtitle = "Distribution is Centered at Zero, And Symmetric", 
+    x = "Estimated Average Treatment Effect", 
+    y = "Count"
+  )
+```
+
+---
+
+# Size of the Observed Difference 
+
+&lt;img src="unit_03_files/figure-html/plot sharpnull and experimental ate-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse, center, middle
+
+# P-Values and Hypothesis Tests
+
+---
+
+# P-Values 
+
+- If the treatment had no effect, how likely is it that the data would generate  a difference this extreme, *just by chance*?
+- What is the difference between the mean in the control and treatment groups?
+- Different from how likely it is the treatment has an effect
+- Convention is to reject the null with p-value under 0.05.
+- p-values don't tell you for sure that the treatment has an effect.
+- They just tell you how likely it is you would have gotten that result by chance.
+- The sampling distribution tells us how large the differences are we find by chance.
+- Can find p-values &lt; 0.05 even when the null hypothesis is correct.
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+- Vector of outcomes and control
+- 40-row table with potential outcomes in control and treatment. 
+- This time, with a difference of 25
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+
+```r
+po_control   &lt;- c(1:20, 51:70)
+po_treatment &lt;- po_control + 25
+
+treatment_assigned &lt;- randomize(units_per_group = 20)
+
+outcomes &lt;- po_treatment * I(treatment_assigned == "Treatment") + 
+  po_control * I(treatment_assigned == "Control")
+
+experimental_ate_big_effect &lt;- estimate_ate(
+  y_values = outcomes, 
+  treatment = treatment_assigned
+  )
+```
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+
+```r
+sharp_null_big_effect &lt;- replicate(
+  n = 5000, 
+  expr = estimate_ate(
+    y_values = outcomes, 
+    treatment = randomize(units_per_group = 20)
+  )
+)
+```
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+
+```r
+histogram_big_effect &lt;- ggplot() + 
+  aes(x = sharp_null_big_effect) + 
+  geom_histogram() + 
+  geom_vline(xintercept = experimental_ate_big_effect, color = 'darkorange') + 
+  labs(
+    title = "Big Effect: Distribution of Treatment Effects Under Sharp Null", 
+    subtitle = "Distribution is Centered at Zero, And Symmetric", 
+    x = "Estimated Average Treatment Effect", 
+    y = "Count"
+  )
+```
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+&lt;img src="unit_03_files/figure-html/plot sharpnull and experimental ate big effect experiment-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Simulating an Experiment with a Large Effect
+
+
+```r
+mean(abs(sharp_null_big_effect) &gt; abs(experimental_ate))
+```
+
+```
+## [1] 0.5922
+```
+
+---
+
+# Compare Big Effect and No Effect Sharp Null Disributions 
+
+&lt;img src="unit_03_files/figure-html/unnamed-chunk-4-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse, center, middle
+
+# Statistical Power 
+
+---
+
+# Detecting Non-Zero Treatmetn Effects
+
+Suppose the treatment effect is 10. 
+
+---
+
+# Create Whole Study Function 
+
+
+```r
+simulate_study &lt;- function(effect_size, units_per_group) { 
+  # requires all functions to date
+  
+  # generate world
+  po_control   &lt;- c(1:20, 51:70)
+  po_treatment &lt;- po_control + effect_size
+  
+  # assign treatment and measure outcomes
+  treatment_assigned &lt;- randomize(units_per_group)
+  outcomes &lt;- po_treatment * I(treatment_assigned == "Treatment") + 
+    po_control * I(treatment_assigned == "Control") 
+  
+  # estimate ate   
+  estimated_ate &lt;- estimate_ate(y_values = outcomes, treatment = treatment_assigned)
+  
+  # generate sharp null distribution
+  sharp_null &lt;- replicate(
+    n = 100, 
+    expr = estimate_ate(y_values = outcomes, treatment = randomize(20)
+    )
+  )
+  
+  p_value &lt;- mean(abs(sharp_null) &gt; abs(estimated_ate))
+  return(p_value)
+}
+```
+
+--- 
+
+# Create Whole Study Function 
+
+
+```r
+simulate_study(effect_size = 10, units_per_group = 20)
+```
+
+```
+## [1] 0.84
+```
+
+---
+
+# Generate P-Value 
+
+
+```r
+# notice: we now have two loops: 
+  # - We're running 1,000 simulations;
+  # - In each simulation, there are 5,000 sharp nulls drawn out
+  # - So get some coffee if you're running this at home
+distribution_of_p_values &lt;- replicate(
+  n = 1000, 
+  expr = simulate_study(
+    effect_size = 10, 
+    units_per_group = 20
+  )
+)
+```
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
