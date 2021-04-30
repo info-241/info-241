@@ -445,6 +445,7 @@ Suppose the treatment effect is 10.
 simulate_study <- function(effect_size, units_per_group) { 
   # requires all functions to date
   
+  effect_size <- 40
   # generate world
   po_control   <- c(1:20, 51:70)
   po_treatment <- po_control + effect_size
@@ -474,7 +475,7 @@ simulate_study <- function(effect_size, units_per_group) {
 
 simulate_study(effect_size = 40, units_per_group = 20)
 
-estimate_ate
+estimate_ate(y_values = outcomes, treatment = randomize(20))
 ```
 
 --- 
