@@ -1,7 +1,7 @@
 #+TITLE: Experiments and Causality 
 #+OPTIONS: toc:nil 
 
-This course introduces students to experimentation in data science. The course pays particular attention to forming causal questions, and to the designing experiments that can provide answers to these questions.
+This course introduces students to experimentation in data science. The course pays particular attention to forming causal questions, and to the designing experiments that can provide answers to these questions. Weekly discussion are guided by this /[[https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/prep_live_session/README.md][Preparing for Live Session]]/ document.
 
 * Schedule
 
