@@ -22,17 +22,20 @@
 |Week 14 | [Student Presentations](#student-presentations-plan-on-15-20-min-plus-time-for-questions) |
 
 # Week 1: The Importance of Experimentation
+
 ## News articles with causal claims
 
 First, read the two news articles that are in the syllabus. 
 
 For each article, please consider the following discussion questions:
+
 - What is the causal claim?
 - What is an alternative explanation for the reported correlation?
 
 ## Cargo Cult Science
 
 Next read [*“Cargo Cult Science”*](../readings/Feynman.1974.pdf) by Nobel laureate [*Richard P. Feynman*](http://en.wikipedia.org/wiki/Richard_Feynman). As you read this article, consider the following discussion questions:
+
 -   How does data science, as practiced, tend to be different from natural science as practiced?
 -   What are characteristics of *true* science?
 -   What are ways that individuals fool themselves?
@@ -42,9 +45,18 @@ Next read [*“Cargo Cult Science”*](../readings/Feynman.1974.pdf) by Nobel la
 -   Provide as many examples as you can of social scientists (or data scientists) pretending to be scientists without really being scientists.
 
 Additional questions to think about
+
 -   Related to FE Chapter 1: What are examples of stalemates in policy discussions? Why have these discussions stalemated?
 -   What are examples of causal claims that have come up in your work life?
 -   What are examples of causal claims that are relevant to your personal life?
+
+## Predict or Cause 
+
+Finally, please read the article we have titled _Predict or Cause_ by Susan Athey. As you're reading, please make a note of the examples that she raises.  
+
+- Which example that Athey presents is the most surprising to you? 
+- Does there seem to be a theme, or unifying thread to each of these examples?
+- Is Athey just making a clever argument -- or, might it be the case that a _vast_ amount of the work that we do is actually causal work in disguise? 
 
 # Week 2: Comparing Apples to Apples
 
