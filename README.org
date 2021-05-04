@@ -79,7 +79,8 @@ We use two books in this course, and read a third book in the second week. We re
 |---------------------+-------------+--------------|
 | Monday              |   5:30-6:30 | Alex         |
 | Tuesday             |   5:30-6:30 | Scott        |
-| Thursday            |   2:00-3:00 | Micah        |
+| Tuesday             |   5:30-6:30 | Micah        |
+| Thursday            |   5:30-6:30 | Micah        |
 | Thursday            |   5:30-6:30 | Scott        |
 | (Friday before PS)  |   4:00-5:00 | Alex         |
 | (Saturday after PS) | 9:00-10:00a | Alex         |
