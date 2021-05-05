@@ -77,11 +77,14 @@ We use two books in this course, and read a third book in the second week. We re
 
 | *Day*               |      *Time* | *Instructor* |
 |---------------------+-------------+--------------|
-| Monday              |   5:30-6:30 | Alex         |
-| Tuesday             |   5:30-6:30 | Scott        |
+| Monday              |   4:00-5:00 | David        |
+| Monday              |   6:30-7:30 | Tim          |
 | Tuesday             |   5:30-6:30 | Micah        |
+| Tuesday             |   6:30-7:30 | Tim          |
+| Wednesday           |   3:00-4:00 | Scott        |
+| Wednesday           |   4:00-5:00 | David        |
 | Thursday            |   5:30-6:30 | Micah        |
-| Thursday            |   5:30-6:30 | Scott        |
+| Thursday            |   3:00-4:00 | Scott        |
 | (Friday before PS)  |   4:00-5:00 | Alex         |
 | (Saturday after PS) | 9:00-10:00a | Alex         |
 
@@ -94,7 +97,7 @@ We use two books in this course, and read a third book in the second week. We re
 - *Problem Sets* (45%, 9% each) A series of problem sets, mostly drawn from FE, many requiring programming or analysis in R.
   - We encourage you to work together on problem sets, because great learning can come out of helping each other get unstuck.  We ask that each person independently prepare his or her own problem-set writeup, to demonstrate that you have thought through the ideas and calculations and can explain them on your own.  This includes making sure you run any code yourself and can explain how it works.   Collaboration is encouraged, but mere copying will be treated as academic dishonesty.
   - At this point, the course has lived for a number of semesters, and we have shared solution sets each semester. We note in particular that struggling with the problems is a key part of the learning in this course.  Copying from past solutions constitutes academic dishonesty and will be punished as such; you should know that we have included language in the solutions that will make it clear when something has been merely copied rather than understood.
-- *Essays* (20%, 10% each) You will write two essays in the course. For each essay, you will first complete a round of peer-evaluation and will then submit a final, revised version of your essay for review by the instructor. These peer reviews will not be graded, but instead will be marked for credit/no-credit.
+- *Essays* (20%, 10% each) You will write two essays in the course. The first essay is an individual assignment. The second essay, 3 research designs for your final project, will be drafted and submitted as a group.
 - *Class Experiment* (30%) In teams of 3-5 students, carry out an experiment that measures a causal effect of interest. See the `./finalProject/` folder for much more information
 - *Async Concept checks* (5%) Throughout the course, we have included concept checks, hikes, and yogas. These are our measure of preparedness of the async content.
 - *Late Policy*: You're busy and things come up -- kids get sick, parents stop by unannounced, managers ask you to reformat your [[https://www.youtube.com/watch?v%3DFy3rjQGc6lA][TPS reports]], you learn that your 261 project has accumulated $50,000 in compute costs -- we get it. You've got five (5) days to turn things in late without penalty, without explanation, and without notice. We'll count at the end of the semester. After you use those 5, each additional day (or part thereof) comes at the cost of 10% on the assignment. That is, 1% off your end-of-semester total grade. Here's the other twist though -- we need to provide solutions back to your classmates who *have* completed their work. So, no individual assignment can come in more than 5 days late; any assignment that does will score a zero. If you see ahead of time that you're going to have a conflict -- a major release, a vacation, etc. -- talk with your instructor to work out an alternative. We'll work with you, but the more notice, the better.
