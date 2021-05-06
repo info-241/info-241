@@ -23,6 +23,10 @@
 
 # Week 1: The Importance of Experimentation
 
+- **Learning Objectives**: "At the end of this week's course of study, students will be able to:"
+  - Clearly describe the objectives, and operation of the course. This includes methods of communication; and expectations for timing and delivery of assignments. 
+  - Appreciate the existance _and_ importance of causal questions in science, business, and data science applications. 
+
 ## News articles with causal claims
 
 First, read the two news articles that are in the syllabus. 
@@ -60,27 +64,12 @@ Finally, please read the article we have titled _Predict or Cause_ by Susan Athe
 
 # Week 2: Comparing Apples to Apples
 
-## More than Good Intentions
+- **Learning Objectives**: "At the end of this week's course of study, student will be able to:" 
+  - Make a clear statement about what it means for an input to **cause** a change in an outcome, using the language of potential outcomes. 
+  - Understand that theories that predict human behavior are less precise (and reliable) than theories that predict other behavior (i.e. physics); as a result, trial, sampling and measurment are necessary 
+  - Describe how any _applied_ sampling process will generate sampling-based uncertainty in estimated statistics 
 
-Read [*Karlan and Appel*](http://smile.amazon.com/More-Than-Good-Intentions-Improving/dp/0452297567) chapters 1, 9. (Read the other chapters if you have time; they are excellent.)
-
-We’re going to talk about the intent of the author, or the moral of the story in live session, but to guide your reading in the chapters we have recommended, consider the following questions:
--   Chapter 1:
-    -   What does the parable of the monks teach us about anti-poverty programs?
-    -   Who cares more about identifiable victims, Econs or Humans?
-    -   What two-pronged strategy does Karlan suggest for going beyond mere good intentions?
--   Chapter 5:
-    -   What does Karlan claim as the biggest takeaway from the entrepreneurship training experiments? How does this conflict with the point of view of Mohammad Yunus?
-    -   What is the two-list elicitation technique useful for? Invent an example of something you might like to learn for yourself by using the technique.
-    -   What are the two larger points about the topic of “slippery money” for anti-poverty programs?
--   Chapter 8:
-    -   On page 170, find the example of a “heterogeneous treatment effect.” That is, the same treatment produced a larger effect for some subjects than for others. What was it?
-    -   What are the two important experiments in this chapter about farmers’ use of fertilizer? What did they find?
-    -   What is the O-ring theory of economic development?
--   Chapter 9:
-    -   What is the most cost effective treatment discussed in this chapter for increasing education for students? In which two countries was the same experiment replicated?
-    -   What were the heterogeneous treatment effects in the ICS school-uniform experiment described on page 200?
-    -   What were the two important ingredients of the Seva Mandir program to increase the amount of time teachers spent in Rajasthani schools? How large were the treatment effects of the program?
+## Poor Economics 
 
 ## Essay 1 critique
 
