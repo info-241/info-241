@@ -66,8 +66,8 @@ Finally, please read the article we have titled _Predict or Cause_ by Susan Athe
 
 - **Learning Objectives**: "At the end of this week's course of study, students will be able to:" 
   - Make a clear statement about what it means for an input to **cause** a change in an outcome, using the language of potential outcomes. 
-  - Understand that theories that predict human behavior are less precise (and reliable) than theories that predict other behavior (i.e. physics); as a result, trial, sampling and measurment are necessary 
-  - Describe how any _applied_ sampling process will generate sampling-based uncertainty in estimated statistics 
+  - Understand that theories that predict human behavior are less precise (and reliable) than theories that predict other behavior (i.e. physics); as a result, trial, sampling and measurment are necessary
+  - Understand that tightly controlled systems 
 
 ## Poor Economics 
 
