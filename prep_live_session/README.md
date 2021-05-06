@@ -64,25 +64,12 @@ Finally, please read the article we have titled _Predict or Cause_ by Susan Athe
 
 # Week 2: Comparing Apples to Apples
 
-- **Learning Objectives**: "At the end of this week's course of study, student will be able to:" 
+- **Learning Objectives**: "At the end of this week's course of study, students will be able to:" 
   - Make a clear statement about what it means for an input to **cause** a change in an outcome, using the language of potential outcomes. 
   - Understand that theories that predict human behavior are less precise (and reliable) than theories that predict other behavior (i.e. physics); as a result, trial, sampling and measurment are necessary 
   - Describe how any _applied_ sampling process will generate sampling-based uncertainty in estimated statistics 
 
 ## Poor Economics 
-
-## Essay 1 critique
-
-We will assign you to two partners to exchange papers and give each other feedback. **Make sure to read your partners’ papers before live session**. You can find them in the forum where you posted your own paper. Consider the following questions:
--   Does the essay complete each of the four requested tasks?
-    -   Present a causal question
-    -   Describe a story by which the effect would be overestimated or underestimated.
-    -   Identify the assumptions required to believe the study results.
-    -   Describe the ideal experiment.
--   Are there places where the essay could be made clearer?
--   Does anything seem too vague? Are there places where the essay could be made more vivid by using a more concrete example?
--   Can you find any places where the essay could be improved by adding active verbs?
--   Do you have any other suggestions for improvement?
 
 ## FE exercises
 
@@ -92,6 +79,8 @@ As you complete the asynchronous content, you might want to look at some of the 
 -   FE, 2.11.
 
 # Week 3: Quantifying uncertainty
+
+- **Learning Outcomes**: "At the end of this week's course of study, students will be able to:"
 
 ## Lewis & Rao reading
 When doing the reading on Lewis and Rao for live session, please consider the following questions to promote your understanding. We will discuss a subset of these questions in class, depending on our time constraints. Let us know in advance if you want to make sure to discuss one of these in particular.
