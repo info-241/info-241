@@ -30,7 +30,7 @@ In your essay, analyze the study that you have chosen.
 We are expecting one to two pages, single spaced. This should read as an essay, not a set of bullet points.
 
 - For this week, a Google Doc probably works great to write and collaborate; though you can also use your editor of choice.
-- We are going to circulate these drafts with classmates; discuss and provide feedback before turning in a **final** draft next week.
+
 
 ## Professional Examples 
 
