@@ -17,14 +17,12 @@ class: center, middle, inverse, title-slide
 ## Unit 3
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-04-29
+### Updated: 2021-05-12
 
 ---
 
 
 
-
----
 
 class: inverse, center, middle
 
@@ -43,9 +41,8 @@ class: inverse, center, middle
   
 ---
 
-# Sampling Distributions and Randomization Inference
+# Sampling Distributions and RI
 
-- First, read GG 3.0, 3.1, 3.4.
 - Groups may differ by chance, even if the treatment has no effect.
   - How much would the groups differ if the treatment had no effect?
   - How large of an "effect estimate" would we reach by chance?
@@ -75,13 +72,40 @@ group &lt;- c(rep("Man",20),rep("Woman",20))
 
 po_control &lt;- c(
   seq(from = 1, to = 20), 
-  seq(from = 51, to = 70)) 
+  seq(from = 51, to = 70)
+  )
 
 ## Suppose there is no effect. 
 ## Then, the potential outcomes to control are equal 
 ## to the potential outcomes to treatment. 
-po_treatment &lt;- po_control 
+
+po_treatment &lt;- po_control + 0
+
+d &lt;- data.frame(
+  'Control'   = po_control,
+  'Treatment' = po_treatment, 
+  'group'        = group
+  )
 ```
+
+---
+
+
+```r
+d %&gt;% 
+  head()
+```
+
+```
+##   Control Treatment group
+## 1       1         1   Man
+## 2       2         2   Man
+## 3       3         3   Man
+## 4       4         4   Man
+## 5       5         5   Man
+## 6       6         6   Man
+```
+
 
 ---
 
@@ -96,10 +120,6 @@ po_treatment &lt;- po_control
 - Concatenate the two vectors.
 - Get a different vector when you run it again.
 
----
-
-# Random Assignment
-
 
 ```r
 randomize &lt;- function(units_per_group) { 
@@ -112,13 +132,19 @@ randomize &lt;- function(units_per_group) {
   assignment_vector &lt;- rep(c('Control', 'Treatment'), each = units_per_group)
   sample(assignment_vector)
 } 
+```
 
+---
+
+# Random Assignment
+
+
+```r
 randomize(units_per_group = 4) 
 ```
 
 ```
-## [1] "Treatment" "Treatment" "Treatment" "Control"   "Control"   "Control"  
-## [7] "Treatment" "Control"
+## [1] "Treatment" "Treatment" "Control"   "Treatment" "Treatment" "Control"   "Control"   "Control"
 ```
 
 ```r
@@ -126,8 +152,7 @@ randomize(units_per_group = 4)
 ```
 
 ```
-## [1] "Control"   "Treatment" "Control"   "Control"   "Treatment" "Treatment"
-## [7] "Treatment" "Control"
+## [1] "Control"   "Treatment" "Treatment" "Treatment" "Treatment" "Control"   "Control"   "Control"
 ```
 
 ---
@@ -156,8 +181,8 @@ outcomes
 ```
 
 ```
-##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 51 52 53 54 55
-## [26] 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
+## [39] 69 70
 ```
 
 ---
@@ -177,16 +202,42 @@ outcomes
 ```r
 estimate_ate &lt;- function(y_values, treatment) { 
   
-  treatment_group_mean &lt;- mean(outcomes[treatment == 'Treatment'])
-  control_group_mean   &lt;- mean(outcomes[treatment == 'Control'])
+  treatment_group_mean &lt;- mean(y_values[treatment == 'Treatment'])
+  control_group_mean   &lt;- mean(y_values[treatment == 'Control'])
   
   ate &lt;- treatment_group_mean - control_group_mean
   
-  return(ate)
+  return(
+    list(
+      "tg_mean" = treatment_group_mean, 
+      "cg_mean" = control_group_mean, 
+      "ate" = ate)
+  )
 }
+```
 
-# In fact, there is _no_ effect, but... sampling! 
+---
+
+
+```r
+## In fact, there is _no_ effect, but... sampling! 
 estimate_ate(y_values = outcomes, treatment = treatment_assigned) 
+```
+
+```
+## $tg_mean
+## [1] 36
+## 
+## $cg_mean
+## [1] 35
+## 
+## $ate
+## [1] 1
+```
+
+```r
+## To pull a single part of this, because it is a list, R indexes with .[[
+estimate_ate(y_values = outcomes, treatment = treatment_assigned)[['ate']]
 ```
 
 ```
@@ -224,29 +275,29 @@ class: inverse, center, middle
 
 ```r
 treatment_assigned_one &lt;- randomize(units_per_group = 20)
-estimate_ate(y_values = outcomes, treatment = treatment_assigned_one) 
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_one)[['ate']]
 ```
 
 ```
-## [1] 1.7
+## [1] 1.3
 ```
 
 ```r
 treatment_assigned_two &lt;- randomize(units_per_group = 20)
-estimate_ate(y_values = outcomes, treatment = treatment_assigned_two) 
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_two)[['ate']]
 ```
 
 ```
-## [1] 13.5
+## [1] 8
 ```
 
 ```r
 treatment_assigned_three &lt;- randomize(units_per_group = 20)
-estimate_ate(y_values = outcomes, treatment = treatment_assigned_three) 
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_three)[['ate']]
 ```
 
 ```
-## [1] 8.3
+## [1] -3.1
 ```
 
 ---
@@ -273,7 +324,7 @@ sharp_null &lt;- replicate(
   n = 5000, 
   expr = estimate_ate(
     y_value = outcomes, 
-    treatment = randomize(units_per_group = 20))
+    treatment = randomize(units_per_group = 20))[['ate']]
 )
 ```
 
@@ -302,20 +353,20 @@ In this particular case,
 experimental_randomization &lt;- randomize(units_per_group = 20)
 experimental_ate &lt;- estimate_ate(
   y_values = outcomes, 
-  treatment = experimental_randomization)
+  treatment = experimental_randomization)[['ate']]
 
 sharp_null &lt;- replicate(
   n = 5000, 
   expr = estimate_ate(
     y_value = outcomes, 
-    treatment = randomize(units_per_group = 20))
+    treatment = randomize(units_per_group = 20))[['ate']]
 )
 
 mean(abs(sharp_null) &gt; abs(experimental_ate))
 ```
 
 ```
-## [1] 0.5616
+## [1] 0.0686
 ```
 
 ---
@@ -386,7 +437,7 @@ outcomes &lt;- po_treatment * I(treatment_assigned == "Treatment") +
 experimental_ate_big_effect &lt;- estimate_ate(
   y_values = outcomes, 
   treatment = treatment_assigned
-  )
+  )[['ate']]
 ```
 
 ---
@@ -399,9 +450,8 @@ sharp_null_big_effect &lt;- replicate(
   n = 5000, 
   expr = estimate_ate(
     y_values = outcomes, 
-    treatment = randomize(units_per_group = 20)
+    treatment = randomize(units_per_group = 20))[['ate']]
   )
-)
 ```
 
 ---
@@ -434,11 +484,11 @@ histogram_big_effect &lt;- ggplot() +
 
 
 ```r
-mean(abs(sharp_null_big_effect) &gt; abs(experimental_ate))
+mean(abs(sharp_null_big_effect) &gt; abs(experimental_ate_big_effect))
 ```
 
 ```
-## [1] 0.5922
+## [1] 0.0012
 ```
 
 ---
@@ -465,7 +515,7 @@ Suppose the treatment effect is 10.
 
 
 ```r
-simulate_study &lt;- function(effect_size, units_per_group) { 
+simulate_study &lt;- function(effect_size) { 
   # requires all functions to date
   
   # generate world
@@ -473,58 +523,126 @@ simulate_study &lt;- function(effect_size, units_per_group) {
   po_treatment &lt;- po_control + effect_size
   
   # assign treatment and measure outcomes
-  treatment_assigned &lt;- randomize(units_per_group)
+  treatment_assigned &lt;- randomize(20)
   outcomes &lt;- po_treatment * I(treatment_assigned == "Treatment") + 
     po_control * I(treatment_assigned == "Control") 
   
   # estimate ate   
-  estimated_ate &lt;- estimate_ate(y_values = outcomes, treatment = treatment_assigned)
+  estimated_ate &lt;- estimate_ate(y_values = outcomes, treatment = treatment_assigned)[['ate']]
   
   # generate sharp null distribution
   sharp_null &lt;- replicate(
     n = 100, 
     expr = estimate_ate(y_values = outcomes, treatment = randomize(20)
-    )
+    )[['ate']]
   )
   
   p_value &lt;- mean(abs(sharp_null) &gt; abs(estimated_ate))
-  return(p_value)
+  return(list(
+    'estimated_ate' = estimated_ate,
+    'mean_sharp_null' = mean(sharp_null), 
+    'p_value' = p_value)
+  )
 }
-```
 
---- 
-
-# Create Whole Study Function 
-
-
-```r
-simulate_study(effect_size = 10, units_per_group = 20)
+simulate_study(effect_size = 5)
 ```
 
 ```
-## [1] 0.84
+## $estimated_ate
+## [1] -10.8
+## 
+## $mean_sharp_null
+## [1] 1.188
+## 
+## $p_value
+## [1] 0.16
 ```
 
 ---
 
-# Generate P-Value 
+# Generate P-Values, Effect Size: 0 
 
 
 ```r
-# notice: we now have two loops: 
-  # - We're running 1,000 simulations;
-  # - In each simulation, there are 5,000 sharp nulls drawn out
-  # - So get some coffee if you're running this at home
-distribution_of_p_values &lt;- replicate(
-  n = 1000, 
-  expr = simulate_study(
-    effect_size = 10, 
-    units_per_group = 20
+## notice: we now have two loops: 
+  ## - We're running 1,000 simulations;
+  ## - In each simulation, there are 1,000 sharp nulls drawn out
+  ## - So get some coffee if you're running this at home
+
+distribution_of_p_values_0 &lt;- replicate(
+  n = 200, 
+  expr = simulate_study(effect_size = 0)[['p_value']]
+)
+```
+
+---
+
+# Plot Distribution of P-Values, Effect Size: 0
+
+
+```r
+histogram_pvalues_0 &lt;- ggplot() + 
+  aes(distribution_of_p_values_0) + 
+  geom_histogram() + 
+  labs(
+    title = "Effect Size: 0", 
+    subtitle = paste0("Percent P-Values &lt; 0.05: ", round(mean(distribution_of_p_values_0 &lt; 0.05) * 100), "%"), 
+    x = "P-Value")
+```
+
+# Generate P-Value, Effect Size 10 
+
+
+```r
+distribution_of_p_values_10 &lt;- replicate(
+  n = 200, 
+  expr = simulate_study(effect_size = 10)[['p_value']]
+)
+```
+
+---
+
+# Plot Distribution of P-Values Effect Size: 10 
+
+
+```r
+histogram_pvalues_10 &lt;- ggplot() + 
+  aes(x = distribution_of_p_values_10) + 
+  geom_histogram() + 
+  labs(
+    title = "Effect Size: 10", 
+    subtitle = paste0("Percent P-Values &lt; 0.05: ", round(mean(distribution_of_p_values_10 &lt; 0.05) * 100), "%"), 
+    x = 'P-Value'
   )
+```
+
+---
+
+# Generate P-Value, Effect Size 20
+
+
+```r
+distribution_of_p_values_20 &lt;- replicate(
+  n = 200, 
+  expr = simulate_study(effect_size = 20)[['p_value']]
 )
 ```
 
 
+```r
+histogram_pvalues_20 &lt;- ggplot() + 
+  aes(x = distribution_of_p_values_20) + 
+  geom_histogram() + 
+  labs(
+    title = "Effect Size: 20",
+    subtitle = paste0("Percent P-Values &lt; 0.05: ", round(mean(distribution_of_p_values_20 &lt; 0.05) * 100), "%"), 
+    x = 'P-Value')
+```
+
+# Plot Distributions of P-Values
+
+&lt;img src="unit_03_files/figure-html/plot all power histograms-1.svg" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

@@ -15,9 +15,12 @@ output:
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, include=FALSE}
+
 library(tidyverse)
 library(ggplot2)
 library(data.table)
+
+#style_xaringan(inverse_background_color = '#003262')
 
 theme_set(theme_minimal())
 ```

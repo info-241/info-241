@@ -27,8 +27,6 @@ knitr::opts_chunk$set(echo = TRUE, dpi = 300)
 theme_set(theme_minimal())
 ```
 
----
-
 class: inverse, center, middle
 
 # Sampling Distribution and Randomization Inference
@@ -46,9 +44,8 @@ class: inverse, center, middle
   
 ---
 
-# Sampling Distributions and Randomization Inference
+# Sampling Distributions and RI
 
-- First, read GG 3.0, 3.1, 3.4.
 - Groups may differ by chance, even if the treatment has no effect.
   - How much would the groups differ if the treatment had no effect?
   - How large of an "effect estimate" would we reach by chance?
@@ -77,26 +74,46 @@ group <- c(rep("Man",20),rep("Woman",20))
 
 po_control <- c(
   seq(from = 1, to = 20), 
-  seq(from = 51, to = 70)) 
+  seq(from = 51, to = 70)
+  )
 
 ## Suppose there is no effect. 
 ## Then, the potential outcomes to control are equal 
 ## to the potential outcomes to treatment. 
-po_treatment <- po_control 
+
+po_treatment <- po_control + 0
+
+d <- data.frame(
+  'Control'   = po_control,
+  'Treatment' = po_treatment, 
+  'group'        = group
+  )
 ```
 
 ---
 
+```{r print head of dataframe}
+d %>% 
+  head()
+```
+
+
+---
+
 ```{r plot outcomes, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'} 
-ggplot() + 
-  aes(x=po_control, color = group) +
+d %>% 
+  pivot_longer(cols = c('Control', 'Treatment')) %>% 
+  ggplot() + 
+  aes(x = value, color = group, linetype = name) + 
   geom_density() + 
+  facet_wrap(facets = vars(name)) + 
   labs(
     title = "Distribution of Potential Outcomes", 
     subtitle = "Man identifiers have lower estrogen",
     x = 'Potential Outcomes', 
     y = 'Density', 
-    color = 'Identity Group'
+    color = 'Identity Group', 
+    linetype = 'Potential Outcome'
   )
 ```
 
@@ -109,11 +126,7 @@ ggplot() +
 - Concatenate the two vectors.
 - Get a different vector when you run it again.
 
----
-
-# Random Assignment
-
-```{r define randomizaton function}
+```{r define randomization function}
 randomize <- function(units_per_group) { 
   ## an (unnecessary) function to randomize units into 
   ## treatment and control 
@@ -124,6 +137,13 @@ randomize <- function(units_per_group) {
   assignment_vector <- rep(c('Control', 'Treatment'), each = units_per_group)
   sample(assignment_vector)
 } 
+```
+
+---
+
+# Random Assignment
+
+```{r demonstrate randomizaton function}
 
 randomize(units_per_group = 4) 
 randomize(units_per_group = 4) 
@@ -166,11 +186,11 @@ outcomes
 
 # Function to Estimate the Average Treatment Effect (ATE) 
 
-```{r estimate ate }
+```{r define estimate ate function}
 estimate_ate <- function(y_values, treatment) { 
   
-  treatment_group_mean <- mean(outcomes[treatment == 'Treatment'])
-  control_group_mean   <- mean(outcomes[treatment == 'Control'])
+  treatment_group_mean <- mean(y_values[treatment == 'Treatment'])
+  control_group_mean   <- mean(y_values[treatment == 'Control'])
   
   ate <- treatment_group_mean - control_group_mean
   
@@ -181,9 +201,16 @@ estimate_ate <- function(y_values, treatment) {
       "ate" = ate)
   )
 }
+```
 
-# In fact, there is _no_ effect, but... sampling! 
+---
+
+```{r, run estimate ate function once}
+## In fact, there is _no_ effect, but... sampling! 
 estimate_ate(y_values = outcomes, treatment = treatment_assigned) 
+
+## To pull a single part of this, because it is a list, R indexes with .[[
+estimate_ate(y_values = outcomes, treatment = treatment_assigned)[['ate']]
 ```
 
 ---
@@ -216,13 +243,13 @@ class: inverse, center, middle
 
 ```{r a few experiments}
 treatment_assigned_one <- randomize(units_per_group = 20)
-estimate_ate(y_values = outcomes, treatment = treatment_assigned_one) 
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_one)[['ate']]
 
 treatment_assigned_two <- randomize(units_per_group = 20)
-estimate_ate(y_values = outcomes, treatment = treatment_assigned_two) 
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_two)[['ate']]
 
 treatment_assigned_three <- randomize(units_per_group = 20)
-estimate_ate(y_values = outcomes, treatment = treatment_assigned_three) 
+estimate_ate(y_values = outcomes, treatment = treatment_assigned_three)[['ate']]
 ```
 
 ---
@@ -248,7 +275,7 @@ sharp_null <- replicate(
   n = 5000, 
   expr = estimate_ate(
     y_value = outcomes, 
-    treatment = randomize(units_per_group = 20))
+    treatment = randomize(units_per_group = 20))[['ate']]
 )
 ```
 
@@ -286,13 +313,13 @@ In this particular case,
 experimental_randomization <- randomize(units_per_group = 20)
 experimental_ate <- estimate_ate(
   y_values = outcomes, 
-  treatment = experimental_randomization)
+  treatment = experimental_randomization)[['ate']]
 
 sharp_null <- replicate(
   n = 5000, 
   expr = estimate_ate(
     y_value = outcomes, 
-    treatment = randomize(units_per_group = 20))
+    treatment = randomize(units_per_group = 20))[['ate']]
 )
 
 mean(abs(sharp_null) > abs(experimental_ate))
@@ -313,7 +340,6 @@ histogram_no_effect <- ggplot() +
     x = "Estimated Average Treatment Effect", 
     y = "Count"
   )
-
 ```
 
 ---
@@ -367,7 +393,7 @@ outcomes <- po_treatment * I(treatment_assigned == "Treatment") +
 experimental_ate_big_effect <- estimate_ate(
   y_values = outcomes, 
   treatment = treatment_assigned
-  )
+  )[['ate']]
 ```
 
 ---
@@ -379,9 +405,8 @@ sharp_null_big_effect <- replicate(
   n = 5000, 
   expr = estimate_ate(
     y_values = outcomes, 
-    treatment = randomize(units_per_group = 20)
+    treatment = randomize(units_per_group = 20))[['ate']]
   )
-)
 ```
 
 ---
@@ -414,7 +439,7 @@ histogram_big_effect
 # Simulating an Experiment with a Large Effect
 
 ```{r}
-mean(abs(sharp_null_big_effect) > abs(experimental_ate))
+mean(abs(sharp_null_big_effect) > abs(experimental_ate_big_effect))
 ```
 
 ---
@@ -442,27 +467,26 @@ Suppose the treatment effect is 10.
 # Create Whole Study Function 
 
 ```{r define simulate study function} 
-simulate_study <- function(effect_size, units_per_group) { 
+simulate_study <- function(effect_size) { 
   # requires all functions to date
   
-  effect_size <- 40
   # generate world
   po_control   <- c(1:20, 51:70)
   po_treatment <- po_control + effect_size
   
   # assign treatment and measure outcomes
-  treatment_assigned <- randomize(units_per_group)
+  treatment_assigned <- randomize(20)
   outcomes <- po_treatment * I(treatment_assigned == "Treatment") + 
     po_control * I(treatment_assigned == "Control") 
   
   # estimate ate   
-  estimated_ate <- estimate_ate(y_values = outcomes, treatment = treatment_assigned)
+  estimated_ate <- estimate_ate(y_values = outcomes, treatment = treatment_assigned)[['ate']]
   
   # generate sharp null distribution
   sharp_null <- replicate(
-    n = 300, 
-    expr = estimate_ate(y_values = outcomes, treatment = randomize(units_per_group)
-    )
+    n = 100, 
+    expr = estimate_ate(y_values = outcomes, treatment = randomize(20)
+    )[['ate']]
   )
   
   p_value <- mean(abs(sharp_null) > abs(estimated_ate))
@@ -473,50 +497,58 @@ simulate_study <- function(effect_size, units_per_group) {
   )
 }
 
-simulate_study(effect_size = 40, units_per_group = 20)
-
-estimate_ate(y_values = outcomes, treatment = randomize(20))
-```
-
---- 
-
-# Create Whole Study Function 
-
-```{r}
-simulate_study(effect_size = 100, units_per_group = 20)
+simulate_study(effect_size = 5)
 ```
 
 ---
+
+# Generate P-Values, Effect Size: 0 
+
+```{r conduct power analysis effect size 0} 
+## notice: we now have two loops: 
+  ## - We're running 1,000 simulations;
+  ## - In each simulation, there are 1,000 sharp nulls drawn out
+  ## - So get some coffee if you're running this at home
+
+distribution_of_p_values_0 <- replicate(
+  n = 200, 
+  expr = simulate_study(effect_size = 0)[['p_value']]
+)
+```
+
+---
+
+# Plot Distribution of P-Values, Effect Size: 0
+
+```{r}
+histogram_pvalues_0 <- ggplot() + 
+  aes(distribution_of_p_values_0) + 
+  geom_histogram() + 
+  labs(
+    title = "Effect Size: 0", 
+    subtitle = paste0("Percent P-Values < 0.05: ", round(mean(distribution_of_p_values_0 < 0.05) * 100), "%"), 
+    x = "P-Value")
+```
 
 # Generate P-Value, Effect Size 10 
 
 ```{r conduct power analysis effect size 10}
-# notice: we now have two loops: 
-  # - We're running 1,000 simulations;
-  # - In each simulation, there are 5,000 sharp nulls drawn out
-  # - So get some coffee if you're running this at home
 distribution_of_p_values_10 <- replicate(
-  n = 1000, 
-  expr = simulate_study(
-    effect_size = 10, 
-    units_per_group = 20
-  )
+  n = 200, 
+  expr = simulate_study(effect_size = 10)[['p_value']]
 )
-
-simulate_study
-
 ```
 
 ---
 
-# Plot Distribution of P-Values Effect Size 10 
+# Plot Distribution of P-Values Effect Size: 10 
 
 ```{r plot pvalues for effect size 10}
 histogram_pvalues_10 <- ggplot() + 
   aes(x = distribution_of_p_values_10) + 
   geom_histogram() + 
   labs(
-    title = "Distribution of P-Values", 
+    title = "Effect Size: 10", 
     subtitle = paste0("Percent P-Values < 0.05: ", round(mean(distribution_of_p_values_10 < 0.05) * 100), "%"), 
     x = 'P-Value'
   )
@@ -524,40 +556,28 @@ histogram_pvalues_10 <- ggplot() +
 
 ---
 
-# Plot Distribution of P-Values, Effect Size 10 
-
-```{r plot pvalues for effect size 10, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
-histogram_pvalues_10
-```
-
----
+# Generate P-Value, Effect Size 20
 
 ```{r conduct power analysis effect size 20}
 distribution_of_p_values_20 <- replicate(
-  n = 1000, 
-  expr = simulate_study(
-    effect_size = 40, 
-    units_per_group = 20
-  )
+  n = 200, 
+  expr = simulate_study(effect_size = 20)[['p_value']]
 )
 ```
-
----
 
 ```{r plot pvalues for effect size 20}
 histogram_pvalues_20 <- ggplot() + 
   aes(x = distribution_of_p_values_20) + 
   geom_histogram() + 
   labs(
-    title = "Distribution of P-Values", 
-    subtitle = paste0("Percent P-Values < 0.05: ", round(mean(distribution_of_p_values_10 < 0.05) * 100), "%"), 
-    x = 'P-Value'
-  )
+    title = "Effect Size: 20",
+    subtitle = paste0("Percent P-Values < 0.05: ", round(mean(distribution_of_p_values_20 < 0.05) * 100), "%"), 
+    x = 'P-Value')
+    
 ```
 
----
+# Plot Distributions of P-Values
 
-```{r plot pvalues for effect size 20, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
-histogram_pvalues_20
+```{r plot all power histograms, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
+histogram_pvalues_0 / histogram_pvalues_10 / histogram_pvalues_20
 ```
-
