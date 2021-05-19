@@ -458,7 +458,7 @@ class: inverse, center, middle
 
 ---
 
-# Detecting Non-Zero Treatmetn Effects
+# Detecting Non-Zero Treatment Effects
 
 Suppose the treatment effect is 10. 
 
@@ -468,8 +468,6 @@ Suppose the treatment effect is 10.
 
 ```{r define simulate study function} 
 simulate_study <- function(effect_size) { 
-  # requires all functions to date
-  
   # generate world
   po_control   <- c(1:20, 51:70)
   po_treatment <- po_control + effect_size
@@ -485,9 +483,7 @@ simulate_study <- function(effect_size) {
   # generate sharp null distribution
   sharp_null <- replicate(
     n = 100, 
-    expr = estimate_ate(y_values = outcomes, treatment = randomize(20)
-    )[['ate']]
-  )
+    expr = estimate_ate(y_values = outcomes, treatment = randomize(20))[['ate']])
   
   p_value <- mean(abs(sharp_null) > abs(estimated_ate))
   return(list(
@@ -496,88 +492,136 @@ simulate_study <- function(effect_size) {
     'p_value' = p_value)
   )
 }
-
-simulate_study(effect_size = 5)
 ```
 
 ---
 
-# Generate P-Values, Effect Size: 0 
+# Simulate Study, Effect Size: 10
 
-```{r conduct power analysis effect size 0} 
+```{r conduct power analysis effect size 10}
 ## notice: we now have two loops: 
-  ## - We're running 1,000 simulations;
+  ## - We're running 500 simulations;
   ## - In each simulation, there are 1,000 sharp nulls drawn out
   ## - So get some coffee if you're running this at home
 
-distribution_of_p_values_0 <- replicate(
-  n = 200, 
-  expr = simulate_study(effect_size = 0)[['p_value']]
-)
-```
-
----
-
-# Plot Distribution of P-Values, Effect Size: 0
-
-```{r}
-histogram_pvalues_0 <- ggplot() + 
-  aes(distribution_of_p_values_0) + 
-  geom_histogram() + 
-  labs(
-    title = "Effect Size: 0", 
-    subtitle = paste0("Percent P-Values < 0.05: ", round(mean(distribution_of_p_values_0 < 0.05) * 100), "%"), 
-    x = "P-Value")
-```
-
-# Generate P-Value, Effect Size 10 
-
-```{r conduct power analysis effect size 10}
 distribution_of_p_values_10 <- replicate(
-  n = 200, 
+  n = 500, 
   expr = simulate_study(effect_size = 10)[['p_value']]
 )
 ```
 
 ---
 
-# Plot Distribution of P-Values Effect Size: 10 
+# Power for 10 Unit Effect
 
-```{r plot pvalues for effect size 10}
-histogram_pvalues_10 <- ggplot() + 
+```{r plot distribution for effect size of 10, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
+ggplot() + 
   aes(x = distribution_of_p_values_10) + 
-  geom_histogram() + 
+  geom_density(color = '#00A598') + 
+  geom_vline(xintercept = 0.05, color = 'darkorange') + 
   labs(
-    title = "Effect Size: 10", 
-    subtitle = paste0("Percent P-Values < 0.05: ", round(mean(distribution_of_p_values_10 < 0.05) * 100), "%"), 
-    x = 'P-Value'
+    title = 'Distribution of P-Values: Effect Size = 10', 
+    subtitle = 'Many tests generate p-values larger than 0.05', 
+    x = 'P-Values', 
+    y = 'Density'
   )
 ```
 
 ---
 
-# Generate P-Value, Effect Size 20
+# Power Sim: 0 & 20 Unit Effect
 
-```{r conduct power analysis effect size 20}
+```{r compute power analysis for zero effect and large effect } 
+distribution_of_p_values_0 <- replicate(
+  n = 500, 
+  expr = simulate_study(effect_size = 0)[['p_value']]
+)
+
 distribution_of_p_values_20 <- replicate(
-  n = 200, 
+  n = 500, 
   expr = simulate_study(effect_size = 20)[['p_value']]
 )
 ```
 
-```{r plot pvalues for effect size 20}
-histogram_pvalues_20 <- ggplot() + 
-  aes(x = distribution_of_p_values_20) + 
-  geom_histogram() + 
+---
+
+# Power Curves for All Effects
+
+```{r plot distributions, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
+d <- data.frame(
+  p_values = c(distribution_of_p_values_0, distribution_of_p_values_10, distribution_of_p_values_20), 
+  group = c(rep('No Effect', length(distribution_of_p_values_0)), 
+            rep('10 Unit Effect', length(distribution_of_p_values_10)), 
+            rep('20 Unit Effect', length(distribution_of_p_values_20)))
+)
+
+d %>% 
+  ggplot() + 
+  aes(x = p_values, color = group) + 
+  geom_density() + 
+  scale_color_manual(values = c('#00A598', '#003262', '#FDB515')) + 
+  geom_vline(xintercept = 0.05, color = 'darkorange') + 
   labs(
-    title = "Effect Size: 20",
-    subtitle = paste0("Percent P-Values < 0.05: ", round(mean(distribution_of_p_values_20 < 0.05) * 100), "%"), 
-    x = 'P-Value')
-    
+    title = 'Distribution of P-Values for Different Effect Sizes', 
+    subtitle = 'Left Shift Rejects Null More Frequently', 
+    color = 'Effect Size',
+    x = 'P-values', 
+    y = 'Density'
+  )
 ```
 
-# Plot Distributions of P-Values
+---
 
-```{r plot all power histograms, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
-histogram_pvalues_0 / histogram_pvalues_10 / histogram_pvalues_20
-```
+# Increasing Statistical Power
+
+## Power Increases With: 
+
+- Size of the effect -- *larger effects are easier to detect!*
+- Square root of the sample size, $\sqrt{N}$. 
+  - To detect an effect twice as small (or equivalently half as large) requires a sample size 4 times larger; 
+- Precision of the measurement 
+- Reduction of variance within groups (e.g. removing individuals pre-test; or block randomizing)
+
+## Statistical Power:
+
+> "The probability that a particular {experiment design & measurment & test} will reject the null hypothesis in a world where it *should* reject that null hypothesis."
+
+---
+
+# Concentrated Tests 
+
+## Suppose the FDA is testing the effect of soybeans on estrogen
+
+-  **Study One**: Give one soybean to 1,000,000 people. 
+- **Study Two**: Give 10 soybeans to 10,000 people. 
+  - If there is a linear effect of soybeans, then these two design have equivalent power
+  - However, *Study Two* has used 1/10 as many soybeans in the study.=
+    - If the input is the expensive part of the experiment, then this saves cost on the input 
+    - If the recruitment of subjects is the expensive part of the experiment, then this has *also* saved cost on the recruitment. 
+- (**Study Three**): Give 100 soybeans to 100 people has the same power as the above two experiments as well!      
+
+---
+
+# Concentrated Tests 
+
+- Often, it is a good idea to decrease the sample size and give a higher "dosage" to the treatment group
+- Concentrated tests increase statistical power by exposing a smaller number of people to a larger dose of treatment. 
+
+---
+
+# Decreasing Statistical Power 
+
+## Power Decreasese With: 
+
+- Larger amounts of variation in the measured outcomes
+  - More diverse populations create more differences in baseline differences; relative to the effect size, this "mutes" the ability to measure an effect 
+  - More "noise" in the measurement raises the "floor" of what one must detect to look different from that noise; precise measurements are preferred to imprecise measurements
+- Standard deviation, $\sigma$, of the outcome
+
+## Key Concept: 
+
+- The ratio of the true treatment effect to the standard error of the estimated effect: 
+
+$$
+  \text{test statistic} = \frac{\hat{\tau}}{SE(\hat{\tau})} =  \frac{\hat{\tau}}{\left(\frac{\sigma_{\hat{\tau}}}{\sqrt{N}}\right)}
+$$

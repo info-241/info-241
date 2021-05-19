@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ## Unit 3
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-05-12
+### Updated: 2021-05-19
 
 ---
 
@@ -144,7 +144,7 @@ randomize(units_per_group = 4)
 ```
 
 ```
-## [1] "Treatment" "Treatment" "Control"   "Treatment" "Treatment" "Control"   "Control"   "Control"
+## [1] "Treatment" "Control"   "Control"   "Treatment" "Treatment" "Treatment" "Control"   "Control"
 ```
 
 ```r
@@ -152,7 +152,7 @@ randomize(units_per_group = 4)
 ```
 
 ```
-## [1] "Control"   "Treatment" "Treatment" "Treatment" "Treatment" "Control"   "Control"   "Control"
+## [1] "Treatment" "Treatment" "Control"   "Treatment" "Control"   "Control"   "Treatment" "Control"
 ```
 
 ---
@@ -181,8 +181,7 @@ outcomes
 ```
 
 ```
-##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
-## [39] 69 70
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70
 ```
 
 ---
@@ -226,13 +225,13 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned)
 
 ```
 ## $tg_mean
-## [1] 36
-## 
-## $cg_mean
 ## [1] 35
 ## 
+## $cg_mean
+## [1] 36
+## 
 ## $ate
-## [1] 1
+## [1] -1
 ```
 
 ```r
@@ -241,7 +240,7 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned)[['ate']]
 ```
 
 ```
-## [1] 1
+## [1] -1
 ```
 
 ---
@@ -279,7 +278,7 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned_one)[['ate']]
 ```
 
 ```
-## [1] 1.3
+## [1] -16.7
 ```
 
 ```r
@@ -288,7 +287,7 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned_two)[['ate']]
 ```
 
 ```
-## [1] 8
+## [1] -1.5
 ```
 
 ```r
@@ -297,7 +296,7 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned_three)[['ate']]
 ```
 
 ```
-## [1] -3.1
+## [1] 0.2
 ```
 
 ---
@@ -366,7 +365,7 @@ mean(abs(sharp_null) &gt; abs(experimental_ate))
 ```
 
 ```
-## [1] 0.0686
+## [1] 0.6704
 ```
 
 ---
@@ -488,7 +487,7 @@ mean(abs(sharp_null_big_effect) &gt; abs(experimental_ate_big_effect))
 ```
 
 ```
-## [1] 0.0012
+## [1] 0
 ```
 
 ---
@@ -505,7 +504,7 @@ class: inverse, center, middle
 
 ---
 
-# Detecting Non-Zero Treatmetn Effects
+# Detecting Non-Zero Treatment Effects
 
 Suppose the treatment effect is 10. 
 
@@ -516,8 +515,6 @@ Suppose the treatment effect is 10.
 
 ```r
 simulate_study &lt;- function(effect_size) { 
-  # requires all functions to date
-  
   # generate world
   po_control   &lt;- c(1:20, 51:70)
   po_treatment &lt;- po_control + effect_size
@@ -533,9 +530,7 @@ simulate_study &lt;- function(effect_size) {
   # generate sharp null distribution
   sharp_null &lt;- replicate(
     n = 100, 
-    expr = estimate_ate(y_values = outcomes, treatment = randomize(20)
-    )[['ate']]
-  )
+    expr = estimate_ate(y_values = outcomes, treatment = randomize(20))[['ate']])
   
   p_value &lt;- mean(abs(sharp_null) &gt; abs(estimated_ate))
   return(list(
@@ -544,105 +539,109 @@ simulate_study &lt;- function(effect_size) {
     'p_value' = p_value)
   )
 }
-
-simulate_study(effect_size = 5)
-```
-
-```
-## $estimated_ate
-## [1] -10.8
-## 
-## $mean_sharp_null
-## [1] 1.188
-## 
-## $p_value
-## [1] 0.16
 ```
 
 ---
 
-# Generate P-Values, Effect Size: 0 
+# Simulate Study, Effect Size: 10
 
 
 ```r
 ## notice: we now have two loops: 
-  ## - We're running 1,000 simulations;
+  ## - We're running 500 simulations;
   ## - In each simulation, there are 1,000 sharp nulls drawn out
   ## - So get some coffee if you're running this at home
 
-distribution_of_p_values_0 &lt;- replicate(
-  n = 200, 
-  expr = simulate_study(effect_size = 0)[['p_value']]
-)
-```
-
----
-
-# Plot Distribution of P-Values, Effect Size: 0
-
-
-```r
-histogram_pvalues_0 &lt;- ggplot() + 
-  aes(distribution_of_p_values_0) + 
-  geom_histogram() + 
-  labs(
-    title = "Effect Size: 0", 
-    subtitle = paste0("Percent P-Values &lt; 0.05: ", round(mean(distribution_of_p_values_0 &lt; 0.05) * 100), "%"), 
-    x = "P-Value")
-```
-
-# Generate P-Value, Effect Size 10 
-
-
-```r
 distribution_of_p_values_10 &lt;- replicate(
-  n = 200, 
+  n = 500, 
   expr = simulate_study(effect_size = 10)[['p_value']]
 )
 ```
 
 ---
 
-# Plot Distribution of P-Values Effect Size: 10 
+# Power for 10 Unit Effect
 
-
-```r
-histogram_pvalues_10 &lt;- ggplot() + 
-  aes(x = distribution_of_p_values_10) + 
-  geom_histogram() + 
-  labs(
-    title = "Effect Size: 10", 
-    subtitle = paste0("Percent P-Values &lt; 0.05: ", round(mean(distribution_of_p_values_10 &lt; 0.05) * 100), "%"), 
-    x = 'P-Value'
-  )
-```
+&lt;img src="unit_03_files/figure-html/plot distribution for effect size of 10-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
 
-# Generate P-Value, Effect Size 20
+# Power Sim: 0 &amp; 20 Unit Effect
 
 
 ```r
+distribution_of_p_values_0 &lt;- replicate(
+  n = 500, 
+  expr = simulate_study(effect_size = 0)[['p_value']]
+)
+
 distribution_of_p_values_20 &lt;- replicate(
-  n = 200, 
+  n = 500, 
   expr = simulate_study(effect_size = 20)[['p_value']]
 )
 ```
 
+---
 
-```r
-histogram_pvalues_20 &lt;- ggplot() + 
-  aes(x = distribution_of_p_values_20) + 
-  geom_histogram() + 
-  labs(
-    title = "Effect Size: 20",
-    subtitle = paste0("Percent P-Values &lt; 0.05: ", round(mean(distribution_of_p_values_20 &lt; 0.05) * 100), "%"), 
-    x = 'P-Value')
-```
+# Power Curves for All Effects
 
-# Plot Distributions of P-Values
+&lt;img src="unit_03_files/figure-html/plot distributions-1.svg" style="display: block; margin: auto;" /&gt;
 
-&lt;img src="unit_03_files/figure-html/plot all power histograms-1.svg" style="display: block; margin: auto;" /&gt;
+---
+
+# Increasing Statistical Power
+
+## Power Increases With: 
+
+- Size of the effect -- *larger effects are easier to detect!*
+- Square root of the sample size, `\(\sqrt{N}\)`. 
+  - To detect an effect twice as small (or equivalently half as large) requires a sample size 4 times larger; 
+- Precision of the measurement 
+- Reduction of variance within groups (e.g. removing individuals pre-test; or block randomizing)
+
+## Statistical Power:
+
+&gt; "The probability that a particular {experiment design &amp; measurment &amp; test} will reject the null hypothesis in a world where it *should* reject that null hypothesis."
+
+---
+
+# Concentrated Tests 
+
+## Suppose the FDA is testing the effect of soybeans on estrogen
+
+-  **Study One**: Give one soybean to 1,000,000 people. 
+- **Study Two**: Give 10 soybeans to 10,000 people. 
+  - If there is a linear effect of soybeans, then these two design have equivalent power
+  - However, *Study Two* has used 1/10 as many soybeans in the study.=
+    - If the input is the expensive part of the experiment, then this saves cost on the input 
+    - If the recruitment of subjects is the expensive part of the experiment, then this has *also* saved cost on the recruitment. 
+- (**Study Three**): Give 100 soybeans to 100 people has the same power as the above two experiments as well!      
+
+---
+
+# Concentrated Tests 
+
+- Often, it is a good idea to decrease the sample size and give a higher "dosage" to the treatment group
+- Concentrated tests increase statistical power by exposing a smaller number of people to a larger dose of treatment. 
+
+---
+
+# Decreasing Statistical Power 
+
+## Power Decreasese With: 
+
+- Larger amounts of variation in the measured outcomes
+  - More diverse populations create more differences in baseline differences; relative to the effect size, this "mutes" the ability to measure an effect 
+  - More "noise" in the measurement raises the "floor" of what one must detect to look different from that noise; precise measurements are preferred to imprecise measurements
+- Standard deviation, `\(\sigma\)`, of the outcome
+
+## Key Concept: 
+
+- The ratio of the true treatment effect to the standard error of the estimated effect: 
+
+$$
+  \text{test statistic} = \frac{\hat{\tau}}{SE(\hat{\tau})} =  \frac{\hat{\tau}}{\left(\frac{\sigma_{\hat{\tau}}}{\sqrt{N}}\right)}
+$$
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
