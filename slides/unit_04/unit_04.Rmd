@@ -1,0 +1,152 @@
+---
+title: "w241: Experiments and Causality"
+subtitle: "Unit 4"
+author: "David Reiley, David Broockman, D. Alex Hughes"
+institute: "UC Berkeley, School of Information"
+date: "Updated: `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, echo=FALSE, message=FALSE, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(patchwork)
+library(data.table)
+
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(echo = TRUE, dpi = 300)
+
+
+theme_set(theme_minimal())
+```
+
+# Blocking
+
+- Hard to know if it was due to chance when there are large differences between treatment and control.
+- Need to reduce the size of the differences that can arise by chance.
+- Increase statistical power given an experiment with same sample and effect size.
+- If some variables are related to the outcome, restrict ourselves to randomizations that keep treatment and control similar.
+
+---
+
+# Men and Women Group Variable
+
+```{r make potential outcomes} 
+group <- c(rep("Man",20),rep("Woman",20))
+
+po_control <- c(
+  seq(from = 1, to = 20), 
+  seq(from = 51, to = 70)
+  )
+
+## Suppose there is no effect. 
+## Then, the potential outcomes to control are equal 
+## to the potential outcomes to treatment. 
+
+po_treatment <- po_control + 0
+
+d <- data.table(
+  'Control'   = po_control,
+  'Treatment' = po_treatment, 
+  'group'        = group
+  )
+```
+
+```{r}
+d %>% head()
+d %>% tail() 
+```
+
+--- 
+
+# Randomization 
+
+```{r define randomization function}
+randomize <- function(units_per_group) { 
+  ## an (unnecessary) function to randomize units into 
+  ## treatment and control 
+  ## ---
+  ## args: 
+  ##  - units_per_group: how many zero and one should be returned
+  
+  assignment_vector <- rep(c('Control', 'Treatment'), each = units_per_group)
+  sample(assignment_vector)
+} 
+```
+
+```{r}
+table(
+  'Sex' = d$group, 
+  'Assignment' = randomize(20)
+)
+
+table(
+  'Sex' = d$group, 
+  'Assignment' = randomize(20)
+)
+
+table(
+  'Sex' = d$group, 
+  'Assignment' = randomize(20)
+)
+```
+
+```{r} 
+
+block_ra <- function(size) { 
+  ## helper function (not strictly necessary) just to 
+  ## clean up the code, will be called in `randomize_block` 
+  urn <- rep(c('Control', 'Treatment'), times = size/2)
+  sample(urn)
+}
+
+randomize_block <- function(data_table, block_variable) { 
+  ## inputs: 
+  ##  - data_table, what is your data? 
+  ##  - block_variable: what variable identifies your blocks? 
+  data_table[ , treatment := block_ra(size = .N), by = get(block_variable)]
+  
+  return(data_table)
+  }
+```
+
+```{r run randomize block}
+dt <- randomize_block(data_table = d, block_variable = 'group')
+
+dt[ , table(treatment, group)]
+```
+
+# Men and Women Group Variable (contd)
+>randomize.blocked <- function(){
++ c(
++ sample(c(rep(0,10),rep(1,10))), #group A + sample(c(rep(0,10),rep(1,10))) #group B +)
++}
+>#now groups are always balanced
+>table(group, randomize.blocked())
+group 0 1
+Man 10 10
+Woman 10 10
+>table(group, randomize.blocked())
+group 0 1
+Man 10 10
+Woman 10 10
+# Simulate the Normal Study
+>sim.normal.study <- function(){
++ po.control <- c(seq(from = 1, to = 20), seq(from = 51, to = 70)) + po.treatment <- po.control
++ treatment <- randomize()
++ outcomes <- po.treatment * treatment + po.control * (1–treatment) + ate <- est.ate(outcomes, treatment)
++ n.women.treatment <- table(group, treatment)[2,2]
++ return(list(ate = ate, n.women.treatment = n.women.treatment)) +}
+>results <- t(replicate(1000, sim.normal.study()))
+>plot(results)
+ https://learn.datascience.berkeley.edu/oyster/player/latest/index.html?segmentUuid=7c4d54ad-a6b1-46bb-a1cb-e24a9815bf3a&print=true Page 2 of 3
+
+Blocking 5/19/21, 4:52 PM
+ https://learn.datascience.berkeley.edu/oyster/player/latest/index.html?segmentUuid=7c4d54ad-a6b1-46bb-a1cb-e24a9815bf3a&print=true Page 3 of 3
