@@ -100,27 +100,36 @@ table(
 
 ```{r} 
 
-block_ra <- function(size) { 
-  ## helper function (not strictly necessary) just to 
-  ## clean up the code, will be called in `randomize_block` 
-  urn <- rep(c('Control', 'Treatment'), times = size/2)
+block_randomize <- function(size) { 
+  ## this function will be executed /within/ the  data.table that 
+  ## holds the data. It could be run outside, but the assignment 
+  ## in place that data.table provides make it clean inside.
+  conditions <- c('Control', 'Treatment')
+  
+  if(size %% 2 == 0) { 
+    ## if there are an even number of units in each block this is easy
+    urn <- rep(conditions, times = size/2)  
+  } else if(size %% 2 == 1) { 
+    ## if there are an odd number, then produce conditions to the 
+    ## nearest even number that is less than the number of units 
+    ## then add one more assignment condition, sampled at random
+    urn <- c(rep(conditions, times = (size/2) - 0.5), sample(conditions, size = 1))
+  } 
+  
+  ## now, shuffle it up and (implicitly) return the shuffled sequence
   sample(urn)
 }
-
-randomize_block <- function(data_table, block_variable) { 
-  ## inputs: 
-  ##  - data_table, what is your data? 
-  ##  - block_variable: what variable identifies your blocks? 
-  data_table[ , treatment := block_ra(size = .N), by = get(block_variable)]
   
-  return(data_table)
-  }
+  
 ```
 
-```{r run randomize block}
-dt <- randomize_block(data_table = d, block_variable = 'group')
+```{r run randomize}
+d[ , block_assignment := block_randomize(size = .N), by = group]
 
-dt[ , table(treatment, group)]
+d[ , table(
+  'Condition' = block_assignment, 
+  'Sex' = group
+  )]
 ```
 
 # Men and Women Group Variable (contd)
