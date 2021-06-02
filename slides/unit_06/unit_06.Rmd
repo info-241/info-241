@@ -1,6 +1,6 @@
 ---
 title: "w241: Experiments and Causality"
-subtitle: "Unit 6: Covariates and Regression"
+subtitle: "Covariates and Regression"
 author: "David Reiley, David Broockman, D. Alex Hughes"
 institute: "UC Berkeley, School of Information"
 date: "Updated: `r Sys.Date()`"
