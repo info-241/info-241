@@ -36,70 +36,62 @@ theme_set(theme_minimal())
 
 ---
 
-# Men and Women Group Variable
+# Make Data
 
-```{r make potential outcomes} 
-group <- c(rep("Man",20),rep("Woman",20))
+```{r define functions, echo = FALSE} 
+make_data <- function(effect_size=0) {
+  group <- c(rep("Man",20),rep("Woman",20))
 
-po_control <- c(
-  seq(from = 1, to = 20), 
-  seq(from = 51, to = 70)
+  po_control <- c(
+    seq(from = 1, to = 20), 
+    seq(from = 51, to = 70)
+    )
+
+  ## Suppose there is no effect. 
+  ## Then, the potential outcomes to control are equal 
+  ## to the potential outcomes to treatment. 
+
+  po_treatment <- po_control + effect_size
+
+  d <- data.table(
+    'Control'   = po_control,
+    'Treatment' = po_treatment, 
+    'group'     = group
   )
+}
 
-## Suppose there is no effect. 
-## Then, the potential outcomes to control are equal 
-## to the potential outcomes to treatment. 
-
-po_treatment <- po_control + 0
-
-d <- data.table(
-  'Control'   = po_control,
-  'Treatment' = po_treatment, 
-  'group'        = group
-  )
-```
-
-```{r}
-d %>% head()
-d %>% tail() 
-```
-
---- 
-
-# Randomization 
-
-```{r define randomization function}
-randomize <- function(units_per_group) { 
+randomize <- function(size=40) { 
   ## an (unnecessary) function to randomize units into 
   ## treatment and control 
   ## ---
   ## args: 
   ##  - units_per_group: how many zero and one should be returned
   
-  assignment_vector <- rep(c('Control', 'Treatment'), each = units_per_group)
+  assignment_vector <- rep(c('Control', 'Treatment'), each = size / 2)
   sample(assignment_vector)
 } 
 ```
 
 ```{r}
-table(
-  'Sex' = d$group, 
-  'Assignment' = randomize(20)
-)
-
-table(
-  'Sex' = d$group, 
-  'Assignment' = randomize(20)
-)
-
-table(
-  'Sex' = d$group, 
-  'Assignment' = randomize(20)
-)
+d <- make_data(effect_size=0)
+head(d)
 ```
 
-```{r} 
+---
+# Randomization
 
+```{r}
+d[ , assignment := randomize(size=40)][ , 
+  table('Sex' = group, 'Assignment' = assignment)]
+
+d[ , assignment := randomize(size=40)][ , 
+  table('Sex' = group, 'Assignment' = assignment)]
+```
+
+---
+# Block Randomization
+
+```{r} 
 block_randomize <- function(size) { 
   ## this function will be executed /within/ the  data.table that 
   ## holds the data. It could be run outside, but the assignment 
@@ -116,46 +108,223 @@ block_randomize <- function(size) {
     urn <- c(rep(conditions, times = (size/2) - 0.5), sample(conditions, size = 1))
   } 
   
-  ## now, shuffle it up and (implicitly) return the shuffled sequence
-  sample(urn)
+  ## now, shuffle it up return the shuffled sequence
+  assignment <- sample(urn)
+  return(assignment)
 }
-  
-  
 ```
+
+---
+# Randomization
 
 ```{r run randomize}
-d[ , block_assignment := block_randomize(size = .N), by = group]
+d[ , block_assignment := block_randomize(size=.N), by = group][ , 
+  table('Sex' = group, 'Assignment' = block_assignment)]
 
-d[ , table(
-  'Condition' = block_assignment, 
-  'Sex' = group
-  )]
+d[ , block_assignment := block_randomize(size=.N), by = group][ , 
+  table('Sex' = group, 'Assignment' = block_assignment)]
 ```
 
-# Men and Women Group Variable (contd)
->randomize.blocked <- function(){
-+ c(
-+ sample(c(rep(0,10),rep(1,10))), #group A + sample(c(rep(0,10),rep(1,10))) #group B +)
-+}
->#now groups are always balanced
->table(group, randomize.blocked())
-group 0 1
-Man 10 10
-Woman 10 10
->table(group, randomize.blocked())
-group 0 1
-Man 10 10
-Woman 10 10
-# Simulate the Normal Study
->sim.normal.study <- function(){
-+ po.control <- c(seq(from = 1, to = 20), seq(from = 51, to = 70)) + po.treatment <- po.control
-+ treatment <- randomize()
-+ outcomes <- po.treatment * treatment + po.control * (1–treatment) + ate <- est.ate(outcomes, treatment)
-+ n.women.treatment <- table(group, treatment)[2,2]
-+ return(list(ate = ate, n.women.treatment = n.women.treatment)) +}
->results <- t(replicate(1000, sim.normal.study()))
->plot(results)
- https://learn.datascience.berkeley.edu/oyster/player/latest/index.html?segmentUuid=7c4d54ad-a6b1-46bb-a1cb-e24a9815bf3a&print=true Page 2 of 3
+---
+# Conduct Experiment 
 
-Blocking 5/19/21, 4:52 PM
- https://learn.datascience.berkeley.edu/oyster/player/latest/index.html?segmentUuid=7c4d54ad-a6b1-46bb-a1cb-e24a9815bf3a&print=true Page 3 of 3
+```{r}
+conduct_experiment <- function(potential_control, potential_treatment, assignment) { 
+  outcomes <- potential_treatment * I(assignment == "Treatment") + 
+    potential_control * I(assignment == "Control")
+  
+  return(outcomes)
+}
+
+d[ , Y := conduct_experiment(Control, Treatment, block_assignment)]
+
+head(d)
+```
+
+---
+# Estimate ATE
+
+```{r}
+estimate_ate <- function(y_values, treatment, verbose=FALSE) { 
+  
+  treatment_group_mean <- mean(y_values[treatment == 'Treatment'])
+  control_group_mean   <- mean(y_values[treatment == 'Control'])
+  
+  ate <- treatment_group_mean - control_group_mean
+  
+  if(verbose) {
+    return(
+      list(
+        "tg_mean" = treatment_group_mean, 
+        "cg_mean" = control_group_mean, 
+        "ate" = ate))
+    } else { 
+      return("ate" = ate)
+      }
+}
+
+ate <- d[ , estimate_ate(y_values = Y, treatment = block_assignment, verbose=TRUE)]
+ate
+```
+
+---
+# Simulate A Normal Study
+
+```{r}
+simulate_normal_study <- function(effect_size) { 
+  ## create world 
+  d <- make_data(effect_size=effect_size)
+
+  ## randomly assign and count the number of women in treatment 
+  d[ , assignment := randomize()]
+  
+  women_in_treatment <- d[group == 'Woman' & assignment == 'Treatment', .N]
+  
+  ## measure outcomes 
+  d[ , Y := conduct_experiment(Control, Treatment, assignment)]
+  
+  ## estimate ate 
+  ate <- d[ , estimate_ate(y_values = Y, treatment = assignment)]
+  
+  ## return objects 
+  ##  - `ate` from the `estimate_ate` function.
+  ##  - `women_in_treatment` as a count
+  return(list('ate' = ate, 'women_in_treatment' = women_in_treatment))
+}
+```
+
+---
+# Run One Normal Study
+
+```{r run a single normal study]}
+normal_study <- simulate_normal_study(effect_size = 0)
+normal_study
+```
+
+---
+# Simulate Many Normal Studies 
+
+```{r}
+many_normal_studies <- replicate(
+  n = 1000, 
+  expr = simulate_normal_study(effect_size = 0))
+
+many_normal_studies <- t(many_normal_studies)
+head(many_normal_studies)
+```
+
+```{r make normal study plots, echo = FALSE} 
+normal_ate_density <- ggplot() + 
+  aes(x = unlist(many_normal_studies[,1])) + 
+  geom_density(fill = '#003262', alpha = 0.7) + 
+  scale_x_continuous(limits = c(-30, 30)) + 
+  labs(
+    title = 'Zero Effect, Simple Randomization', 
+    subtitle = 'Some extreme effects',
+    x = 'Estimated ATE', 
+    y = 'Density'
+  )
+
+normal_ate_by_women <- ggplot() + 
+  aes(x = unlist(many_normal_studies[,1]), y = unlist(many_normal_studies[,2])) + 
+  geom_jitter() + 
+  scale_x_continuous(limits = c(-30, 30)) + 
+  scale_y_continuous(limits = c(4, 16)) + 
+  labs(
+    title = 'Treatment Effect vs. Women in Treatment', 
+    subtitle = 'Linear, increasing relationship', 
+    x = 'Estimated ATE', 
+    y = 'Women in Treatment'
+  )
+```
+
+---
+# Plot Normal ATE 
+
+```{r, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
+normal_ate_density | normal_ate_by_women 
+```
+
+---
+# Simulate a Block Randomized Study 
+
+```{r}
+simulate_blocked_study <- function(effect_size) { 
+  ## create world 
+  d <- make_data(effect_size=effect_size)
+  
+  ## randomly assign and count the number of women in treatment 
+  d[ , assignment := block_randomize(20), by = group]
+
+  women_in_treatment <- d[group == 'Woman' & assignment == 'Treatment', .N]
+  
+  ## measure outcomes 
+  d[ , Y := conduct_experiment(Control, Treatment, assignment)]
+  
+  ## estimate ate 
+  ate <- d[ , estimate_ate(y_values = Y, treatment = assignment)]
+  
+  ## return objects 
+  ##  - `ate` from the `estimate_ate` function.
+  ##  - `women_in_treatment` as a count 
+  return(list('ate' = ate, 'women_in_treatment' = women_in_treatment))
+}
+```
+
+---
+# Simulate a Block Randomized Study 
+```{r}
+blocked_study <- simulate_blocked_study(effect_size = 0)
+blocked_study
+```
+
+---
+# Simulate Many Block Randomized Studies 
+
+```{r}
+many_blocked_studies <- replicate(
+  n = 1000, 
+  expr = simulate_blocked_study(effect_size = 0)
+)
+
+many_blocked_studies <- t(many_blocked_studies)
+head(many_blocked_studies)
+```
+
+```{r, echo = FALSE}
+blocked_ate_density <- ggplot() + 
+  aes(x = unlist(many_blocked_studies[,1])) + 
+  geom_density(fill = '#FDB515', alpha = 0.7) + 
+  scale_x_continuous(limits = c(-30, 30)) + 
+  labs(
+    title = 'Zero Effect, Blocked Randomization', 
+    subtitle = 'Results tightly centered at true treatment effect',
+    x = 'Estimated ATE', y = 'Density'
+  )
+
+blocked_ate_by_women <- ggplot() + 
+  aes(x = unlist(many_blocked_studies[,1]), y = unlist(many_blocked_studies[,2])) + 
+  geom_jitter() + 
+  scale_x_continuous(limits = c(-30, 30)) + 
+  scale_y_continuous(limits = c(4, 16)) + 
+  labs(
+    title = 'Treatment Effect vs. Women in Treatment', 
+    subtitle = '', 
+    x = 'Estimated ATE', 
+    y = 'Women in Treatment'
+  )
+```
+
+---
+# Plot Blocked ATE
+
+```{r, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
+blocked_ate_density | blocked_ate_by_women
+```
+
+---
+# Plot Unblocked and Blocked
+```{r, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
+(normal_ate_density | normal_ate_by_women) / 
+  (blocked_ate_density | blocked_ate_by_women) 
+```

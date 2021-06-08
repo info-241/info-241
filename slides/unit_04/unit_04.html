@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>w241: Experiments and Causality</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="David Reiley, David Broockman, D. Alex Hughes" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# w241: Experiments and Causality
+## Unit 4
+### David Reiley, David Broockman, D. Alex Hughes
+### UC Berkeley, School of Information
+### Updated: 2021-05-25
+
+---
+
+
+
+
+# Blocking
+
+- Hard to know if it was due to chance when there are large differences between treatment and control.
+- Need to reduce the size of the differences that can arise by chance.
+- Increase statistical power given an experiment with same sample and effect size.
+- If some variables are related to the outcome, restrict ourselves to randomizations that keep treatment and control similar.
+
+---
+
+# Make Data
+
+
+
+
+```r
+d &lt;- make_data(effect_size=0)
+head(d)
+```
+
+```
+##    Control Treatment group
+## 1:       1         1   Man
+## 2:       2         2   Man
+## 3:       3         3   Man
+## 4:       4         4   Man
+## 5:       5         5   Man
+## 6:       6         6   Man
+```
+
+---
+# Randomization
+
+
+```r
+d[ , assignment := randomize(size=40)][ , 
+  table('Sex' = group, 'Assignment' = assignment)]
+```
+
+```
+##        Assignment
+## Sex     Control Treatment
+##   Man        12         8
+##   Woman       8        12
+```
+
+```r
+d[ , assignment := randomize(size=40)][ , 
+  table('Sex' = group, 'Assignment' = assignment)]
+```
+
+```
+##        Assignment
+## Sex     Control Treatment
+##   Man        10        10
+##   Woman      10        10
+```
+
+---
+# Block Randomization
+
+
+```r
+block_randomize &lt;- function(size) { 
+  ## this function will be executed /within/ the  data.table that 
+  ## holds the data. It could be run outside, but the assignment 
+  ## in place that data.table provides make it clean inside.
+  conditions &lt;- c('Control', 'Treatment')
+  
+  if(size %% 2 == 0) { 
+    ## if there are an even number of units in each block this is easy
+    urn &lt;- rep(conditions, times = size/2)  
+  } else if(size %% 2 == 1) { 
+    ## if there are an odd number, then produce conditions to the 
+    ## nearest even number that is less than the number of units 
+    ## then add one more assignment condition, sampled at random
+    urn &lt;- c(rep(conditions, times = (size/2) - 0.5), sample(conditions, size = 1))
+  } 
+  
+  ## now, shuffle it up return the shuffled sequence
+  assignment &lt;- sample(urn)
+  return(assignment)
+}
+```
+
+---
+# Randomization
+
+
+```r
+d[ , block_assignment := block_randomize(size=.N), by = group][ , 
+  table('Sex' = group, 'Assignment' = block_assignment)]
+```
+
+```
+##        Assignment
+## Sex     Control Treatment
+##   Man        10        10
+##   Woman      10        10
+```
+
+```r
+d[ , block_assignment := block_randomize(size=.N), by = group][ , 
+  table('Sex' = group, 'Assignment' = block_assignment)]
+```
+
+```
+##        Assignment
+## Sex     Control Treatment
+##   Man        10        10
+##   Woman      10        10
+```
+
+---
+# Conduct Experiment 
+
+
+```r
+conduct_experiment &lt;- function(potential_control, potential_treatment, assignment) { 
+  outcomes &lt;- potential_treatment * I(assignment == "Treatment") + 
+    potential_control * I(assignment == "Control")
+  
+  return(outcomes)
+}
+
+d[ , Y := conduct_experiment(Control, Treatment, block_assignment)]
+
+head(d)
+```
+
+```
+##    Control Treatment group assignment block_assignment Y
+## 1:       1         1   Man  Treatment        Treatment 1
+## 2:       2         2   Man  Treatment          Control 2
+## 3:       3         3   Man    Control        Treatment 3
+## 4:       4         4   Man  Treatment          Control 4
+## 5:       5         5   Man    Control        Treatment 5
+## 6:       6         6   Man    Control          Control 6
+```
+
+---
+# Estimate ATE
+
+
+```r
+estimate_ate &lt;- function(y_values, treatment, verbose=FALSE) { 
+  
+  treatment_group_mean &lt;- mean(y_values[treatment == 'Treatment'])
+  control_group_mean   &lt;- mean(y_values[treatment == 'Control'])
+  
+  ate &lt;- treatment_group_mean - control_group_mean
+  
+  if(verbose) {
+    return(
+      list(
+        "tg_mean" = treatment_group_mean, 
+        "cg_mean" = control_group_mean, 
+        "ate" = ate))
+    } else { 
+      return("ate" = ate)
+      }
+}
+
+ate &lt;- d[ , estimate_ate(y_values = Y, treatment = block_assignment, verbose=TRUE)]
+ate
+```
+
+```
+##    tg_mean cg_mean ate
+## 1:   35.95   35.05 0.9
+```
+
+---
+# Simulate A Normal Study
+
+
+```r
+simulate_normal_study &lt;- function(effect_size) { 
+  ## create world 
+  d &lt;- make_data(effect_size=effect_size)
+
+  ## randomly assign and count the number of women in treatment 
+  d[ , assignment := randomize()]
+  
+  women_in_treatment &lt;- d[group == 'Woman' &amp; assignment == 'Treatment', .N]
+  
+  ## measure outcomes 
+  d[ , Y := conduct_experiment(Control, Treatment, assignment)]
+  
+  ## estimate ate 
+  ate &lt;- d[ , estimate_ate(y_values = Y, treatment = assignment)]
+  
+  ## return objects 
+  ##  - `ate` from the `estimate_ate` function.
+  ##  - `women_in_treatment` as a count
+  return(list('ate' = ate, 'women_in_treatment' = women_in_treatment))
+}
+```
+
+---
+# Run One Normal Study
+
+
+```r
+normal_study &lt;- simulate_normal_study(effect_size = 0)
+normal_study
+```
+
+```
+## $ate
+## [1] -5.3
+## 
+## $women_in_treatment
+## [1] 9
+```
+
+---
+# Simulate Many Normal Studies 
+
+
+```r
+many_normal_studies &lt;- replicate(
+  n = 1000, 
+  expr = simulate_normal_study(effect_size = 0))
+
+many_normal_studies &lt;- t(many_normal_studies)
+head(many_normal_studies)
+```
+
+```
+##      ate  women_in_treatment
+## [1,] 1.8  10                
+## [2,] 0.6  10                
+## [3,] 4.3  11                
+## [4,] -6   9                 
+## [5,] -9.8 8                 
+## [6,] 2.7  10
+```
+
+
+
+---
+# Plot Normal ATE 
+
+
+```
+## Warning: Removed 1 rows containing missing values (geom_point).
+```
+
+&lt;img src="unit_04_files/figure-html/unnamed-chunk-8-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# Simulate a Block Randomized Study 
+
+
+```r
+simulate_blocked_study &lt;- function(effect_size) { 
+  ## create world 
+  d &lt;- make_data(effect_size=effect_size)
+  
+  ## randomly assign and count the number of women in treatment 
+  d[ , assignment := block_randomize(20), by = group]
+
+  women_in_treatment &lt;- d[group == 'Woman' &amp; assignment == 'Treatment', .N]
+  
+  ## measure outcomes 
+  d[ , Y := conduct_experiment(Control, Treatment, assignment)]
+  
+  ## estimate ate 
+  ate &lt;- d[ , estimate_ate(y_values = Y, treatment = assignment)]
+  
+  ## return objects 
+  ##  - `ate` from the `estimate_ate` function.
+  ##  - `women_in_treatment` as a count 
+  return(list('ate' = ate, 'women_in_treatment' = women_in_treatment))
+}
+```
+
+---
+# Simulate a Block Randomized Study 
+
+```r
+blocked_study &lt;- simulate_blocked_study(effect_size = 0)
+blocked_study
+```
+
+```
+## $ate
+## [1] -1.4
+## 
+## $women_in_treatment
+## [1] 10
+```
+
+---
+# Simulate Many Block Randomized Studies 
+
+
+```r
+many_blocked_studies &lt;- replicate(
+  n = 1000, 
+  expr = simulate_blocked_study(effect_size = 0)
+)
+
+many_blocked_studies &lt;- t(many_blocked_studies)
+head(many_blocked_studies)
+```
+
+```
+##      ate  women_in_treatment
+## [1,] 0.6  10                
+## [2,] -1.2 10                
+## [3,] -2.3 10                
+## [4,] 1.4  10                
+## [5,] 1.1  10                
+## [6,] 1.7  10
+```
+
+
+
+---
+# Plot Blocked ATE
+
+&lt;img src="unit_04_files/figure-html/unnamed-chunk-13-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+# Plot Unblocked and Blocked
+&lt;img src="unit_04_files/figure-html/unnamed-chunk-14-1.svg" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
