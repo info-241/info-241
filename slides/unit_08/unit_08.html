@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ## Incomplete Control Over Treatment Delivery
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-06-14
+### Updated: 2021-06-16
 
 ---
 
@@ -33,416 +33,189 @@ class: inverse, center, middle
 
 ## Noncompliance in randomized experiments
 
-Treatment assigned but not received
-
-+ Knock on the door to discuss voting in upcoming election, but person doesn't answer
-
-How to deal with noncompliance
-+ Analyze data correctly (don't introduce bias)
-+ Design experiments differently to improve precision
-
-Remember the advertising experiments earlier in the course
-
-One-sided noncompliance: subjects assigned to treatment don't receive
-
-Two-sided noncompliance: Control subjects receive treatment
+- Sometimes units assigned to treatment do not actually receive treatment 
+- This week, we will learn how to deal with noncompliance
+  - How to analyze data correctly without inducing bias
+  - How to design experiments to improve precision in the presence of noncompliance
+- Leading example: Advertising experiments from earlier in the course
+  - Randomly assign a person to be targeted with advertising
+  - But, they don't browse to the site and so *choose* to receive zero ads
+  - Or, some other advertiser non-randomly targets the person so our ad campaign cannot reach them. 
 
 ---
 # Reading
 
-## *Gerber and Green*: Chapter 5
+## *Gerber and Green*: Chapter 5, Introduction
 
-Return when finished
+- This is about 4 pages of reading. 
 
 ---
 
-&lt;!-- # Introduction to Heterogeneous Treatment Effects  --&gt;
+class: inverse, center, middle
 
-&lt;!-- --- --&gt;
+# Example: Get Out To Vote
 
-&lt;!-- # Main Topics  --&gt;
+---
 
-&lt;!-- ## Heterogeneous treatment effects --&gt;
-&lt;!-- - Does the same same treatment have different effects on different subjects?  --&gt;
-&lt;!-- - Use of regression to measure HTEs: Interaction between covariates of interest and treatment variable  --&gt;
+# Introduction to Chapter 5
 
-&lt;!-- ## Data analysis with non-experimental control --&gt;
-&lt;!-- - Multiple comparisons problem: Fishing expeditions can cause overstatement of true statistical significance. --&gt;
+## Get out the vote (GOTV) example
 
+- Treatment assigned at random
+  - Canvasser knock on the doors of 1,000 treatment houses
+  - Canvassers skip knocking on the doors of 1,000 control houses
+  
+## In the treatment Group
+  - 250 subjects answer the door
+  - The other 750 subjects did not receive treatment, *even though they were assigned to*. 
+  
+## Three groups of individuals 
 
-&lt;!-- --- --&gt;
+With three groups of individuals, who should we compare to whom when estimating the treatment effect? 
 
-&lt;!-- # Reading  --&gt;
+1. **Group A**: 250 people who answered the doors? 
+2. **Group B**: 750 people who didn't answer their doors? 
+3. **Group C**: 1,000 people in the control group (on whose doors no one knocked)
 
-&lt;!-- ## Reading: *Field Experiments*  --&gt;
-&lt;!-- Please read --&gt;
+---
 
-&lt;!-- - Section 9.0 (the Introduction), and,  --&gt;
-&lt;!-- - Section 9.1  --&gt;
+# Introduction to Chapter 5 (cont'd) 
 
-&lt;!-- --- --&gt;
+## *Field Experiments* considers three options: 
 
-&lt;!-- class: inverse, center, middle  --&gt;
+1. Compare group *A* to *C*: treatment individuals vs. control individuals 
+2. Compare group *A* to groups *B* and *C* :treated individuals vs. untreated individuals 
+3. Compare group *A* and *B* to group *C*: whol treatment group to whole control group
 
-&lt;!-- # Motivating Examples of Heterogeneous Treatment Effects  --&gt;
+---
 
-&lt;!-- --- --&gt;
+class: inverse, center, middle
 
-&lt;!-- # Quiz Question Discussion --&gt;
+# Example: Yahoo! Ad-Effectiveness 
 
-&lt;!-- - Potential outcomes are hypothetical population parameters. --&gt;
-&lt;!-- - In real-world samples, we get to measure only --&gt;
-&lt;!--   - Treatment outcomes for the treatment group --&gt;
-&lt;!--   - Control outcomes for the control group --&gt;
-&lt;!-- - We can measure only treatment outcomes or control outcomes for a single person. --&gt;
+---
 
-&lt;!-- --- --&gt;
+# Yahoo! Ad Experiemnt 
 
-&lt;!-- # Reading  --&gt;
+## Group A 
+- Assigned to treatment and received treatment 
+- 64% of the treatment group 
+- Purchased $1.81 per person 
 
-&lt;!-- ## Reading: *Field Experiments*, Section 9.3.1 --&gt;
+## Group B 
+- Assigned to treatment, *but did not receive* treatment 
+- 36% of the treatment group 
+- Purchased $2.04 per person 
 
-&lt;!-- While reading, consider, "Do different groups have different treatment effects?" --&gt;
+## Group C 
+- Assigned to control, *but did not receive* treatment 
+- 100% of the control group
+- Purchased $1.84 per person 
 
-&lt;!-- --- --&gt;
+---
 
-&lt;!-- # Example: Electricity Consumption --&gt;
+# Yahoo! Ad Experiemnt (cont'd) 
 
-&lt;!-- ## Test Groups --&gt;
-&lt;!-- 1. Below-average; and,  --&gt;
-&lt;!-- 2. Above-average electricity consumers --&gt;
+- The correct apples to apples comparison is \{*A* &amp; *B*\} to *C*
+- Treatment effect of $$\{(\$1.81 \times 0.64) + (\$2.04 \times 0.36) \} - \$1.84 = \mathbf{\$0.05}$$
 
-&lt;!-- ## Treatment  --&gt;
-&lt;!-- - Social comparison --&gt;
-&lt;!-- - How much electricity are your neighbors using?  --&gt;
+## But, what is this effect? 
 
-&lt;!-- ## HTE --&gt;
-&lt;!-- - Are people who use a *lot* of energy more responsive than people who aren't using much energy?  --&gt;
-&lt;!-- - Are people who are using less than their neighbors going to start using more?  --&gt;
+- Treatment effect is *diluted* but the 36% of consumers in the treatment group who did not receive ads and therefore could not have had any treatment effect
+- This $0.04 estimate is called the **intent-to-treat (ITT)** treatment effect 
+- The treatment effect on those who were *actually* treated must have been larger than $0.05
+- Producing an unbiased estimate of the treatment effect on those actually treated requires *reweighing this ITT*. 
 
-&lt;!-- --- --&gt;
+---
 
-&lt;!-- # Example: Congressional Responsiveness --&gt;
+# Reading 
 
-&lt;!-- ## Test groups --&gt;
-&lt;!-- 1. Members of Congress from the North; and,  --&gt;
-&lt;!-- 2. Members of Contress from the South --&gt;
+## Read *Field Experiments*, Section 5.1
+- Section 5.1 introduces new notation about treatment since assignment to treatmetn no longer guarantees that a subject will (or did) receive treatment 
+- As before, `\(d = 1\)` indicates that someone received a dose of treatment, and `\(d = 0\)` indicates that someone received a dose of control 
+- Section 5.1 introduces new notation, `\(z\)`, that indicates whether someone was assigned ("azzigned" mnemonically) to treatment 
 
-&lt;!-- ## Treatment  --&gt;
-&lt;!-- - Being informed of a meeting with a donor versus a constituent --&gt;
+## Assignment and receiving treatment are distinct events 
+- Someone might be assigned to treatment, `\(z=1\)`, but choose to take a dose of control, `\(d=0\)`
+- In the future, we'll let subjects be assigned to control, `\(z=0\)`, but choose to take a dose of treatment, `\(d=1\)`
 
-&lt;!-- ## HTE --&gt;
-&lt;!-- - Responsiveness of different congressmen --&gt;
+---
 
-&lt;!-- --- --&gt;
+class: inverse, center, middle 
 
-&lt;!-- # Example: eBay Shipping Policies  --&gt;
+# Example: Blood Pressure
 
-&lt;!-- ## Test groups  --&gt;
-&lt;!-- - Buyers of high-priced items  --&gt;
-&lt;!-- - Buyers of low-priced items --&gt;
+---
 
-&lt;!-- ## Treatment --&gt;
-&lt;!-- - Charging (or not charging) a shipping price on an auction --&gt;
-&lt;!-- Some measure of value should be predetermined before the experiment --&gt;
+# Example: Blood Pressure
 
-&lt;!-- ## HTE --&gt;
-&lt;!-- - Responsiveness to shipping costs on high-value versus low-value items --&gt;
+## Suppose our goal is to assess the effect of a new blood pressure medicine
+  - 100 control individuals are giving nothing, `\(z=0\)`
+  - 100 treatment individuals are provided with blood pressure medicine 
+    - 60 individuals take their pills, `\(z=1, d=1\)`
+    - 40 individuals do not take their pills, `\(z=1, d=0\)`
 
-&lt;!-- --- --&gt;
+## Who are the compliers, and who are the never takers?     
 
-&lt;!-- # Example: eBay Seller Reputation --&gt;
+---
 
-&lt;!-- ## Test Groups  --&gt;
-&lt;!-- - Buyers of high-priced items  --&gt;
-&lt;!-- - Buyers of low-priced items --&gt;
+# Example: Blood Pressure (cont'd) 
 
-&lt;!-- ## Treatment  --&gt;
-&lt;!-- - Selling from a high- or low-reputation account  --&gt;
+- 100 control group units did not take the pill, `\(z=0, d=0\)`, and have a **mean BP = 140**
+- 60 compliers who took the pill, `\(z=1, d=1\)`, have a **mean BP = 150**. 
+- 40 never-takers who did not take the pill, `\(z=1, d=0\)`, have a **mean BP of 100**
 
-&lt;!-- ## HTE --&gt;
-&lt;!-- - Are people differently reactive to reputation when they are buying high-priced, rather than low-priced items?  --&gt;
+## Don't be tempted! 
 
-&lt;!-- --- --&gt;
+- Tempting to naïvely conclude that pills increase blood pressure
+  - People who take the pill have higher blood pressure than either of the groups that did not take the pill
+- But, a more careful analysis would show that the ATE is, in fact, a *reduction* in blood pressure
 
-&lt;!-- # Example: Donation Matching  --&gt;
+---
 
-&lt;!-- ## Test Groups  --&gt;
-&lt;!-- - People who live in *Blue States*  --&gt;
-&lt;!-- - Peolpe who live in *Red States*  --&gt;
+# Reading: Skip *FE*, Section 5.2
 
-&lt;!-- ## Treatment  --&gt;
-&lt;!-- - Informing individuals that a donation they make to the ACLU will be matched  --&gt;
+## Key Takeaway #1 
 
-&lt;!-- ## HTE  --&gt;
-&lt;!-- - Because the ACLU is perceived to be a "Liberal" non-profit organization, do individuals who live in areas that are more liberal react more strongly to the donor-matching treatment?  --&gt;
+- The **ITT** is the "intent-to-treat" effect 
+  - The ITT is the difference of the average outcomes in the group assigned to receive treatment and the group assigned to receive control 
+  - The `\(ITT = E[Y|Z=1] - E[Y|Z=0]\)`
+  - This is a correct, *apples-to-apples* comparison 
+  - But, this estimate will be diluted compared to the actual treatment effect for the people who received the treatment 
+  - In other words, the ITT is the treatment effect of the *intention to treat*, `\(z\)`, on the outcome variable `\(Y\)`. 
+  
+---
 
-&lt;!-- --- --&gt;
+# Reading: Skip *FE*, Section 5.2
 
-&lt;!-- class: inverse, center, middle  --&gt;
+## Key Takeaway #2
 
-&lt;!-- # Treatment-by-Covariate Interactions  --&gt;
+- The `\(ITT_{D}\)` is the effect of being assigned to treatment, on *receiving a dose of treatment* 
+- Because receiving a dose happens **after** random treatment assignment, it meets all the requirements of a causal effect
+- `\(ITT_{D} = E[d_{i} | z_{i} = 1] - E[d_{i} | z_{i} = 0]\)` 
 
-&lt;!-- --- --&gt;
+## Blood Pressure Example 
+- 60% of the treatment group received treatment, `\(E[d_{i} | z_{i} = 1] = 0.6\)`
+- 0% of the control group received the treatment, `\(E[d_{i} |z_{i} = 0] = 0.0\)`. 
+- And so, `\(ITT_{D} = E[d_{i} | z_{i} = 1] - E[d_{i} | z_{i} = 0] = 0.6 - 0.0 = \mathbf{0.6}\)`
 
-&lt;!-- # Quiz Review  --&gt;
+## Alternative Terms 
 
-&lt;!-- ## Answer --&gt;
-&lt;!-- - Students whose parents' literacy was above the median --&gt;
+- *Take up rate* 
+- Or, alternative symbol, `\(\alpha\)`
 
-&lt;!-- ## Discussion  --&gt;
-&lt;!-- - Treatment effect not statistically significantly different between students whose parents have above-median versus below-median literacy --&gt;
-&lt;!-- - We need to know standard errors in order to evaluate how much to believe a point estimate --&gt;
+---
 
-&lt;!-- --- --&gt;
+# Reading: *FE*, Section 5.3
 
-&lt;!-- # Estimating HTEs --&gt;
+## Read *Field Experiments*, Section 5.3
+- Gerber and Green draw an important distinction between the ATE and the CACE in this section 
+  - The ATE is the average treatment effect for the whole population
+  - The CACE is the average treatment effect for the population who comply with their assignment 
+- When there is non-compliance, we cannot measure the potential outcomes to treatmetn for non-compliers -- none of them receive treatment! 
+- Thus, when there is non-compliance, there is no guarantee that the ATE = CACE. 
 
-&lt;!-- ## Etimating with two samples  --&gt;
-
-&lt;!-- - Split data into two separate samples --&gt;
-&lt;!-- - Compute means and standard errors of the treatment effect in each group --&gt;
-&lt;!--   - Do a two-sample test of means. --&gt;
-&lt;!--   - **Group one**: Students whose parents have above-median literacy --&gt;
-&lt;!--   - **Group two**: Students whose parents have below-median literacy --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Estimating HTEs (cont'd)  --&gt;
-
-&lt;!-- ## Estimating with regression  --&gt;
-&lt;!-- - Estimate a regression with dummy variables  --&gt;
-&lt;!--   - `\(I\)` indicator for teacher incentive treatment  --&gt;
-&lt;!--   - `\(P\)` indicator for parents with above-average literacy  --&gt;
-&lt;!-- - Include an interaction between `\(I \times P\)` --&gt;
-
-&lt;!-- `$$Y_{i} = \beta_{0} + \beta_{1} I_{i} + \beta_{2} P_{i} + \beta_{3} (I_{i} \times P_{i}) + \epsilon_{i}$$` --&gt;
-&lt;!-- ## Inferences  --&gt;
-&lt;!-- - Test whether there is evidence that the interaction term is different from zero --&gt;
-&lt;!--   - `\(H_{0}\)`: The treatment effects are no different between the groups  --&gt;
-&lt;!--   - `\(H_{A}\)`: The treatment effects are different between the groups --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Reading Clarification  --&gt;
-
-&lt;!-- - Always present standard errors with point estimates. --&gt;
-&lt;!-- - Always show the number of observations. --&gt;
-&lt;!-- - Reports the coefficient on one row, and the standard error in parentheses on the row below --&gt;
-&lt;!-- - Includes a reporting of:  --&gt;
-&lt;!--   - The number of observations --&gt;
-&lt;!--   - The `\(R^2\)` and *F-Test* vs. an intercept-only model --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- class: center --&gt;
-
-&lt;!-- ## Standard Format of Results  --&gt;
-
-&lt;!-- ```{r, echo = FALSE} --&gt;
-&lt;!-- d &lt;- data.frame(x = runif(n = 100, min = 0, max = 10)) --&gt;
-&lt;!-- d$y &lt;- 1 + d$x + rnorm(n = 100) --&gt;
-
-&lt;!-- model &lt;- lm(y ~ x, data = d) --&gt;
-
-&lt;!-- stargazer::stargazer( --&gt;
-&lt;!--   model, type = 'text', --&gt;
-&lt;!--   covariate.labels = 'Treatment',  --&gt;
-&lt;!--   dep.var.labels = 'Score',  --&gt;
-&lt;!--   omit.stat = c('ser'),  --&gt;
-&lt;!--   digits = 2) --&gt;
-&lt;!-- ``` --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Reading Clarification (cont'd)  --&gt;
-
-&lt;!-- `$$\widehat{Y}_{i} = \beta_{0} + \beta_{1} I_{i} + \beta_{2} P_{i} + \beta_{3} (I_{i} \times P_{i})$$` --&gt;
-
-&lt;!-- - If a test for `\(\beta_{3}\)` rejects the null hypothesis, then treatment effects differ along with levels of the covariate --&gt;
-&lt;!-- - Possible to estimate this with regression or randomization inference  --&gt;
-&lt;!--   - Gerber and Green use randomization inference,  --&gt;
-&lt;!--   - With data that is well-behaved, we can rely on the Central Limit Theorem and use regression --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- class: inverse, center, middle  --&gt;
-
-&lt;!-- # Teacher Incentives: Evidence from India --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Example: Teacher Incentives  --&gt;
-
-&lt;!-- ## [Muralidharan and Sundararaman (2011)](https://www.jstor.org/stable/10.1086/659655) --&gt;
-
-&lt;!-- ![header text](./figures/teacher_incentives_header.png) --&gt;
-&lt;!-- --- --&gt;
-
-&lt;!-- # School Enrollments  --&gt;
-
-&lt;!-- ![enrollments table](./figures/hte_school_enrollment.png) --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Data Structure: Teacher Gender  --&gt;
-
-&lt;!-- | Test Score | Male Teacher | Incentive | Interaction |  --&gt;
-&lt;!-- |------------|--------------|-----------|-------------| --&gt;
-&lt;!-- | 10         | 1            | 1         | 1           | --&gt;
-&lt;!-- | 12         | 1            | 0         | 0           |  --&gt;
-&lt;!-- | 8          | 0            | 1         | 0           |  --&gt;
-&lt;!-- | 14         | 0            | 0         | 0           |  --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Results: Teacher Gender  --&gt;
-
-&lt;!-- ![student characteristics table](./figures/hte_male_student.png) --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Estimating Equation  --&gt;
-
-&lt;!-- $$\begin{aligned}  --&gt;
-&lt;!--   T_{ijkm}(Y_{n})  = \alpha &amp;+ \gamma T_{ijkm}(Y_{0}) + \delta_{1} Incentives_{i} \\  --&gt;
-&lt;!--     &amp; + \delta_{2} Characteristic_{i} \\  --&gt;
-&lt;!--     &amp; + \delta_{3} (Incentives_{i} \times Characteristic_{i}) \\  --&gt;
-&lt;!--     &amp; + \beta Z_{m} + \epsilon_{k} + \epsilon_{jk} + \epsilon_{ijk} --&gt;
-&lt;!-- \end{aligned}$$ --&gt;
-
-&lt;!-- - `\(T\)` is a test score taken in year Y  --&gt;
-&lt;!-- - `\(Z_{m}\)` are covariates that are used to increase efficiency of the estimate --&gt;
-&lt;!-- - Subscripts are:  --&gt;
-&lt;!--   - `\(i\)` indexes the student, `\(j\)` the grade, and `\(k\)` the school, and `\(m\)` mandal --&gt;
-&lt;!--   - `\(n\)` year of observation --&gt;
-
-&lt;!-- ## Regressors of interest  --&gt;
-
-&lt;!-- - Incentives  --&gt;
-&lt;!-- - Characteristics --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Reading Regression Results  --&gt;
-
-&lt;!-- - Each column represents a separate regression estimate --&gt;
-&lt;!--   - **Dependent Variable**: Students' test score after treatment, normalized by the standard deviation across students --&gt;
-
-&lt;!-- ![student characteristics table](./figures/hte_male_student.png) --&gt;
-
-&lt;!-- - If a male student started at the 50th percentile, the treatment would have increased him to the 59th percentile. --&gt;
-&lt;!-- - No compelling evidence that treatment works differently for male or female identifying students - no HTE --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- class: inverse, center, middle  --&gt;
-
-&lt;!-- # HTEs by Student Characteristics --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Quiz Review  --&gt;
-
-&lt;!-- - Asterisks help reader pick out statistically significant effects --&gt;
-&lt;!-- - Most columns had statistically significant treatment effects... --&gt;
-&lt;!-- - ... but no statistically significant HTEs --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Household Wealth Interaction Effect --&gt;
-
-&lt;!-- - Only the household affluence interaction term was statistically significant. --&gt;
-&lt;!-- - Household affluence variable is difficult to interpret. --&gt;
-&lt;!--   - Interaction coefficient = `0.038 **` --&gt;
-&lt;!--   - Treatment effect increases by 0.038 for each additional point of household-affluence score. --&gt;
-&lt;!--   - *Household-affluence score* ranges from 0–7 --&gt;
-&lt;!--   - Assumes all categories have equal treatment-effect benefits -- `\(1 \rightarrow 2 = 6 \rightarrow 7\)` --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Alternative Specification  --&gt;
-
-&lt;!-- ## Rather than a linear scale, allow multiple dimensions of wealth  --&gt;
-
-&lt;!-- - Seven separate dummy variables as covariates. --&gt;
-&lt;!--   - One for owning land --&gt;
-&lt;!--   - One for owning a house --&gt;
-&lt;!--   - One for having running water --&gt;
-&lt;!--   - One for owning a TV --&gt;
-&lt;!-- - And then, seven different interaction terms. --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # One Regression to Rule Them All?  --&gt;
-&lt;!-- ## Several specific regressions or one big regression? --&gt;
-
-&lt;!-- - Muralidharan and Sundararaman (2011) Used one column for each covariate --&gt;
-&lt;!--   - Each covariate could have been put into the same regression. --&gt;
-&lt;!--   - But, might be difficult to identify *each* effect, since covariates are not randomly-assigned  --&gt;
-&lt;!--   - As a result, many of the covariates might covary with others, and so lead to "unstable" estimates  --&gt;
-&lt;!--   - This instability is because one measure is picking up many, related effects --&gt;
-
-&lt;!-- ## Colinearity isn't a problem with treatment variables  --&gt;
-
-&lt;!-- - Because the experiment has randomly assigned treatment, it should be independent from all sets of covariates --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Teacher Incentives: Household Affluence  --&gt;
-
-&lt;!-- ![household affluence](./figures/hte_household_affluence.png) --&gt;
-
-&lt;!-- - Adding household affluence leads the reported effect on `Incentive` to shrink --&gt;
-&lt;!--   - Estimated overall ATE = `\(3.5\)` (average affluence) `\(\times 0.038 = 0.133\)`  --&gt;
-&lt;!--   - (Note, this would only be the case if there was a uniform distribution, or symmetric distribution across the affluence scale) --&gt;
-&lt;!--   - Incentive + estimated overall ATE `\(0.09 + 0.133 = 0.223\)` --&gt;
-&lt;!-- - In an interaction model, the effect of treatment depends on levels for interacted variables   --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Teacher Incentives: Parental Literacy --&gt;
-
-&lt;!-- ![parental literacy](./figures/hte_parental_literacy.png) --&gt;
-
-&lt;!-- - Always be aware of the amount of statistical uncertainty in estimates --&gt;
-&lt;!--   - Confidence interval: `\(−0.003 \pm 0.038\)` per unit of literacy --&gt;
-&lt;!--   - The largest absolute value in that interval is `\(-0.003 - 0.038 = -0.041\)`. --&gt;
-&lt;!-- - Even using the coefficient estimate with the largest magnitude `\(-0.041\)` and evaluating it at the largest parental literacy value, `\(4\)`, the estimated total interaction effect confidence interval is `\(-0.041 \times 4 = -0.16\)` --&gt;
-&lt;!-- - This is still smaller than the baseline treatment effect, `\(0.224\)` for those with totally parents marked as a zero on literacy --&gt;
-
-&lt;!-- --- --&gt;
-&lt;!-- class: center, middle --&gt;
-
-&lt;!-- ## Always look at the magnitude of the estimate!  --&gt;
-&lt;!-- ## Always look at size of the confidence interval! --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Broad based Treatment Effect  --&gt;
-
-&lt;!-- ![overall effect](./figures/broadbased_effects.png) --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- class: inverse, center, middle --&gt;
-
-&lt;!-- # HTEs by Teacher Characteristics --&gt;
-
-&lt;!-- ---  --&gt;
-
-&lt;!-- # Review: Student Characteristic HTE --&gt;
-
-&lt;!-- - Broad-based benefits from teacher incentive program were found. --&gt;
-&lt;!--   - No HTEs by past student test score --&gt;
-&lt;!--   - Household wealth was the only significant HTE interaction. --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Teacher Characteristics --&gt;
-
-&lt;!-- Review the table. --&gt;
-&lt;!-- Answer the quiz questions. --&gt;
+---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
