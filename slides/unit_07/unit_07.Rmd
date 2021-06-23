@@ -405,7 +405,7 @@ class: inverse, center, middle
 
 # HTEs by Teacher Characteristics
 
---- 
+---
 
 # Review: Student Characteristic HTE
 
