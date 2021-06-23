@@ -476,6 +476,41 @@ class: inverse, center, middle
 
 class: inverse, center, middle 
 
-## Two-Sided Noncompliance
+# Two-Sided Noncompliance
 
 ---
+
+# Reading 
+
+## Read *Field Experiments*, Introduction to Chapter 6 and section 6.1 
+
+## Reading Tips
+
+- Be certain to read box 6.1; it provides concepts and notation for this section 
+- Remember that wehn we are using binary variables, we can multiply them to get a boolean $AND$. 
+
+$$\pi_{c} \equiv \frac{1}{N}\sum_{i=1}^{N}d_{i}(1)(1-d_{i}(0))$$
+
+- $d_{i}(1) = 1$ if, when assigned to treatment, the individual receives the treatment 
+- $d_{i}(0) = 0$ if, when assigned to control, the individual receives control
+- If $d_{i}(1)(1-d_{i}(0)) = 1$ then the person is a complier
+
+---
+
+# Two-sided Noncompliance
+
+- One-sided noncompliance occurs when treatment units receive control, but all control units correctly receive control
+- If control-group subjects can get treated, then we must consider four types of individuals 
+
+1. **Compliers** who do exactly as they are told: 
+  - $z=1 \rightarrow d=1$
+  - $z=0 \rightarrow d=0$
+2. **Never-takers** who never take the treatment, no matter their assignment. 
+3. **Always-takers** who always receive the treatemnt, no matter their assignment.
+4. **Defiers**, the 4 year-old kids of experiments, who do the opposite of what they are told: 
+  - $z=1 \rightarrow d=0$
+  - $z=0 \rightarrow d=1$
+
+## Key assumption: No defiers
+- Also known as *monotonicity assumption* the dosage is increasing in assignment
+- Without this assumption, we cannot produce an estimator. Is this assumtpion ever violated?
