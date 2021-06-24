@@ -419,3 +419,284 @@ class: inverse, center, middle
 
 Review the table.
 Answer the quiz questions.
+
+---
+
+class: inverse, center, middle 
+
+# Discussin of Quiz
+
+---
+
+# Disucssion of Quiz 
+
+## Quiz Review
+
+- Most significant effects (at the 5% level) for covariates of (a) teacher training and (b) years of experience.
+  - Displayed in the interaction row
+- The interaction terms in columns two and three show the most significant impact.
+- Teachers with more experience deliver fewer benefits based on incentives.
+- Teachers with more training deliver more benefits based on incentives.
+- Understanding the size of the HTEs is important.
+- Examine the magnitude of the regressors.
+
+---
+
+class: inverse, center, middle
+
+# Teacher Training Quiz 
+
+---
+
+# Teacher Training Quiz 
+
+Teacher training levels:
+
+    1 = No training
+    2 = Diploma
+    3 = Bachelor's
+    4 = Master's
+
+- Starting with a baseline of 0 for the no training value makes coefficient interpretation easier.
+- Main treatment effect in this specification is negative. Why?
+
+|           | (2) Training | 
+|-----------|--------------|
+| Incentive | -0.224       | 
+|           | (0.176)      | 
+
+---
+
+# Teacher Training Effect and Interaction 
+
+|              | (2) Training | 
+|--------------|--------------|
+| Incentive    | $-0.224$     | 
+|              | $(0.176)$    | 
+| Covariate    | $-0.051$     |
+|              | $(0.041)$    | 
+| Interaction  | $0.138^{**}$ | 
+|              | $(0.061)$    | 
+| Observations | $53,890$     | 
+| $R^2$        | $0.29$       | 
+
+- $-0.224$ is the baseline treatment effect for a teacher with training score of $0$.
+- Although no teachers have a training score of $0$.
+- Starting with a baseline of $0$ makes coefficient interpretation easier
+- Estimate is not statistically different from $0$.
+- T-ratio is very low.
+
+---
+
+# Estimating Confidence Intervals for HTEs 
+
+
+- Confidence interval for incentive effect (for those with training = 0) in this specification: $−0.224 \pm 0.35$
+- Covariate should equal 0 (not 1) for no training.
+  - Incentive coefficient would be easier to interpret.
+- Few teachers in the sample had literally no training.
+- What would be the estimate for a teacher who did have training?
+
+---
+
+class: inverse, center, middle
+
+# Discussion of Bachelor's Degree Quiz
+
+---
+
+# Discussion of Bachelor's Degree Quiz 
+
+## **Answer**: Estimated estimated treatment effect for teachers with bachelor's degrees
+
+$$
+\begin{aligned}
+  -0.244 +  & 0.138 \times 3 &&= 0.19 \\ 
+  \text{Incentive} + &  \text{Incentive}\times \text{Bachelors} &&=\text{Treatment effect} \\ 
+\end{aligned}
+$$
+
+- Positive treatment effect estimate for those with bachelor's degrees, negative treatment effect for teachers with no training.
+
+## Easier Method (for reporting) 
+
+- Split up the sample by the levels of training.
+- Estimate treatment effect for each group.
+- Standard errors on the treatment effect will probably be large.
+- Both the incentive and interaction coefficients have large standard errors.
+
+---
+
+# Discussion of Bachelor's Degree Quiz 
+
+|              | (2) Training | 
+|--------------|--------------|
+| Incentive    | $-0.224$     | 
+|              | $(0.176)$    | 
+| Covariate    | $-0.051$     |
+|              | $(0.041)$    | 
+| Interaction  | $0.138^{**}$ | 
+|              | $(0.061)$    | 
+| Observations | $53,890$     | 
+| $R^2$        | $0.29$       | 
+
+
+- Delta method could be used to compute exact standard errors.
+- If the covariate is well defined, it's good enough to:
+  - Examine the size of the treatment and interaction coefficients
+  - Determine if interaction coefficient is statistically significant
+  - Estimate the size of associated standard errors
+  
+---
+
+# Conclusion 
+
+- Understand point estimates.
+- Determine statistical significance of the HTE coefficient.
+- Compute the point estimate of the treatment effect for different values of the covariates.
+
+---
+
+# Reading 
+
+## Reading: *Field Experiments*, Section 9.3.2
+
+- Pay attention to the paragraph at the bottom of page 301. 
+- Subgroup membership is non-experimental in nature
+
+---
+
+class: inverse, center, middle 
+
+#  Example of HTEs in a Multifactor Experiment
+
+---
+
+# Reading 
+
+## Reading: *Field Experiments* Section 9.4 
+
+- Two treatment variables, $J$ and $G$, and one covariate, $H$
+  - $J$: Name is signed as *Jose* or *Colin*
+  - $G$: Grammar is *bad* or *good* 
+  - $H$: Legislator is *Hispanic* or *Non Hispanic*
+
+## Reading: *Field Experiments* Section 9.5.
+
+- Study Equation $9.19$ and Table $9.2$.
+- Equation $9.19$: regression presentation of data in Table $9.2$
+- New scenario:
+  - Three binary variables
+  - Three possible two-way interactions
+  - Three-way interaction
+  
+---
+
+class: inverse, center, middle 
+
+# The Multiple-Comparisons Problem 
+
+---
+
+![jelly beans 1](./figures/jelly_beans_1.png)
+
+---
+
+![jelly beans 2](./figures/jelly_beans_2.png)
+
+---
+
+![jelly beans 3](./figures/jelly_beans_3.png)
+
+---
+
+![jelly beans 4](./figures/jelly_beans_4.png)
+
+---
+
+![jelly beans 5](./figures/jelly_beans_5.png)
+
+---
+
+![jelly beans 6](./figures/jelly_beans_6.png)
+
+---
+
+
+# Multiple Comparisons Problem 
+
+- More variables means more specification searching is possible.
+- Specifications can be changed until the coefficients are suitable.
+- All possible covariates can be tried until statistical significance is found.
+- Statistical theory assumes we know the correct model.
+  - We don't always have the correct model, though.
+- Some searching is inevitable.
+- An effect isn't necessarily real when one coefficient was significant out of many possibilities tried.
+
+---
+
+# Fishing Expeditions 
+
+- Trying out multiple hypotheses before picking a favorite.
+- Violates assumptions that give valid confidence intervals.
+- Analyzing data in different ways is OK.
+- But the computed confidence intervals will be too narrow.
+
+---
+
+# Fishing Expeditions: Solutions
+
+- Bonferroni correction (see Box 9.4): helps avoid overstating statistical significance.
+- Critical values will be higher than without correcting, i.e. $t_{BF} > 1.96$ 
+- Consider findings to be interesting hypotheses.
+- Test them in another experiment to ensure replication
+
+---
+
+# Lewis and Reiley Age Effects 
+
+- Found higher sales revenue from older people who watched advertisements
+- *Buuuuut...* results didn't replicate in a second experiment.
+
+![no age based hte](./figures/lewis_reiley_2014.png)
+
+---
+
+# Teacher Incentives Effect 
+
+- Affluent households had statistically significantly larger treatment effects.
+  - This was the only significant interaction term out of eight tried.
+  - Bonferroni correction may have shown that this effect wasn't significant.
+- Muralidharan and Sundararaman examined many covariates.
+  - But properly avoided a fishing expedition
+- Student ability didn't affect incentive treatment.
+
+---
+
+class: inverse, center, middle 
+
+# Final Thoughts 
+
+---
+
+# Quiz Recap 
+
+Quiz Recap
+
+- Practiced converting sample means to regression coefficients.
+- Examined multifactor experiments.
+- Examined HTEs.
+- This quiz put together HTEs and multifactor experiments.
+
+---
+
+# Automated Searches for Interactions
+
+## Main point: 
+Fishing expeditions are a problem because of multiple comparisons.
+
+- Keep analysis simple.
+- Machine learning can help find heterogeneous treatment effects.
+- Performs automated specification searches.
+- Multiple comparisons will still be an issue.
+- Treat any output as a hypothesis to be confirmed in another experiment.
