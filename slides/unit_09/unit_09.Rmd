@@ -336,7 +336,10 @@ class: inverse, center, middle
 
 ---
 
-![](./figures/Figure5.png)
+```{r echo = FALSE, fig.height=3, fig.align='center', dpi = 300}
+knitr::include_graphics(path = './figures/Figure5.png')
+```
+
 ---
 # Findings
 - Treatment point estimates uniformly positive every week
