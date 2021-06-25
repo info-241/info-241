@@ -389,6 +389,7 @@ knitr::include_graphics(path='./figures/Figure_5k.png')
 
 
 
+
 ---
 # Findings
 - Treatment point estimates uniformly positive every week
@@ -533,11 +534,6 @@ class: inverse, center, middle
 - Allays concerns about witholding treatment
 - Can delay widespread treatment long enough to see effects in early treatment groups before administering to all groups
 - Long-run *and* simultaneous treatment effects
-
-
----
-![](./figures/AdsForPerry.png)
-
 
 
 <!-- Section 9.19 -->
