@@ -91,8 +91,8 @@ With three groups of individuals, who should we compare to whom when estimating 
 ## *Field Experiments* considers three options: 
 
 1. Compare group *A* to *C*: treatment individuals vs. control individuals 
-2. Compare group *A* to groups *B* and *C* :treated individuals vs. untreated individuals 
-3. Compare group *A* and *B* to group *C*: whol treatment group to whole control group
+2. Compare group *A* to groups *B* and *C*: treated individuals vs. untreated individuals 
+3. Compare group *A* and *B* to group *C*: whole treatment group to whole control group
 
 ---
 
@@ -138,7 +138,7 @@ class: inverse, center, middle
 # Reading 
 
 ## Read *Field Experiments*, Section 5.1
-- Section 5.1 introduces new notation about treatment since assignment to treatmetn no longer guarantees that a subject will (or did) receive treatment 
+- Section 5.1 introduces new notation about treatment since assignment to treatment no longer guarantees that a subject will (or did) receive treatment 
 - As before, $d = 1$ indicates that someone received a dose of treatment, and $d = 0$ indicates that someone received a dose of control 
 - Section 5.1 introduces new notation, $z$, that indicates whether someone was assigned ("azzigned" mnemonically) to treatment 
 
@@ -219,7 +219,7 @@ class: inverse, center, middle
 - Gerber and Green draw an important distinction between the ATE and the CACE in this section 
   - The ATE is the average treatment effect for the whole population
   - The CACE is the average treatment effect for the population who comply with their assignment 
-- When there is non-compliance, we cannot measure the potential outcomes to treatmetn for non-compliers -- none of them receive treatment! 
+- When there is non-compliance, we cannot measure the potential outcomes to treatment for non-compliers -- none of them receive treatment! 
 - Thus, when there is non-compliance, there is no guarantee that the ATE = CACE. 
 
 ---
@@ -234,7 +234,7 @@ class: inverse, center, middle
 
 ## Context shapes which which quantity is more important to estimate 
 
-- The *ATE* for everyone; 
+- The *ATE* for everyone
 - The *CACE* for the people we can actually treat 
 
 - In advertising, the advertiser only pays for ads that were delivered to compliers 
@@ -272,11 +272,11 @@ class: inverse, center, middle
 
 # Computing CACE for Yahoo!
 
-- $ITT = \$0.05$, difference between treatment and control, including never-takers 
+- $ITT = 0.05$, difference between treatment and control, including never-takers 
 - $\alpha = ITT_{D} = 0.64$, the fraction of compliers that were reached with ads 
 - If the exclusion restriction is true, never takers should have zero treatment effect
-- $\therefore$, any treatment effect is generated from the 64% who received ads 
-- To estimate treatment, divite the $ITT$ by the compliance rate 
+- Therefore, any treatment effect is generated from the 64% who received ads 
+- To estimate treatment, divide the $ITT$ by the compliance rate 
 
 $$CACE = \frac{ITT}{\alpha} = \$0.08$$
 
@@ -284,10 +284,10 @@ $$CACE = \frac{ITT}{\alpha} = \$0.08$$
 
 # CACE Standard Errors 
 
-- In the Yahoo! example, we estimate an ITT of $\$0.05\pm\$0.07 = (\$0.02, \$0.12)$
-- Among the people who complied with their assignment, their *CACE* is larger, $\$0.08$. Is this *now* statistically significant? Is the confidence interval $\$0.08\pm\$0.07$? 
+- In the Yahoo! example, we estimate an ITT of $0.05 \pm 0.07 = (0.02, 0.12)$
+- Among the people who complied with their assignment, their *CACE* is larger, $0.08$. Is this *now* statistically significant? Is the confidence interval $0.08 \pm 0.07$? 
 - No! Equation 5.29 points out that scaling up our estimate also means scaling up our uncertainty? 
-- We estimate a $CACE = \$0.08 \pm \$0.11$ and still have a non-significant result 
+- We estimate a $CACE = 0.08 \pm 0.11$ and still have a non-significant result 
 - Equation 5.29 provides this statement of CACE standard errors
 
 ---
@@ -309,11 +309,11 @@ $$CACE = \frac{ITT}{\alpha} = \$0.08$$
 
 ## But First! 
 
-- Think about the advertising-effectivenes example: 
+- Think about the advertising-effectiveness example: 
   - 36% of subjects in that experiment are never-takers that cannot provide information about a treatment effect 
   - But, we cannot exclude them, because we cannot identify who, in the control group, *would have been* a non-complier if they were in treatment.
 - Section 5.9 introduces the **placebo design** that distinguishes between subject *types* in without giving treatment to them.
-- As a result, it is possible to exlcude never-takers from the CACE estimate *while still* maintaining an apples-to-apples comparison
+- As a result, it is possible to exclude never-takers from the CACE estimate *while still* maintaining an apples-to-apples comparison
 
 ## Two-Stage Least Squares 
 
@@ -325,7 +325,7 @@ $$CACE = \frac{ITT}{\alpha} = \$0.08$$
 # Applying a Placebo Design 
 
 - Canvassing example shows that using a placebo to identify individuals in the *control group* would could receive treatment (i.e. they are compliers) can increase *efficiency*
-- Apply this concept ot the Yahoo! example 
+- Apply this concept to the Yahoo! example 
   - Yahoo! ad effectiveness experiment randomly assigned 80% of the population to be in the treatment group
   - Of those, 64% that were targeted for treatment actually received it
   - If we could find the 36% in the control group that *would not have taken treatment*, then we could exclude them and increase the precision of our estimates 
@@ -412,7 +412,7 @@ $$\frac{V[\tau_{CACE}]}{V[\tau_{ATET}]} = \frac{1}{\alpha}$$
 - Suppose that Pandora is ready to serve an audio ad; and that the marketplace clears a *Home Depot* ad. 
 - If that user has been assigned to the control group, the system instead plays the second-highest bidding ad in the marketplace. Suppose this is for a Toyota truck. 
   - (This example really lands home with Alex while he's making the slides...) 
-- The user *hears* a Toyota ad that has be *posessed* (spooky!) by a Home Depot ghost ad.
+- The user *hears* a Toyota ad that has be *possessed* (spooky!) by a Home Depot ghost ad.
 - In practice, the key is to log the fact that the listener *would have* received a Home Depot ad if they were in the control group
 - So long as the server is set up correctly, and doesn't change any *other* features of the ad, the group no longer has to pay for American Red Cross placebo ads
 
@@ -465,7 +465,7 @@ class: inverse, center, middle
 
 # What *else* could go wrong? 
 
-- What if the placebo has a treatment effect on the outcome we're interested in? This would be an **eclusion restriction** violation
+- What if the placebo has a treatment effect on the outcome we're interested in? This would be an **exclusion restriction** violation
 
 ## Examples
 
@@ -487,7 +487,7 @@ class: inverse, center, middle
 ## Reading Tips
 
 - Be certain to read box 6.1; it provides concepts and notation for this section 
-- Remember that wehn we are using binary variables, we can multiply them to get a boolean $AND$. 
+- Remember that when we are using binary variables, we can multiply them to get a boolean $AND$. 
 
 $$\pi_{c} \equiv \frac{1}{N}\sum_{i=1}^{N}d_{i}(1)(1-d_{i}(0))$$
 
@@ -506,11 +506,325 @@ $$\pi_{c} \equiv \frac{1}{N}\sum_{i=1}^{N}d_{i}(1)(1-d_{i}(0))$$
   - $z=1 \rightarrow d=1$
   - $z=0 \rightarrow d=0$
 2. **Never-takers** who never take the treatment, no matter their assignment. 
-3. **Always-takers** who always receive the treatemnt, no matter their assignment.
+3. **Always-takers** who always receive the treatment, no matter their assignment.
 4. **Defiers**, the 4 year-old kids of experiments, who do the opposite of what they are told: 
   - $z=1 \rightarrow d=0$
   - $z=0 \rightarrow d=1$
 
 ## Key assumption: No defiers
 - Also known as *monotonicity assumption* the dosage is increasing in assignment
-- Without this assumption, we cannot produce an estimator. Is this assumtpion ever violated?
+- Without this assumption, we cannot produce an estimator. Is this assumption ever violated?
+
+---
+
+# Estimating Treatment Effects
+
+Estimating treatment effects in a two-sided noncompliance case is an extension of the method developed and presented for one-sided noncompliance. 
+
+- Treatment effect is estimated *only* for the compliers: 
+  - Both always-takers and never-takers can demonstrate no treatment effect because their dosage is the same in treatment as control. Always $D=1$ for always takers; always $D=0$ for never takers. 
+  - Only compliers are affected by treatment assignment
+  - Once again, estimate the $ITT$ across all individuals, and then re-scale by the share of compliers. 
+  
+---
+
+# Key Question
+
+## What is the share of compliers?
+
+```{r, echo = FALSE, fig.align='center', out.height=500, out.width=500} 
+knitr::include_graphics(path = './figures/two_sided_zero.png')
+```
+
+---
+
+# Key Question
+
+## What is the share of compliers?
+
+```{r, echo = FALSE, fig.align='center', out.height=500, out.width=500} 
+knitr::include_graphics(path = './figures/two_sided_one.png')
+```
+
+---
+
+# Key Question
+
+## What is the share of compliers?
+
+```{r, echo = FALSE, fig.align='center', out.height=500, out.width=500} 
+knitr::include_graphics(path = './figures/two_sided_two.png')
+```
+
+---
+
+# Key Question 
+
+## What is the share of compliers? 
+
+- $ITT_{D}$ is more sensible in two-sided than one-sided noncompliance. It is the effect of treatment assignment, $Z$, on dosage, $D$. 
+- The treatment effect of assignment on dosage raises the *fraction* of people getting dosed: 
+  - From some quantity greater than zero (because some assigned to control get treatment) 
+  - To some quantity lesser than one (because some assigned to treatment get control)
+  - $ITT_{D} = E[D|Z=1] - D[D|Z=0]$
+  - From the last slide, $ITT_{D} = 0.90 - 0.15 = 0.75$ of the subjects are compliers
+  - So, divide $ITT$ by this $0.75$. 
+- **One-sided noncompliance**: $ITT_{D} \equiv$ the take up rate
+- **Two-sided noncompliance**: $ITT_{D} \equiv$ the *difference* in take up rates
+
+## Estimating CACE 
+
+- In two-sided, like one-sided noncompliance, $CACE = \frac{ITT}{ITT_{D}}$. 
+- Theorem 6.2 in *Field Experiments* gives the full, technical description
+
+---
+
+class: inverse, center, middle 
+
+# Reading: The KIPP Lottery 
+
+---
+
+# Reading: The KIPP Lottery 
+
+## Reading: Please read *Mastering Metrics* pages 98 - 105
+- A copy of the PDF of this chapter is in the `./readings/` folder of the course. 
+
+## Two Sided Non-compliance 
+- Charter schools in many areas have more demand from parents than supply in the schools--they are oversubscribed
+- In an attempt to be fair, *Knowledge Is Power Program* (KIPP) schools in Lynn, MA allocated seats via a lottery 
+- In the reading that you're going to do, watch for two kinds of non-compliance, never-takers and always-takers. 
+
+## Stop when you get to the section heading "LATE for Charter School" 
+
+---
+
+class: inverse, center, middle 
+
+# Discussion of MM Table 3.1 
+
+---
+
+# Table 3.1, Panel A 
+
+```{r, fig.height=3, fig.align='center', echo = FALSE}
+knitr::include_graphics(path = './figures/table_3_1_a.png')
+```
+
+---
+
+# Table 3.1, Panel B
+
+```{r, fig.height=3, fig.align='center', echo=FALSE}
+knitr::include_graphics(path = './figures/table_3_1_b.png')
+```
+
+---
+
+# Features to Notice in Table 3.1 
+
+- Panel A is a covariate balance check 
+- Panel B gives several different outcomes, one on each row
+- Columns (1), (2), and (4) give mean levels of the variables 
+- Columns (3) and (5) report differences, or treatment effects 
+- Look, for example, at the math-score outcome
+  - Column (2) shows us that the math score for lottery winners was 0.003 standard deviations below the state mean 
+  - Column (3) shows us that the difference between lottery winners and lottery losers was 0.355 standard deviations in math score. **This is a substantial ITT**. 
+  
+---
+
+# Table 3.1, cont'd
+
+```{r, fig.height=3, fig.align='center', echo = FALSE}
+knitr::include_graphics(path = './figures/table_3_1_b.png')
+```
+
+---
+
+# Noncompliance in KIPP 
+
+- **Never-takers**: didn't attend KIPP even though the won the lottery (see Figure 3.1: there are 82 never-takers out of 303 lottery winners)
+- **Always-takers**: figures out how to attend KIPP even though they lost the lottery (5 students out of 143 lottery losers)
+- **Compliers**: attended KIPP if, and only if, they won the lottery (about 74% of the students) 
+- **Defiers**: by assumption, there are are none
+
+---
+
+# Table 3.2: Mnemonic for Types 
+
+```{r, echo = FALSE, fig.height=3, fig.align='center'}
+knitr::include_graphics(path = './figures/table_3_2.png')
+```
+
+---
+
+# CACE is Estimated Using Instrumental Varaibles 
+
+## There are two kinds of attendance in KIPP attendance 
+  1. **Clean Variation**: random variation generated by the lottery 
+    - Used for measuring causal effects 
+    - Provides apples-to-apples comparisons 
+  2. **Dirty Variation**: endogenous variation generated by heterogeneous student characteristics 
+    - This can contaminate causal effects with spurious correlation
+    - Might cause an apples-to-oranges comparison 
+    - Perhaps always takers are more motivated than compliers? 
+    
+## Instrumental Variables can "purge" dirty variation
+
+---
+
+class: inverse, center, middle 
+
+# Estimating CACE in KIPP 
+
+---
+
+# Figure 3.2: IV in School
+
+```{r, echo = FALSE, fig.height=3, fig.align='center'}
+knitr::include_graphics(path = './figures/figure_3_2.png')
+```
+
+---
+
+class: inverse, center, middle 
+
+# Reading: *Field Experiments* 
+
+---
+
+# Reading
+
+## Reading: *Field Experiments*, Section 6.5.4
+
+- Please read about *encouragement designs* 
+  - *Optional*: If you are interested, Section 6.4 is another very readable example of computing treatment effects with two-sided non-compliance
+  
+---
+
+class: inverse, center, middle 
+
+# Encouragement Designs 
+
+---
+
+# What is an "Encouragement Design"? 
+
+- Sometimes, ethical reasons prohibit us from requiring people to either take, or not-take a treatment
+- But, we might *encourage* subjects to follow our guidance. 
+- This encouragement might cause some to take (or not) the treatment
+- But, there might be considerable two-sided non-compliance
+- Estimation will require reliable estimators 
+
+---
+
+# Examples of Encouragement Designs 
+
+## Calling Voters 
+- Phone individuals and encourage them to watch a mayoral debate
+- Check to see if the individual watched, and whether opinions of candidates changes as a result of watching 
+- Control group is encouraged to watch a non-political TV show in a placebo design 
+
+## Incentivising Gym Attendance 
+- Offer $100 to individuals who visit the gym three times per week for a month 
+- Monitor gym visits after the month of encouragement to observe whether a month's encouragement can cause a "habit" 
+
+## Incentivising "Healthy" Eating
+- Offer subjects $1000 to follow a keto diet for six months (monsters!) 
+- Ask subjects to wear blood-sugar monitors so we can monitor compliance 
+- Only pay those who keep their blood-sugar under 140 mg/dL 
+- Measure how lower blood-sugar affects cardiovascular health
+
+---
+
+class: inverse, center, middle 
+
+# Reading: *Field Experiments*, Section 6.6
+
+---
+
+# Reading 
+
+## Reading: *Field Experiments*, Section 6.6 
+
+- Please read the first 2.5 pages on "downstream experimentation" 
+- Stop when you get to the paragraph that begins with, "Let's now consider" 
+- The rest of section 6.6 is optional, and interesting. 
+
+---
+
+class: inverse, center, middle
+
+# Downstream Experiments 
+
+---
+
+# What is a Downstream Experiment? 
+
+## Upstream Experiments 
+
+- Class size on graduation rates 
+
+## Downstream Experiment 
+
+- "Do increases in graduation rates cause people to be more likely to vote?" 
+  - Once we've observed that there are large effects in the upstream experiment, one can use this as if the class-size experiment were an encouragement design 
+  - Does reducing class sizes increase graduation rates? 
+  - Do randomly generate increases in graduation rates make people more likely to vote? 
+
+## Rapid Decay
+
+- Typically, effects of treatment **very rapidly** decay. 
+- Downstream experiments will only work if there are strong upstream experimental effects 
+
+---
+
+# Examples of Downstream Experiments 
+
+## Smoking 
+
+What is the effect of smoking a first cigarette at age 21 on the likelihood of being a regular smoker at age 25? 
+  - If we're lucky, someone has already done an experiment on cigarette prices to estimate cigarette demand as a function of price
+  - $Z$: Cigarette-price treatment 
+  - $D$: Trying one's first cigarette at age 21
+  - $Y$: Being a regular smoker at age 25 
+  
+## Sentence Length on Recidivism 
+
+What is the effect of a longer incarceration on the likelihood of being incarcerated in the future? 
+- $Z$: Being assigned to a tough judge who gives longer sentences 
+- $D$: Getting a sentence of a year or more in prison 
+- $Y$: Probability of being convicted of another crime within 10 years of the first 
+
+---
+
+class: inverse, center, middle 
+
+# Noncompliance in Review 
+
+---
+
+# Noncompliance in Review 
+
+- Sometimes, we cannot deliver the assigned treatment to every unit
+- Maintaining experimental comparability requires comparing all units we **intended** to give treatment to all units we **intended** to give control (ITT)
+- Tempting, but incorrect, to compare those in the treatment group who received treatment against the control group
+  - Without a placebo design, we cannot know who in the control group *would have complied* 
+  - Placebo designs *always* show a difference in baseline outcomes for compliers than never-takers
+  - Apples-to-oranges comparisons are not a theoretical problem -- it is a *real* problem 
+
+---
+
+# Noncompliance in Review (cont'd) 
+
+- With two-sided noncompliance, there are three categories of subjects
+  - Never-takers
+  - Always-takers
+  - Compliers 
+- We assume there are no defiers. 
+- CACE estimates are specific to compliers. 
+- ITT estimates are the treatment effect of treatment assignment, not receiving treatment, on outcomes 
+- $CACE = \frac{ITT}{\Delta ITT_{D}}$
+- Placebo designs can increase precision in CACE by "deleting data" on never-takers in both treatment and control/placebo groups
+  - Increases the signal-to-noise ratio while maintaining apples-to-apples comparability 
+  
