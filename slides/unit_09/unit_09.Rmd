@@ -13,7 +13,6 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 ---
-
 ```{r setup, echo=FALSE, message=FALSE, include=FALSE}
 library(latex2exp)
 library(tidyverse)
@@ -31,15 +30,17 @@ knitr::opts_chunk$set(echo = TRUE, dpi = 300, fig.height = 3)
 theme_set(theme_minimal())
 ```
 
+
 class: inverse, center, middle 
+# Introduction
+<!-- Section 9.1 -->
 
-# 9.1 Introduction
 
+
+<!-- Section 9.2 -->
 ---
-
 class: inverse, center, middle 
-
-# 9.2 Spillovers
+# Spillovers
 
 ---
 # What are spillovers?
@@ -56,11 +57,13 @@ Effects of one person's treatment on the outcome of another person
 - Note for discussion any jargon you don't understand
 - Make sure you understand the bulleted list of examples on pages 255 and 266
 
+
+
+<!-- Section 9.3 -->
 ---
-
 class: inverse, center, middle 
+# Example: Job-Performance Monitoring 
 
-# 9.3 Example: Job-Performance Monitoring 
 
 ---
 # Example: Nagin et al (2002)
@@ -77,6 +80,7 @@ class: inverse, center, middle
 - Some of these may be employee bad luck (eg. donor changed mind), but some may be deliberate cheating
 - Minimize expensive spot-checks (callbacks)
 
+
 ---
 # Example: Nagin et al (2002) cont'd 
 
@@ -86,6 +90,7 @@ class: inverse, center, middle
   - Experimental rates reported back to employees: 0%, 2%, 5%, and 10%
   - Actual experimental rate: 25%
   - An employee in the 10% group would have 25/100 calls audited, but only 10 of those used to report back to employee
+  
   
 ---
 # Results
@@ -109,16 +114,15 @@ With spillover effect:
 - 5% treatment should create spillover effect
 - 0% group should expect more auditing and make fewer bad calls
 
----
 
+
+<!-- Section 9.5 -->
+---
 class: inverse, center, middle 
+# Example Continued: Spillovers and Experimental Design
 
-# 9.5 Example Continued: Spillovers and Experimental Design
 
 ---
-
-<!-- Alex noted to ignore this, but it is discussed in video -->
-
 # Quiz Answer
 
 **Question:** With spillovers, would we expect a simple randomized experiment to underestimate or overestimate the effect of changing the auditing policy?
@@ -128,12 +132,12 @@ class: inverse, center, middle
 
 
 ---
-
 # What can we do to improve design?
 
 Randomize at work-site level (eg. different cities) instead of individual level
 - Distance between groups of employees minimizes chance of spillover
 - Represents clustered design (see *Field Experiments* 3.6.2)
+
 
 ---
 # Clustered Design
@@ -145,7 +149,6 @@ Used in telemarketing example (Nagin et al 2002) to avoid spillover problems
 - Cross-site variation in treatment provides basis for results
 - Within-site variation obtained by reshuffling treatments after six weeks
   - Addresses concerns about everyone in a given treatment gropu having correlated behavior for reasons other than the treatment
-
 
 
 ---
@@ -175,10 +178,11 @@ Make sure you understand the roommate example, specifically:
   - Second subscript is treated individual (self)
   
   
+  
+<!-- Section 9.6 -->
 ---
 class: inverse, center, middle 
-
-# 9.6 Identifying Causal Effects in the Presense of Spillovers
+# Identifying Causal Effects in the Presense of Spillovers
 
 ---
 # Example in 8.1
@@ -206,7 +210,6 @@ From pg 257, first paragraph, last sentence
 
 
 ---
-
 # Reading Assignment
 
 ## *Fields Experiments* Section 8.2
@@ -219,77 +222,70 @@ Focus primarily on *pgs 260-261*
 - Kinds of proximity that might cause spillovers
 - Last sentence of page 261: **We are ignoring spillovers from a distance of two or more units**
 - Compute probabilities in Table 8.3 by understanding the relationship to Figure 8.1
-
 - Don't worry about pages 262-263 (location-adjacent version of probability-weighting problem in Section 4.5)
 
 
 
+<!-- Section 9.7 -->
 ---
-
 class: inverse, center, middle 
+# Quiz 2
 
-# 9.7 Quiz 2
 
+
+<!-- Section 9.8 -->
 ---
-
 class: inverse, center, middle 
-# 9.8 Spatial Spillovers
+# Spatial Spillovers
+
 
 ---
-
 # Spatial Spillover Example
 - Skip the reading in *Field Experiments*, Section 8.3
 - See figure 8.4 for example of spillovers in two dimensions
 
+
+<!-- Figure 8.4 Animation slides -->
 ---
 # Figure 8.4: Spillover in Two Dimensions
-
-![](./figures/Figure8_4a.png)
-
-
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure8_4a.png')
+```
 ---
 # Figure 8.4: Spillover in Two Dimensions
-
-![](./figures/Figure8_4b.png)
-
-
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure8_4b.png')
+```
 ---
 # Figure 8.4: Spillover in Two Dimensions
-
-![](./figures/Figure8_4c.png)
-
-
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure8_4c.png')
+```
 ---
 # Figure 8.4: Spillover in Two Dimensions
-
-![](./figures/Figure8_4d.png)
-
-
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure8_4d.png')
+```
 ---
 # Figure 8.4: Spillover in Two Dimensions
-
-![](./figures/Figure8_4e.png)
-
-
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure8_4e.png')
+```
 ---
 # Figure 8.4: Spillover in Two Dimensions
-
-![](./figures/Figure8_4f.png)
-
-
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure8_4f.png')
+```
 ---
 # Figure 8.4: Spillover in Two Dimensions
-
-![](./figures/Figure8_4g.png)
-
-
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure8_4g.png')
+```
 ---
 # Figure 8.4: Spillover in Two Dimensions
-
-![](./figures/Figure8_4h.png)
-
-
-
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure8_4h.png')
+```
 
 
 
@@ -308,6 +304,7 @@ Contrast with usual virtue of experiments: make measurements with minimal assump
 Assumption problems not unique to geography
 - Eg. social networks
 
+
 ---
 # Reading Assignment
 
@@ -318,27 +315,80 @@ First: A motivating example on longer-run effects of advertising
 
 
 
-
-
+<!-- Section 9.9 -->
 ---
 class: inverse, center, middle 
+# Spilling Across Time: Example on the Effects of Advertising
 
-# 9.9 Spilling Across Time: Example on the Effects of Advertising
 
 ---
-
-
 # Longer-Term Effects of Advertising
 
 - Lewis and Reiley (2014) estimate persistent effects of advertising in subsequent weeks
 
 - Without re-reandomization in second campaigns, we can't distinguish its separate effects
 
----
 
-```{r echo = FALSE, fig.height=3, fig.align='center', dpi = 300}
-knitr::include_graphics(path = './figures/Figure5.png')
+
+<!-- Figure 5 animation slides -->
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5a.png')
 ```
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5b.png')
+```
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5c.png')
+```
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5d.png')
+```
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5e.png')
+```
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5f.png')
+```
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5g.png')
+```
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5h.png')
+```
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5i.png')
+```
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5j.png')
+```
+---
+# Figure 5: Advertising Example
+```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+knitr::include_graphics(path='./figures/Figure_5k.png')
+```
+
+
+
 
 ---
 # Findings
@@ -346,37 +396,37 @@ knitr::include_graphics(path = './figures/Figure5.png')
 - Difference-in-difference assumption may have caused overestimation
   - All obsvations based on same pre-period
   - Overestimation due to pre-period differences will carry over to all subseguent weeks
-  
 - Results show evidence of long-term effects of advertising
 
----
 
+---
 #Reading Assignment
 
-## *Field Experiments*, Section 8.4
+## Read *Field Experiments*, Section 8.4
 - Temporal spillover effects over time, from present to future
 - Within-subjects experimental designs
 
 
 
----
-
-class: inverse, center, middle 
-
-# 9.10 Yoga: Estimating in the Presense of Spillover
-
-## THE SLIDES FOR THIS SECTION ARE NOT HERE
-
----
-
-class: inverse, center, middle 
-
-# 9.11 Quiz 3
-
+<!-- Section 9.10 -->
 ---
 class: inverse, center, middle 
+# Yoga: Estimating in the Presense of Spillover
 
-# 9.12 Within-Subjects Design and Time-Series Experiments
+
+
+<!-- Section 9.11 -->
+---
+class: inverse, center, middle 
+# Quiz 3
+
+
+
+<!-- Section 9.12 -->
+---
+class: inverse, center, middle 
+# Within-Subjects Design and Time-Series Experiments
+
 
 ---
 # Within-Subjects Design: Why?
@@ -414,34 +464,34 @@ Including many time periods can solve this problem
 
 
 
-
-
----
-
-class: inverse, center, middle 
-
-# 9.13 Quiz 4
-
----
-
-class: inverse, center, middle 
-
-# 9.14 Yoga: Estimating with Clustered Standard Errors
-
-## THERE ARE NO SLIDES HERE
----
-
-class: inverse, center, middle 
-
-# 9.15 Review: Estimating with Clustered Standard Errors
-
+<!-- Section 9.13 -->
 ---
 class: inverse, center, middle 
+# Quiz 4
 
-# 9.16 Guide to Reading: Waitlist Designs
+
+
+<!-- Section 9.14 -->
+---
+class: inverse, center, middle 
+# Yoga: Estimating with Clustered Standard Errors
+
+
+
+<!-- Section 9.15 -->
+---
+class: inverse, center, middle 
+# Review: Estimating with Clustered Standard Errors
+
+
+
+<!-- Section 9.16 -->
+---
+class: inverse, center, middle 
+# Guide to Reading: Waitlist Designs
+
 
 ---
-
 # Reading Assignment
 
 ## *Field Experiments*, Section 8.5
@@ -451,19 +501,21 @@ class: inverse, center, middle
 *The example in the rest of this section is instructive if you wish to read it, but the details are beyond our scope*
 
 
+
+<!-- Section 9.17 -->
 ---
 class: inverse, center, middle 
-
 # 9.17 Quiz 5
 
+
+
+<!-- Section 9.18 -->
 ---
-
 class: inverse, center, middle 
-
 # 9.18 Waitlist Designs
 
----
 
+---
 # Waitlist Design
 
 ## Administer randomized treatment to all subjects over time
@@ -472,12 +524,10 @@ class: inverse, center, middle
 
 
 ---
-
 ![](./figures/AdsForPerry.png)
 
 
 ---
-
 # Benefits of Waitlist Design
 
 - Allows experimentation
@@ -486,25 +536,13 @@ class: inverse, center, middle
 - Long-run *and* simultaneous treatment effects
 
 
+<!-- Section 9.19 -->
 ---
-
-![](./figures/AdsForPerry.png)
----
-
 class: inverse, center, middle 
-
-# 9.19 Yoga Example: Unsccessully Estimating in the Presence of Spillover
-
+# Yoga Example: Unsccessully Estimating in the Presence of Spillover
 
 
 ---
-<!-- THESE ARE THE SLIDES I MADE BEFORE -->
-
-
-
-
----
-
 # What to Remember From This Week
 
 All experiments aim for *Ceteris paribus* "all other things being equal" except treatment effect
@@ -518,4 +556,3 @@ Clustered treatment can eliminate this bias
 Within-subjects design can be valuable if treatment effects are limited in time
 
 Stepped-wedge designs get variation both within and between subjects
-
