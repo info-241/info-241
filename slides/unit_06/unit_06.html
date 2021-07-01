@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ## Covariates and Regression
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-06-04
+### Updated: 2021-06-16
 
 ---
 
@@ -211,6 +211,8 @@ class: center, middle
   - More educated data scientists earn more than less educated data scientists.
 - Including the occupation covariate is therefore a bad idea: *It picks up only the latter kind of variation.*
 
+![table_6_1](./figures/table_6_1.png)
+
 ---
 
 # Example: eBay Reputation
@@ -282,7 +284,7 @@ class: inverse, center, middle
 
 class: center, middle
 
-![](unit_06_files/figure-html/unnamed-chunk-66-1.png)&lt;!-- --&gt;
+![](unit_06_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -299,12 +301,7 @@ class: center, middle
 
 ---
 
-
-```r
-large_variance_in_y | small_variance_in_y | small_variance_in_x
-```
-
-![](unit_06_files/figure-html/unnamed-chunk-67-1.png)&lt;!-- --&gt;
+![](unit_06_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -333,7 +330,7 @@ large_variance_in_y | small_variance_in_y | small_variance_in_x
 
 # Distributions of Data 
 
-![](unit_06_files/figure-html/unnamed-chunk-68-1.png)&lt;!-- --&gt;
+![](unit_06_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
 
 - *Fanned Out* data means many lines could be fit, depending on the sample 
 - More accurate plot with accuracy *distant* from grand mean: endpoints anchor slope.
@@ -359,7 +356,7 @@ large_variance_in_y | small_variance_in_y | small_variance_in_x
 
 - When estimating variance of `\(\hat{\beta}\)`: 
   - Take weighted sum of squared residuals (i.e., squared vertical deviations from regression line)
-  - Divide by total variance in $X4
+  - Divide by total variance in `\(X\)`
   - Weights in weighted sum correspond to leverage of each observation
   - Squared residuals, `\(\hat{\epsilon}^2\)`, weighted by squared horizontal deviations from the mean
   
@@ -554,13 +551,13 @@ Define the following symbols
 
 ## Data Structure
 
-|ID       | Y        | NH_GG    | H_GG     | NH_BG    | H_BG     | 
-|---------|----------|----------|----------|----------|----------|
-| 1       | Yes      | 1        | 0        | 0        | 0        | 
-| 2       | Yes      | 0        | 0        | 1        | 0        | 
-| 3       | No       | 0        | 1        | 0        | 0        | 
-|$\vdots$ | `\(\vdots\)` | `\(\vdots\)` | `\(\vdots\)` | `\(\vdots\)` | `\(\vdots\)` | 
-| 400     | No       | 0        | 1        | 0        | 0        |  
+|ID        | Y        | NH_GG    | H_GG     | NH_BG    | H_BG     | 
+|----------|----------|----------|----------|----------|----------|
+| 1        | Yes      | 1        | 0        | 0        | 0        | 
+| 2        | Yes      | 0        | 0        | 1        | 0        | 
+| 3        | No       | 0        | 1        | 0        | 0        | 
+| `\(\vdots\)` | `\(\vdots\)` | `\(\vdots\)` | `\(\vdots\)` | `\(\vdots\)` | `\(\vdots\)` | 
+| 400      | No       | 0        | 1        | 0        | 0        |  
 
 ---
 
@@ -688,6 +685,26 @@ Regression output automatically includes standard errors, for easy hypothesis te
 ## Multifactor Experiments 
 - We can expand the complexity of treatment we assign by *crossing* treatment features
 - Regression with dummy variables quickly, efficiently, and unbiasedly estimates the effects of these experiments.
+
+---
+
+class: inverse, center, middle
+
+# Lessons to Remember 
+
+---
+
+# Lessons to Remember 
+
+## Lessons to Remember
+
+- Quadratic terms in regression allow us to assess whether effects are increasing or decreasing in a continuous covariate.
+- **Attenuation bias**: When X is mismeasured, our estimated treatment effect will be biased toward zero.
+- **Bad controls**: In experiments, don't use covariates that could have been affected by the treatment.
+- **Robust standard errors** are always a good idea. We don't have to know how the variance of the error term changes with covariates; the formula takes care of this for us.
+- **Clustered standard errors** are necessary when we have clustered treatment assignment (see FE 3.6.2).
+- **Multifactor experiments** have more than one treatment at a time.
+- We can use regression with dummy variables to quickly and conveniently summarize the treatment effects and interaction effects.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
