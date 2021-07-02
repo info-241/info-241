@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ## Causal Inference from Observational Data
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-07-01
+### Updated: 2021-07-02
 
 ---
 
@@ -44,7 +44,7 @@ class: inverse, center, middle
 ---
 # A Few Clarifications
 - What does "reduced form" mean?
-  - We previously talked about regressing treatment `\(X\)` on instrument `\(Z\)`, computing the fitted values of `\(X\)`, then regressing outcome `\(Y\)` on these fitted values `\(\hat{X}\)`
+- We previously talked about regressing treatment `\(X\)` on instrument `\(Z\)`, computing the fitted values of `\(X\)`, then regressing outcome `\(Y\)` on these fitted values `\(\hat{X}\)`
   - The reduced-form equation **"reduces" these two equations to a single equation**, the regression of `\(Y\)` on `\(Z\)`
 - The initials in the example's names correspond to:
 .center[ **A**lvaro   &lt;--&gt;   **A**lways-takers]
@@ -180,7 +180,10 @@ class: inverse, center, middle
 ---
 # Regression Discontinuity
 ## Equation 4.2
-`$$\bar{M}_{a} = \alpha + \rho D_{a} + \gamma a + e_{a}$$`
+
+$$
+  \bar{M}_{a} = \alpha + \rho D_{a} + \gamma a + e_{a}
+$$
 - We regress the outcome (mortality rate) on"
   - A treatment dummy variable (are you over 21?)
   - A linear term for age, in years. This allows for a time trend in mortality
@@ -215,10 +218,11 @@ class: inverse, center, middle
 ---
 # Equation 4.4
 
-`$$\bar{M}_a = \alpha + \rho D_a + \gamma_1(a-a_0)^2+\delta_1[(a-a_0)D_a]+\delta_2[(a-a_0)^2]D_a + e_{a}$$`
-- This "fancy regression allows the relationship between mortality and age to have: 
-  - Ane quadratic shape to the right of the 21st birthday
-  - A different quadratic shape to the left
+`$$\bar{M}_a = \alpha + \rho D_a +   \gamma_1(a-a_0)^2+\delta_1[(a-a_0)D_a]+\delta_2[(a-a_0)^2]D_a + e_{a}$$`
+- This "fancy" regression allows the relationship between mortality and age to have: 
+  - A quadratic shape to the left of the 21st birthday
+  - A different quadratic shape to the right 
+
   
 
 ---
@@ -236,6 +240,17 @@ class: inverse, center, middle
 - The dashed straight line shows the simple regression curve
   - The slope on the simple curve must be the same on either side of the discontinuity
   - The fancy curve has a different slope and curvature on each side
+
+
+
+---
+# Equation 4.4 Results: Figure 4.4
+
+&lt;img src="./figures/figure4_4c.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
+- The solid curved line shows the fancy (quadratic) regression curve
+- The dashed straight line shows the simple regression curve
+  - The slope on the simple curve must be the same on either side of the discontinuity
+  - The fancy curve has a different slope and curvature on each side
   - This particularly captures the jump in mortality rates right after the 21st birthday
   - The curve declines over time, but the mortality rate at age 23 is still a little higher than at 20
 
@@ -248,13 +263,27 @@ class: inverse, center, middle
 - Since the trends are gradual, some extrapolation may be okay
   - Legal access to alcohol appears to produce higher mortality rates, especially at first
   - Continuing for a couple of years, mortality rates return to baseline
-  
+
+
+
+---
+# Placebo Tests: Figure 4.5
+### Table 4.1 and Figure 4.5 show placebo tests
+&lt;img src="./figures/figure4_5.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
+
 
 ---
 # Placebo Tests: Figure 4.5
 ### Table 4.1 and Figure 4.5 show placebo tests
   
-&lt;img src="./figures/figure4_5.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="./figures/figure4_5a.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
+- Deaths from disease ("internal causes") show no serious jumps at the discontinuity
+
+
+---
+# Placebo Tests: Figure 4.5
+### Table 4.1 and Figure 4.5 show placebo tests
+&lt;img src="./figures/figure4_5b.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
 - Deaths from disease ("internal causes") show no serious jumps at the discontinuity
 - Motor vehicle fatalities show a substantial jump
 - This makes us even more confident that the jump we saw in the initial RD is really a causal effect of legal access to alcohol
@@ -265,8 +294,8 @@ class: inverse, center, middle
 ---
 # Parametric vs. Nonparametric RD
 
-- What we've seen in the earlier figures is **parametric RD**: We estimate regression lines or curves and have a shift due to the treatment dummy variable
-- With **nonparametric RD** we avoid assuming some parametric form, in case that might introduce specification error
+- **Parametric RD:** We estimate regression lines or curves and have a shift due to the treatment dummy variable
+- **Nonparametric RD:** we avoid assuming some parametric form, in case that might introduce specification error
   - Instead, we look at the simple change in `\(Y\)` in a narrow window around the threshold
 - **Bandwidth** is the width of this window
 
@@ -299,7 +328,8 @@ class: inverse, center, middle
 - Does that tell us what would happen if we reduced the drinking age to 18?
   - Maybe, but we have to think about generalizability
 - Earlier we discussed "local average treatment effects". With RD we get a very local ATE
-  - We have learned the effects of alcohol access on mortality for 21-year-olds, but we cannot be certain these results would generalize to 18-year-olds
+  - We have learned the effects of alcohol access on mortality for 21-year-olds
+  - We cannot be certain these results would generalize to 18-year-olds
 - Next, David Broockman will discuss a few more examples of RD
 
 
@@ -313,15 +343,18 @@ class: inverse, center, middle
 ---
 # Example of Regression Discontinuity
 - Do unemployment benefits lead people to slack off?
-- Ideal experiment: randomly assign some countries to strict unemployment regimes
-- Find "naturally" occurring coin flip situations
+- Ideal experiment: randomly assign some countries or persons to strict unemployment regimes
+- Find "naturally occurring" coin flip situations
 - "Discontinuity" in Austria
   - People over 50 eligible for unemployment benefits
   - People under 50 not eligible
   - Does the age threshold affect worker productivity?
-  - Simply comparing young vs. old could lead to false conclusion that being old causes differences in unemployment duration
 
 
+---
+# Example of Regression Discontinuity
+&lt;img src="./figures/figure11_9.png" width="80%" style="display: block; margin: auto;" /&gt;
+- Simply comparing young vs. old could lead to false conclusion that being old causes differences in unemployment duration
 
 ---
 class: inverse, center, middle 
@@ -330,13 +363,19 @@ class: inverse, center, middle
 
 ---
 # Does Getting Elected Make You Rich?
-&lt;img src="./figures/figure11_10.png" width="80%" style="display: block; margin: auto;" /&gt;
+- Ideal experiment: randomly assign person to be elected and measure their wealth when they die
+- Eggers and Hainmueller
+  - Examined wealth at death of British MPs who won or lost by narrow margins
 
 
 ---
-# Another Example
-- Do people get rich by being elected?
-- Ideal experiment: randomly assign person to be elected and measure his/her wealth upon death
+# Does Getting Elected Make You Rich?
+&lt;img src="./figures/figure11_10.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+*Note: the y-axis on this graph is a logarithmic scale, so MPs who won essentially have double the wealth*
+---
+# Does Getting Elected Make You Rich?
+- Ideal experiment: randomly assign person to be elected and measure their wealth when they die
 - Eggers and Hainmueller
   - Examined wealth at death of British MPs who won or lost by narrow margins
 - Interpretation issue: Are results simply due to MPs moving to London?
@@ -365,12 +404,23 @@ class: inverse, center, middle
 - Black candidates disproportionately lost by slim margins
 - Manipulations make analysis difficult
 
+---
+# Tests for Sorting
+- **Covariate balance** on either side of cut point
+  - Does covariate balance hold up based on early measurements?
+- **Smoothness (McCrary test)**
+  - Eg. effects of minimum-wage laws on unemployment
+  - Comparison between states based on margin of vote passing
+  
+---
+#Tests for Sorting
+&lt;img src="./figures/figure11_11.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ---
 # Tests for Sorting
-- Covariate balance on either side of cut point
+- **Covariate balance** on either side of cut point
   - Does covariate balance hold up based on early measurements?
-- Smoothness (McCrary test)
+- **Smoothness (McCrary test)**
   - Eg. effects of minimum-wage laws on unemployment
   - Comparison between states based on margin of vote passing
 - Can't directly compare bills due to differences in kinds of bills that just pass and just fail
@@ -383,7 +433,8 @@ class: inverse, center, middle
 
 ---
 class: inverse, center, middle 
-# Yoga: Conducting Regression Discontinuity Analysis
+# Yoga: 
+## .center[Conducting Regression Discontinuity Analysis]
 &lt;!-- There are no slides for this section --&gt;
 
 
@@ -397,19 +448,341 @@ class: inverse, center, middle
 - The third observational technique we will consider is called **difference in differences (DID)**
 - This technique is used when a natural experiment takes place over time, in a before-after setting, and when we don't have a randomized control group
 - Instead, we have a group that is similar to the treated group but not guaranteed to be identical
+
 ### Read *Mastering Metrics*, Section 5.1, page 178 through the top of page 187
 
 **Note:** Lecturer meant to say *"...section 5.1"*
+
+
+---
+class: inverse, middle, center
+# Example:
+## .center[Difference in Differences]
+## .center[Mississippi Credit Bank]
+
+---
+# Difference in Differences
+## Effects of Federal Reserve Lending Policy to Mississippi Banks
+- It is difficult to do a field experiment on monitary policy
+- Instead we look for a natural experiment
+  - In 1930, the Federal Reserve Bank of Atlanta (6th District) chose to provide much more credit to troubled banks than did the St. Lous Fed (8th District)
+  - The state of Mississippi was divided almost equally between the two districts
+
+---
+# Difference in Differences
+## Effects of Federal Reserve Lending Policy to Mississippi Banks (cont'd)
+- The banks are not randomized, so a simple difference can be misleading
+  - In 1931, 11 fewer banks were open in the 6th District than the 8th
+  - We might be tempted to conclude that easy lending caused more banks to close
+  - BUT before the crisis, 30 fewer banks were open in the 6th District
+- We must account for this baseline difference
+- This is what DID does by subtracting the before-after difference in the treatment group from the before-after difference in the psuedo-control group
+
+
+---
+# Figure 5.3: DID Strategy Illustration
+&lt;img src="./figures/figure5_3.png" width="100%" style="display: block; margin: auto;" /&gt;
+- To get a valid causal difference with DID, we need to satisfy the **"common trends"** (or "parallel trends" assumption
+
+
+
+---
+# Figure 5.3: DID Strategy Illustration
+&lt;img src="./figures/figure5_3a.png" width="100%" style="display: block; margin: auto;" /&gt;
+- Figure 5.3 shows that this assumption is reasonable
+- The hypothesized policy difference occurs in 1930
+
+
+---
+# Figure 5.3: DID Strategy Illustration
+&lt;img src="./figures/figure5_3b.png" width="100%" style="display: block; margin: auto;" /&gt;
+- In other years the two lines (number of banks open) move in parallel
+
+
+---
+# Figure 5.3: DID Strategy Illustration
+&lt;img src="./figures/figure5_3c.png" width="100%" style="display: block; margin: auto;" /&gt;
+- The dashed line shows the counterfactual number of banks that would have been open in the 6th District if the Atlanta Fed had not pursued an easy lending policy in 1930
+
+
+---
+# Figure 5.3: DID Strategy Illustration
+&lt;img src="./figures/figure5_3d.png" width="100%" style="display: block; margin: auto;" /&gt;
+- The difference between the 6th District actual and hypothetical curves shows the estimated causal effect of the 6th District's lending policy
+
+
+---
+# Reading Assignment
+### Read the rest of *Mastering Metrics* Section 5.1, pages 187-191
+- This section discusses how to implement a DID strategy using regression
+- The technique will look familiar if you remember the material on using regression to analyze heterogeneous treatment effects
+
+
+
+---
+class: inverse, middle, center
+# Difference in Difference Regressions
+
+
+---
+# DID Regressions
+
+`\(Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}\)`
+- If we have more than two time periods or more than two comparison groups available, we can implement DID via a regression
+
+- **TREAT** is a dummy variable equal to one in the treatment group (the 6th district in this example
+  - The coefficient of -29 means that in the pretreatment baseline period there were 29 fewer banks open in the 6th District than in the 8th
+
+
+---
+# DID Regressions (cont'd)
+
+`\(Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}\)`
+
+- **POST** is a dummy variable
+  - POST = 0 prior to treatment
+  - POST = 1 during the treatment time period
+  - The coefficient of -49 means there was a downward trend in banks open before and after 1930 (49 fewer banks on average during the post-period than in the pre-period in the 8th District)
+
+
+---
+# DID Regressions (cont'd)
+
+`\(Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}\)`
+
+- The coefficient of 20.5 on the interaction term is the estimated causal effect of easy lending policy to troubled banks
+  - Eg. the difference in the post-period vs the pre-period in the treatment group, relative to the difference in the comparison group
+- Next, David Broockman will share some additional examples of DID
+
+
+
+---
+class: inverse, middle, center
+# Yoga: 
+## .center[Difference-in-Difference Regressions]
+&lt;!-- There are no slides for this section --&gt;
+
+
+
+---
+class: inverse, middle, center
+# Yoga: 
+## .center[Coding the DID for Mississippi Banks]
+&lt;!-- There are no slides for this section --&gt;
+
+
+
+---
+class: inverse, middle, center
+# Yoga: 
+## .center[ Difference-in-Difference Regressions]
+&lt;!-- There are no slides for this section --&gt;
+
+
+
+---
+class: inverse, middle, center
+# Difference in Differences:
+## .center[Does Media Affect Politics?]
+
+
+---
+# DID Example
+## Ladd and Lenz (2009)
+- Does the media affect politial outcomes, specifically newspaper endorsements?
+- Ideal experiment: Randomly assign newspapers to endorse a candidate
+- People often read newspapers that reinforce their views
+  - Do readers' views change if newspaper switches endorsement?
+- Data on voters' decision to vote for Labour Party in 1992 and 1997
+  - Which newspapers voters read
+  - Some newspapers switched endorsement to Labour Party
+  
+  
+  
+  
+---
+# DID Example: Ladd and Lenz (2009)
+&lt;img src="./figures/figure11_19.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+# DID Example: Ladd and Lenz (2009)
+&lt;img src="./figures/figure11_19a.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+# DID Example: Ladd and Lenz (2009)
+&lt;img src="./figures/figure11_19b.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+# DID Example: Ladd and Lenz (2009)
+&lt;img src="./figures/figure11_19c.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+# DID Example: Ladd and Lenz (2009)
+&lt;img src="./figures/figure11_19d.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+# DID Example: Ladd and Lenz (2009)
+&lt;img src="./figures/figure11_19.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+---
+# DID Example: Ladd and Lenz (2009)
+- Does the media affect politial outcomes, specifically newspaper endorsements?
+- Ideal experiment: Randomly assign newspapers to endorse a candidate
+- People often read newspapers that reinforce their views
+  - Do readers' views change if newspaper switches endorsement?
+- Data on voters' decision to vote for Labour Party in 1992 and 1997
+  - Which newspapers voters read
+  - Some newspapers switched endorsement to Labour Party
+- Key assumption: nothing changing over time that leads to treatment and outcome
+  - Consider other reasons for results
   
 
+---
+# Potential Problems with Ladd and Lenz
+- Big housing crisis in 1997 
+- People voted for Labour due to frustrations with incumbents
+- People with homes were:
+  - More upset over housing crisis
+  - More likely to get newspapers
+  - More likely to receive treatment and vote based on housing crisis
+- Ladd and Lenz checked on this using a placebo test
+  - DID when treatment didn't change, readers of other papers
+  - No effect seen among readers of other papers, only papers which switched their endorsement
+
+
+---
+class: inverse, middle, center
+# Difference in Differences:
+## .center[Does Price Advertising Change Prices?]
+
+
+---
+# DID Example: Advertising and Prices
+
+- Rhode Island (RI) banned advertising prices of alcohol
+  - Will firms offer less competetive pricing as a result?
+- Could compare RI alcohol prices to those in Connecticut and Massachusetts (MA)
+  - Other conditions between states might differ
+- RI ended advertising ban
+  - Can't simply do a before/after analysis
+  - Price change could reflect other factors
+- Compare changes in RI over time to changes in MA over time
+  - Prices increased 2% in Rhode Island
+  - Likely due to inflation
+- Milyo and Waldfogel (1999) collected data on liquor prices in RI and MA before and after ban
+  - Had foresight to collect data when Supreme Court agreed to hear case on advertising ban
+  - Found prices of newly advertised products in RI **decreased** relative to same goods in MA
+  - Prices didn't drop for product that were never advertised
+  - Prices dropped only for newly advertised products
+
+
+
+---
+# Review of Difference-in-Differences
+
+- Did heps counteract selection efforts
+- Can't always directly compare two entities
+- Before/after effects can be misleading
+
+
+
+---
+class: inverse, middle, center
+# Difference in Differences:
+## .center[Home Prices and Incinerator Location]
+
+---
+# DID Example: Home Prices
+
+- How much do property values drop as a result of having an incinerator nearby?
+- Can't simply look at home prices in relation to distance from incinerator
+  - Why some places have incinerators while others don't?
+  - Ideal experiment: randomly assign location of incinerators
+  - Incinerators tend to be built in bad neighborhoods where property values are lower to begin with
+  - Unobserved heterogeneity (Eg. bad construction or recently built development)
+
+
+---
+# Kiel and McClain (1995)
+- DID approach
+- Collected data in two time periods:
+  - Before incinerator announced
+  - After incinerator built
+- Compared data in North Andover to other locations
+- Found home prices near incinerator increase about 5% less but not significantly significant
+  - Other characteristics matter more
+  - Extra bathroom: +13% +/- 5%
+  - Average prices over time (before/after): +14% +/- 6%
+
+---
+# DID Example: Home Prices
+## Importance of the DID Approach
+
+- Home prices near incinerator could have had lower baseline resulting from pre-existing differences
+- DID protects from false conclusions drawn from simple before/after approach
+- Vulnerabilities still exist
+  - Eg. demographic changes could lead to incinertor being built in the first place
+
+
+
+---
+class: inverse, middle, center
+# Strengths and Weaknesses of DID
+
+
+---
+# Strengths of DID
+- DID is a simple tool: we computer differences directly or do OLS regression with clustered standard errors
+- If we have covariates that might predict differences in `\(Y\)`, we can include them to try to improve precision
+- Causal effects are much stronger and more believable than with simple before/after differences or simple differences across non-randomized comparison groups
+
+
+---
+# Weaknesses of DID
+- Causal inference hinges on the assignment mechanism
+- The common trends (parallel trends) assumption is a strong assumption.
+- An example where it fails: observational online-advertising
+  - People may be gone on vacation
+  - People may see simultaneous newspaper advertising campaigns
+  
+  
+  
+---
+class: inverse, middle, center
+# Synthetic Controls as Generalized Difference in Differences
+&lt;!-- There are no slides for this section --&gt;
+
+
+---
+class: inverse, middle, center
+# Yoga: 
+## .center[Coding California Smoking with Synthetic Controls #1]
+&lt;!-- There are no slides for this section --&gt;
+
+
+
+---
+class: inverse, middle, center
+# Yoga: 
+## .center[Coding California Smoking with Synthetic Controls #2]
+&lt;!-- There are no slides for this section --&gt;
+
+
+---
+class: inverse, middle, center
+# Concluding Thoughts
+&lt;!-- There are no slides for this section --&gt;
 
 
 
 
 
-&lt;!-- ```{r echo=FALSE, out.width='40%', fig.align='center'} --&gt;
-&lt;!-- knitr::include_graphics(path='./figures/Table4_1.png') --&gt;
-&lt;!--  ``` --&gt;
+
+
+&lt;!-- EASY TO GRAB FUNCTIONS --&gt;
+
+&lt;!-- ```{r echo=FALSE, out.width='80%', fig.align='center'} --&gt;
+&lt;!-- knitr::include_graphics(path='./figures/ ') --&gt;
+&lt;!-- ``` --&gt;
 
 
 &lt;!-- `$$\widehat{Y}_{i} = \beta_{0} + \beta_{1} I_{i} + \beta_{2} P_{i} + \beta_{3} (I_{i} \times P_{i})$$` --&gt;
