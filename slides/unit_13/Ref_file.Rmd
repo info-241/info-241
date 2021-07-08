@@ -1,0 +1,93 @@
+---
+title: "w241: Experiments and Causality"
+subtitle: "Applications of Experimental Design"
+author: "David Reiley, David Broockman, D. Alex Hughes"
+institute: "UC Berkeley, School of Information"
+date: "Updated: `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, echo=FALSE, message=FALSE, include=FALSE}
+library(latex2exp)
+library(tidyverse)
+library(ggplot2)
+library(patchwork)
+library(data.table)
+
+berkeley_blue   <- '#003262'
+california_gold <- '#FDB515'
+
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(echo = TRUE, dpi = 300, fig.height = 3)
+
+
+theme_set(theme_minimal())
+```
+
+class: inverse, center, middle 
+
+# Introduction: 
+## .center[Applications of Experimental Design]
+DATASCI W241: Experiments and Causality
+
+
+---
+class: inverse, middle, center
+# Quiz 1
+## Applications of Experimental Design
+
+
+---
+class: inverse, middle, center
+# Oversampling a Subpopulation
+DATASCI W241: Experiments and Causality
+
+
+---
+# Introduction
+#### **Example:** MN Dept of Revenue tax-compliance experiment
+- Anticipated heterogeneous treatment effects
+  - People with high income have more incentive to hide income
+  - People with more opportunity to hide income (self-employed) more likely to under-report
+- Without oversampling, treatment group of 1,500 taxpayers contained only 7 high-income, high-opportunity earners
+  - Oversampling increased this to 80
+
+
+
+
+
+
+<!-- EASY TO GRAB FUNCTIONS -->
+
+<!-- ```{r echo=FALSE, out.width='80%', fig.align='center'} -->
+<!-- knitr::include_graphics(path='./figures/ ') -->
+<!-- ``` -->
+
+
+<!-- $$\widehat{Y}_{i} = \beta_{0} + \beta_{1} I_{i} + \beta_{2} P_{i} + \beta_{3} (I_{i} \times P_{i})$$ -->
+
+
+<!-- $$\begin{aligned}  -->
+<!--   T_{ijkm}(Y_{n})  = \alpha &+ \gamma T_{ijkm}(Y_{0}) + \delta_{1} Incentives_{i} \\  -->
+<!--     & + \delta_{2} Characteristic_{i} \\  -->
+<!--     & + \delta_{3} (Incentives_{i} \times Characteristic_{i}) \\  -->
+<!--     & + \beta Z_{m} + \epsilon_{k} + \epsilon_{jk} + \epsilon_{ijk} -->
+<!-- \end{aligned}$$ -->
+
+
+
+<!-- |             | Control | Treatment | -->
+<!-- |-------------|---------|-----------| -->
+<!-- | Democrats   |   0%    |   100%    | -->
+<!-- | Republicans | 100%    |     0%    | -->
+<!-- | Average     |  50%    |    50%    | -->
+
+
+
