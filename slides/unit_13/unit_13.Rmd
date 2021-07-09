@@ -165,7 +165,7 @@ class: inverse, middle, center
 
 
 ---
-# Comparison 3:
+# Comparison 3
 ## Gneezy and List (2006) field experiment
 ----
 - Wanted to see what would happen when people are being paid actual money for actual work, rather than in a laboratory setting
