@@ -35,8 +35,6 @@ class: inverse, center, middle
 
 # Introduction: 
 ## .center[Attrition, Mediation, and Generalizability]
-DATASCI W241: Experiments and Causality
-
 
 
 ---
@@ -64,7 +62,7 @@ DATASCI W241: Experiments and Causality
 <br>
 
 | Group | Status  | Blood Pressure |
-|-------|---------|----------------|
+|:-----:|---------|:--------------:|
 |   0   | Alive   |   70    |
 |   0   | Dead    |   ?     |
 |   0   | Dead    |   ?     |
@@ -141,8 +139,8 @@ DATASCI W241: Experiments and Causality
 ## Scenario #1
 <br>
 
-| Democrat | Monday Obama Call | Answers Tuesday Survey | Obama Vote |
-|-----|-------------------|------------------------|------------|
+| Democrat   |  Monday Obama Call  |  Answers Tuesday Survey  |  Obama Vote  |
+|:----------:|:-------------------:|:------------------------:|:------------:|
 | 0 | 0 | 1 | 0 |
 | 0 | 0 | 1 | 0 |
 | 0 | 1 | 0* | 0 |
@@ -162,7 +160,7 @@ DATASCI W241: Experiments and Causality
 <br>
 
 | Democrat | Monday Obama Call | Answers Tuesday Survey | Obama Vote |
-|-----|-------------------|------------------------|------------|
+|:--------:|:-----------------:|:----------------------:|:----------:|
 | 1 | 0 | 0* | 1 |
 | 1 | 0 | 0* | 1 |
 | 1 | 1 | 1 | 1 |
@@ -215,7 +213,7 @@ class: inverse, middle, center
 
   
 |             | Control | Treatment |
-|-------------|---------|-----------|
+|-------------|:-------:|:---------:|
 | Democrats   |   0%    |   100%    |
 | Republicans | 100%    |     0%    |
 | Average     |  50%    |    50%    |
@@ -244,7 +242,19 @@ class: inverse, middle, center
 
 - In a political example, look for differences in income or political party
 - If treatment causes Republicans to attrit (leave the sample), party affiliation will no longer be balanced in the final sample
-  - $P \supset Q \rightarrow \sim Q \supset \sim P$ but not $\sim P \supset  \sim Q$
+
+
+$$
+\begin{aligned}
+P \supset Q & \rightarrow \neg Q \supset \neg P \\ 
+P \supset Q & \not \rightarrow \neg P \supset  \neg Q
+\end{aligned}
+$$
+- $\supset$: superset
+- $\rightarrow$: implies
+- $\not \rightarrow$: does not imply
+- $\neg$: not
+
 ---
 # Differential Attrition Concealed
 #### Although something could be diagnostic of differential attrition, differential attrition may still exist
