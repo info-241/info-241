@@ -136,7 +136,7 @@ class: inverse, middle, center
 
 
 ---
-# Comparison 2:
+# Comparison 2
 ## Employee Reciprocity Study: Labor Economics
 ----
 #### Lab experiments with two people in job market scenario
