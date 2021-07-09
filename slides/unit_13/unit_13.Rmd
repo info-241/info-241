@@ -35,8 +35,6 @@ class: inverse, center, middle
 
 # Introduction: 
 ## .center[Applications of Experimental Design]
-#####DATASCI W241: Experiments and Causality
-
 
 ---
 class: inverse, middle, center
@@ -48,8 +46,6 @@ class: inverse, middle, center
 class: inverse, middle, center
 # Oversampling a Subpopulation
 
-
-
 ---
 # Introduction
 #### **Example:** MN Dept of Revenue tax-compliance experiment
@@ -59,7 +55,6 @@ class: inverse, middle, center
 - Without oversampling, treatment group of 1,500 taxpayers contained *only 7* high-income, high-opportunity earners
   - This is the population we are most interested in
   - Oversampling increased this to 80 people
-
 
 ---
 # When to Oversample
@@ -76,8 +71,6 @@ class: inverse, middle, center
 - Standard deviation is many times the mean
 - Large samples can overcome huge variance
 
-
-
 ---
 # Adaptive Sampling
 
@@ -86,12 +79,10 @@ class: inverse, middle, center
   - If an A/B test reveals one sub-population has high variance of purchases, then
   - Oversample this high-variance group
 
-
 ---
 # Summary
 
 ### If a group is either **very small** or has **high variance**, oversampling is prudent
-
 
 ---
 # Reading 
@@ -104,8 +95,6 @@ class: inverse, middle, center
 class: inverse, middle, center
 # Quiz 2
 <!-- There are no slides for this section -->
-
-
 
 ---
 class: inverse, middle, center
@@ -121,8 +110,6 @@ class: inverse, middle, center
   - Negative treatment effect on purchases for 8 months following experiment
   - Negative treatment effect for website purchases for same retailer
 
-
-  
 ---
 # Comparison 1
 ## Lewis and Reiley Advertising Experiment
@@ -133,7 +120,6 @@ class: inverse, middle, center
   - No evidence of acceleration of purchases
   
 #### Lesson: pay attention to outcomes of actual concern (in this case total sales)
-
 
 ---
 # Comparison 2
@@ -151,9 +137,8 @@ class: inverse, middle, center
   - Employee has received wage; no incentive to engage in costly effort
   - Employer has no incentive to pay more than minimum wage
 
-
 ---
-# Comparison 2:
+# Comparison 2
 ## Employee Reciprocity Study: Labor Economics
 ----
 #### Actual results:
@@ -161,8 +146,6 @@ class: inverse, middle, center
   - Employees who receive higher wage offers tend to work harder for employer than employees who receive low wage offers
 - We know this is treatment effect of offer received
 - Evidence of reciprocity effect between workers and wage-setting employees
-
-
 
 ---
 # Comparison 3
@@ -177,7 +160,6 @@ class: inverse, middle, center
 #### Lesson: We may need to redefine the outcome to be more broad
 - Redefining outcome more broadly here lead to different conclusion
 
-
 ---
 # Conclusion
 
@@ -187,39 +169,31 @@ class: inverse, middle, center
 
 ### Treatment effects may wear off after longer period of time
 
-
 ---
+
 # Reading Assignment
-
-### Read *Field Experiments* textbook Section 12.4  
+## Please Read: *Field Experiments*, Section 12.4  
 - Bertrand & Mullainathan Audit Study
-- ** Audit Study:** Field experiment where research doesn't necessarily follow through with a completed transaction
-
-
+- **Audit Study:** Field experiment where research doesn't necessarily follow through with a completed transaction
 
 ---
 class: inverse, middle, center
 # Quiz 3
 <!-- There are no slides for this section -->
 
-
-
 ---
 class: inverse, middle, center
 # Audit Studies
 
-
 ---
 # Recap:
-### Bertrand and Mullhainathan job discrimination study
+## Bertrand and Mullhainathan job discrimination study
 ----
 - Drew from identical resumes with white-sounding names vs. black-sounding names
 - Showed clear evidence of discrimination against black-sounding candidate names
 - Proves causal effect of race
 
 #### This is an audit study because we didn't perform the call-back interviews based on responses from employers
-
-
 
 ---
 # Bertrand and Mullainathan Audit Study:
@@ -233,8 +207,6 @@ class: inverse, middle, center
 - Is double-blind 
   - If we had done face-to-face interviews it would have required actors to go to interviews, could no longer be double blind
   
-  
-
 ---
 # Aside: Car Dealer Audit Study
 ### Scenario: black and white consumers visited car dealers
@@ -261,20 +233,18 @@ class: inverse, middle, center
   - 2x2 design (two races, two quality levels)
   - More discrimination for high-quality or low-quality resumes?
   
-  
 ---
 # Next: Schneider (2012)Audit Study
 ### Does expectation of repeat business cause an auto mechanic to behave differently?
 
-
-
 ---
+
 class: inverse, middle, center
-# Example
+# Example: 
 ## .center[Schneider (2012) Audit Study]
 
-
 ---
+
 # Schneider (2012) Audit Study
 ## Overview
 ----
@@ -305,16 +275,14 @@ class: inverse, middle, center
 - Charged more than twice as much for estimate in low-reputation treatment vs. high-reputation treatment
 - No significant difference in diagnosing problems between treatments
 
-
-
 ---
+
 class: inverse, middle, center
 # Example:
 ## .center[Bandiera *et al.* Personnel Economics]
 
-
-
 ---
+
 # Example: Bandiera *et al.* Experiment
 ## Overview
 ----
@@ -330,9 +298,8 @@ class: inverse, middle, center
   - Deliberate intervention designed to measure causal effects
   - Before/After design constraint related to concern regarding spill-over effects from employees talking to one another
 
-
-
 ---
+
 # Example: Bandiera *et al.* Experiment
 ## Results
 ----
@@ -348,9 +315,8 @@ class: inverse, middle, center
   
 #### Evidence that relative performance scheme can encourage people to work less
 
-
-
 ---
+
 # Example: Bandiera *et al.* Experiment
 ## Evaluation
 ----
@@ -364,14 +330,14 @@ class: inverse, middle, center
   - Above results held for pickers of strawberries but not raspberries
   - Raspberries functioned as control
   
-  
 ---
+
 class: inverse, middle, center
 # Example:
 ## .center[Response to Incentives]
 
-
 ---
+
 # Charness and Gneezy (2009)
 ## Overview
 ----
@@ -384,9 +350,8 @@ class: inverse, middle, center
 - Collected data on gym attendance for 7 weeks post-experiment
 - Collected data on gym attendance pre-experiment
 
-  
-
 ---
+
 # Charness and Gneezy (2009)
 ## Results
 ----
@@ -395,8 +360,8 @@ class: inverse, middle, center
   - Highest effect in participants who did not previously exercise at gym at all
   - Low effect in participants who were already going to gym
   
-  
 ---
+
 # Charness and Gneezy (2009)
 ## Limitations
 ----
@@ -405,21 +370,19 @@ class: inverse, middle, center
   - Places limit on generalizability regarding habit formation
 
 ---
+
 # Additional Incentive Examples
 
 ## "Can we pay people to..."
 
 - Lose weight?
-  - From behavioral economics perspective, what constitutes sufficient incentive?
 - Quit smoking?
 - Take blood pressure medication consistently?
-
-
 - Get better grades?
   - Fryer's attempt to pay students to get better scores was ineffective
   
-  
 ---
+
 # Incentives, Unintended Consequences
 
 
@@ -437,9 +400,8 @@ class: inverse, middle, center
   - Fine was interpreted as a price
   - Fine was insufficient to deter unwanted behavior
   
-  
-  
 ---
+
 # Summary: Experimental Design
 #### Strive for originality and creativity
 #### Think more broadly
@@ -451,9 +413,8 @@ class: inverse, middle, center
   - Variety in treatment to create more generalizability
   - Subpopulation oversampling
 
-
-
 ---
+
 class: inverse, middle, center
 # Case Study:
 ## .center[Study on LGBT Canvassing by David Broockman]
@@ -461,19 +422,17 @@ class: inverse, middle, center
 
 
 ---
+
 class: inverse, middle, center
 # Case Study:
 ## .center[Results of LaCour and Green (2014) on Gay-Marriage Canvassing]
 <!-- There are no slides for this section -->
 
-
-
 ---
+
 class: inverse, middle, center
 # Broockman Smells a Rat
 <!-- There are no slides for this section -->
-
-
 
 ---
 class: inverse, middle, center
@@ -481,72 +440,36 @@ class: inverse, middle, center
 ## .center[How Can We Tell When Data Is Fake?]
 <!-- There are no slides for this section -->
 
-
-
 ---
+
 class: inverse, middle, center
 # This Time For Real:
 ## .center[Transgender Canvassing in Miami]
 <!-- There are no slides for this section -->
 
-
-
 ---
+
 class: inverse, middle, center
 # Final Perspectives:
 ## .center[LGBT Canvassing and Research Integrity]
 <!-- There are no slides for this section -->
 
-
-
 ---
+
 class: inverse, middle, center
 # Further Reading:
 ## .center[Broockman's LGBT Canvassing Research]
-
+<!-- There are no slides for this section -->
 
 ---
+
 # Further Reading:
 ## Broockman's LGBT Canvassing Research
 ----
 
-
 If you are interested in reading more about this topic, we recommend two articles:
 
-Jesse Singal, *New York Magazine*, [The Case of the Amazing Gay-Marriate Data: How a Graduate Student Reluctantly Uncovered a Hughe Scientific Fraud](https://www.thecut.com/2015/05/how-a-grad-student-uncovered-a-huge-fraud.html)
+- Jesse Singal, *New York Magazine*, [The Case of the Amazing Gay-Marriate Data: How a Graduate Student Reluctantly Uncovered a Hughe Scientific Fraud](https://www.thecut.com/2015/05/how-a-grad-student-uncovered-a-huge-fraud.html)
 
-John Bohannon, *Science*, [For Real This Time: Talking to people about gay and transgender issues can change their prejudices](https://www.sciencemag.org/news/2016/04/real-time-talking-people-about-gay-and-transgender-issues-can-change-their-prejudices)
+- John Bohannon, *Science*, [For Real This Time: Talking to people about gay and transgender issues can change their prejudices](https://www.sciencemag.org/news/2016/04/real-time-talking-people-about-gay-and-transgender-issues-can-change-their-prejudices)
 
-
-
-
-
-
-
-
-
-
-<!-- EASY TO GRAB FUNCTIONS -->
-
-<!-- ```{r echo=FALSE, out.width='80%', fig.align='center'} -->
-<!-- knitr::include_graphics(path='./figures/ ') -->
-<!-- ``` -->
-
-
-<!-- $$\widehat{Y}_{i} = \beta_{0} + \beta_{1} I_{i} + \beta_{2} P_{i} + \beta_{3} (I_{i} \times P_{i})$$ -->
-
-
-<!-- $$\begin{aligned}  -->
-<!--   T_{ijkm}(Y_{n})  = \alpha &+ \gamma T_{ijkm}(Y_{0}) + \delta_{1} Incentives_{i} \\  -->
-<!--     & + \delta_{2} Characteristic_{i} \\  -->
-<!--     & + \delta_{3} (Incentives_{i} \times Characteristic_{i}) \\  -->
-<!--     & + \beta Z_{m} + \epsilon_{k} + \epsilon_{jk} + \epsilon_{ijk} -->
-<!-- \end{aligned}$$ -->
-
-
-
-<!-- |             | Control | Treatment | -->
-<!-- |-------------|---------|-----------| -->
-<!-- | Democrats   |   0%    |   100%    | -->
-<!-- | Republicans | 100%    |     0%    | -->
-<!-- | Average     |  50%    |    50%    | -->
