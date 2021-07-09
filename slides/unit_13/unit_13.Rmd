@@ -35,8 +35,6 @@ class: inverse, center, middle
 
 # Introduction: 
 ## .center[Applications of Experimental Design]
-Week 13 - Applications of Experimental Design
-
 #####DATASCI W241: Experiments and Causality
 
 
@@ -563,6 +561,5 @@ John Bohannon, *Science*, [For Real This Time: Talking to people about gay and t
 <!-- | Democrats   |   0%    |   100%    | -->
 <!-- | Republicans | 100%    |     0%    | -->
 <!-- | Average     |  50%    |    50%    | -->
-
 
 
