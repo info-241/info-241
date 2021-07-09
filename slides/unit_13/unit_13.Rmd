@@ -413,7 +413,6 @@ class: inverse, middle, center
   - From behavioral economics perspective, what constitutes sufficient incentive?
 - Quit smoking?
 - Take blood pressure medication consistently?
-  - From behavioral economics perspective, what constitutes sufficient incentive?
 
 
 - Get better grades?
