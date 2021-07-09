@@ -94,14 +94,11 @@ class: inverse, middle, center
 
 
 ---
-# Reading Assignment
+# Reading 
 
-### Next we will discuss how we measure outcomes.
-
-<br>
-### Read Section 12.3 on catalog mailing experiment of *Simester et al. (2009)*
-
-
+## Please Read: *Field Experiments* Section 12.3
+- This section will cover a catalogue mailing experiment that was conducted by Simester et al. (2009) 
+- Pay particular attention to how the authors choose to measure their outcome
 
 ---
 class: inverse, middle, center
@@ -558,4 +555,3 @@ John Bohannon, *Science*, [For Real This Time: Talking to people about gay and t
 <!-- | Democrats   |   0%    |   100%    | -->
 <!-- | Republicans | 100%    |     0%    | -->
 <!-- | Average     |  50%    |    50%    | -->
-
