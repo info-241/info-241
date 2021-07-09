@@ -124,7 +124,7 @@ class: inverse, middle, center
 
   
 ---
-# Comparison 1: 
+# Comparison 1
 ## Lewis and Reiley Advertising Experiment
 ----
 #### Outcome defined more broadly
