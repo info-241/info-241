@@ -411,8 +411,6 @@ class: inverse, middle, center
 
 - Lose weight?
   - From behavioral economics perspective, what constitutes sufficient incentive?
-
-
 - Quit smoking?
 
 
