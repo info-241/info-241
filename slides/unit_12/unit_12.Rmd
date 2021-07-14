@@ -258,7 +258,7 @@ $$
 ---
 # Differential Attrition Concealed
 #### Although something could be diagnostic of differential attrition, differential attrition may still exist
-- There could see there is no average differential attrition and observable covariates are still balanced **BUT**
+- There could see there is no average differential attrition and observable covariates are still balanced, *BUT*, 
 
 #### There could be differential attrition in something you can't measure
 - There might be differential attrition due to the treatment
