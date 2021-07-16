@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ## Final Thoughts on Experiments and Causality
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-07-15
+### Updated: 2021-07-16
 
 ---
 
@@ -36,9 +36,7 @@ class: inverse, center, middle
   - Existing in the state of the world where one has done X or Y
   - Eg. should women receive hormone replacement therapy (HRT) or not?
   - Eg. Should prices be raised or not?
-  
-  
-- **Observational data:** Compare units with different `\(X\)` values
+- Observational data: Compare units with different `\(X\)` values
 
   
 ---
@@ -74,7 +72,7 @@ class: inverse, middle, center
 - In previous years, there have been huge advances in predictive accuracy of statistical models
 - Sometimes only need to predict `\(Y\)`:
 
-#### Some examples:
+Some examples:
 
 
 | Question| Decision | Experiment Needed?|
@@ -209,7 +207,7 @@ class: inverse, middle, center
 #### Results
 - Experiment shows people who clicked ad would have gone to website anyway
 - Actual Return on Investment: -63%
-- $1 spent yields \$0.37 revenue
+- $1 spent yields $0.37 revenue
 
 ### Experiment showed there wasn't a causal effect
 
@@ -269,8 +267,8 @@ class: inverse, middle, center
 ---
 # Common Themes
 
-#### Treatment effect different from `\(Y\)`
-#### Assumptions can exist without being aware of them
+### 1. Treatment effect different from `\(Y\)`
+### 2. Assumptions can exist without being aware of them
 
 
 
@@ -287,7 +285,7 @@ class: inverse, middle, center
 
 2. **Regression adjustment:** Multivariate regression
 
-3. **Propensity scores:** 
+3. **Propensity scores** 
 
 
 ####There is no free lunch
@@ -296,7 +294,7 @@ class: inverse, middle, center
 
 ---
 # Matching
-#### Compare subjects with very similar values of covariates
+### Compare subjects with very similar values of covariates
 - "Among women of the same race, with similar incomes, blood pressure, height, and weight..."
 - "...those who take HRT are less likely to get cancer than those who don't"
 
@@ -309,7 +307,7 @@ class: inverse, middle, center
 ---
 # Regression Adjustment
 
-#### Imposes a functional form on the link between covariates, treatment, and outcome
+### Imposes a functional form on the link between covariates, treatment, and outcome
 - Extremely similar to matching
 - **Example:** People who weight more are more likely to take HRT
   - Remove effect of weight by adjusting for it
@@ -367,11 +365,10 @@ class: inverse, middle, center
 ---
 # Common themes
 
-### Controlling for observables
+### 1. Controlling for observables
 - Not unobservables
 
-
-### Are there differences between the kind of people who get treatment and don't that we didn't (or can't) observe?
+### 2. Are there differences between the kind of people who get treatment and don't that we didn't (or can't) observe?
 
 
 
@@ -409,8 +406,8 @@ class: inverse, middle, center
 
 
 
----
-#Death in the Time of Cholera
+&lt;!-- --- --&gt;
+&lt;!-- #Death in the Time of Cholera --&gt;
 
 |                       | Number of Houses | Deaths | Deaths per 10,000 Houses |
 |-----------------------|:----------------:|:------:|:------------------------:|
@@ -453,7 +450,7 @@ class: inverse, middle, center
 - Intervention is occurring
 - Affecting real people in real world
 
-### Consider ethical implications of choices
+## Consider ethical implications of choices
 
 
 ---
@@ -508,7 +505,7 @@ class: inverse, middle, center
 - Eg. bed nets to protect people from malaria
 
 
-### Two potential responses:
+#### Two potential responses:
 1. Often can't give treatment to everyone anyway
   - Consider alternatives
   - Random assignment and treating everyone possible are not incompatible
