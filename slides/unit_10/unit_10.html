@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ## Causal Inference from Observational Data
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-07-02
+### Updated: 2021-07-16
 
 ---
 
@@ -45,32 +45,44 @@ class: inverse, center, middle
 # A Few Clarifications
 - What does "reduced form" mean?
 - We previously talked about regressing treatment `\(X\)` on instrument `\(Z\)`, computing the fitted values of `\(X\)`, then regressing outcome `\(Y\)` on these fitted values `\(\hat{X}\)`
-  - The reduced-form equation **"reduces" these two equations to a single equation**, the regression of `\(Y\)` on `\(Z\)`
+- **Reduced-form equation:** "Reduces" these two equations to a single equation, the regression of `\(Y\)` on `\(Z\)`
+
+
 - The initials in the example's names correspond to:
-.center[ **A**lvaro   &lt;--&gt;   **A**lways-takers]
-.center[**C**amila   &lt;--&gt;   **C**ompliers]
-.center[**N**ormando &lt;--&gt;   **N**ever-takers]
+  - **A**lvaro `\(\leftrightarrow\)`   **A**lways-takers
+  - **C**amila   `\(\leftrightarrow\)`  **C**ompliers
+  - **N**ormando `\(\leftrightarrow\)` **N**ever-takers
+
+
 - The author's Passover analogy is not entirely clear but may be as follows for four types of children:
-.center[Wise &lt;--&gt; Compliers]
-.center[Wicked &lt;--&gt; Defiers]
-.center[Simple &lt;--&gt; Always-takers]
-.center[Doesn't know how to ask &lt;--&gt; Never-takers]
-- "External validity" is a common term in academic social science, but I prefer the term "generalizability"
+  - Wise `\(\leftrightarrow\)` Compliers
+  - Wicked `\(\leftrightarrow\)` Defiers
+  - Simple `\(\leftrightarrow\)`  Always-takers
+  - Doesn't know how to ask `\(\leftrightarrow\)` Never-takers
+
+
+- "External validity" is a common term, but I prefer the term "generalizability"
 
 
 ---
 # Example: Vietnam Draft Lottery 
 ## and Returns to Schooling
+----
 
-- IV can be used for natural experiments where the treatment is a continuous variable rather than binary
-- Angrist and Krueger (1992) used the Vietnam draft lottery as a natural experiment to assess returns to schooling on earnings
-  - During the Vietnam War, a fraction of young men from every birth year were prioritized for draft via a lottery system based on birth date
-  - Men with lower draft numbers became more likely to enroll in college because an education deferment would allow them to avoid service
-  - Thus, the lottery created a random variation in the number of years of schooling, which created an opportunity to estimate returns to schooling
+#### Instrumental variables can be used for natural experiments where the treatment is a continuous variable rather than binary
+
+
+#### Example: Angrist and Krueger (1992) 
+- Used the Vietnam draft lottery as a natural experiment to assess returns to schooling on earnings
+- During the Vietnam War, a fraction of young men from every birth year were prioritized for draft via a lottery system based on birth date
+- Men with lower draft numbers became more likely to enroll in college because an education deferment would allow them to avoid service
+- Thus, the lottery created a random variation in the number of years of schooling, which created an opportunity to estimate returns to schooling
 
 
 ---
-# Example: Vietnam Draft Lottery (cont'd)
+# Example: Vietnam Draft Lottery 
+
+
 - We start the IV regression with a person's years of schooling `\(X\)` regressed on instrument `\(Z\)`, the order his birth date was pulled in the lottery
   - Then we regress earnings `\(Y\)` on the predicted values of years of schooling `\(X\)`
   - This tells us how the "clean" variation in number of years of schooling affects earnings
@@ -78,8 +90,9 @@ class: inverse, center, middle
 
 
 ---
-# Potential Problem:
-## Violation of the Exclusion Restriction
+# Example: Vietnam Draft Lottery
+###Potential Problem: Violation of the Exclusion Restriction
+----
 
 - The required assumption is that the random process cannot affect the outcome in any way other than the treatment being examined
   - This assumption is no problem in many examples such as the KIPP lottery
@@ -127,8 +140,8 @@ class: inverse, center, middle
 ---
 # Advantages of Natural Experiments
 
-- If you are lucky enough to find one, you save the time of running the experiment
-- Estimation is straightforward
+1. If you are lucky enough to find one, you save the time of running the experiment
+2. Estimation is straightforward
   - IV/2SLS is very similar to OLS
   - Estimation packages like "ivreg" in R give correct standard errors
   
@@ -136,10 +149,10 @@ class: inverse, center, middle
 ---
 #Disadvantages of Natural Experiments
 
-- Administration of randomizing can be difficult
+1. Administration of randomizing can be difficult
   - People select, randomization fails, etc.
   - In an observational natural experiment, you have no control over the design, data collection, execution, block, or attrition
-- You might not find a natural experiment on the topic you care about
+2. You might not find a natural experiment on the topic you care about
   - Good natural experiments can be as rare as unicorns
   - We often have to run the experiments ourselves
   
@@ -169,7 +182,7 @@ class: inverse, center, middle
 
 ---
 # Regression Discontinuity 
-## Figure 4.2 (cont'd)
+## Figure 4.2
 
 &lt;img src="./figures/figure4_4b.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
 
@@ -181,19 +194,18 @@ class: inverse, center, middle
 # Regression Discontinuity
 ## Equation 4.2
 
-$$
-  \bar{M}_{a} = \alpha + \rho D_{a} + \gamma a + e_{a}
-$$
-- We regress the outcome (mortality rate) on"
-  - A treatment dummy variable (are you over 21?)
-  - A linear term for age, in years. This allows for a time trend in mortality
+`$$\bar{M}_{a} = \alpha + \rho D_{a} + \gamma a + e_{a}$$`
+
+- We regress the outcome (mortality rate) on:
+ - A treatment dummy variable (are you over 21?)
+ - A linear term for age, in years. This allows for a time trend in mortality
 
 &lt;img src="./figures/figure4_4c.png" width="70%" height="50%" style="display: block; margin: auto;" /&gt;
 - Figure 4.2 shows the resulting regression line: downward-sloping, except for a discrete jump on the 21st birthday
 
 ---
 # Regression Discontinuity
-## Equation 4.2 (cont'd)
+## Equation 4.2 
 
 - For a "fancy" analysis, we can: 
   - Use a quadratic regression (rather than linear) **OR**
@@ -226,14 +238,15 @@ class: inverse, center, middle
   
 
 ---
-# Equation 4.4 Results: Figure 4.4
+# Equation 4.4 Results - Figure 4.4
+
 
 &lt;img src="./figures/figure4_4d.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
 - The solid curved line shows the fancy (quadratic) regression curve
 
   
 ---
-# Equation 4.4 Results: Figure 4.4
+# Equation 4.4 Results - Figure 4.4
 
 &lt;img src="./figures/figure4_4e.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
 - The solid curved line shows the fancy (quadratic) regression curve
@@ -244,7 +257,7 @@ class: inverse, center, middle
 
 
 ---
-# Equation 4.4 Results: Figure 4.4
+# Equation 4.4 Results - Figure 4.4
 
 &lt;img src="./figures/figure4_4c.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
 - The solid curved line shows the fancy (quadratic) regression curve
@@ -256,7 +269,8 @@ class: inverse, center, middle
 
 
 ---
-# Equation 4.4 Results: Figure 4.4 (cont'd)
+# Equation 4.4 Results - Figure 4.4 
+
 &lt;img src="./figures/figure4_4.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
 
 - We don't want to extrapolate too far--the power of an RD is right at the break point
@@ -342,7 +356,7 @@ class: inverse, center, middle
 
 ---
 # Example of Regression Discontinuity
-- Do unemployment benefits lead people to slack off?
+#### Do unemployment benefits lead people to slack off?
 - Ideal experiment: randomly assign some countries or persons to strict unemployment regimes
 - Find "naturally occurring" coin flip situations
 - "Discontinuity" in Austria
@@ -389,7 +403,8 @@ class: inverse, center, middle
 
 ---
 # Common Issues With
-## .center[Regression Discontinuity Designs]
+##Regression Discontinuity Designs
+----
 
 ### "Sorting" at cut point
 
@@ -406,11 +421,13 @@ class: inverse, center, middle
 
 ---
 # Tests for Sorting
-- **Covariate balance** on either side of cut point
-  - Does covariate balance hold up based on early measurements?
-- **Smoothness (McCrary test)**
-  - Eg. effects of minimum-wage laws on unemployment
-  - Comparison between states based on margin of vote passing
+#### **Covariate balance** on either side of cut point
+- Does covariate balance hold up based on early measurements?
+
+
+####**Smoothness (McCrary test)**
+- Eg. effects of minimum-wage laws on unemployment
+- Comparison between states based on margin of vote passing
   
 ---
 #Tests for Sorting
@@ -418,11 +435,12 @@ class: inverse, center, middle
 
 ---
 # Tests for Sorting
-- **Covariate balance** on either side of cut point
+#### **Covariate balance** on either side of cut point
   - Does covariate balance hold up based on early measurements?
-- **Smoothness (McCrary test)**
-  - Eg. effects of minimum-wage laws on unemployment
-  - Comparison between states based on margin of vote passing
+
+#### **Smoothness (McCrary test)**
+- Eg. effects of minimum-wage laws on unemployment
+- Comparison between states based on margin of vote passing
 - Can't directly compare bills due to differences in kinds of bills that just pass and just fail
 - Check for proportion of observations in running variable
   - Eg. fraction of yes votes vs treatment variable
@@ -445,7 +463,7 @@ class: inverse, center, middle
 
 ---
 # Reading Assignment
-- The third observational technique we will consider is called **difference in differences (DID)**
+#### The third observational technique we will consider is called **difference in differences (DiD)**
 - This technique is used when a natural experiment takes place over time, in a before-after setting, and when we don't have a randomized control group
 - Instead, we have a group that is similar to the treated group but not guaranteed to be identical
 
@@ -463,6 +481,7 @@ class: inverse, middle, center
 ---
 # Difference in Differences
 ## Effects of Federal Reserve Lending Policy to Mississippi Banks
+----
 - It is difficult to do a field experiment on monitary policy
 - Instead we look for a natural experiment
   - In 1930, the Federal Reserve Bank of Atlanta (6th District) chose to provide much more credit to troubled banks than did the St. Lous Fed (8th District)
@@ -470,43 +489,45 @@ class: inverse, middle, center
 
 ---
 # Difference in Differences
-## Effects of Federal Reserve Lending Policy to Mississippi Banks (cont'd)
+## Effects of Federal Reserve Lending Policy to Mississippi Banks
+----
+
 - The banks are not randomized, so a simple difference can be misleading
   - In 1931, 11 fewer banks were open in the 6th District than the 8th
   - We might be tempted to conclude that easy lending caused more banks to close
   - BUT before the crisis, 30 fewer banks were open in the 6th District
 - We must account for this baseline difference
-- This is what DID does by subtracting the before-after difference in the treatment group from the before-after difference in the psuedo-control group
+- This is what DiD does by subtracting the before-after difference in the treatment group from the before-after difference in the psuedo-control group
 
 
 ---
-# Figure 5.3: DID Strategy Illustration
+# Figure 5.3: DiD Strategy Illustration
 &lt;img src="./figures/figure5_3.png" width="100%" style="display: block; margin: auto;" /&gt;
-- To get a valid causal difference with DID, we need to satisfy the **"common trends"** (or "parallel trends" assumption
+- To get a valid causal difference with DiD, we need to satisfy the **"common trends"** (or "parallel trends" assumption
 
 
 
 ---
-# Figure 5.3: DID Strategy Illustration
+# Figure 5.3: DiD Strategy Illustration
 &lt;img src="./figures/figure5_3a.png" width="100%" style="display: block; margin: auto;" /&gt;
 - Figure 5.3 shows that this assumption is reasonable
 - The hypothesized policy difference occurs in 1930
 
 
 ---
-# Figure 5.3: DID Strategy Illustration
+# Figure 5.3: DiD Strategy Illustration
 &lt;img src="./figures/figure5_3b.png" width="100%" style="display: block; margin: auto;" /&gt;
 - In other years the two lines (number of banks open) move in parallel
 
 
 ---
-# Figure 5.3: DID Strategy Illustration
+# Figure 5.3: DiD Strategy Illustration
 &lt;img src="./figures/figure5_3c.png" width="100%" style="display: block; margin: auto;" /&gt;
 - The dashed line shows the counterfactual number of banks that would have been open in the 6th District if the Atlanta Fed had not pursued an easy lending policy in 1930
 
 
 ---
-# Figure 5.3: DID Strategy Illustration
+# Figure 5.3: DiD Strategy Illustration
 &lt;img src="./figures/figure5_3d.png" width="100%" style="display: block; margin: auto;" /&gt;
 - The difference between the 6th District actual and hypothetical curves shows the estimated causal effect of the 6th District's lending policy
 
@@ -514,7 +535,7 @@ class: inverse, middle, center
 ---
 # Reading Assignment
 ### Read the rest of *Mastering Metrics* Section 5.1, pages 187-191
-- This section discusses how to implement a DID strategy using regression
+- This section discusses how to implement a DiD strategy using regression
 - The technique will look familiar if you remember the material on using regression to analyze heterogeneous treatment effects
 
 
@@ -525,17 +546,17 @@ class: inverse, middle, center
 
 
 ---
-# DID Regressions
+# DiD Regressions
 
 `\(Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}\)`
-- If we have more than two time periods or more than two comparison groups available, we can implement DID via a regression
+- If we have more than two time periods or more than two comparison groups available, we can implement DiD via a regression
 
 - **TREAT** is a dummy variable equal to one in the treatment group (the 6th district in this example
   - The coefficient of -29 means that in the pretreatment baseline period there were 29 fewer banks open in the 6th District than in the 8th
 
 
 ---
-# DID Regressions (cont'd)
+# DiD Regressions
 
 `\(Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}\)`
 
@@ -546,13 +567,13 @@ class: inverse, middle, center
 
 
 ---
-# DID Regressions (cont'd)
+# DiD Regressions
 
 `\(Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}\)`
 
 - The coefficient of 20.5 on the interaction term is the estimated causal effect of easy lending policy to troubled banks
   - Eg. the difference in the post-period vs the pre-period in the treatment group, relative to the difference in the comparison group
-- Next, David Broockman will share some additional examples of DID
+- Next, David Broockman will share some additional examples of DiD
 
 
 
@@ -567,7 +588,7 @@ class: inverse, middle, center
 ---
 class: inverse, middle, center
 # Yoga: 
-## .center[Coding the DID for Mississippi Banks]
+## .center[Coding the DiD for Mississippi Banks]
 &lt;!-- There are no slides for this section --&gt;
 
 
@@ -587,9 +608,9 @@ class: inverse, middle, center
 
 
 ---
-# DID Example
-## Ladd and Lenz (2009)
-- Does the media affect politial outcomes, specifically newspaper endorsements?
+# DiD Example: Ladd and Lenz (2009)
+
+#### Does the media affect politial outcomes, specifically newspaper endorsements?
 - Ideal experiment: Randomly assign newspapers to endorse a candidate
 - People often read newspapers that reinforce their views
   - Do readers' views change if newspaper switches endorsement?
@@ -601,31 +622,29 @@ class: inverse, middle, center
   
   
 ---
-# DID Example: Ladd and Lenz (2009)
+# DiD Example: Ladd and Lenz (2009)
 &lt;img src="./figures/figure11_19.png" width="80%" style="display: block; margin: auto;" /&gt;
 ---
-# DID Example: Ladd and Lenz (2009)
+# DiD Example: Ladd and Lenz (2009)
 &lt;img src="./figures/figure11_19a.png" width="80%" style="display: block; margin: auto;" /&gt;
 ---
-# DID Example: Ladd and Lenz (2009)
+# DiD Example: Ladd and Lenz (2009)
 &lt;img src="./figures/figure11_19b.png" width="80%" style="display: block; margin: auto;" /&gt;
 ---
-# DID Example: Ladd and Lenz (2009)
+# DiD Example: Ladd and Lenz (2009)
 &lt;img src="./figures/figure11_19c.png" width="80%" style="display: block; margin: auto;" /&gt;
 ---
-# DID Example: Ladd and Lenz (2009)
+# DiD Example: Ladd and Lenz (2009)
 &lt;img src="./figures/figure11_19d.png" width="80%" style="display: block; margin: auto;" /&gt;
 ---
-# DID Example: Ladd and Lenz (2009)
+# DiD Example: Ladd and Lenz (2009)
 &lt;img src="./figures/figure11_19.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 
-
-
 ---
-# DID Example: Ladd and Lenz (2009)
-- Does the media affect politial outcomes, specifically newspaper endorsements?
+# DiD Example: Ladd and Lenz (2009)
+#### Does the media affect politial outcomes, specifically newspaper endorsements?
 - Ideal experiment: Randomly assign newspapers to endorse a candidate
 - People often read newspapers that reinforce their views
   - Do readers' views change if newspaper switches endorsement?
@@ -638,14 +657,14 @@ class: inverse, middle, center
 
 ---
 # Potential Problems with Ladd and Lenz
-- Big housing crisis in 1997 
+### Big housing crisis in 1997 
 - People voted for Labour due to frustrations with incumbents
 - People with homes were:
   - More upset over housing crisis
   - More likely to get newspapers
   - More likely to receive treatment and vote based on housing crisis
 - Ladd and Lenz checked on this using a placebo test
-  - DID when treatment didn't change, readers of other papers
+  - DiD when treatment didn't change, readers of other papers
   - No effect seen among readers of other papers, only papers which switched their endorsement
 
 
@@ -656,7 +675,7 @@ class: inverse, middle, center
 
 
 ---
-# DID Example: Advertising and Prices
+# DiD Example: Advertising and Prices
 
 - Rhode Island (RI) banned advertising prices of alcohol
   - Will firms offer less competetive pricing as a result?
@@ -679,9 +698,9 @@ class: inverse, middle, center
 ---
 # Review of Difference-in-Differences
 
-- Did heps counteract selection efforts
-- Can't always directly compare two entities
-- Before/after effects can be misleading
+#### DiD helps counteract selection efforts
+#### Can't always directly compare two entities
+#### Before/after effects can be misleading
 
 
 
@@ -691,9 +710,9 @@ class: inverse, middle, center
 ## .center[Home Prices and Incinerator Location]
 
 ---
-# DID Example: Home Prices
+# DiD Example: Home Prices
 
-- How much do property values drop as a result of having an incinerator nearby?
+#### How much do property values drop as a result of having an incinerator nearby?
 - Can't simply look at home prices in relation to distance from incinerator
   - Why some places have incinerators while others don't?
   - Ideal experiment: randomly assign location of incinerators
@@ -703,7 +722,7 @@ class: inverse, middle, center
 
 ---
 # Kiel and McClain (1995)
-- DID approach
+- DiD approach
 - Collected data in two time periods:
   - Before incinerator announced
   - After incinerator built
@@ -714,11 +733,11 @@ class: inverse, middle, center
   - Average prices over time (before/after): +14% +/- 6%
 
 ---
-# DID Example: Home Prices
-## Importance of the DID Approach
+# DiD Example: Home Prices
+#### Importance of the DiD Approach
 
 - Home prices near incinerator could have had lower baseline resulting from pre-existing differences
-- DID protects from false conclusions drawn from simple before/after approach
+- **DiD protects from false conclusions drawn from simple before/after approach**
 - Vulnerabilities still exist
   - Eg. demographic changes could lead to incinertor being built in the first place
 
@@ -726,18 +745,18 @@ class: inverse, middle, center
 
 ---
 class: inverse, middle, center
-# Strengths and Weaknesses of DID
+# Strengths and Weaknesses of DiD
 
 
 ---
-# Strengths of DID
-- DID is a simple tool: we computer differences directly or do OLS regression with clustered standard errors
+# Strengths of DiD
+- DiD is a simple tool: we computer differences directly or do OLS regression with clustered standard errors
 - If we have covariates that might predict differences in `\(Y\)`, we can include them to try to improve precision
 - Causal effects are much stronger and more believable than with simple before/after differences or simple differences across non-randomized comparison groups
 
 
 ---
-# Weaknesses of DID
+# Weaknesses of DiD
 - Causal inference hinges on the assignment mechanism
 - The common trends (parallel trends) assumption is a strong assumption.
 - An example where it fails: observational online-advertising
