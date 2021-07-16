@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>w241: Experiments and Causality</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="David Reiley, David Broockman, D. Alex Hughes" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# w241: Experiments and Causality
+## Final Thoughts on Experiments and Causality
+### David Reiley, David Broockman, D. Alex Hughes
+### UC Berkeley, School of Information
+### Updated: 2021-07-15
+
+---
+
+
+
+
+class: inverse, center, middle 
+
+# Observation vs. Experiment
+
+---
+# Observation
+
+- Data analysis allows for making decisions
+- Decisions involve counterfactuals
+  - Existing in the state of the world where one has done X or Y
+  - Eg. should women receive hormone replacement therapy (HRT) or not?
+  - Eg. Should prices be raised or not?
+  
+  
+- **Observational data:** Compare units with different `\(X\)` values
+
+  
+---
+# Experimentation
+- Experiments involve **interventions**
+  - Rather than only observing, as an analyst you get involved in giving treatments
+
+
+- Randomization
+- Focus on selection process
+  - How do units get different `\(X\)` values?
+  - How did units get into the groups?
+
+
+- Quite often, units have different `\(X\)` values because of pre-existing differences
+  - People and firms make choices for a reason
+  - Typically implausible to believe `\(X\)` is assigned haphazardly, especially if it's reasonable to think `\(X\)` affects `\(Y\)`
+- In experiments, `\(X\)` values are determined by randomization, guaranteeing subjects' `\(Y\)` values would be otherwise be similar if there were no treatment effect
+- If we are wrong, it can be proven
+
+
+- Field experiments allow us to infer **causal relationships** in the real world
+  - Study real-world conditions as closely as possible
+
+
+---
+class: inverse, middle, center
+# Prediction vs. Inference
+
+
+---
+# Prediction vs. Causal Inference
+- In previous years, there have been huge advances in predictive accuracy of statistical models
+- Sometimes only need to predict `\(Y\)`:
+
+#### Some examples:
+
+
+| Question| Decision | Experiment Needed?|
+|---------------------------------------|------------------------------|:---:|
+|How many shoes will I sell next month? | How many shoes should I stock? | No |
+|How many website visits will I get?    | Which web hosting plan to buy?     | No |
+| Are men or women more likely to buy my product?| Who to market to? | **Yes**|
+
+- Subtle difference: person most likely to do something won't necessarily be most likely to respond
+
+
+---
+# Mistaking Prediction for Causal 
+##Inference
+----
+
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+
+
+#### Overview
+- Specifically branded searches
+- Seemingly strong evidence that Google search clicks have great return on investment (ROI)
+  - People who click often buy
+  - Very strong correlation between number of sales and number of clicks
+  - Statisticians didn't want to decrease variable that seemed to predict sales well
+
+---
+# Mistaking Prediction for Causal 
+##Inference
+----
+
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+
+
+#### Experiment
+- If ads weren't shown, would people searching "eBay" end up on eBay.com anyway?
+
+
+---
+# Mistaking Prediction for Causal 
+##Inference
+----
+
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+
+![](./figures/figure14_3a.png)
+
+
+---
+# Mistaking Prediction for Causal 
+##Inference
+----
+
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+
+
+#### Experiment
+- If ads weren't shown, would people searching "eBay" end up on eBay.com anyway?
+  - Randomly assigned some regions to get ads while others didn't
+
+
+---
+# Mistaking Prediction for Causal 
+##Inference
+----
+
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+
+![](./figures/figure14_3a.png)
+
+---
+# Mistaking Prediction for Causal 
+##Inference
+----
+
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+
+![](./figures/figure14_3b.png)
+
+
+
+---
+# Mistaking Prediction for Causal 
+##Inference
+----
+
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+
+
+#### Experiment
+- If ads weren't shown, would people searching "eBay" end up on eBay.com anyway?
+  - Randomly assigned some regions to get ads while others didn't
+  - If attribution model is correct, total sales should go down too
+
+
+---
+# Mistaking Prediction for Causal 
+##Inference
+----
+
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+
+![](./figures/figure14_3b.png)
+
+
+---
+# Mistaking Prediction for Causal 
+##Inference
+----
+
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+
+
+#### Experiment
+- If ads weren't shown, would people searching "eBay" end up on eBay.com anyway?
+  - Randomly assigned some regions to get ads while others didn't
+  - If attribution model is correct, total sales should go down too
+  - Observation alone predicts $1 spent yields $417.3 in revenue (4,173% ROI)
+
+
+
+
+
+---
+# Mistaking Prediction for Causal 
+##Inference
+----
+
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+
+
+#### Results
+- Experiment shows people who clicked ad would have gone to website anyway
+- Actual Return on Investment: -63%
+- $1 spent yields \$0.37 revenue
+
+### Experiment showed there wasn't a causal effect
+
+
+
+
+
+
+
+
+
+
+---
+class: inverse, middle, center
+# Misuses of Predictive models
+
+
+---
+# Predictions and Decisions
+
+#### **Example:** You are a marketer who learns that women are more likely to buy product than men
+- Should we advertise more to women?
+- Can predict effect of advertising
+
+---
+# Misuses of Predictive Scores
+
+- Firms often create predictive model scores
+  - Predicts likelihoods
+- Predictive models can yield predicted values without clear causal implications
+  
+
+---
+# Example: Magazines
+
+- Model for subscription cancellations
+  - Percentage chance of cancellation over next few months
+- Discount for people likely to cancel
+- Problem: Not known if people most likely to leave will be responsive to discounts
+- Experiment where random sampling of subscribers received discount
+  - Heterogeneous treatment effect
+- Only way to be sure it by running intervention
+
+
+---
+# Example: Voting
+
+- Likelihood of voting for Republican candidate
+  - Idea: Target "moderates" (40-60) with persuasive appeals
+  - 40-60 not moderates, just people we are bad at predicting
+
+
+####Even if person is a moderate, doesn't mean he or she would be receptive to appeals
+####Predictive models often don't work out in practice
+
+
+---
+# Common Themes
+
+#### Treatment effect different from `\(Y\)`
+#### Assumptions can exist without being aware of them
+
+
+
+---
+class: inverse, middle, center
+# Attempts to Fix Observational Data
+
+
+---
+# Fix Observational Data
+## Three Techniques
+----
+1. **Matching:** Compare units with similar values
+
+2. **Regression adjustment:** Multivariate regression
+
+3. **Propensity scores:** 
+
+
+####There is no free lunch
+
+
+
+---
+# Matching
+#### Compare subjects with very similar values of covariates
+- "Among women of the same race, with similar incomes, blood pressure, height, and weight..."
+- "...those who take HRT are less likely to get cancer than those who don't"
+
+
+- Still don't know if we have all the necessary covariates
+- Potential for unobserved heterogeneity still exists in matching analyses
+- What are the reasons people who are so similar get different treatments?
+- There can be unknowns that don't exist in data set
+
+---
+# Regression Adjustment
+
+#### Imposes a functional form on the link between covariates, treatment, and outcome
+- Extremely similar to matching
+- **Example:** People who weight more are more likely to take HRT
+  - Remove effect of weight by adjusting for it
+- Some underlying move as matching
+- Covariates don't always have linear relationship between outcome and treatment
+- Compare people within similar values of covariates
+- Still don't know why some subjects got treatment and some did not
+
+---
+# Omitted Variable Bias
+#### Unobserved heterogeneity big problem with experiments
+- Incinerator example
+  - Researchers had done regression adjustment (ie. "controlled for")
+
+#### Matching won't always show unobserved differences
+- Can't measure everything
+- Experimentation allows for unobserved things to be balanced
+
+---
+class: inverse, middle, center
+
+# Fixing Observational Data
+## .center[Part II]
+
+---
+# Propensity Scores
+
+- Key challenge in causal inference is potential connection between **likelihood of treatment assignment** and **outcome**
+- If units more likely to get a treatment *also* have different `\(Y\)` values for other reasons, comparisons between treatment and control will reflect these non-causal differences
+
+### Propensity scores estimate likelihood of receiving treatment directly
+- Strategy: Compare units with similar probability of treatment
+
+
+---
+#Example: Propensity Scores
+
+- Overweight rich women and underweight poor women have a similar chance of receiving treatment, so compare those groups with and without HRT to each other
+  - Model suggests similar likelihood of receiving treatment
+  - If probability of treatment is known, can get unbiased causal effects
+  - Problem remains: We don't know all the reasons why people get treated
+
+
+- Propensity score can be wrong for many units
+  - Eg. underweight poor women have 80% chance of treatment
+  - Possible some have 99% chance of treatment due to poor health
+  - Other group could have 10% chance
+  - Therefore, unclear what is true chance of being treated
+
+
+#### Propensity score matching is another way to do matching
+#### Have all reasons for treatment been measured?
+
+
+---
+# Common themes
+
+### Controlling for observables
+- Not unobservables
+
+
+### Are there differences between the kind of people who get treatment and don't that we didn't (or can't) observe?
+
+
+
+---
+class: inverse, middle, center
+# Shoe Leather
+
+
+---
+# Tremendous Effort Examples
+####Bertrand and Mullainathan
+  - Thousands of fake resumes
+  - Thousands of employer listings
+
+
+#### Careful research takes real effort
+- Many people don't want to do careful research because its difficult and requires effort
+- Many times it doesn't feel "fancy"
+- The right kind of data often hard to get
+
+
+---
+# Snow and Cholera
+
+- **Hypothesis:** Disease isn't spread through "miasma"
+  - Contended that cholera is a waterborne disease
+- Ideal Experiment: Randomly assign houses to water companies
+- Natural experiment existed
+  - Pipes were laid many years prior in same neighborhoods
+  - Arbitrary who has which water company
+- Took lots of effort to gather data
+- Knocked on doors to determine people's water company and if they had cholera
+- The table he produced was very simple
+
+
+
+
+---
+#Death in the Time of Cholera
+
+|                       | Number of Houses | Deaths | Deaths per 10,000 Houses |
+|-----------------------|:----------------:|:------:|:------------------------:|
+| Southwark and Vauxhall|   40,046        |   1,263   |   315               |
+| Lambeth               |   26,107        |   98        |   37            |
+| Rest of London        |   256,423       |   1,422     |   59            |
+
+
+---
+# Making the Effort
+
+#### Put onus on those making assumptions
+- Why do units get their `\(X\)` values?
+- What determines which units get in groups being compared?
+- Why believe an artificial setting speaks to the setting that's important?
+
+
+#### Some people will say it's impossible to do an experiment that will rigorously answer the questions -- take this as a challege!
+- Think carefully about how to conduct an experiment that will answer big question
+
+
+#### Worth the work to do careful research
+  - People will say they can't help
+  - Then they will be surprised people are cooperating
+  - Then they will fight the findings
+
+
+#### Worth the time and effort
+
+
+
+---
+class: inverse, middle, center
+# Deception and Privacy
+
+
+---
+# Deception and Privacy
+#### Field experiments affected in particular
+- Intervention is occurring
+- Affecting real people in real world
+
+### Consider ethical implications of choices
+
+
+---
+# Example: Food Poisoning Letters
+
+- Fake letters sent to restaurants, claiming food poisoning
+- Testing customer-service responses
+- Restaurant employees were fired erroneously
+- Professor conducting study got in big trouble
+- This really was not an ethical study
+
+
+
+---
+# Example: Bertrand and Mullainathan
+
+- Measured racial discrimination in job market
+- Sought to quantify effects of race during hiring process
+- Firms receiving fake resumes were misled and had time wasted
+- People were unknowingly participating in study without giving consent
+
+
+
+---
+# Privacy
+
+- Ethical intuitions still evolving
+- Privacy policies make research difficult
+- Often want to observe/match data but can't
+  - Make case for importance of data desired
+  - Find ways to not violate policy such as anonymizing data or randomly assign units in clusters
+- Think creatively about how to conduct an experiment consistent with a privacy policy if it can't be changed
+
+
+
+---
+# Ethics
+
+- Consider costs and benefits of research
+- Research ethics are cost/benefit analysis
+- Look at subject's point of view
+  - Tendency to treat subjects as objects
+  - Consider human impact
+  
+  
+#### Ethical principle: Always see your "treatment units" as real people
+  
+  
+---
+# Ethics
+#### Common argument: Withholding treatment from people in certain situations would be unethical
+- Eg. bed nets to protect people from malaria
+
+
+### Two potential responses:
+1. Often can't give treatment to everyone anyway
+  - Consider alternatives
+  - Random assignment and treating everyone possible are not incompatible
+2. Consider benefits of research
+  - If control group yields good results, it will benefit many more people in the long run
+  
+
+  
+---
+class: inverse, middle, center
+# Change the World!
+
+
+
+---
+# Experiments Are Changing the World
+
+### 1. Development
+### 2. Politics
+### 3. Conservation
+### 4. Business
+
+---
+# Development Economics
+
+### See books by Karlan and Appel, Banerjee and Duflo
+
+
+- How do we increase education?
+  - Provide uniforms to girls?
+  - Ask teachers to take pictures of themselves?
+  - Deworm kids at school?
+  - Give cash to families?
+- Prior to 2000, most development programs were never really tested
+- With limited resources, allocate randomly
+  - Can know which pilot programs to expand with additional funds
+- Without experiments, no way to know the counterfactual
+
+
+---
+# Politics
+- Persuasion and mobilization of voters and volunteers
+- How do we register minorities to vote and turn out?
+- How do we make sure voters hold elected officials accountable for corruption?
+- Which governance structures protect minority rights?
+- How can activists affect politicians' behavior?
+
+
+#### Questions can start to be answered based on science rather than philosophy
+- Experimentation has transformed political world
+
+
+
+---
+# Conservation
+- Typical approach: blandishments to conserve
+- Opower sends mail comparing neighbors' power use
+  - Had large effect on people's conservation
+  - Frequency of mailings?
+  - Amount of social judgement?
+  - Effect diminished after several months; new mailings needed
+  - Optimal number of mailings to preserve "shock value"?
+
+
+---
+# Business
+- Employee incentives
+- Pricing
+- Advertising
+- Audit studies for quality control
+- Have to admit ignorance in order to justify experiment
+  - People often set in their ways
+  - Gathering data that proves you wrong can be uncomfortable
+
+
+#### Be in the ignorance-reduction business!
+  - Reduce ignorance through the use of random assignment
+
+
+#### Run experiments!
+
+
+---
+class: middle
+![](./figures/figure14_9.png)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
