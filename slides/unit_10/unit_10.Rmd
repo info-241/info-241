@@ -352,6 +352,12 @@ knitr::include_graphics(path='./figures/table4_1.png')
 - In Table 4.1, the results are not very sensitive to the choice of window
 - We see similar estimates when we compare Column 1 (window ages 19-22) to Column 3 (window ages 20-21)
 
+---
+# Parametric vs. Nonparametric RD
+
+```{r, echo=FALSE, out.width='80%', fig.align='center'}
+knitr::include_graphics(path='./figures/table4_1_short.png')
+```
 
 ---
 # Parametric vs. Nonparametric RD
