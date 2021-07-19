@@ -127,7 +127,7 @@ class: inverse, center, middle
 - Need randomly assigned economic growth
   - Rain tends to be associated with economic growth in agricultural areas
 
-###.center[Rain  -> Economic Growth  -> Less Civil War?]
+### Rain $\rightarrow$ Economic Growth $\rightarrow$ Less Civil War?
 
 - Compare countries with high rainfall to low
 - "If there's a correlation between rain and civil war, it could only be caused by lower economic growth"
@@ -135,7 +135,7 @@ class: inverse, center, middle
 - But is economic growth the only way rain could affect civil war?
   - "No one likes to fight a war when it's muddy"
   
-###.center[Rain  -> ~~Economic Growth~~ mud  -> Less Civil War]
+### Rain $\rightarrow$ ~~Economic Growth~~ *Mud* $\rightarrow$ Less Civil War
 
 
 
@@ -243,7 +243,7 @@ class: inverse, center, middle
 ---
 # Equation 4.4
 
-$$\bar{M}_a = \alpha + \rho D_a +   \gamma_1(a-a_0)^2+\delta_1[(a-a_0)D_a]+\delta_2[(a-a_0)^2]D_a + e_{a}$$
+$$\overline{M}_{a} = \alpha + \rho D_{a} + \gamma_{1}(a-a_{0}) + \gamma_{2}(a-a_{0})^{2}+\delta_{1}[(a-a_{0})D_{a}]+\delta_{2}[(a-a_{0})^{2} D_{a}] + e_{a}$$
 - This "fancy" regression allows the relationship between mortality and age to have: 
   - A quadratic shape to the left of the 21st birthday
   - A different quadratic shape to the right 
