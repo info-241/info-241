@@ -197,7 +197,7 @@ Some examples:
 - If ads weren't shown, would people searching "eBay" end up on eBay.com anyway?
   - Randomly assigned some regions to get ads while others didn't
   - If attribution model is correct, total sales should go down too
-  - Observation alone predicts $1 spent yields $417.3 in revenue (4,173% ROI)
+  - Observation alone predicts 1 USD spent yields 417.3 USD in revenue (4,173% ROI)
 
 
 
@@ -213,8 +213,8 @@ Some examples:
 
 #### Results
 - Experiment shows people who clicked ad would have gone to website anyway
-- Actual Return on Investment: -63%
-- $1 spent yields $0.37 revenue
+- Actual Return on Investment: $-63%$
+- $1$ USD spent yields $0.37$ USD revenue
 
 ### Experiment showed there wasn't a causal effect
 
@@ -538,7 +538,7 @@ class: inverse, middle, center
 ---
 # Development Economics
 
-### See books by Karlan and Appel, Banerjee and Duflo
+### See [More than Good Intentions](https://smile.amazon.com/More-Than-Good-Intentions-Improving/dp/0452297567/ref=sr_1_1?dchild=1&keywords=more+than+good+intentions&qid=1626725023&sr=8-1) by Karlan and Appel, and [Poor Economics](https://ebookcentral-proquest-com.libproxy.berkeley.edu/lib/berkeley-ebooks/detail.action?docID=688714) by Banerjee and Duflo
 
 
 - How do we increase education?
