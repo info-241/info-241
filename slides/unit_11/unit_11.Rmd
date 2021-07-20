@@ -31,8 +31,6 @@ knitr::opts_chunk$set(echo = TRUE, dpi = 300, fig.height = 3)
 theme_set(theme_minimal())
 ```
 
-
-
 class: inverse, center, middle 
 # Introduction to Causal Inference from Observational Data
 
@@ -159,7 +157,6 @@ class: inverse, center, middle
 - Pay particular attention to figure 4.2: How convincing is this as a demonstration of causal effect?
 
 
-
 ---
 class: inverse, center, middle 
 # Introduction to Regression Discontinuity
@@ -220,6 +217,7 @@ knitr::include_graphics(path='./figures/figure4_4c.png')
 # Reading Assignment
 ### Read *Mastering Metrics* page 153 to end of Section 4.1 on page 164
 - See if you can recognize the placebo tests
+
 
 
 
@@ -363,6 +361,7 @@ knitr::include_graphics(path='./figures/Table4_1.png')
   - We have learned the effects of alcohol access on mortality for 21-year-olds
   - We cannot be certain these results would generalize to 18-year-olds
 - Next, David Broockman will discuss a few more examples of RD
+
 
 
 
@@ -620,6 +619,7 @@ class: inverse, middle, center
 
 
 
+
 ---
 class: inverse, middle, center
 # Yoga: 
@@ -820,6 +820,7 @@ class: inverse, middle, center
 
 
 
+
 ---
 class: inverse, middle, center
 # Yoga: 
@@ -831,26 +832,3 @@ class: inverse, middle, center
 class: inverse, middle, center
 # Concluding Thoughts
 <!-- There are no slides for this section -->
-
-
-
-
-
-
-
-<!-- EASY TO GRAB FUNCTIONS -->
-
-<!-- ```{r echo=FALSE, out.width='80%', fig.align='center'} -->
-<!-- knitr::include_graphics(path='./figures/ ') -->
-<!-- ``` -->
-
-
-<!-- $$\widehat{Y}_{i} = \beta_{0} + \beta_{1} I_{i} + \beta_{2} P_{i} + \beta_{3} (I_{i} \times P_{i})$$ -->
-
-
-<!-- $$\begin{aligned}  -->
-<!--   T_{ijkm}(Y_{n})  = \alpha &+ \gamma T_{ijkm}(Y_{0}) + \delta_{1} Incentives_{i} \\  -->
-<!--     & + \delta_{2} Characteristic_{i} \\  -->
-<!--     & + \delta_{3} (Incentives_{i} \times Characteristic_{i}) \\  -->
-<!--     & + \beta Z_{m} + \epsilon_{k} + \epsilon_{jk} + \epsilon_{ijk} -->
-<!-- \end{aligned}$$ -->
