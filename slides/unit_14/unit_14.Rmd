@@ -93,10 +93,10 @@ Some examples:
 
 ---
 # Mistaking Prediction for Causal 
-##Inference
+## Inference
 ----
 
-#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "eBay"
 
 
 #### Overview
@@ -108,10 +108,10 @@ Some examples:
 
 ---
 # Mistaking Prediction for Causal 
-##Inference
+## Inference
 ----
 
-#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "eBay"
 
 
 #### Experiment
@@ -120,20 +120,20 @@ Some examples:
 
 ---
 # Mistaking Prediction for Causal 
-##Inference
+## Inference
 ----
 
-#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "eBay"
 
 ![](./figures/figure14_3a.png)
 
 
 ---
 # Mistaking Prediction for Causal 
-##Inference
+## Inference
 ----
 
-#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "eBay"
 
 
 #### Experiment
@@ -143,19 +143,19 @@ Some examples:
 
 ---
 # Mistaking Prediction for Causal 
-##Inference
+## Inference
 ----
 
-#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "eBay"
 
 ![](./figures/figure14_3a.png)
 
 ---
 # Mistaking Prediction for Causal 
-##Inference
+## Inference
 ----
 
-#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "eBay"
 
 ![](./figures/figure14_3b.png)
 
@@ -163,10 +163,10 @@ Some examples:
 
 ---
 # Mistaking Prediction for Causal 
-##Inference
+## Inference
 ----
 
-#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "eBay"
 
 
 #### Experiment
@@ -177,20 +177,20 @@ Some examples:
 
 ---
 # Mistaking Prediction for Causal 
-##Inference
+## Inference
 ----
 
-#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "eBay"
 
 ![](./figures/figure14_3b.png)
 
 
 ---
 # Mistaking Prediction for Causal 
-##Inference
+## Inference
 ----
 
-#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "eBay"
 
 
 #### Experiment
@@ -205,10 +205,10 @@ Some examples:
 
 ---
 # Mistaking Prediction for Causal 
-##Inference
+## Inference
 ----
 
-#### **Example:** Blake *et al.*: eBay ads on Google searches for "ebay"
+#### **Example:** Blake *et al.*: eBay ads on Google searches for "eBay"
 
 
 #### Results
@@ -292,18 +292,22 @@ class: inverse, middle, center
 
 2. **Regression adjustment:** Multivariate regression
 
-3. **Propensity scores** 
+3. **Propensity scores:** Model likelihood of receiving treatment 
 
 
-####There is no free lunch
+## The truth of causal epistemology: 
+## *There is no free lunch* 
 
+- All modeling choices will make tradeoffs
 
 
 ---
 # Matching
 ### Compare subjects with very similar values of covariates
-- "Among women of the same race, with similar incomes, blood pressure, height, and weight..."
-- "...those who take HRT are less likely to get cancer than those who don't"
+
+> 
+> - "Among women of the same race, with similar incomes, blood pressure, height, and weight..."
+> - "...those who take HRT are less likely to get cancer than those who don't"
 
 
 - Still don't know if we have all the necessary covariates
@@ -370,12 +374,16 @@ class: inverse, middle, center
 
 
 ---
-# Common themes
+# Common Themes
 
-### 1. Controlling for observables
-- Not unobservables
+###1. Controlling for observables
+- We can control for observable features, but we cannot control for things that we cannot measure
+- Might seem tautological, but this point can be challenging to communicate 
 
-### 2. Are there differences between the kind of people who get treatment and don't that we didn't (or can't) observe?
+## 2. We might ask
+- Are there differences between the kind of people who either receive treatment or do not receive treatment? 
+- Are we able to observe what is different? 
+- What if we cannot observe what is different? 
 
 
 
@@ -386,12 +394,12 @@ class: inverse, middle, center
 
 ---
 # Tremendous Effort Examples
-####Bertrand and Mullainathan
+## Bertrand and Mullainathan
   - Thousands of fake resumes
   - Thousands of employer listings
 
 
-#### Careful research takes real effort
+## Careful research takes real effort
 - Many people don't want to do careful research because its difficult and requires effort
 - Many times it doesn't feel "fancy"
 - The right kind of data often hard to get
@@ -597,4 +605,4 @@ class: inverse, middle, center
 
 ---
 class: middle
-![](./figures/figure14_9.png)
+![](./figures/figure14_9.jpeg)
