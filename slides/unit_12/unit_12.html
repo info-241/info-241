@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ## Attrition, Mediation, and Generalizability
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-07-14
+### Updated: 2021-07-19
 
 ---
 
@@ -355,16 +355,19 @@ class: inverse, middle, center
 # Mediation
 
 **Example 1**: Chewing bark  `\(\rightarrow\)` less pain
-- Why?
-  - Aspirin in the bark (mediator)
-- Why does aspirin work?
-  - Biological mechanism that reduces pain (mediator)
-- Why?
+- *Why?* Because there is aspirin in the bark (mediator)
+- *Why does aspirin work?* Because there is a biological mechanism that reduces pain (new mediator)
+- *Why?* ... 
 
 **Example 2:** Fruit juice `\(\rightarrow\)` cures scurvy
-- Why?
-  - Treatment (fruit juice) cured scurvy (outcome) through mediator (vitamin C)
-- Why?
+- *Why?* Because there is vitamin C in the bark (new mediator) 
+- *Why does vitamin C cure scurvy?* Because there is a biological mechanism 
+- *Why?* ... 
+
+#### Asking questions is important! 
+- But there are limits to what we know, or even *could know* in many contexts
+- Maintain an eye for deeper understanding
+- But acknowledge where a usefully shallow understanding can suffice
 
 ---
 # Mediation
@@ -385,19 +388,20 @@ class: inverse, middle, center
 ### **DO NOT use this approach** because the analysis is typically biased
 ----
 **Example:** Lime treats scurvy by increasing vitamin C levels
-- Mediator = `\(\alpha + \beta1 \times\)`treatment
+- Mediator = `\(\alpha + \beta \times \text{ treatment}\)`
   - Does lime juice lead to higher levels of vitamin C?
-- Outcome = `\(\alpha + \beta1 \times\)`treatment
+- Outcome = `\(\alpha + \beta \times \text{ treatment}\)`
   - Is there an average treatment effect on the outcome?
   - Does lime juice lead to less scurvy?
-- Outcome = `\(\alpha + \beta1 \times\)`treatment `\(+ \beta \times\)`mediator
+- Outcome = `\(\alpha + \beta_{1} \times \text{ treatment } + \beta_{2} \times \text{ mediator}\)` 
   - What is the effect of lime juice (treatment) on scurvy (outcome) once we control for vitamin C levels (mediator)?
   
 
 
 ---
 # Typical Approach to Mediation Analysis
-### **DO NOT use this approach** because the analysis is typically biased
+### **DO NOT use this approach!** 
+### Analysis is typically biased
 ----
 ####Result: The treatment is no longer effective when we control for the mediator
 - However, doesn't definitively establish that the mediator caused the treatment to lose effect
@@ -449,7 +453,7 @@ class: inverse, middle, center
 # Implicit Mediation Analysis
 
 #### Theory testing by looking for subgroup effects
-- **Example** in political study 
+- **Example:** Politics
   - *Theory:* people are more likely to adopt the views of politicians of their own parties
   - *Treatment group:* receives letter from Democratic politician stating his position on an issue
   - *Control group:* does not receive letter
@@ -506,8 +510,10 @@ class: inverse, middle, center
 
 
 ---
+class: center, middle
+
 # Generalizability
-### **Generalizability:** The limitations of any one experiment to apply to other subjects in other contexts
+## **Generalizability:** The limitations of any one experiment to apply to other subjects in other contexts
 
 
 ---
@@ -546,10 +552,12 @@ class: inverse, middle, center
 
 ---
 # Generalizability of Treatments
-#### Generalizability of research partners who agree to administer a treatment
+### Example: Job Training 
 
-&lt;br&gt;
-**Example:** job training program partner
+&gt; Will the a job-training program that shows effectiveness in an experiment work if used company-wide? 
+
+#### Experimental Study 
+
 - Study to evaluate effect of a job training program
 - Send letters to job training programs asking them to randomly choose 500 people to be evaluated
 - 20 programs agree to participate
@@ -616,14 +624,16 @@ class: inverse, middle, center
 ---
 # Example: Get Out the Vote Campaigns
 
-#### Professors tried a strategy in an off-year Michigan primary election where few people typically vote or know about the election
-- Results: Get Out the Vote strategy is very effective
-- But, when treatment was tried in presidential election, the effects were much smaller
+## Green, Gerber, and Larimer (2008)
 
-#### How treatment effects differ across people and across context may not be obvious until we conduct further experiments
-- After many experiments, Get Out the Vote can now make empirical generalizations
-- Hundreds of experiments allowed them to find regularities so we can accurately forecast causal effects
+- Professors tried a strategy in an off-year Michigan primary election where few people typically vote or know about the election
+  - **Results**: Get Out the Vote strategy is very effective
+  - But, when treatment was tried in presidential election, the effects were much smaller
+- How treatment effects differ across people and across context may not be obvious until we conduct further experiments
+  - After many experiments, Get Out the Vote can now make empirical generalizations
+  - Hundreds of experiments allowed them to find regularities so we can accurately forecast causal effects
 
+## Key Takeaway
 #### No experiment applies to all circumstances
 
 
@@ -668,34 +678,6 @@ class: inverse, middle, center
 - Cannot ever know for sure how your experiment will differ in other contexts
 - Perform other experiments to validate that your results would replicate in other circumstances
 - With many experiments you can start to build more general theories
-
-
-
-
-
-
-
-
-&lt;!-- EASY TO GRAB FUNCTIONS --&gt;
-
-&lt;!-- ```{r echo=FALSE, out.width='80%', fig.align='center'} --&gt;
-&lt;!-- knitr::include_graphics(path='./figures/ ') --&gt;
-&lt;!-- ``` --&gt;
-
-
-&lt;!-- `$$\widehat{Y}_{i} = \beta_{0} + \beta_{1} I_{i} + \beta_{2} P_{i} + \beta_{3} (I_{i} \times P_{i})$$` --&gt;
-
-
-&lt;!-- $$\begin{aligned}  --&gt;
-&lt;!--   T_{ijkm}(Y_{n})  = \alpha &amp;+ \gamma T_{ijkm}(Y_{0}) + \delta_{1} Incentives_{i} \\  --&gt;
-&lt;!--     &amp; + \delta_{2} Characteristic_{i} \\  --&gt;
-&lt;!--     &amp; + \delta_{3} (Incentives_{i} \times Characteristic_{i}) \\  --&gt;
-&lt;!--     &amp; + \beta Z_{m} + \epsilon_{k} + \epsilon_{jk} + \epsilon_{ijk} --&gt;
-&lt;!-- \end{aligned}$$ --&gt;
-
-
-
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
