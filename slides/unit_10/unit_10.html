@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ## Causal Inference from Observational Data
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-07-19
+### Updated: 2021-07-20
 
 ---
 
@@ -120,7 +120,7 @@ class: inverse, center, middle
 - Need randomly assigned economic growth
   - Rain tends to be associated with economic growth in agricultural areas
 
-### Rain `\(\rightarrow\)` Economic Growth `\(\rightarrow\)` Less Civil War?
+![](./figures/Section11_5a.png)
 
 - Compare countries with high rainfall to low
 - "If there's a correlation between rain and civil war, it could only be caused by lower economic growth"
@@ -128,8 +128,7 @@ class: inverse, center, middle
 - But is economic growth the only way rain could affect civil war?
   - "No one likes to fight a war when it's muddy"
   
-### Rain `\(\rightarrow\)` ~~Economic Growth~~ *Mud* `\(\rightarrow\)` Less Civil War
-
+![](./figures/Section11_5b.png)
 
 
 ---
@@ -300,7 +299,7 @@ class: inverse, center, middle
 &lt;img src="./figures/figure4_5b.png" width="90%" height="50%" style="display: block; margin: auto;" /&gt;
 - Deaths from disease ("internal causes") show no serious jumps at the discontinuity
 - Motor vehicle fatalities show a substantial jump
-- This makes us even more confident that the jump we saw in the initial RD is really a causal effect of legal access to alcohol
+- More confident that the jump we saw is a causal effect of legal access to alcohol
   - Deaths associated with alcohol show a big jump
   - Deaths associated with other causes don't move
   
@@ -552,8 +551,9 @@ class: inverse, middle, center
 ---
 # DiD Regressions
 
-`$$Y_{dt}=167-29 \cdot TREAT_d - 49\cdot POST_t +20.5 \cdot (TREAT_d * POST_t)+e_{dt} \tag{Eq 100}$$`
+`$$Y_{dt}=167-\underset{(8.8)}{29} \cdot TREAT_d - \underset{(7.6)}{49}\cdot POST_t +\underset{(10.7)}{20.5} \cdot (TREAT_d * POST_t)+e_{dt}$$`
 - If we have more than two time periods or more than two comparison groups available, we can implement DiD via a regression
+
 
 - **TREAT** is a dummy variable equal to one in the treatment group (the 6th district in this example
   - The coefficient of -29 means that in the pretreatment baseline period there were 29 fewer banks open in the 6th District than in the 8th
@@ -562,7 +562,7 @@ class: inverse, middle, center
 ---
 # DiD Regressions
 
-`\(Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}\)`
+`$$Y_{dt}=167-\underset{(8.8)}{29} \cdot TREAT_d - \underset{(7.6)}{49}\cdot POST_t +\underset{(10.7)}{20.5} \cdot (TREAT_d * POST_t)+e_{dt}$$`
 
 - **POST** is a dummy variable
   - POST = 0 prior to treatment
@@ -573,7 +573,7 @@ class: inverse, middle, center
 ---
 # DiD Regressions
 
-`\(Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}\)`
+`$$Y_{dt}=167-\underset{(8.8)}{29} \cdot TREAT_d - \underset{(7.6)}{49}\cdot POST_t +\underset{(10.7)}{20.5} \cdot (TREAT_d * POST_t)+e_{dt}$$`
 
 - The coefficient of 20.5 on the interaction term is the estimated causal effect of easy lending policy to troubled banks
   - Eg. the difference in the post-period vs the pre-period in the treatment group, relative to the difference in the comparison group
