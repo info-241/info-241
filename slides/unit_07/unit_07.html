@@ -17,7 +17,8 @@ class: center, middle, inverse, title-slide
 ## Heterogeneous Treatment Effects
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-06-29
+### Updated: 2021-07-21
+
 ---
 
 
@@ -215,17 +216,17 @@ class: center
 ##              ---------------------------
 ##                         Score           
 ## ----------------------------------------
-## Treatment              1.04***          
+## Treatment              1.01***          
 ##                        (0.03)           
 ##                                         
-## Constant               0.79***          
-##                        (0.18)           
+## Constant               0.81***          
+##                        (0.19)           
 ##                                         
 ## ----------------------------------------
 ## Observations             100            
-## R2                      0.91            
-## Adjusted R2             0.91            
-## F Statistic    983.06*** (df = 1; 98)   
+## R2                      0.90            
+## Adjusted R2             0.89            
+## F Statistic    839.71*** (df = 1; 98)   
 ## ========================================
 ## Note:        *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01
 ```
@@ -659,7 +660,11 @@ class: inverse, center, middle
 - Found higher sales revenue from older people who watched advertisements
 - *Buuuuut...* results didn't replicate in a second experiment.
 
-![no age based hte](./figures/lewis_reiley_2014.png)
+&lt;img src="./figures/lewis_reiley_2014.png" width="610" style="display: block; margin: auto;" /&gt;
+
+
+&lt;!-- ![](./figures/lewis_reiley_2014.png) --&gt;
+
 
 ---
 
@@ -701,6 +706,36 @@ Fishing expeditions are a problem because of multiple comparisons.
 - Performs automated specification searches.
 - Multiple comparisons will still be an issue.
 - Treat any output as a hypothesis to be confirmed in another experiment.
+
+---
+
+# What to Remember From This Week
+
+
+### Options for reporting heterogeneous treatment effects
+- Report separate treatment effects for each subgroup.
+- Use regressions where the treatment dummy variable is multiplied by covariates of interest.
+
+### Defining covariates so that reading output is easier
+
+### Being able to read output of regression models with interaction terms
+
+### Testing significance of treatment effects between subgroups
+- Can be done with a t-test on one coefficient
+- Can also be done with an F-test
+
+---
+
+# What to Remember, continued
+
+## Interpreting HTEs
+- HTEs explain how different subgroups respond to treatment.
+- HTEs don't explain causal effects of reassigning people to new subgroups.
+
+## Multiple-comparisons problem
+- Examining many different regression models and picking favorites makes us overstate statistical significance.
+- Results from fishing expeditions should be treated as hypotheses to be retested.
+- Machine learning can help develop testable HTE hypotheses.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

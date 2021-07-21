@@ -658,7 +658,13 @@ class: inverse, center, middle
 - Found higher sales revenue from older people who watched advertisements
 - *Buuuuut...* results didn't replicate in a second experiment.
 
-![no age based hte](./figures/lewis_reiley_2014.png)
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics(path = './figures/lewis_reiley_2014.png')
+```
+
+
+<!-- ![](./figures/lewis_reiley_2014.png) -->
+
 
 ---
 
@@ -700,3 +706,33 @@ Fishing expeditions are a problem because of multiple comparisons.
 - Performs automated specification searches.
 - Multiple comparisons will still be an issue.
 - Treat any output as a hypothesis to be confirmed in another experiment.
+
+---
+
+# What to Remember From This Week
+
+
+### Options for reporting heterogeneous treatment effects
+- Report separate treatment effects for each subgroup.
+- Use regressions where the treatment dummy variable is multiplied by covariates of interest.
+
+### Defining covariates so that reading output is easier
+
+### Being able to read output of regression models with interaction terms
+
+### Testing significance of treatment effects between subgroups
+- Can be done with a t-test on one coefficient
+- Can also be done with an F-test
+
+---
+
+# What to Remember, continued
+
+## Interpreting HTEs
+- HTEs explain how different subgroups respond to treatment.
+- HTEs don't explain causal effects of reassigning people to new subgroups.
+
+## Multiple-comparisons problem
+- Examining many different regression models and picking favorites makes us overstate statistical significance.
+- Results from fishing expeditions should be treated as hypotheses to be retested.
+- Machine learning can help develop testable HTE hypotheses.
