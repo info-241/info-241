@@ -247,48 +247,44 @@ class: inverse, center, middle
 
 <!-- Figure 8.4 Animation slides -->
 ---
-# Figure 8.4: Spillover in Two Dimensions
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
-knitr::include_graphics(path='./figures/Figure8_4a.png')
-```
----
-# Figure 8.4: Spillover in Two Dimensions
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
-knitr::include_graphics(path='./figures/Figure8_4b.png')
-```
----
-# Figure 8.4: Spillover in Two Dimensions
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
-knitr::include_graphics(path='./figures/Figure8_4c.png')
-```
----
-# Figure 8.4: Spillover in Two Dimensions
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
-knitr::include_graphics(path='./figures/Figure8_4d.png')
-```
----
-# Figure 8.4: Spillover in Two Dimensions
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
-knitr::include_graphics(path='./figures/Figure8_4e.png')
-```
----
-# Figure 8.4: Spillover in Two Dimensions
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
-knitr::include_graphics(path='./figures/Figure8_4f.png')
-```
----
-# Figure 8.4: Spillover in Two Dimensions
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
-knitr::include_graphics(path='./figures/Figure8_4g.png')
-```
----
-# Figure 8.4: Spillover in Two Dimensions
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
-knitr::include_graphics(path='./figures/Figure8_4h.png')
-```
+# Figure 84: Spillover in Two Dimensions
 
+![figure8_4a](./figures/Figure8_4a.png)
 
+---
+# Figure 8.4: Spillover in Two Dimensions
 
+![figure8_4b](./figures/Figure8_4b.png)
+
+---
+# Figure 8.4: Spillover in Two Dimensions
+
+![figure8_4c](./figures/Figure8_4c.png)
+
+---
+# Figure 8.4: Spillover in Two Dimensions
+
+![figure8_4d](./figures/Figure8_4d.png)
+
+---
+# Figure 8.4: Spillover in Two Dimensions
+
+![figure8_4e](./figures/Figure8_4e.png)
+
+---
+# Figure 8.4: Spillover in Two Dimensions
+
+![figure8_4f](./figures/Figure8_4f.png)
+
+---
+# Figure 8.4: Spillover in Two Dimensions
+
+![figure8_4g](./figures/Figure8_4g.png)
+
+---
+# Figure 8.4: Spillover in Two Dimensions
+
+![figure8_4h](./figures/Figure8_4h.png)
 
 ---
 # Making Assumptions
@@ -333,57 +329,57 @@ class: inverse, center, middle
 <!-- Figure 5 animation slides -->
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5a.png')
 ```
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5b.png')
 ```
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5c.png')
 ```
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5d.png')
 ```
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5e.png')
 ```
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5f.png')
 ```
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5g.png')
 ```
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5h.png')
 ```
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5i.png')
 ```
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5j.png')
 ```
 ---
 # Figure 5: Advertising Example
-```{r echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
+```{r, echo=FALSE, out.height='85%', out.width='85%', fig.align='center'}
 knitr::include_graphics(path='./figures/Figure_5k.png')
 ```
 
@@ -463,6 +459,11 @@ Including many time periods can solve this problem
 - Enough data for valid standard-error estimates
 
 
+---
+class: middle
+# Quiz
+
+## According to *Field Experiments*, Section 8.4, what assumption has to hold for within-subjects experiments to work?
 
 <!-- Section 9.13 -->
 ---
@@ -518,9 +519,12 @@ class: inverse, center, middle
 ---
 # Waitlist Design
 
-## Administer randomized treatment to all subjects over time
+## Waitlist Designs: 
+
+- Administer randomized treatment to all subjects over time
+- Eventually administer treatment to all subjects by the end of the experiment
 - Roll out treatment to control group in stages
-- Also known as *Stepped-wedge* designs
+- Are sometimes also known as *Stepped-wedge* designs
 
 
 ---
@@ -535,24 +539,23 @@ class: inverse, center, middle
 - Can delay widespread treatment long enough to see effects in early treatment groups before administering to all groups
 - Long-run *and* simultaneous treatment effects
 
+---
+![](./figures/AdsForPerry.png)
 
 <!-- Section 9.19 -->
----
-class: inverse, center, middle 
-# Yoga Example: Unsccessully Estimating in the Presence of Spillover
-
 
 ---
 # What to Remember From This Week
 
-All experiments aim for *Ceteris paribus* "all other things being equal" except treatment effect
+- All experiments aim for *Ceteris paribus* "all other things being equal" except treatment effect
+- Spillovers between subjects can bias results:
+  - Positive spillovers: underestimation (eg. I see ads and take my friend to the store)
+  - Negative spillovers: overestimation (eg. extra police divert crime to a difference area)
+- Clustered treatment can eliminate this bias
+- Within-subjects design can be valuable if treatment effects are limited in time
+- Stepped-wedge designs get variation both within and between subjects
 
-Spillovers between subjects can bias results:
-- Positive spillovers: underestimation (eg. I see ads and take my friend to the store)
-- Negative spillovers: overestimation (eg. extra police divert crime to a difference area)
 
-Clustered treatment can eliminate this bias
-
-Within-subjects design can be valuable if treatment effects are limited in time
-
-Stepped-wedge designs get variation both within and between subjects
+---
+class: inverse, center, middle 
+# Yoga Example: Unsccessully Estimating in the Presence of Spillover
