@@ -445,7 +445,7 @@ knitr::include_graphics(path='./figures/Fig_1f.png')
 
 - Precision-weighted average:
 
-$$\frac{1}{StandardError^2}$$
+$$\frac{1}{SE^2}$$
 
 - Double the standard error gets $1/4$ the weight
 - 1/4 sample size means $1/4$ the information
