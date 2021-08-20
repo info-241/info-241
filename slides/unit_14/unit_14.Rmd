@@ -604,5 +604,7 @@ class: inverse, middle, center
 
 
 ---
-class: middle
-![](./figures/figure14_9.jpeg)
+ 
+```{r echo=FALSE, out.width='80%', fig.align='center'}
+knitr::include_graphics('./figures/figure14_9.jpeg')
+```
