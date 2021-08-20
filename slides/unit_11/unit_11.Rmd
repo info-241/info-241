@@ -1,6 +1,6 @@
 ---
 title: "w241: Experiments and Causality"
-subtitle: "Causal Inference from Observational Data"
+subtitle: "Problems and Diagnostics"
 author: "David Reiley, David Broockman, D. Alex Hughes"
 institute: "UC Berkeley, School of Information"
 date: "Updated: `r Sys.Date()`"
@@ -20,815 +20,449 @@ library(tidyverse)
 library(ggplot2)
 library(patchwork)
 library(data.table)
-
 berkeley_blue   <- '#003262'
 california_gold <- '#FDB515'
-
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(echo = TRUE, dpi = 300, fig.height = 3)
-
-
 theme_set(theme_minimal())
 ```
 
 class: inverse, center, middle 
-# Introduction to Causal Inference from Observational Data
-
-
----
-class: inverse, center, middle 
-# Natural Experiments
-<!-- There are no slides for this section -->
+# Problems and Diagnostics Introduction
 
 
 
 ---
 class: inverse, center, middle 
-# Instrumental Variables
+# Common Implementation Problems
 
 
 ---
-# A Few Clarifications
-
-- What does "reduced form" mean?
-- We previously talked about regressing treatment $X$ on instrument $Z$, computing the fitted values of $X$, then regressing outcome $Y$ on these fitted values $\hat{X}$
-  - The reduced-form equation **"reduces" these two equations to a single equation**, the regression of $Y$ on $Z$
-- The initials in the example's names correspond to:
-.center[ **A**lvaro   <-->   **A**lways-takers]
-.center[**C**amila   <-->   **C**ompliers]
-.center[**N**ormando <-->   **N**ever-takers]
-- The author's Passover analogy is not entirely clear but may be as follows for four types of children:
-.center[Wise <--> Compliers]
-.center[Wicked <--> Defiers]
-.center[Simple <--> Always-takers]
-.center[Doesn't know how to ask <--> Never-takers]
-- "External validity" is a common term in academic social science, but I prefer the term "generalizability"
+# Review from previous weeks
+## Compliance Problems
+- Incomplete control over treatment delivery
+  - Solutions: Intent to treat or placebo design
+- Accidental delivery to control group
 
 
 ---
-# Example: Vietnam Draft Lottery 
-## and Returns to Schooling
-
-- IV can be used for natural experiments where the treatment is a continuous variable rather than binary
-- Angrist and Krueger (1992) used the Vietnam draft lottery as a natural experiment to assess returns to schooling on earnings
-  - During the Vietnam War, a fraction of young men from every birth year were prioritized for draft via a lottery system based on birth date
-  - Men with lower draft numbers became more likely to enroll in college because an education deferment would allow them to avoid service
-  - Thus, the lottery created a random variation in the number of years of schooling, which created an opportunity to estimate returns to schooling
+# New Implementation Problems
+- Randomization system doesn't work as intended
+- Treatment not delivered or not received
+  - Eg. letters not read or emails not opened
+- Unintended effects of treatment
 
 
 ---
-# Example: Vietnam Draft Lottery (cont'd)
-- We start the IV regression with a person's years of schooling $X$ regressed on instrument $Z$, the order his birth date was pulled in the lottery
-  - Then we regress earnings $Y$ on the predicted values of years of schooling $X$
-  - This tells us how the "clean" variation in number of years of schooling affects earnings
-- This IV regression is much better than simply regressing wages on years of schooling, which is fraught with OVB problems
+# Hawthorne Effect
+## The Effect of change or novelty
+
+#### Social experiment conducted at the Hawthorne factory
+- Effects on worker productivity
+  - Brightness of lights
+  - Temperature in factory
+- Every variable **seemed** to affect productivity
+  - Effects were only **Temporary**
+
+#### Websites
+- Changes to a site cause users to act differently
+- User activity often normalizes after adjusting to change
+  - Eg. Change in purchase flow might cause **temporary** conversion increase
+
 
 ---
-# Potential Problem:
-## Violation of the Exclusion Restriction
+# Demand Effects
+## Subjects who are aware of being studied often give different answers
+- Subjects may give answers they think the researcher wants to hear
+- Treatment can alert subjects to what researchers are looking for
+- Example: Wearing a Barack Obama sticker may change how people respond to the question "Who do you plan on voting for?"
+- Example: study to determine price for new product
+  - Subjects might lie if they feel they can affect the price of the new product
+- Researchers strive to conceal the connection between survey and treatment
 
-- The required assumption is that the random process cannot affect the outcome in any way other than the treatment being examined
-  - This assumption is no problem in many examples such as the KIPP lottery
-- However, serving in Vietnam may affect earnings in ways unrelated to schooling
-  - Eg. PTSD may reduce earnings, which would underestimate returns to schooling
-- In the next example, David Broockman will describe a natural experiment where the exclusion restriction might be violated
+
+---
+# Blind Trials
+**Single-blind Trial**: Subject doesn't know
+
+**Double-blind trial**: Experimenter doesn't know
+
+**Triple-blind trial**: Analyst doesn't know group assignments
+  - Eliminates fishing expedition problem
+  - Biased analysis may cause study to be halted prematurely
+
+
+---
+# Unexpected Implementation Results
+### Abstract concepts may result in missed real-world contexts
+- **Example:** Restorative justice meetings
+  - Attempt at reconciliation between criminals and victims
+  - Criminals didn't show up, further damaging victims
+  - Pilot study could have prevented problem
+- **Example:** Field workers refuse to randomize or think they are helping
+  - Canvassers who knock on every door unintentionally ruin control group
+- **Example:** TiVo's effect on people remembering ads
+  - People wouldn't accept the free TiVo device, treatment group was smaller than expected
+  - Started giving TiVo's to people in control group as well
+  
 
 
 ---
 class: inverse, center, middle 
-# Two-State Least Squares
-<!-- This section has no slides -->
+# Detecting Errors
+
+
+---
+# Detecting Errors: Overview
+**Pilot studies**: Discover unanticipated problems
+
+**Placebo Tests**: No effect desired
+
+**Manipulation checks**: Was treatment successfully delivered? 
 
 
 
 ---
-class: inverse, center, middle 
-# Optional Example:
-## .center[Does Economic Stagnation Cause War?]
+# Pilot Studies
+## Always run a pilot study, no excuses!
 
-
----
-# Does Economic Stagnation Cause War?
-- Can foreign aid prevent civil war?
-- Need randomly assigned economic growth
-  - Rain tends to be associated with economic growth in agricultural areas
-
-###.center[Rain  -> Economic Growth  -> Less Civil War?]
-
-- Compare countries with high rainfall to low
-- "If there's a correlation between rain and civil war, it could only be caused by lower economic growth"
-- Potential policy recommendation: If war looks likely, send money
-- But is economic growth the only way rain could affect civil war?
-  - "No one likes to fight a war when it's muddy"
-  
-###.center[Rain  -> ~~Economic Growth~~ mud  -> Less Civil War]
-
-
-
----
-class: inverse, center, middle 
-# Advantages and Disadvantages of Natural Experiments
-
-
----
-# Advantages of Natural Experiments
-
-- If you are lucky enough to find one, you save the time of running the experiment
-- Estimation is straightforward
-  - IV/2SLS is very similar to OLS
-  - Estimation packages like "ivreg" in R give correct standard errors
-  
-  
----
-#Disadvantages of Natural Experiments
-
-- Administration of randomizing can be difficult
-  - People select, randomization fails, etc.
-  - In an observational natural experiment, you have no control over the design, data collection, execution, block, or attrition
-- You might not find a natural experiment on the topic you care about
-  - Good natural experiments can be as rare as unicorns
-  - We often have to run the experiments ourselves
-  
-  
----
-# Reading Assignment
-### Read *Mastering Metrics*, Section 4.1, pages 147-153
-- Measuring the mortality effects of drinking alcohol
-- Pay particular attention to figure 4.2: How convincing is this as a demonstration of causal effect?
-
-
----
-class: inverse, center, middle 
-# Introduction to Regression Discontinuity
-
-
----
-# Regression Discontinuity 
-## Figure 4.2
-
-```{r echo=FALSE, out.height='50%', out.width='90%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure4_4a.png')
-```
-
-- There is a non-random "running variable": age
-- There is a "threshold": the minimum legal drinking age of 21
-
-
----
-# Regression Discontinuity 
-## Figure 4.2 (cont'd)
-
-```{r echo=FALSE, out.height='50%', out.width='90%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure4_4b.png')
-```
-
-- It seems reasonable to believe that other reasons for mortality are exactly the same for someone who is 20 years, 364 days old, and someone who is exactly 21 years old
-  - If we compare people on either side of the discontinuity, the difference should be due only to the access of alcohol
-  
-  
----
-# Regression Discontinuity
-## Equation 4.2
-
-$$
-  \bar{M}_{a} = \alpha + \rho D_{a} + \gamma a + e_{a}
-$$
-- We regress the outcome (mortality rate) on"
-  - A treatment dummy variable (are you over 21?)
-  - A linear term for age, in years. This allows for a time trend in mortality
-
-```{r echo=FALSE, out.height='50%', out.width='70%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure4_4c.png')
-```
-- Figure 4.2 shows the resulting regression line: downward-sloping, except for a discrete jump on the 21st birthday
-
----
-# Regression Discontinuity
-## Equation 4.2 (cont'd)
-
-- For a "fancy" analysis, we can: 
-  - Use a quadratic regression (rather than linear) **OR**
-  - Allow the regression to change slope right at the discontinuity
-- But these are niceties
-- We care most about the discrete jump in $Y$ at the age discontinuity
-
-
----
-# Reading Assignment
-### Read *Mastering Metrics* page 153 to end of Section 4.1 on page 164
-- See if you can recognize the placebo tests
-
+- Unanticipated reactions
+  - **Example:** Fake emails to state legislators
+  - Intended to study responses based on geographic origin of messages
+  - Spillover between legislators
+- Flawed power calculations
+  - Likelihood of effects of different sizes
+  - Baseline
+  - Response rates
+  - Variance of *y*
+- Training Staff for correct implementation
+- Determining if systems really work
+- New ideas, potential for improvement
 
 
 
 ---
 class: inverse, center, middle 
-# Example:
-## .center[Detailed Analysis of the Effects of the Drinking Age]
-
-
----
-# Equation 4.4
-
-$$\bar{M}_a = \alpha + \rho D_a +   \gamma_1(a-a_0)^2+\delta_1[(a-a_0)D_a]+\delta_2[(a-a_0)^2]D_a + e_{a}$$
-- This "fancy" regression allows the relationship between mortality and age to have: 
-  - A quadratic shape to the left of the 21st birthday
-  - A different quadratic shape to the right 
-
-  
-
----
-# Equation 4.4 Results: Figure 4.4
-
-```{r echo=FALSE, out.height='50%', out.width='90%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure4_4d.png')
-```
-- The solid curved line shows the fancy (quadratic) regression curve
-
-  
----
-# Equation 4.4 Results: Figure 4.4
-
-```{r echo=FALSE, out.height='50%', out.width='90%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure4_4e.png')
-```
-- The solid curved line shows the fancy (quadratic) regression curve
-- The dashed straight line shows the simple regression curve
-  - The slope on the simple curve must be the same on either side of the discontinuity
-  - The fancy curve has a different slope and curvature on each side
-
-
-
----
-# Equation 4.4 Results: Figure 4.4
-
-```{r echo=FALSE, out.height='50%', out.width='90%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure4_4c.png')
-```
-- The solid curved line shows the fancy (quadratic) regression curve
-- The dashed straight line shows the simple regression curve
-  - The slope on the simple curve must be the same on either side of the discontinuity
-  - The fancy curve has a different slope and curvature on each side
-  - This particularly captures the jump in mortality rates right after the 21st birthday
-  - The curve declines over time, but the mortality rate at age 23 is still a little higher than at 20
-
-
----
-# Equation 4.4 Results: Figure 4.4 (cont'd)
-```{r echo=FALSE, out.height='50%', out.width='90%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure4_4.png')
-```
-
-- We don't want to extrapolate too far--the power of an RD is right at the break point
-- Since the trends are gradual, some extrapolation may be okay
-  - Legal access to alcohol appears to produce higher mortality rates, especially at first
-  - Continuing for a couple of years, mortality rates return to baseline
-
-
-
----
-# Placebo Tests: Figure 4.5
-### Table 4.1 and Figure 4.5 show placebo tests
-```{r echo=FALSE, out.height='50%', out.width='90%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure4_5.png')
-```
-
-
----
-# Placebo Tests: Figure 4.5
-### Table 4.1 and Figure 4.5 show placebo tests
-  
-```{r echo=FALSE, out.height='50%', out.width='90%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure4_5a.png')
-```
-- Deaths from disease ("internal causes") show no serious jumps at the discontinuity
-
-
----
-# Placebo Tests: Figure 4.5
-### Table 4.1 and Figure 4.5 show placebo tests
-```{r echo=FALSE, out.height='50%', out.width='90%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure4_5b.png')
-```
-- Deaths from disease ("internal causes") show no serious jumps at the discontinuity
-- Motor vehicle fatalities show a substantial jump
-- This makes us even more confident that the jump we saw in the initial RD is really a causal effect of legal access to alcohol
-  - Deaths associated with alcohol show a big jump
-  - Deaths associated with other causes don't move
-  
-  
----
-# Parametric vs. Nonparametric RD
-
-- **Parametric RD:** We estimate regression lines or curves and have a shift due to the treatment dummy variable
-- **Nonparametric RD:** we avoid assuming some parametric form, in case that might introduce specification error
-  - Instead, we look at the simple change in $Y$ in a narrow window around the threshold
-- **Bandwidth** is the width of this window
-
-
----
-# Parametric vs. Nonparametric RD
-## Table 4.1
-
-```{r echo=FALSE, out.height='25%', out.width='50%', fig.align='center'}
-knitr::include_graphics(path='./figures/table4_1.png')
-```
-
-- In Table 4.1, the results are not very sensitive to the choice of window
-- We see similar estimates when we compare Column 1 (window ages 19-22) to Column 3 (window ages 20-21)
-
-
----
-# Parametric vs. Nonparametric RD
-## Table 4.1 (cont'd)
-
-```{r echo=FALSE, out.width='40%', fig.align='center'}
-knitr::include_graphics(path='./figures/Table4_1.png')
-```
-
-- Trade-off of narrow bandwidth:
-  - Gives a much cleaner RD. We think all other things are equal on both sides of the threshold **BUT**
-  - Cuts down on amount of data, which decreases precision. Notice how Column 3 has larger standard errors than Column 1
-
-
----
-# Policy Question
-- Chapter 4 opened with the policy question **What should the drinking age be?**
-- With RD, we saw that legal access to alcohol has a big causal effect on mortality for 21-year-olds
-- Does that tell us what would happen if we reduced the drinking age to 18?
-  - Maybe, but we have to think about generalizability
-- Earlier we discussed "local average treatment effects". With RD we get a very local ATE
-  - We have learned the effects of alcohol access on mortality for 21-year-olds
-  - We cannot be certain these results would generalize to 18-year-olds
-- Next, David Broockman will discuss a few more examples of RD
-
+# Yoga: Detecting Errors
+<!-- No slides for this section -->
 
 
 
 ---
 class: inverse, center, middle 
-# Example:
-## .center[Effects of Unemployment Insurance]
-
-
----
-# Example of Regression Discontinuity
-- Do unemployment benefits lead people to slack off?
-- Ideal experiment: randomly assign some countries or persons to strict unemployment regimes
-- Find "naturally occurring" coin flip situations
-- "Discontinuity" in Austria
-  - People over 50 eligible for unemployment benefits
-  - People under 50 not eligible
-  - Does the age threshold affect worker productivity?
-
-
----
-# Example of Regression Discontinuity
-```{r echo=FALSE, out.width='80%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure11_9.png')
-```
-- Simply comparing young vs. old could lead to false conclusion that being old causes differences in unemployment duration
+# Review: Detecting Errors
+<!-- No slides for this section -->
 
 ---
 class: inverse, center, middle 
-# Example: 
-## .center[Does Getting Elected Make You Rich?]
-
----
-# Does Getting Elected Make You Rich?
-- Ideal experiment: randomly assign person to be elected and measure their wealth when they die
-- Eggers and Hainmueller
-  - Examined wealth at death of British MPs who won or lost by narrow margins
-
-
----
-# Does Getting Elected Make You Rich?
-```{r echo=FALSE, out.width='75%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure11_10.png')
-```
-
-*Note: the y-axis on this graph is a logarithmic scale, so MPs who won essentially have double the wealth*
----
-# Does Getting Elected Make You Rich?
-- Ideal experiment: randomly assign person to be elected and measure their wealth when they die
-- Eggers and Hainmueller
-  - Examined wealth at death of British MPs who won or lost by narrow margins
-- Interpretation issue: Are results simply due to MPs moving to London?
+# Placebo Tests
 
 
 
 ---
-class: inverse, center, middle 
-# Strengths and Weaknesses of Regression Discontinuity Designs
+# Placebo Tests
+#### If experiment/experimentation system works, there should be **no difference** in a variable
+
+- Difference in variable suggests a problem with the sytsem
+- **A/A test:** Tests a treatment against itself to detect any difference in outcome
+- **Traditional placebo test:** Checks other outcomes that treatment shouldn't affect
 
 
 ---
-# Common Issues With
-## .center[Regression Discontinuity Designs]
+# A/A Placebo Test
 
-### "Sorting" at cut point
+### Example: Website optimizer code
+In-house system randomly directed to page A or B when page A loaded
+- Control: page A loaded
+- Treatment: User redirected to page B
+- Measured outcome: purchases on page
+- Issues:
+  - Load time was longer for treatment group
+  - Treatment code didn't run on all web browsers. Some users directed to treatment page, but when it didn't load their purchase assigned to control group
+  - Unrealized manipulations, Eg. delay loading web page
+  - *Page A consistently bested B despite being identical* 
+  - Redirect delay and issues made the treatment perform better, not the content
 
-####Ex ante: before the event
-- People are aware of the threshold and can try to get above it
-- Eg. Latin honors
-  - Effect of honors on success in labor market
-  - Awareness of threshold results in better students just above cutoff
+
+---
+# Placebo Test
+
+- Great tool for questioning observational studies
+  - To prove bias, look for differences that shouldn't exist if assumption is right
+- **Example:** Krueger (1993)
+- Research question: Does using computers cause people to earn more?
+- Workers who use computers earn 15-20% more
+- Ideal experiment: Computers increase productivity, warranting higher wages
+- DiNardo and Pischke saw potential bias
+  - Found workers who use pencils, pens, and phones also earn more
+  - Workers who use screwdrivers earn less
+  - Wages depend on *types of jobs that use these tools*, not the tools themselves
+
+
+---
+# Another Placebo Test Example
+#### Gerber and Green Placebo Treatment: blood drive non-compliance
+- Can't compare compliers to everyone in control group
+- Compliers tend to be systematically different
+- Compare entire treatment group to entire control group OR treatment compliers to control compliers
+
+
+---
+# Social Influence Example
+
+### Do people influence their friends?
+- Many studies ask for a person's weight and weight of friend
+- Social network models find that being fatter causes friends to get fatter (causal claim)
+  - Likely **not** causal relationship
+- What can be controlled for?
+- Repeat same procedure where there cannot be a causal affect
+  - Same model finds being tall causes friends to get taller, even though this is impossible
+  - Social network models struggle to recover causal effects
   
-#### Ex post: after the event
-- Eg. Elections of Black mayors in the 1970s
-- Black candidates disproportionately lost by slim margins
-- Manipulations make analysis difficult
-
----
-# Tests for Sorting
-- **Covariate balance** on either side of cut point
-  - Does covariate balance hold up based on early measurements?
-- **Smoothness (McCrary test)**
-  - Eg. effects of minimum-wage laws on unemployment
-  - Comparison between states based on margin of vote passing
-  
----
-#Tests for Sorting
-```{r echo=FALSE, out.width='90%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure11_11.png')
-```
-
----
-# Tests for Sorting
-- **Covariate balance** on either side of cut point
-  - Does covariate balance hold up based on early measurements?
-- **Smoothness (McCrary test)**
-  - Eg. effects of minimum-wage laws on unemployment
-  - Comparison between states based on margin of vote passing
-- Can't directly compare bills due to differences in kinds of bills that just pass and just fail
-- Check for proportion of observations in running variable
-  - Eg. fraction of yes votes vs treatment variable
-- Passage of regression discontinuity check doesn't guarantee assumptions hold
-- Check for lack of covariate balance, lack of smoothness
+#### Placebo tests can find differences where, if your procedure works correctly, there should be no difference
 
 
 
 ---
 class: inverse, center, middle 
-# Yoga: 
-## .center[Conducting Regression Discontinuity Analysis]
-<!-- There are no slides for this section -->
+# Manipulation Checks and Covariate Balance
+
+
+---
+# Manipulation Checks
+
+- In placebo tests we wanted to find no difference. If we did, there might be an issue with our experiment
+- Manipulation checks are the opposite
+- If experiment worked, there **should** be differences in this variable
+- **Example:** Broockman and Bulter (2014) 
+  - Treatment: Send letters from legislators
+  - Control group: received no letters
+  - Did constituents receive letters? Did they learn their legislator's positions?
+  - Asked people if they recalled recently receiving a letter from legislator
+  - People in treatment group more likely to report having received letter, understand legilator's position
+  - Can't use this information in estimation
+
+
+---
+# Manipulation Checks (Cont'd)
+- **Example:** Sending postcards to voters causes 10% increase in understanding candidate's position
+  - Can't use information in same way as one-sided non-compliance
+  - Sanity check, making sure treatment had expected effect
+- Particularly important for proving null effect
+  - Otherwise it may be believed that your treatment simply wasn't received
+- Returning to Broockman and Butler example
+  - If no effect, skeptics may believe letters not opened
+  - Information not assigned directly to people, it is assigned to their mailbox. 
+  
+  
+---
+# Covariate Balance Checks
+
+- Check for problems in implementation of experiments
+- Experiments guarantee balance in observable and unobservable characteristics
+- Check balance on observable covariates to ensure random assignment was done correctly 
+- Example of balance not holding: users in treatment group are more active internet users
+  - Might give impression of not conducting clean random assignment
+- Especially important when randomization scheme is complex
+  - Blocking, clustering, different probabilities
+  - Complex systems between researchers and subjects
+- See regression unit for more on this
+
+
+---
+# Example of Failing Covariate Balance
+
+- **Example:** Lewis and Reiley's first dataset
+- Strange patterns: negative treatment effect
+- Large imbalance on pretreatment sales
+  - Control group bought more in preperiod than treatment group
+  - Reason: vendor truncated data by number of sales
+  - Treatment group sales data lost
+- This is an example of a problem that would never be expected, but there are all kinds of small things like this that could go wrong
+- Really important to check covariable balance as a sanity check
+
+
+---
+# Summary
+###1. Conduct a pilot study
+###2. Manipulation check to measure delivery of treatment
+###3. Placebo test
+###4. Check for covariate balance
+
 
 
 ---
 class: inverse, center, middle 
-# Difference in Differences
+# Advocating Experimentation
 
 
 ---
-# Reading Assignment
-- The third observational technique we will consider is called **difference in differences (DID)**
-- This technique is used when a natural experiment takes place over time, in a before-after setting, and when we don't have a randomized control group
-- Instead, we have a group that is similar to the treated group but not guaranteed to be identical
-
-### Read *Mastering Metrics*, Section 5.1, page 178 through the top of page 187
-
-**Note:** Lecturer meant to say *"...section 5.1"*
+# Advocating Experimentation
+### 1. Increase perceived benefits
+### 2. Decrease perceived costs
 
 
 ---
-class: inverse, middle, center
-# Example:
-## .center[Difference in Differences]
-## .center[Mississippi Credit Bank]
+# Increase Perceived Benefits
+### Stimulate curiosity
+- Intellectual interest
+- Get people excited
 
----
-# Difference in Differences
-## Effects of Federal Reserve Lending Policy to Mississippi Banks
-- It is difficult to do a field experiment on monitary policy
-- Instead we look for a natural experiment
-  - In 1930, the Federal Reserve Bank of Atlanta (6th District) chose to provide much more credit to troubled banks than did the St. Lous Fed (8th District)
-  - The state of Mississippi was divided almost equally between the two districts
-
----
-# Difference in Differences
-## Effects of Federal Reserve Lending Policy to Mississippi Banks (cont'd)
-- The banks are not randomized, so a simple difference can be misleading
-  - In 1931, 11 fewer banks were open in the 6th District than the 8th
-  - We might be tempted to conclude that easy lending caused more banks to close
-  - BUT before the crisis, 30 fewer banks were open in the 6th District
-- We must account for this baseline difference
-- This is what DID does by subtracting the before-after difference in the treatment group from the before-after difference in the psuedo-control group
+### Vivid examples of current data leading to bad decisions
+- Conduct placebo test and show practices failing
+- Present potential conclusions experiment could produce and ways this could chance practices
+- Tell story of why causal inference from observational data might be wrong
+  - Eg. Playing outside improves children's eyesight
+  - How did people receive treatment?
+  - What's different about those people? What are the reasons?
 
 
 ---
-# Figure 5.3: DID Strategy Illustration
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure5_3.png')
-```
-- To get a valid causal difference with DID, we need to satisfy the **"common trends"** (or "parallel trends" assumption
+# Increase Perceived Benefits (cont'd)
 
+### "Investment in information for future decisions"
+- Eg. Firm worries that holding back advertising for sake of experimenting will cost them money
+- Short-term costs pay off in future
+- Down payment
 
+### Build rapport
+- Personal connections lead to willingness to run experiments
 
----
-# Figure 5.3: DID Strategy Illustration
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure5_3a.png')
-```
-- Figure 5.3 shows that this assumption is reasonable
-- The hypothesized policy difference occurs in 1930
-
-
----
-# Figure 5.3: DID Strategy Illustration
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure5_3b.png')
-```
-- In other years the two lines (number of banks open) move in parallel
+### Do small studies as proofs of concept
+- Example: Broockman and Butler (2014)
+  - One congressman signing on for small study led to results that garnered interest for larger study
+- Helps secure greater cooperation
 
 
 ---
-# Figure 5.3: DID Strategy Illustration
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure5_3c.png')
-```
-- The dashed line shows the counterfactual number of banks that would have been open in the 6th District if the Atlanta Fed had not pursued an easy lending policy in 1930
+# Decrease Perceived Costs
 
+### Administration, unfairness, giving up potential gains from treatment (eg. ads)
 
----
-# Figure 5.3: DID Strategy Illustration
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure5_3d.png')
-```
-- The difference between the 6th District actual and hypothetical curves shows the estimated causal effect of the 6th District's lending policy
-
-
----
-# Reading Assignment
-### Read the rest of *Mastering Metrics* Section 5.1, pages 187-191
-- This section discusses how to implement a DID strategy using regression
-- The technique will look familiar if you remember the material on using regression to analyze heterogeneous treatment effects
-
-
-
----
-class: inverse, middle, center
-# Difference in Difference Regressions
-
-
----
-# DID Regressions
-
-$Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}$
-- If we have more than two time periods or more than two comparison groups available, we can implement DID via a regression
-
-- **TREAT** is a dummy variable equal to one in the treatment group (the 6th district in this example
-  - The coefficient of -29 means that in the pretreatment baseline period there were 29 fewer banks open in the 6th District than in the 8th
-
-
----
-# DID Regressions (cont'd)
-
-$Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}$
-
-- **POST** is a dummy variable
-  - POST = 0 prior to treatment
-  - POST = 1 during the treatment time period
-  - The coefficient of -49 means there was a downward trend in banks open before and after 1930 (49 fewer banks on average during the post-period than in the pre-period in the 8th District)
-
-
----
-# DID Regressions (cont'd)
-
-$Y_{dt}=167-29TREAT_d-49POST_t +20.5(TREAT_d *POST_t)+e_{dt}$
-
-- The coefficient of 20.5 on the interaction term is the estimated causal effect of easy lending policy to troubled banks
-  - Eg. the difference in the post-period vs the pre-period in the treatment group, relative to the difference in the comparison group
-- Next, David Broockman will share some additional examples of DID
-
-
-
----
-class: inverse, middle, center
-# Yoga: 
-## .center[Difference-in-Difference Regressions]
-<!-- There are no slides for this section -->
-
-
-
----
-class: inverse, middle, center
-# Yoga: 
-## .center[Coding the DID for Mississippi Banks]
-<!-- There are no slides for this section -->
-
-
-
-
----
-class: inverse, middle, center
-# Yoga: 
-## .center[ Difference-in-Difference Regressions]
-<!-- There are no slides for this section -->
-
-
-
----
-class: inverse, middle, center
-# Difference in Differences:
-## .center[Does Media Affect Politics?]
-
-
----
-# DID Example
-## Ladd and Lenz (2009)
-- Does the media affect politial outcomes, specifically newspaper endorsements?
-- Ideal experiment: Randomly assign newspapers to endorse a candidate
-- People often read newspapers that reinforce their views
-  - Do readers' views change if newspaper switches endorsement?
-- Data on voters' decision to vote for Labour Party in 1992 and 1997
-  - Which newspapers voters read
-  - Some newspapers switched endorsement to Labour Party
+### Delay for some units
+- Randomize order of mailings
+- Campaign contributions
+  - Spread out donations to allow experimentation
   
+### Limited resources
+- Example: Charity gives 5,000 bed nets to people in Africa
+  - Witholding bed nets seems morally questionable
+  - Expanding population creates control group without witholding bed nets
   
-  
-  
+### Experimentation as investment in information
+
+
+
 ---
-# DID Example: Ladd and Lenz (2009)
-```{r echo=FALSE, out.width='80%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure11_19.png')
+class: inverse, center, middle 
+# The Long View
+
+
+---
+# Building Knowledge Over Time
+- Try pilot studies
+- System should produce covariate balance
+- Parameters should look as expected
+  - Eg. 80/20 treatment/control split
+  - Example: Internet explorer skewed data
+- Understand parameters for power analysis
+- When creating a system, studies should be useful
+
+
+---
+# Pooling Results
+```{r echo=FALSE, out.width= '90%', out.height='100%', fig.align='center'}
+knitr::include_graphics(path='./figures/Fig_1.png')
 ```
 ---
-# DID Example: Ladd and Lenz (2009)
-```{r echo=FALSE, out.width='80%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure11_19a.png')
+# Pooling Results
+```{r echo=FALSE, out.width= '90%', out.height='100%', fig.align='center'}
+knitr::include_graphics(path='./figures/Fig_1a.png')
 ```
 ---
-# DID Example: Ladd and Lenz (2009)
-```{r echo=FALSE, out.width='80%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure11_19b.png')
+# Pooling Results
+```{r echo=FALSE, out.width= '90%', out.height='100%', fig.align='center'}
+knitr::include_graphics(path='./figures/Fig_1b.png')
 ```
 ---
-# DID Example: Ladd and Lenz (2009)
-```{r echo=FALSE, out.width='80%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure11_19c.png')
+# Pooling Results
+```{r echo=FALSE, out.width= '90%', out.height='100%', fig.align='center'}
+knitr::include_graphics(path='./figures/Fig_1c.png')
 ```
 ---
-# DID Example: Ladd and Lenz (2009)
-```{r echo=FALSE, out.width='80%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure11_19d.png')
+# Pooling Results
+```{r echo=FALSE, out.width= '90%', out.height='100%', fig.align='center'}
+knitr::include_graphics(path='./figures/Fig_1d.png')
 ```
 ---
-# DID Example: Ladd and Lenz (2009)
-```{r echo=FALSE, out.width='80%', fig.align='center'}
-knitr::include_graphics(path='./figures/figure11_19.png')
+# Pooling Results
+```{r echo=FALSE, out.width= '90%', out.height='100%', fig.align='center'}
+knitr::include_graphics(path='./figures/Fig_1e.png')
+```
+---
+# Pooling Results
+```{r echo=FALSE, out.width= '90%', out.height='100%', fig.align='center'}
+knitr::include_graphics(path='./figures/Fig_1f.png')
 ```
 
 
+<!-- #################################################### -->
+<!-- BELOW IS THE CODE THAT SHOULD DISPLAY FIGURES IN PDF -->
+<!-- #################################################### -->
+
+<!-- --- -->
+<!-- # Pooling Results -->
+<!-- ![](./figures/Fig_1.png) -->
+
+<!-- --- -->
+<!-- # Pooling Results -->
+
+<!-- ![](./figures/Fig_1a.png) -->
+
+<!-- --- -->
+<!-- # Pooling Results -->
+<!-- ![](./figures/Fig_1b.png) -->
+
+<!-- --- -->
+<!-- # Pooling Results -->
+<!-- ![](./figures/Fig_1c.png) -->
+
+<!-- --- -->
+<!-- # Pooling Results -->
+<!-- ![](./figures/Fig_1d.png) -->
+
+<!-- --- -->
+<!-- # Pooling Results -->
+<!-- ![](./figures/Fig_1e.png) -->
+
+<!-- --- -->
+<!-- # Pooling Results -->
+<!-- ![](./figures/Fig_1f.png) -->
+
+
+---
+# Pooling Results
+
+- Precision-weighted average:
+
+$$\frac{1}{StandardError^2}$$
+
+- Double the standard error gets $1/4$ the weight
+- 1/4 sample size means $1/4$ the information
+- If variance is the same, weight by number of subjects
+- Standard error used to represent adjustment of overall view of treatment
+- Meta-analysis summarizes data
 
 
 
 ---
-# DID Example: Ladd and Lenz (2009)
-- Does the media affect politial outcomes, specifically newspaper endorsements?
-- Ideal experiment: Randomly assign newspapers to endorse a candidate
-- People often read newspapers that reinforce their views
-  - Do readers' views change if newspaper switches endorsement?
-- Data on voters' decision to vote for Labour Party in 1992 and 1997
-  - Which newspapers voters read
-  - Some newspapers switched endorsement to Labour Party
-- Key assumption: nothing changing over time that leads to treatment and outcome
-  - Consider other reasons for results
-  
-
----
-# Potential Problems with Ladd and Lenz
-- Big housing crisis in 1997 
-- People voted for Labour due to frustrations with incumbents
-- People with homes were:
-  - More upset over housing crisis
-  - More likely to get newspapers
-  - More likely to receive treatment and vote based on housing crisis
-- Ladd and Lenz checked on this using a placebo test
-  - DID when treatment didn't change, readers of other papers
-  - No effect seen among readers of other papers, only papers which switched their endorsement
+class: inverse, center, middle 
+# Yoga: Combining or Separating
+<!-- No slides for this section -->
 
 
 ---
-class: inverse, middle, center
-# Difference in Differences:
-## .center[Does Price Advertising Change Prices?]
+class: inverse, center, middle 
+# Review: Combining or Separating
+<!-- No slides for this section -->
 
-
----
-# DID Example: Advertising and Prices
-
-- Rhode Island (RI) banned advertising prices of alcohol
-  - Will firms offer less competetive pricing as a result?
-- Could compare RI alcohol prices to those in Connecticut and Massachusetts (MA)
-  - Other conditions between states might differ
-- RI ended advertising ban
-  - Can't simply do a before/after analysis
-  - Price change could reflect other factors
-- Compare changes in RI over time to changes in MA over time
-  - Prices increased 2% in Rhode Island
-  - Likely due to inflation
-- Milyo and Waldfogel (1999) collected data on liquor prices in RI and MA before and after ban
-  - Had foresight to collect data when Supreme Court agreed to hear case on advertising ban
-  - Found prices of newly advertised products in RI **decreased** relative to same goods in MA
-  - Prices didn't drop for product that were never advertised
-  - Prices dropped only for newly advertised products
-
-
-
----
-# Review of Difference-in-Differences
-
-- Did heps counteract selection efforts
-- Can't always directly compare two entities
-- Before/after effects can be misleading
-
-
-
----
-class: inverse, middle, center
-# Difference in Differences:
-## .center[Home Prices and Incinerator Location]
-
----
-# DID Example: Home Prices
-
-- How much do property values drop as a result of having an incinerator nearby?
-- Can't simply look at home prices in relation to distance from incinerator
-  - Why some places have incinerators while others don't?
-  - Ideal experiment: randomly assign location of incinerators
-  - Incinerators tend to be built in bad neighborhoods where property values are lower to begin with
-  - Unobserved heterogeneity (Eg. bad construction or recently built development)
-
-
----
-# Kiel and McClain (1995)
-- DID approach
-- Collected data in two time periods:
-  - Before incinerator announced
-  - After incinerator built
-- Compared data in North Andover to other locations
-- Found home prices near incinerator increase about 5% less but not significantly significant
-  - Other characteristics matter more
-  - Extra bathroom: +13% +/- 5%
-  - Average prices over time (before/after): +14% +/- 6%
-
----
-# DID Example: Home Prices
-## Importance of the DID Approach
-
-- Home prices near incinerator could have had lower baseline resulting from pre-existing differences
-- DID protects from false conclusions drawn from simple before/after approach
-- Vulnerabilities still exist
-  - Eg. demographic changes could lead to incinertor being built in the first place
-
-
-
----
-class: inverse, middle, center
-# Strengths and Weaknesses of DID
-
-
----
-# Strengths of DID
-- DID is a simple tool: we computer differences directly or do OLS regression with clustered standard errors
-- If we have covariates that might predict differences in $Y$, we can include them to try to improve precision
-- Causal effects are much stronger and more believable than with simple before/after differences or simple differences across non-randomized comparison groups
-
-
----
-# Weaknesses of DID
-- Causal inference hinges on the assignment mechanism
-- The common trends (parallel trends) assumption is a strong assumption.
-- An example where it fails: observational online-advertising
-  - People may be gone on vacation
-  - People may see simultaneous newspaper advertising campaigns
-  
-  
-  
----
-class: inverse, middle, center
-# Synthetic Controls as Generalized Difference in Differences
-<!-- There are no slides for this section -->
-
-
----
-class: inverse, middle, center
-# Yoga: 
-## .center[Coding California Smoking with Synthetic Controls #1]
-<!-- There are no slides for this section -->
-
-
-
-
----
-class: inverse, middle, center
-# Yoga: 
-## .center[Coding California Smoking with Synthetic Controls #2]
-<!-- There are no slides for this section -->
-
-
----
-class: inverse, middle, center
-# Concluding Thoughts
-<!-- There are no slides for this section -->
