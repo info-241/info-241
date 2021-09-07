@@ -14,10 +14,10 @@
 class: center, middle, inverse, title-slide
 
 # w241: Experiments and Causality
-## Unit 4
+## Blocking and Clustering
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-05-25
+### Updated: 2021-09-07
 
 ---
 
@@ -65,8 +65,8 @@ d[ , assignment := randomize(size=40)][ ,
 ```
 ##        Assignment
 ## Sex     Control Treatment
-##   Man        12         8
-##   Woman       8        12
+##   Man        10        10
+##   Woman      10        10
 ```
 
 ```r
@@ -77,8 +77,8 @@ d[ , assignment := randomize(size=40)][ ,
 ```
 ##        Assignment
 ## Sex     Control Treatment
-##   Man        10        10
-##   Woman      10        10
+##   Man         7        13
+##   Woman      13         7
 ```
 
 ---
@@ -155,9 +155,9 @@ head(d)
 
 ```
 ##    Control Treatment group assignment block_assignment Y
-## 1:       1         1   Man  Treatment        Treatment 1
-## 2:       2         2   Man  Treatment          Control 2
-## 3:       3         3   Man    Control        Treatment 3
+## 1:       1         1   Man  Treatment          Control 1
+## 2:       2         2   Man  Treatment        Treatment 2
+## 3:       3         3   Man  Treatment        Treatment 3
 ## 4:       4         4   Man  Treatment          Control 4
 ## 5:       5         5   Man    Control        Treatment 5
 ## 6:       6         6   Man    Control          Control 6
@@ -191,8 +191,8 @@ ate
 ```
 
 ```
-##    tg_mean cg_mean ate
-## 1:   35.95   35.05 0.9
+##    tg_mean cg_mean  ate
+## 1:    34.7    36.3 -1.6
 ```
 
 ---
@@ -233,10 +233,10 @@ normal_study
 
 ```
 ## $ate
-## [1] -5.3
+## [1] 5.4
 ## 
 ## $women_in_treatment
-## [1] 9
+## [1] 11
 ```
 
 ---
@@ -253,13 +253,13 @@ head(many_normal_studies)
 ```
 
 ```
-##      ate  women_in_treatment
-## [1,] 1.8  10                
-## [2,] 0.6  10                
-## [3,] 4.3  11                
-## [4,] -6   9                 
-## [5,] -9.8 8                 
-## [6,] 2.7  10
+##      ate   women_in_treatment
+## [1,] 7.3   12                
+## [2,] 5.6   11                
+## [3,] -2.2  10                
+## [4,] -0.4  10                
+## [5,] -15.6 7                 
+## [6,] -5.4  9
 ```
 
 
@@ -267,12 +267,13 @@ head(many_normal_studies)
 ---
 # Plot Normal ATE 
 
-
-```
-## Warning: Removed 1 rows containing missing values (geom_point).
-```
-
 &lt;img src="unit_04_files/figure-html/unnamed-chunk-8-1.svg" style="display: block; margin: auto;" /&gt;
+
+--- 
+
+class: inverse, center, middle
+
+# Benefits of Blocking
 
 ---
 # Simulate a Block Randomized Study 
@@ -311,7 +312,7 @@ blocked_study
 
 ```
 ## $ate
-## [1] -1.4
+## [1] 3.1
 ## 
 ## $women_in_treatment
 ## [1] 10
@@ -333,24 +334,184 @@ head(many_blocked_studies)
 
 ```
 ##      ate  women_in_treatment
-## [1,] 0.6  10                
-## [2,] -1.2 10                
-## [3,] -2.3 10                
-## [4,] 1.4  10                
-## [5,] 1.1  10                
-## [6,] 1.7  10
+## [1,] -0.8 10                
+## [2,] -2.5 10                
+## [3,] 1.6  10                
+## [4,] 3    10                
+## [5,] -1.5 10                
+## [6,] 0.4  10
 ```
 
 
 
 ---
-# Plot Blocked ATE
+# Plot Blocked and Unblocked ATE
 
 &lt;img src="unit_04_files/figure-html/unnamed-chunk-13-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
 # Plot Unblocked and Blocked
+
 &lt;img src="unit_04_files/figure-html/unnamed-chunk-14-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# P-values of Blocked vs. Normal Study 
+
+- Blocking allows for more precision (efficiency) by not conducting randomizations where covaraites (e.g. sex) are very imbalanced
+
+
+```r
+# Normal Study
+mean(abs(many_normal_studies[,1] &gt; 10))
+```
+
+```
+## [1] 0.103
+```
+
+
+```r
+mean(abs(many_blocked_studies[,1] &gt; 10))
+```
+
+```
+## [1] 0
+```
+
+---
+
+# Preview: Regression 
+
+
+```r
+d &lt;- make_data(effect_size = 10)
+d[ , assignment := randomize()]
+d[ , Y := conduct_experiment(Control, Treatment, assignment)]
+
+model_simple &lt;- d[ , lm(Y ~ assignment)]
+model_mf     &lt;- d[ , lm(Y ~ assignment + group)]
+```
+
+---
+
+# Preview: Regression, Cont'd 
+
+
+```
+## 
+## ====================================================
+##                           Dependent variable:       
+##                    ---------------------------------
+##                                    Y                
+##                       Unblocked         Blocked     
+##                          (1)              (2)       
+## ----------------------------------------------------
+## Assigned Treatment      11.200           6.162      
+##                    (-5.110, 27.510)  (2.638, 9.686) 
+##                       p = 0.187       p = 0.002***  
+##                                                     
+## Group: Woman                             50.384     
+##                                     (46.860, 53.908)
+##                                       p = 0.000***  
+##                                                     
+## Intercept               34.900           12.227     
+##                    (23.367, 46.433) (9.284, 15.170) 
+##                     p = 0.00000***    p = 0.000***  
+##                                                     
+## ----------------------------------------------------
+## Observations              40               40       
+## R2                      0.045            0.957      
+## Adjusted R2             0.020            0.955      
+## ====================================================
+## Note:                    *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01
+```
+
+---
+
+# Summary of Blocking
+
+## Blocking
+
+- Reduces the probability that a large Treatment vs. Control difference can occur by change by balancing the presence of similar units across Treatment and Control
+- Can dramatically reduce the **standard error** of the estimator (i.e. the standard deviation of the sampling distribution)
+- Is successful if the blocks predict the outcome
+- Is unsuccessful if the blocks do **not** predict the outcome
+
+## Power 
+- Is affected by (a) sample size; and, (b) ratio of treatment effect to uncertainty about the estimate of treatment effect
+- The standard deviation of the outcome is often much smaller within groups that are measurable before conducting the experiment
+
+---
+
+class: inverse, center, middle
+
+# Clustering 
+
+---
+
+# Overview of Clustering 
+
+## Clustering
+
+- Often, units can be observed individually, but must be assigned to the same condition
+- If there is covariance between group membership and outcomes (often there is) then this experiment does not do *as good a job* at breaking the relationship between treatment assignment and potential outcomes
+- Alternatively, you might think of this experiment as producing less *information* about the treatment effect relative to the background noise of the world
+
+---
+
+# Examples of Clustering 
+
+## School Length
+- Cannot randomly assign *at the student level* the length of the school day
+- Instead, every student at the same school (or district, or state) has to receive the same length
+
+## Broadcast TV Advertisements 
+- In broadcast TV, it is not possible to assign advertisements (e.g. for [Babbitt's Sports](https://youtu.be/uguewe3uvo4) to specific individuals
+- Instead, whole markets receive the same ads
+
+## Retail Stores and Prices 
+- [Retail stores](https://frontierruckus.bandcamp.com/album/deadmalls-and-nightfalls-2) cannot individually assign price discounts to shoppers
+- However, prices can be manipulated at the store-level and purchases observed at the individual-level
+
+---
+
+# Reading Assignment 
+
+- Please read *Field Experiments* pages 80-85. 
+
+---
+
+class: inverse, center, middle 
+
+# Clustering Example 
+
+---
+
+# Setting up Data 
+
+## Cluster: The level or unit where treatment is assigned 
+- Notice that outcomes can be observed at more fine-grained levels
+- There may be difference in *cluster-average* outcomes: 
+  - A teacher stubs their toe on the way to school 
+  - It is hot or cold in one classroom
+
+
+```r
+classrooms_number &lt;- 8
+students_number   &lt;- 16 # this is MIDS, not kindergarden
+
+classroom_ids &lt;- rep(x = 1:8, each = 16)
+classroom_ids
+```
+
+```
+##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3
+##  [38] 3 3 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 5 5
+##  [75] 5 5 5 5 5 5 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7
+## [112] 7 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8
+```
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
