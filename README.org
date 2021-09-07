@@ -77,10 +77,10 @@ We use two books in this course, and read a third book in the second week. We re
 
 | *Day*               |      *Time* | *Instructor* |
 |---------------------+-------------+--------------|
-| Monday              |   3:00-4:00 | Alex        |
-| Monday              |   5:30-6:30 | David          |
+| Monday              |   3:00-4:00 | Alex         |
+| Monday              |   5:30-6:30 | David        |
 | Tuesday             |   5:30-6:30 | Scott        |
-| Wednesday           |   5:30-6:30 | Alex        |
+| Wednesday           |   5:30-6:30 | Alex         |
 | Thursday            |   3:00-4:00 | Scott        |
 | Thursday            |   5:30-6:30 | David        |
 | (Friday before PS)  |   4:00-5:00 | Alex         |
