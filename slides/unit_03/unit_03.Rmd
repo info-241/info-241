@@ -234,6 +234,13 @@ class: inverse, center, middle
 - We’ll see where it comes from visually.
 
 ---
+# Average Size of the Difference 
+
+### Because this demonstration is based on a stochastic simulation, the *specific* values that are in the slides might not match what we're narrating aloud. 
+
+### What we're reading aloud are the results for the trial that we conducted. 
+
+---
 
 # Average Size of the Difference
 
@@ -259,7 +266,8 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned_three)[['ate']]
 - Similar to re-sampling from a population.
 - Re-randomizing from within the original population. Testing the null hypothesis from within the sample we already have.
 - Re-shuffle the 40 people between treatment and control. Assuming the treatment effect for everyone is zero. 
-- **Sharp null hypothesis**: For every unit, there is no effect.
+## Sharp null hypothesis: For every unit, there is no effect.
+
 - Repeat this process to generate a synthetic distribution of effects if the sharp null hypothesis *were true*. 
 
 - Randomly sample the vector of assignments 5,000 times to generate an unbiased sample of all the effects.
@@ -279,6 +287,10 @@ sharp_null <- replicate(
 )
 ```
 
+```{r, echo = FALSE}
+experimental_ate <- 1.3
+```
+
 ---
 
 ```{r sharp null distribution, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'} 
@@ -292,6 +304,22 @@ ggplot() +
     y = "Count"
   )
 ```
+
+---
+
+```{r sharp null distribution with abline, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'} 
+ggplot() + 
+  aes(x = sharp_null) + 
+  geom_histogram() + 
+  geom_vline(xintercept = experimental_ate, color = 'darkorange') + 
+  labs(
+    title = "Distribution of Treatment Effects Under Sharp Null", 
+    subtitle = "Distribution is Centered at Zero, And Symmetric", 
+    x = "Estimated Average Treatment Effect", 
+    y = "Count"
+  )
+```
+
 
 ---
 
@@ -311,9 +339,6 @@ In this particular case,
 
 ```{r estimate p-value}
 experimental_randomization <- randomize(units_per_group = 20)
-experimental_ate <- estimate_ate(
-  y_values = outcomes, 
-  treatment = experimental_randomization)[['ate']]
 
 sharp_null <- replicate(
   n = 5000, 
@@ -389,11 +414,13 @@ treatment_assigned <- randomize(units_per_group = 20)
 
 outcomes <- po_treatment * I(treatment_assigned == "Treatment") + 
   po_control * I(treatment_assigned == "Control")
+outcomes
 
 experimental_ate_big_effect <- estimate_ate(
   y_values = outcomes, 
   treatment = treatment_assigned
   )[['ate']]
+experimental_ate_big_effect
 ```
 
 ---
@@ -625,3 +652,36 @@ d %>%
 $$
   \text{test statistic} = \frac{\hat{\tau}}{SE(\hat{\tau})} =  \frac{\hat{\tau}}{\left(\frac{\sigma_{\hat{\tau}}}{\sqrt{N}}\right)}
 $$
+
+---
+
+class: inverse, center, middle
+# Recap of the Week 
+
+---
+
+# Recap of the Week, Part I 
+
+## Sampling Distribution 
+
+- A **sharp null sampling distribution** is a distribution of estimates that we would receive by chance if there really were *no effect*
+  - The "sharp null distribution" then simulates the range of outcomes our experiment and estimate system can produce, even when there is *no effect* 
+  - The proportion of these simulations that are *more-extreme* than the treatment effect observed in the experiment is the **randomization inference p-value**. 
+  
+---
+
+# Recap of the Week, Part II
+  
+## P-Values 
+
+- **P-values** provide a statement about $P(\text{data} | \text{sharp-null is true})$. 
+- What we would *ideally* like to know is $P(\text{alternative is true} | \text{data})$, but this isn't provided by randomization inference, or Frequentest inference. 
+
+---
+
+# Recap of the Week, Part III
+
+## Statistical Power 
+
+- Simply increasing sample size of an experiment can improve **statistical power** which is the *the probability that a test will reject the sharp-null hypothesis when the sharp null is* actually *true*. 
+- Careful design can also improve statistical power. 
