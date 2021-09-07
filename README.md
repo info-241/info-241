@@ -196,7 +196,10 @@ If you are looking to work on something over the break between semesters, we rec
 
 There are several options for how to build a compute environment for this course.
 
--   If you do not want to re-sync content, or manage the syncing yourself (via a shell) you can navigate to the Datahub directly: You can get to it [here](http://datahub.berkeley.edu/hub/user-redirect/git-pull?repo=https://github.com/UCB-MIDS/w241&branch=master&urlpath=rstudio).
+-   If you do not want to re-sync content, or manage the syncing yourself (via a shell) you can navigate to the Datahub directly: You can get to it [[<http://ischool.datahub.berkeley.edu/>
+
+][here]].
+
 -   This is a minimal instance &#x2013; you&rsquo;re capped at 1GB memory, but it is a really nice way to work on async coding without having to start any machinery of your own. You should be able to knit, save, and edit as you like.
 -   The courses&rsquo; upstream repository is *entirely* segmented from your copy of this, so feel free to make any changes that you want. Note, however, that this also means that changes you make in the datahub will *not* be present on your own fork of the repository. In other words, things that happen in the datahub, stay in the data hub.
 
