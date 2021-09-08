@@ -20,6 +20,8 @@ library(ggplot2)
 library(patchwork)
 library(data.table)
 
+library(magrittr)
+
 library(lmtest)
 library(sandwich)
 
@@ -36,6 +38,15 @@ theme_set(theme_minimal())
 - Need to reduce the size of the differences that can arise by chance.
 - Increase statistical power given an experiment with same sample and effect size.
 - If some variables are related to the outcome, restrict ourselves to randomizations that keep treatment and control similar.
+
+---
+
+```{r, echo=FALSE}
+## Note that in this code, until we note otherwise are are not doing 
+## randomization inference to measure uncertainty. Instead, these simulations 
+## are designed to simulate what effect you might generate when you *actually*
+## conduct your experiment. 
+```
 
 ---
 
@@ -210,7 +221,7 @@ normal_study
 ```{r}
 many_normal_studies <- replicate(
   n = 1000, 
-  expr = simulate_normal_study(effect_size = 0))
+  expr = simulate_normal_study(effect_size = 10))
 
 many_normal_studies <- t(many_normal_studies)
 head(many_normal_studies)
@@ -285,7 +296,7 @@ simulate_blocked_study <- function(effect_size) {
 ---
 # Simulate a Block Randomized Study 
 ```{r}
-blocked_study <- simulate_blocked_study(effect_size = 0)
+blocked_study <- simulate_blocked_study(effect_size = 10)
 blocked_study
 ```
 
@@ -295,7 +306,7 @@ blocked_study
 ```{r}
 many_blocked_studies <- replicate(
   n = 1000, 
-  expr = simulate_blocked_study(effect_size = 0)
+  expr = simulate_blocked_study(effect_size = 10)
 )
 
 many_blocked_studies <- t(many_blocked_studies)
@@ -331,33 +342,25 @@ blocked_ate_by_women <- ggplot() +
 ---
 # Plot Blocked and Unblocked ATE
 
+```{r, echo = FALSE}
+## Notice that even though the true effect is 10: 
+## - When we pursue a simple randomization there are a large number of
+##   
+```
+
+
 ```{r, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
 (normal_ate_density | normal_ate_by_women) /
 (blocked_ate_density | blocked_ate_by_women)
 ```
 
 ---
-# Plot Unblocked and Blocked
-
-```{r, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
-(normal_ate_density | normal_ate_by_women) / 
-  (blocked_ate_density | blocked_ate_by_women) 
-```
-
----
 
 # P-values of Blocked vs. Normal Study 
 
-- Blocking allows for more precision (efficiency) by not conducting randomizations where covaraites (e.g. sex) are very imbalanced
-
-```{r}
-# Normal Study
-mean(abs(many_normal_studies[,1] > 10))
-```
-
-```{r}
-mean(abs(many_blocked_studies[,1] > 10))
-```
+- Blocking allows for more precision (efficiency) by not conducting randomization where covaraites (e.g. sex) are very imbalanced
+- This means that your estimator will produce an estimate that is closer to the *true* causal effect
+- This is an estimate that is closer to the orange lines on the last slide
 
 ---
 
@@ -452,7 +455,7 @@ class: inverse, center, middle
 
 # Setting up Data 
 
-## Cluster: The level or unit where treatment is assigned 
+## Cluster: The level where treatment is assigned 
 - Notice that outcomes can be observed at more fine-grained levels
 - There may be difference in *cluster-average* outcomes: 
   - A teacher stubs their toe on the way to school 
@@ -476,16 +479,18 @@ classroom_noise_vector <- 1:8 + rnorm(n=8, mean=0, sd=.5)
 ```
 
 ```{r make the data table}
-d <- data.table(
+potential_outcomes_data <- data.table(
   student_id      = 1:(8*16), 
-  classroom_id    = classroom_ids, 
+  classroom_id    = classroom_ids_vector, 
   classroom_noise = rep(classroom_noise_vector, each = students_number)
 )
 
-setkey(d, 'classroom_id')
+setkey(potential_outcomes_data, 'classroom_id')
 
-d[ , student_outcomes_control := rnorm(n=.N, mean=10) + classroom_noise]
-d[ , student_outcomes_treat   := student_outcomes_control + rnorm(n=.N, mean=0.75)]
+potential_outcomes_data[ , 
+  student_outcomes_control := rnorm(n=.N, mean=10) + classroom_noise]
+potential_outcomes_data[ , 
+  student_outcomes_treat := student_outcomes_control + rnorm(n=.N, mean=1.5)]
 ```
 
 ---
@@ -496,38 +501,234 @@ d[ , student_outcomes_treat   := student_outcomes_control + rnorm(n=.N, mean=0.7
 urn <- rep(c('Control', 'Treatment'), each = classrooms_number/2)
 
 cluster_assignment_table <- data.table(
-  classroom_id         = d[ , unique(classroom_id)],
+  classroom_id         = potential_outcomes_data[ , unique(classroom_id)],
   classroom_assignment = sample(urn),
   key = 'classroom_id'
 )
 
-d[cluster_assignment_table, on=.(classroom_id)]
+experiment_data <- merge(
+  x = potential_outcomes_data, 
+  y = cluster_assignment_table, 
+  on = 'classroom_id')
+```
 
-d
+---
 
+# Classroom Example, cont'd 
+
+```{r}
+head(experiment_data)
+```
+
+---
+
+# Classroom Example, cont'd 
+
+```{r}
+experiment_data[ , classroom_assignment == 'Treatment']
+```
+
+---
+
+# Classroom Example, cont'd 
+
+```{r}
+experiment_data[ , Y := conduct_experiment(
+  potential_control   = student_outcomes_control, 
+  potential_treatment = student_outcomes_treat, 
+  assignment          = classroom_assignment )
+  ]
+
+cluster_ate <- experiment_data[ , estimate_ate(
+  y_values  = Y,
+  treatment =  classroom_assignment, 
+  verbose   = TRUE)
+  ]
+
+cluster_ate
+```
+
+---
+
+# Notice $\rho$ between classroom and $Y$
+
+```{r, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'} 
+experiment_data %>% 
+  ggplot() + 
+  aes(
+    x = student_id, 
+    y = Y, 
+    color = as.factor(classroom_id), 
+    shape = classroom_assignment) + 
+  geom_point() + 
+  labs(
+    shape = 'Treatment Assignment', 
+    color = 'Classroom', 
+    x     = 'Student ID', 
+    y     = 'Outcome',
+    title = 'Cluster Assignment')
+```
+
+---
+
+# Classroom Example, Sharp Null
+
+## Repeat the reassignment process
+- **Under the sharp null hypothesis** we assume that the potential outcomes to treatment that we *observe* for the units in the treatment group, $Y_{i}(1)|d_{i}=1$, are equal to the potential outcomes to control that we *do not observe* for the units in the treatment group, $Y_{i}(0)|d_{i}=1$. 
+- Similarly, **under the sharp null hypothesis** we assume that the potential outcomes to control that we *observe* for the people who are in the control group, $Y_{i}(0)|d_{i}=0$ are equal to the potential outcomes to treatment that we *do not observe* for the units in the control group, $Y_{i}(1)|d_{i}=0$
+
+## Take care
+- Take care to notice how this statement of the sharp null hypothesis is different from the guarantees of apples-to-apples comparisions that are achieved through randomization
+
+---
+
+# Classroom Example, Cluster RI Function
+
+```{r, echo = FALSE}
+## This is the first time in this code that we're running a *proper* 
+## randomization inference loop. 
+## Notice, that the data is flowing from: 
+##  - `potential_outcomes` data --> 
+##  - `experiment_data` --> 
+##  - `cluster_ri_ates`
+## 
+## We get to actually *observe* one set of outcomes -- the realized potential outcomes
+## And from this set of realized potential outcomes we then conduct our randomization 
+##   inference. 
 ```
 
 
-```{r}
-block_randomize <- function(size) { 
-  ## this function will be executed /within/ the  data.table that 
-  ## holds the data. It could be run outside, but the assignment 
-  ## in place that data.table provides make it clean inside.
-  conditions <- c('Control', 'Treatment')
+```{r define cluster ri function}
+cluster_ri <- function(x_data, clustered) { 
+  urn <- rep(c('Control', 'Treatment'), each = x_data[ , length(unique(classroom_id))/2])
+
+  if(clustered == TRUE) { 
+    cluster_assignment_table <- data.table(
+      classroom_id         = x_data[ , unique(classroom_id)],
+      ri_classroom_assignment = sample(urn),
+      key = 'classroom_id'
+    )
   
-  if(size %% 2 == 0) { 
-    ## if there are an even number of units in each block this is easy
-    urn <- rep(conditions, times = size/2)  
-  } else if(size %% 2 == 1) { 
-    ## if there are an odd number, then produce conditions to the 
-    ## nearest even number that is less than the number of units 
-    ## then add one more assignment condition, sampled at random
-    urn <- c(rep(conditions, times = (size/2) - 0.5), sample(conditions, size = 1))
-  } 
-  
-  ## now, shuffle it up return the shuffled sequence
-  assignment <- sample(urn)
-  return(assignment)
+    d <- merge(x_data, cluster_assignment_table, on = 'classroom_id')
+    d[ , .(group_mean = mean(Y)), 
+       keyby = .(ri_classroom_assignment)][ , diff(group_mean)]    
+  } else if(clustered == FALSE) {
+    d <- x_data
+    
+    d[ , .(group_mean = mean(Y)),
+       keyby = .(sample(classroom_assignment))][ , diff(group_mean)]
+  }
 }
 ```
 
+```{r run cluster ri function once}
+cluster_ri(x_data = experiment_data, clustered = TRUE)
+```
+
+---
+
+# Classroom Example, Conduct Cluster RI 
+
+```{r}
+cluster_ri_ates <- replicate(
+  n = 5000, 
+  cluster_ri(x_data = experiment_data, clustered = TRUE)
+)
+```
+
+---
+
+# Classroom Example, Plot Cluster RI
+
+```{r, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'} 
+ggplot() + 
+  geom_density(aes(x = cluster_ri_ates), fill = '#003262', alpha = .5) + 
+  geom_vline(xintercept = cluster_ate[['ate']], color = 'darkorange') + 
+  labs(
+    x = 'Randomization Inference ATEs (in blue)',
+    title = 'Cluster RI and estimated Treatment Effect',
+    subtitle = sprintf('Two-sided p-value: %.2f', mean(abs(cluster_ri_ates) >= cluster_ate[['ate']]))
+  )
+```
+
+---
+
+class: inverse, center, middle
+
+# Perils of Ignoring Clustering
+
+---
+
+# What if we ignore clustering? 
+
+## What if we analyze results as though there wasn't clustering? 
+
+- Randomization happened at the classroom level, but our analysis ignores it? 
+- **Result**: p-values will be *too small* and false rejection rate will be larger than $\alpha$ that you're controlling for
+- Potentially *much* larger depending on the correlation between classrooms and outcomes. 
+
+---
+
+# What if we ignore clustering? 
+
+```{r}
+non_clustered_ates <- replicate(
+  n = 5000, 
+  cluster_ri(x_data = experiment_data, clustered = FALSE)
+)
+```
+
+---
+
+# Recall: Two-sample t-test
+
+(Note: It isn't necessary to remember this formula from previous classes.) 
+
+$$t = \frac{\overline{X}_{1} - \overline{X}_{2}}{\sqrt{\frac{s^{2}_{1}}{N_{1}} + \frac{s^{2}_{2}}{N_{2}}}}$$
+
+---
+
+# What if we ignore clustering? (cont'd)
+
+```{r, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'} 
+ggplot() + 
+  geom_density(aes(x = cluster_ri_ates),    fill = '#003262', alpha = 0.5) + 
+  geom_density(aes(x = non_clustered_ates), fill = '#FDB515', alpha = 0.5) + 
+  geom_vline(xintercept = cluster_ate[['ate']], color = 'darkorange') + 
+  labs(
+    x = 'Correct cluster RI ATEs in blue; incorrect RI ATEs in gold',
+    title = 'Cluster RI and estimated Treatment Effect',
+    subtitle = sprintf(
+      'Correct Two-sided p-value: %.2f; incorrect two-sided p-value: %.2f', 
+      mean(abs(cluster_ri_ates) >= abs(cluster_ate[['ate']])), 
+      mean(abs(non_clustered_ates) >= abs(cluster_ate[['ate']]))
+      )
+  )
+```
+
+---
+
+# Summary 
+
+- When units are assigned to treatment or control in clusters, larger differences between `Treatment` and `Control` outcomes will happen by chance 
+- To account for this uncertainty, when conducting randomization inference, *match the experiment's assignment process*
+  - If experimental assignment happened at random, randomization inference needs to as well
+  - If experimental assignment happened with clusters, randomization inference needs to as well;
+  - If experimental assignment happened with blocks, randomization inference needs to as well.
+- Stats software (e.g. `vcovCL` in R) can estimate correct clustered $SEs$ in a regression framework 
+
+---
+
+# Summary
+
+## Power is relatively worse when
+
+- Average between cluster differences are larger 
+- Within cluster differences are smaller 
+- The number of clusters is small
+
+## Power is relatively better when
+
+- Average between cluster differences are smaller 
+- Within cluster differences are larger 
+- The number of clusters is large 

@@ -33,6 +33,10 @@ class: center, middle, inverse, title-slide
 
 ---
 
+
+
+---
+
 # Make Data
 
 
@@ -77,8 +81,8 @@ d[ , assignment := randomize(size=40)][ ,
 ```
 ##        Assignment
 ## Sex     Control Treatment
-##   Man         7        13
-##   Woman      13         7
+##   Man        10        10
+##   Woman      10        10
 ```
 
 ---
@@ -155,12 +159,12 @@ head(d)
 
 ```
 ##    Control Treatment group assignment block_assignment Y
-## 1:       1         1   Man  Treatment          Control 1
-## 2:       2         2   Man  Treatment        Treatment 2
+## 1:       1         1   Man  Treatment        Treatment 1
+## 2:       2         2   Man    Control          Control 2
 ## 3:       3         3   Man  Treatment        Treatment 3
 ## 4:       4         4   Man  Treatment          Control 4
 ## 5:       5         5   Man    Control        Treatment 5
-## 6:       6         6   Man    Control          Control 6
+## 6:       6         6   Man  Treatment        Treatment 6
 ```
 
 ---
@@ -192,7 +196,7 @@ ate
 
 ```
 ##    tg_mean cg_mean  ate
-## 1:    34.7    36.3 -1.6
+## 1:    34.2    36.8 -2.6
 ```
 
 ---
@@ -233,10 +237,10 @@ normal_study
 
 ```
 ## $ate
-## [1] 5.4
+## [1] -6.4
 ## 
 ## $women_in_treatment
-## [1] 11
+## [1] 9
 ```
 
 ---
@@ -246,20 +250,20 @@ normal_study
 ```r
 many_normal_studies &lt;- replicate(
   n = 1000, 
-  expr = simulate_normal_study(effect_size = 0))
+  expr = simulate_normal_study(effect_size = 10))
 
 many_normal_studies &lt;- t(many_normal_studies)
 head(many_normal_studies)
 ```
 
 ```
-##      ate   women_in_treatment
-## [1,] 7.3   12                
-## [2,] 5.6   11                
-## [3,] -2.2  10                
-## [4,] -0.4  10                
-## [5,] -15.6 7                 
-## [6,] -5.4  9
+##      ate  women_in_treatment
+## [1,] 15.2 11                
+## [2,] 4.8  9                 
+## [3,] 3.8  9                 
+## [4,] 15.5 11                
+## [5,] 10.6 10                
+## [6,] 7    9
 ```
 
 
@@ -267,7 +271,16 @@ head(many_normal_studies)
 ---
 # Plot Normal ATE 
 
-&lt;img src="unit_04_files/figure-html/unnamed-chunk-8-1.svg" style="display: block; margin: auto;" /&gt;
+
+```
+## Warning: Removed 8 rows containing non-finite values (stat_density).
+```
+
+```
+## Warning: Removed 8 rows containing missing values (geom_point).
+```
+
+&lt;img src="unit_04_files/figure-html/unnamed-chunk-9-1.svg" style="display: block; margin: auto;" /&gt;
 
 --- 
 
@@ -306,13 +319,13 @@ simulate_blocked_study &lt;- function(effect_size) {
 # Simulate a Block Randomized Study 
 
 ```r
-blocked_study &lt;- simulate_blocked_study(effect_size = 0)
+blocked_study &lt;- simulate_blocked_study(effect_size = 10)
 blocked_study
 ```
 
 ```
 ## $ate
-## [1] 3.1
+## [1] 8.6
 ## 
 ## $women_in_treatment
 ## [1] 10
@@ -325,7 +338,7 @@ blocked_study
 ```r
 many_blocked_studies &lt;- replicate(
   n = 1000, 
-  expr = simulate_blocked_study(effect_size = 0)
+  expr = simulate_blocked_study(effect_size = 10)
 )
 
 many_blocked_studies &lt;- t(many_blocked_studies)
@@ -334,12 +347,12 @@ head(many_blocked_studies)
 
 ```
 ##      ate  women_in_treatment
-## [1,] -0.8 10                
-## [2,] -2.5 10                
-## [3,] 1.6  10                
-## [4,] 3    10                
-## [5,] -1.5 10                
-## [6,] 0.4  10
+## [1,] 9.6  10                
+## [2,] 12.8 10                
+## [3,] 8.5  10                
+## [4,] 9.5  10                
+## [5,] 11.1 10                
+## [6,] 9.1  10
 ```
 
 
@@ -347,37 +360,27 @@ head(many_blocked_studies)
 ---
 # Plot Blocked and Unblocked ATE
 
-&lt;img src="unit_04_files/figure-html/unnamed-chunk-13-1.svg" style="display: block; margin: auto;" /&gt;
 
----
-# Plot Unblocked and Blocked
 
-&lt;img src="unit_04_files/figure-html/unnamed-chunk-14-1.svg" style="display: block; margin: auto;" /&gt;
+
+
+```
+## Warning: Removed 8 rows containing non-finite values (stat_density).
+```
+
+```
+## Warning: Removed 8 rows containing missing values (geom_point).
+```
+
+&lt;img src="unit_04_files/figure-html/unnamed-chunk-15-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # P-values of Blocked vs. Normal Study 
 
-- Blocking allows for more precision (efficiency) by not conducting randomizations where covaraites (e.g. sex) are very imbalanced
-
-
-```r
-# Normal Study
-mean(abs(many_normal_studies[,1] &gt; 10))
-```
-
-```
-## [1] 0.103
-```
-
-
-```r
-mean(abs(many_blocked_studies[,1] &gt; 10))
-```
-
-```
-## [1] 0
-```
+- Blocking allows for more precision (efficiency) by not conducting randomization where covaraites (e.g. sex) are very imbalanced
+- This means that your estimator will produce an estimate that is closer to the *true* causal effect
+- This is an estimate that is closer to the orange lines on the last slide
 
 ---
 
@@ -407,22 +410,22 @@ model_mf     &lt;- d[ , lm(Y ~ assignment + group)]
 ##                       Unblocked         Blocked     
 ##                          (1)              (2)       
 ## ----------------------------------------------------
-## Assigned Treatment      11.200           6.162      
-##                    (-5.110, 27.510)  (2.638, 9.686) 
-##                       p = 0.187       p = 0.002***  
+## Assigned Treatment      16.500           11.515     
+##                    (0.317, 32.683)  (7.813, 15.218) 
+##                       p = 0.053*     p = 0.00000*** 
 ##                                                     
-## Group: Woman                             50.384     
-##                                     (46.860, 53.908)
+## Group: Woman                             49.848     
+##                                     (46.146, 53.551)
 ##                                       p = 0.000***  
 ##                                                     
-## Intercept               34.900           12.227     
-##                    (23.367, 46.433) (9.284, 15.170) 
-##                     p = 0.00000***    p = 0.000***  
+## Intercept               32.250           9.818      
+##                    (20.807, 43.693) (6.726, 12.911) 
+##                     p = 0.00001***   p = 0.00000*** 
 ##                                                     
 ## ----------------------------------------------------
 ## Observations              40               40       
-## R2                      0.045            0.957      
-## Adjusted R2             0.020            0.955      
+## R2                      0.095            0.954      
+## Adjusted R2             0.071            0.952      
 ## ====================================================
 ## Note:                    *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01
 ```
@@ -490,19 +493,20 @@ class: inverse, center, middle
 
 # Setting up Data 
 
-## Cluster: The level or unit where treatment is assigned 
+## Cluster: The level where treatment is assigned 
 - Notice that outcomes can be observed at more fine-grained levels
 - There may be difference in *cluster-average* outcomes: 
   - A teacher stubs their toe on the way to school 
   - It is hot or cold in one classroom
 
 
+
 ```r
 classrooms_number &lt;- 8
 students_number   &lt;- 16 # this is MIDS, not kindergarden
 
-classroom_ids &lt;- rep(x = 1:8, each = 16)
-classroom_ids
+classroom_ids_vector &lt;- rep(x = 1:8, each = 16)
+classroom_ids_vector
 ```
 
 ```
@@ -512,6 +516,269 @@ classroom_ids
 ## [112] 7 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8
 ```
 
+---
+
+# Classroom Example 
+
+
+```r
+classroom_noise_vector &lt;- 1:8 + rnorm(n=8, mean=0, sd=.5)
+```
+
+
+```r
+potential_outcomes_data &lt;- data.table(
+  student_id      = 1:(8*16), 
+  classroom_id    = classroom_ids_vector, 
+  classroom_noise = rep(classroom_noise_vector, each = students_number)
+)
+
+setkey(potential_outcomes_data, 'classroom_id')
+
+potential_outcomes_data[ , 
+  student_outcomes_control := rnorm(n=.N, mean=10) + classroom_noise]
+potential_outcomes_data[ , 
+  student_outcomes_treat := student_outcomes_control + rnorm(n=.N, mean=1.5)]
+```
+
+---
+
+# Classroom Example, cont'd 
+
+
+```r
+urn &lt;- rep(c('Control', 'Treatment'), each = classrooms_number/2)
+
+cluster_assignment_table &lt;- data.table(
+  classroom_id         = potential_outcomes_data[ , unique(classroom_id)],
+  classroom_assignment = sample(urn),
+  key = 'classroom_id'
+)
+
+experiment_data &lt;- merge(
+  x = potential_outcomes_data, 
+  y = cluster_assignment_table, 
+  on = 'classroom_id')
+```
+
+---
+
+# Classroom Example, cont'd 
+
+
+```r
+head(experiment_data)
+```
+
+```
+##    classroom_id student_id classroom_noise student_outcomes_control
+## 1:            1          1       0.9414733                12.304659
+## 2:            1          2       0.9414733                11.671225
+## 3:            1          3       0.9414733                10.932684
+## 4:            1          4       0.9414733                10.888481
+## 5:            1          5       0.9414733                10.146979
+## 6:            1          6       0.9414733                 9.566612
+##    student_outcomes_treat classroom_assignment
+## 1:               13.62628            Treatment
+## 2:               13.26672            Treatment
+## 3:               12.26637            Treatment
+## 4:               11.94485            Treatment
+## 5:               11.49461            Treatment
+## 6:               10.81955            Treatment
+```
+
+---
+
+# Classroom Example, cont'd 
+
+
+```r
+experiment_data[ , classroom_assignment == 'Treatment']
+```
+
+```
+##   [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [13]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
+##  [37]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [61] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [73]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
+##  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [97] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [109] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [121]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+```
+
+---
+
+# Classroom Example, cont'd 
+
+
+```r
+experiment_data[ , Y := conduct_experiment(
+  potential_control   = student_outcomes_control, 
+  potential_treatment = student_outcomes_treat, 
+  assignment          = classroom_assignment )
+  ]
+
+cluster_ate &lt;- experiment_data[ , estimate_ate(
+  y_values  = Y,
+  treatment =  classroom_assignment, 
+  verbose   = TRUE)
+  ]
+
+cluster_ate
+```
+
+```
+##     tg_mean  cg_mean      ate
+## 1: 15.76146 14.06886 1.692603
+```
+
+---
+
+# Notice `\(\rho\)` between classroom and `\(Y\)`
+
+&lt;img src="unit_04_files/figure-html/unnamed-chunk-23-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Classroom Example, Sharp Null
+
+## Repeat the reassignment process
+- **Under the sharp null hypothesis** we assume that the potential outcomes to treatment that we *observe* for the units in the treatment group, `\(Y_{i}(1)|d_{i}=1\)`, are equal to the potential outcomes to control that we *do not observe* for the units in the treatment group, `\(Y_{i}(0)|d_{i}=1\)`. 
+- Similarly, **under the sharp null hypothesis** we assume that the potential outcomes to control that we *observe* for the people who are in the control group, `\(Y_{i}(0)|d_{i}=0\)` are equal to the potential outcomes to treatment that we *do not observe* for the units in the control group, `\(Y_{i}(1)|d_{i}=0\)`
+
+## Take care
+- Take care to notice how this statement of the sharp null hypothesis is different from the guarantees of apples-to-apples comparisions that are achieved through randomization
+
+---
+
+# Classroom Example, Cluster RI Function
+
+
+
+
+
+```r
+cluster_ri &lt;- function(x_data, clustered) { 
+  urn &lt;- rep(c('Control', 'Treatment'), each = x_data[ , length(unique(classroom_id))/2])
+
+  if(clustered == TRUE) { 
+    cluster_assignment_table &lt;- data.table(
+      classroom_id         = x_data[ , unique(classroom_id)],
+      ri_classroom_assignment = sample(urn),
+      key = 'classroom_id'
+    )
+  
+    d &lt;- merge(x_data, cluster_assignment_table, on = 'classroom_id')
+    d[ , .(group_mean = mean(Y)), 
+       keyby = .(ri_classroom_assignment)][ , diff(group_mean)]    
+  } else if(clustered == FALSE) {
+    d &lt;- x_data
+    
+    d[ , .(group_mean = mean(Y)),
+       keyby = .(sample(classroom_assignment))][ , diff(group_mean)]
+  }
+}
+```
+
+
+```r
+cluster_ri(x_data = experiment_data, clustered = TRUE)
+```
+
+```
+## [1] 2.230896
+```
+
+---
+
+# Classroom Example, Conduct Cluster RI 
+
+
+```r
+cluster_ri_ates &lt;- replicate(
+  n = 5000, 
+  cluster_ri(x_data = experiment_data, clustered = TRUE)
+)
+```
+
+---
+
+# Classroom Example, Plot Cluster RI
+
+&lt;img src="unit_04_files/figure-html/unnamed-chunk-26-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse, center, middle
+
+# Perils of Ignoring Clustering
+
+---
+
+# What if we ignore clustering? 
+
+## What if we analyze results as though there wasn't clustering? 
+
+- Randomization happened at the classroom level, but our analysis ignores it? 
+- **Result**: p-values will be *too small* and false rejection rate will be larger than `\(\alpha\)` that you're controlling for
+- Potentially *much* larger depending on the correlation between classrooms and outcomes. 
+
+---
+
+# What if we ignore clustering? 
+
+
+```r
+non_clustered_ates &lt;- replicate(
+  n = 5000, 
+  cluster_ri(x_data = experiment_data, clustered = FALSE)
+)
+```
+
+---
+
+# Recall: Two-sample t-test
+
+(Note: It isn't necessary to remember this formula from previous classes.) 
+
+`$$t = \frac{\overline{X}_{1} - \overline{X}_{2}}{\sqrt{\frac{s^{2}_{1}}{N_{1}} + \frac{s^{2}_{2}}{N_{2}}}}$$`
+
+---
+
+# What if we ignore clustering? (cont'd)
+
+&lt;img src="unit_04_files/figure-html/unnamed-chunk-28-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Summary 
+
+- When units are assigned to treatment or control in clusters, larger differences between `Treatment` and `Control` outcomes will happen by chance 
+- To account for this uncertainty, when conducting randomization inference, *match the experiment's assignment process*
+  - If experimental assignment happened at random, randomization inference needs to as well
+  - If experimental assignment happened with clusters, randomization inference needs to as well;
+  - If experimental assignment happened with blocks, randomization inference needs to as well.
+- Stats software (e.g. `vcovCL` in R) can estimate correct clustered `\(SEs\)` in a regression framework 
+
+---
+
+# Summary
+
+## Power is relatively worse when
+
+- Average between cluster differences are larger 
+- Within cluster differences are smaller 
+- The number of clusters is small
+
+## Power is relatively better when
+
+- Average between cluster differences are smaller 
+- Within cluster differences are larger 
+- The number of clusters is large 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
