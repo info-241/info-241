@@ -91,7 +91,7 @@ When doing the reading on Lewis and Rao for live session, please consider the fo
     -   d. Why is it harder to show that a campaign is profitable than to show that its effects are statistically significant?
 
 ## Exercises we intend to do in class
-- We're going to talk through `./week03_apply_these_concepts.Rmd` in live session. Please have worked through this code ahead of time, and be ready to talk about what you think is happening with that distribution of treatment effects under the sharp null. 
+- We're going to talk through `./week_03/donor_treatment_effects.Rmd` in live session. Please have worked through this code ahead of time, and be ready to talk about what you think is happening with that distribution of treatment effects under the sharp null. 
 -   FE, 3.1, (a), (b), (c), maybe (e) 
 -   FE 3.5, a, b, and d (if time)
 
