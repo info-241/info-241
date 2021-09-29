@@ -6,6 +6,11 @@ output:
     df_print: paged
 ---
 
+```{r}
+library(data.table)
+```
+
+
 # Benefits of Blocking
 Remember the group variable from last week? Let's draw up another one of those, set up in the exact same way. 
 
