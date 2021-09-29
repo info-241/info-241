@@ -30,6 +30,8 @@ knitr::opts_chunk$set(echo = TRUE, dpi = 300)
 
 
 theme_set(theme_minimal())
+
+set.seed(1)
 ```
 
 # Blocking
@@ -349,7 +351,7 @@ blocked_ate_by_women <- ggplot() +
 ```
 
 
-```{r, message = FALSE, echo = FALSE, dev='svglite', fig.height=4, fig.align='center'}
+```{r, message=FALSE, warning=FALSE, echo=FALSE, dev='svglite', fig.height=4, fig.align='center'}
 (normal_ate_density | normal_ate_by_women) /
 (blocked_ate_density | blocked_ate_by_women)
 ```
@@ -379,7 +381,7 @@ model_mf     <- d[ , lm(Y ~ assignment + group)]
 
 # Preview: Regression, Cont'd 
 
-```{r, echo = FALSE, message = FALSE, warning = FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ## assuming classical standard errors are appropriate (for ease of presentation)
 stargazer::stargazer(
   model_simple, model_mf, 
@@ -432,7 +434,7 @@ class: inverse, center, middle
 - Instead, every student at the same school (or district, or state) has to receive the same length
 
 ## Broadcast TV Advertisements 
-- In broadcast TV, it is not possible to assign advertisements (e.g. for [Babbitt's Sports](https://youtu.be/uguewe3uvo4) to specific individuals
+- In broadcast TV, it is not possible to assign advertisements (e.g. for [Babbitt's Sports](https://youtu.be/uguewe3uvo4)) to specific individuals
 - Instead, whole markets receive the same ads
 
 ## Retail Stores and Prices 
@@ -600,26 +602,30 @@ experiment_data %>%
 
 ```{r define cluster ri function}
 cluster_ri <- function(x_data, clustered) { 
-  urn <- rep(c('Control', 'Treatment'), each = x_data[ , length(unique(classroom_id))/2])
-
   if(clustered == TRUE) { 
+    urn <- rep(c('Control', 'Treatment'), each = x_data[ , length(unique(classroom_id))/2])
     cluster_assignment_table <- data.table(
-      classroom_id         = x_data[ , unique(classroom_id)],
-      ri_classroom_assignment = sample(urn),
-      key = 'classroom_id'
+             classroom_id            = x_data[ , unique(classroom_id)],
+             ri_classroom_assignment = sample(urn),
+           key = 'classroom_id'
     )
   
     d <- merge(x_data, cluster_assignment_table, on = 'classroom_id')
     d[ , .(group_mean = mean(Y)), 
-       keyby = .(ri_classroom_assignment)][ , diff(group_mean)]    
+       keyby = .(ri_classroom_assignment) 
+       ][ , diff(group_mean)]    
   } else if(clustered == FALSE) {
     d <- x_data
-    
     d[ , .(group_mean = mean(Y)),
-       keyby = .(sample(classroom_assignment))][ , diff(group_mean)]
+       keyby = .(sample(classroom_assignment))
+       ][ , diff(group_mean)]
   }
 }
 ```
+
+---
+
+# Classroom Example, Cluster RI Function
 
 ```{r run cluster ri function once}
 cluster_ri(x_data = experiment_data, clustered = TRUE)
@@ -667,9 +673,30 @@ class: inverse, center, middle
 - **Result**: p-values will be *too small* and false rejection rate will be larger than $\alpha$ that you're controlling for
 - Potentially *much* larger depending on the correlation between classrooms and outcomes. 
 
+
+    cluster_ri <- function(x_data, clustered) { 
+      if(clustered == TRUE) { 
+        ## ... we're going to use the second clause of 
+        ## `cluster_ri`, where we flag clustered==FALSE
+      } else if(clustered == FALSE) {
+        d <- x_data
+        d[ , .(group_mean = mean(Y)),
+           keyby = .(sample(classroom_assignment))
+           ][ , diff(group_mean)]
+      }
+    }
+
 ---
 
 # What if we ignore clustering? 
+
+- In the `clustered == FALSE` clause, randomization is handled by simply sampling the vector called `classroom_assignment`. 
+- Notice the individual-level randomization
+
+```{r}
+experiment_data[ , sample(classroom_assignment)][1:40]
+```
+
 
 ```{r}
 non_clustered_ates <- replicate(
@@ -712,9 +739,9 @@ ggplot() +
 
 - When units are assigned to treatment or control in clusters, larger differences between `Treatment` and `Control` outcomes will happen by chance 
 - To account for this uncertainty, when conducting randomization inference, *match the experiment's assignment process*
-  - If experimental assignment happened at random, randomization inference needs to as well
-  - If experimental assignment happened with clusters, randomization inference needs to as well;
-  - If experimental assignment happened with blocks, randomization inference needs to as well.
+  - If assignment happened at random, randomization inference needs to as well
+  - If assignment happened with clusters, randomization inference needs to as well
+  - If assignment happened with blocks, randomization inference needs to as well
 - Stats software (e.g. `vcovCL` in R) can estimate correct clustered $SEs$ in a regression framework 
 
 ---
