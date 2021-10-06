@@ -149,7 +149,7 @@ model_3 <- d[ , lm(nts ~ incentive + t_service + incentive * t_service
 
 stargazer(
   model_3, type = 'text', 
-  se = list(get_cluster_se(model_1)), 
+  se = list(get_cluster_se(model_3)), 
   omit = 'U_MC'
 )
 ```
