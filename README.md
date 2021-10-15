@@ -123,7 +123,7 @@ This course introduces students to experimentation in data science. The course p
 <td class="org-left">Problems, Diagnostics and the Long View</td>
 <td class="org-left">FE 11.3</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/DinardoPischke_1997.pdf">DiNardo and Pischke</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Simonsohn.2014.pdf">Simonsohn</a> (O): <a href="http://varianceexplained.org/r/bayesian-ab-testing/">Robinson</a></td>
-<td class="org-left">PS 4, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/final_project/pilot_data.md">Pilot Data</a></td>
+<td class="org-left"><a href="https://classroom.github.com/a/LadmQxFM">PS 4</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/final_project/pilot_data.md">Pilot Data</a></td>
 </tr>
 
 
