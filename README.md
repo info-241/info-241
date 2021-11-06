@@ -141,7 +141,7 @@ This course introduces students to experimentation in data science. The course p
 <td class="org-left">Creative Experiments</td>
 <td class="org-left">FE 12, (O): <a href="https://www.thecut.com/2015/05/how-a-grad-student-uncovered-a-huge-fraud.html">Ny Mag</a>, <a href="http://www.sciencemag.org/news/2016/04/real-time-talking-people-about-gay-and-transgender-issues-can-change-their-prejudices">Science</a>, FE 13</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/broockman_irregular.pdf">Broockman Irregularities</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Hughes.2017.pdf">Hughes et al.</a> (O): <a href="https://eng.uber.com/xp/">Uber Platform</a></td>
-<td class="org-left">PS 5</td>
+<td class="org-left"><a href="https://classroom.github.com/a/SkPLO1o2">PS 5</a></td>
 </tr>
 
 
