@@ -21,7 +21,11 @@ What is the team's strategy for measuring outcomes?
 - Is the team going to rely on "self-reported" survey data? If so, how accurate a measurement will this produce? What _specific_ question wording will the team be using in a survey? Share this with your instructor. 
 - Is the team going to rely on "revealed preference" data like on-device clicks, purchases, or other _direct_ measurements of the outcome? If so, how has this been designed, and does it do a good job of capturing the concept that the team is interested in learning about?
 
+# Submitting 
+
+Please submit your check-in document in Gradescope so that your instructor has the document on hand for when you conduct your check-in meeting. 
+
 # Schedule a meeting with your instructor 
 
-When the team turns in their responses to this document, please also schedule a time to meet with your instructor to talk about the teams progress to-date. 
+When the team turns in their responses to this document, please also schedule a time to meet with your instructor to talk about the teams progress to-date. Your instructor will discuss scheduling this in live-session. 
 
