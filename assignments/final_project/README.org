@@ -1,11 +1,10 @@
 * The Group Project 
+
 In teams of between three and five students, carry out an experiment that measures a causal effect of interest.
 
-* Task Links
+* Places to Generate Ideas 
 
-1. Form Teams: bCourses Group Tool
-2. Three Project Ideas: [[[./three_project_ideas.md][Link]]]
-3. Two Page Description of Project: [[[./two_page_description.md][link]]]
+You and your team can work on *anything* for this class project. For some, this can be a crippling amount of freedom. In the [[https://docs.google.com/document/d/1IMsGTHmklhvetfJJfEm9dhoFM7bvb-YOkN_6mAM8kFM/edit?usp%3Dsharing][supplemental reading]] document, there is a whole section of published experiments that are interesting that you might use as inspiration for your own work. 
 
 * Project Aims 
 - In this project, we want you and your team to learn what it is like to do an experiment in practice. This means identifying the theory that you want to test, deducing hypotheses to test from that theory, developing a measurement scheme for your outcomes, and then designing and executing an experiment that will systematically reveal subjects' potential outcomes.
