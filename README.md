@@ -41,7 +41,7 @@ This course introduces students to experimentation in data science. The course p
 <td class="org-right">2</td>
 <td class="org-left">Apples to Apples</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/FEDAI_ch2.pdf">FE 2</a>; <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/LewisReiley.pdf">Lewis &amp; Reiley</a> (p. 1-2.5, §1; §2A-B)</td>
-<td class="org-left">Poor Economics, Ch. 1, 3, 6;  <a href="http://www.lse.ac.uk/philosophy/science-and-pseudoscience-overview-and-transcript/">Lakatos</a> (O): <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Rubin.2008.pdf">Rubin</a>, sections 1 &amp; 2</td>
+<td class="org-left"><a href="https://search.ebscohost.com/login.aspx?direct=true&amp;db=nlebk&amp;AN=2371491&amp;site=ehost-live&amp;ebv=EB&amp;ppid=pp_C1">PoE</a>, Ch. 1-3;  <a href="http://www.lse.ac.uk/philosophy/science-and-pseudoscience-overview-and-transcript/">Lakatos</a> (O): <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Rubin.2008.pdf">Rubin</a>, sections 1 &amp; 2</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/essays/essay1/README.md">Essay 1</a></td>
 </tr>
 
@@ -49,16 +49,16 @@ This course introduces students to experimentation in data science. The course p
 <tr>
 <td class="org-right">3</td>
 <td class="org-left">Quantifying Uncertainty</td>
-<td class="org-left">FE 3.0, 3.1, 3.4</td>
+<td class="org-left">FE 3.0, 3.1, 3.4, <a href="https://search.ebscohost.com/login.aspx?direct=true&amp;db=nlebk&amp;AN=2371491&amp;site=ehost-live&amp;ebv=EB&amp;ppid=pp_C1">PoE,</a> Ch. 4, 8-10</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Blackwell.2013.pdf">Blackwell</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Lewis.Rao.2015.pdf">Lewis and Rao</a> 1, 3.1, 3.2</td>
-<td class="org-left"><a href="https://classroom.github.com/a/K_fN1Rgi">PS 1</a></td>
+<td class="org-left"><a href="https://classroom.github.com/a/ebCO_m6M">PS 1</a></td>
 </tr>
 
 
 <tr>
 <td class="org-right">4</td>
 <td class="org-left">Blocking and Clustering</td>
-<td class="org-left">FE 3.6.1, 3.6.2, 4.4, 4.5</td>
+<td class="org-left">FE 3.6.1, 3.6.2, 4.4, 4.5; <a href="https://search.ebscohost.com/login.aspx?direct=true&amp;db=nlebk&amp;AN=2371491&amp;site=ehost-live&amp;ebv=EB&amp;ppid=pp_C1">PoE</a>, Ch. 11-13</td>
 <td class="org-left">(O): <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Cameron_Miller_Cluster_Robust_October152013.pdf">Cluster Estimator</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Moore.2012.pdf">Block</a><a href="https://cran.r-project.org/web/packages/blockTools/index.html">Tools</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/abadie_2017.pdf">When to Cluster</a></td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/final_project/three_project_ideas.md">Three Project Ideas</a></td>
 </tr>
@@ -78,7 +78,7 @@ This course introduces students to experimentation in data science. The course p
 <td class="org-left">Regression; Multi-factor Experiments</td>
 <td class="org-left">MM 6.1, MM 95-97, FE 9.3.3, 9.4</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Montgomery.2016.pdf">Montgomery</a> Sections 1, 3.0, 3.1, 3.2, 3.5, 4.2, Skim 5</td>
-<td class="org-left"><a href="https://classroom.github.com/a/DGtrFC8w">PS 2</a></td>
+<td class="org-left"><a href="https://classroom.github.com/a/kk1Kc90E">PS 2</a></td>
 </tr>
 
 
@@ -96,7 +96,7 @@ This course introduces students to experimentation in data science. The course p
 <td class="org-left">Noncompliance</td>
 <td class="org-left">FE 5</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/GerberGreen.2005.pdf">G&amp;G 2005</a>; <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/trochim_donnelly_ch_7.pdf">TD, Ch 7</a>; <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/trochim_donnelly_ch_9.pdf">TD, Ch 9</a></td>
-<td class="org-left">PS 3</td>
+<td class="org-left"><a href="https://classroom.github.com/a/gimNIQzB">PS 3</a></td>
 </tr>
 
 
@@ -121,16 +121,16 @@ This course introduces students to experimentation in data science. The course p
 <tr>
 <td class="org-right">11</td>
 <td class="org-left">Problems, Diagnostics and the Long View</td>
-<td class="org-left">FE 11.3</td>
+<td class="org-left">FE 11.3; <a href="https://search.ebscohost.com/login.aspx?direct=true&amp;db=nlebk&amp;AN=2371491&amp;site=ehost-live&amp;ebv=EB&amp;ppid=pp_C1">PoE,</a> Ch. 14-15</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/DinardoPischke_1997.pdf">DiNardo and Pischke</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Simonsohn.2014.pdf">Simonsohn</a> (O): <a href="http://varianceexplained.org/r/bayesian-ab-testing/">Robinson</a></td>
-<td class="org-left"><a href="https://classroom.github.com/a/LadmQxFM">PS 4</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/final_project/pilot_data.md">Pilot Data</a></td>
+<td class="org-left"><a href="https://classroom.github.com/a/6YB-6Zxm">PS 4</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/final_project/pilot_data.md">Pilot Data</a></td>
 </tr>
 
 
 <tr>
 <td class="org-right">12</td>
 <td class="org-left">Attrition, Mediation, Generalizabilty</td>
-<td class="org-left">FE 7, 10, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/bates_2017.pdf">Bates 2017</a></td>
+<td class="org-left">FE 7, 10, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/bates_2017.pdf">Bates 2017</a>;</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Allcott.2014.pdf">Alcott and Rogers</a></td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -141,7 +141,7 @@ This course introduces students to experimentation in data science. The course p
 <td class="org-left">Creative Experiments</td>
 <td class="org-left">FE 12, (O): <a href="https://www.thecut.com/2015/05/how-a-grad-student-uncovered-a-huge-fraud.html">Ny Mag</a>, <a href="http://www.sciencemag.org/news/2016/04/real-time-talking-people-about-gay-and-transgender-issues-can-change-their-prejudices">Science</a>, FE 13</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/broockman_irregular.pdf">Broockman Irregularities</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Hughes.2017.pdf">Hughes et al.</a> (O): <a href="https://eng.uber.com/xp/">Uber Platform</a></td>
-<td class="org-left"><a href="https://classroom.github.com/a/SkPLO1o2">PS 5</a></td>
+<td class="org-left"><a href="https://classroom.github.com/a/4QTmfWZq">PS 5</a></td>
 </tr>
 
 
@@ -163,6 +163,8 @@ This course introduces students to experimentation in data science. The course p
 </tr>
 </tbody>
 </table>
+
+Note, readings that are after an (O) in the table above are optional readings that will directly support your learning but aren&rsquo;t required. Also note that David has made a **great** resource that has suggestions for further reading. You can access it in this living [google doc](https://docs.google.com/document/d/1IMsGTHmklhvetfJJfEm9dhoFM7bvb-YOkN_6mAM8kFM/edit?usp%3Dsharing). This set of additional readings stays up to date with technical and applied developments in the field.
 
 
 # Description
@@ -212,20 +214,21 @@ There are several options for how to build a compute environment for this course
 
 We use two books in this course, and read a third book in the second week. We recommend that you buy a paper copy of the two textbooks (we&rsquo;ve chosen textbooks that have a fair price), and would understand if you digitally read the third book. Support a local bookstore if you can; but, we&rsquo;ve included a link to Amazon for those who cannot.
 
--   *Field Experiments: Design and Analysis* is the core textbook for the course. It is available on Amazon for $40 [[link](https://www.amazon.com/Field-Experiments-Design-Analysis-Interpretation/dp/0393979954/ref%3Dsr_1_1?ie%3DUTF8&qid%3D1495560177&sr%3D8-1&keywords%3Dfield%2Bexperiments)] and is necessary to succeed in the course.
--   *Mastering Metrics* is the secondary textbook for the course. It is available at Amazon for $20 [[link](https://www.amazon.com/Mastering-Metrics-Path-Cause-Effect/dp/0691152845/ref%3Dsr_1_sc_1?ie%3DUTF8&qid%3D1495560224&sr%3D8-1-spell&keywords%3Dmastring%2Bmetrics)].
--   *Poor Economics* is the third book for the course. It is available for purchase on Amazon for $15 [[link](https://www.amazon.com/Poor-Economics-Radical-Rethinking-Poverty/dp/1610390938/ref=sr_1_1?dchild=1&keywords=poor+economics&qid=1608586471&sr=8-1)], and from the UC Library digitally [[link](https://ebookcentral-proquest-com.libproxy.berkeley.edu/lib/berkeley-ebooks/detail.action?docID=876489)].
--   *More than Good Intentions* was previously used in the course. For folks with an interest in questions of development, it is an interesting read. It is available at Amazon for $10, new, or $3 used [[link](https://www.amazon.com/More-Than-Good-Intentions-Improving/dp/0452297567/ref%3Dsr_1_1?ie%3DUTF8&qid%3D1495560260&sr%3D8-1&keywords%3Dmore%2Bthan%2Bgood%2Bintentions)]. But, you could also read this digitally.
+-   *Field Experiments: Design and Analysis* (FE) is the core textbook for the course. It is available on Amazon for $40 [[link](https://www.amazon.com/Field-Experiments-Design-Analysis-Interpretation/dp/0393979954/ref%3Dsr_1_1?ie%3DUTF8&qid%3D1495560177&sr%3D8-1&keywords%3Dfield%2Bexperiments)] and is necessary to succeed in the course. Unfortunately, there are no digital versions of this book.
+-   *The Power of Experiments* (PoE) is the second textbook for the course. It is available through the library VPN [[link](https://search.ebscohost.com/login.aspx?direct=true&db=nlebk&AN=2371491&site=ehost-live&ebv=EB&ppid=pp_C1)] and in print.
+-   *Mastering Metrics* is the third textbook for the course. It is available at Amazon for $20 [[link](https://www.amazon.com/Mastering-Metrics-Path-Cause-Effect/dp/0691152845/ref%3Dsr_1_sc_1?ie%3DUTF8&qid%3D1495560224&sr%3D8-1-spell&keywords%3Dmastring%2Bmetrics)]. Unfortunately, the University does not maintain a digital version of this book.
+-   *Poor Economics* was previously used in teh course. You do not need to purchase this book, but it highlights research by Nobel Prize winning economists. It is available for purchase on Amazon for $15 [[link](https://www.amazon.com/Poor-Economics-Radical-Rethinking-Poverty/dp/1610390938/ref=sr_1_1?dchild=1&keywords=poor+economics&qid=1608586471&sr=8-1)], and from the UC Library digitally [[link](https://ebookcentral-proquest-com.libproxy.berkeley.edu/lib/berkeley-ebooks/detail.action?docID=876489)].
+-   *More than Good Intentions* was previously used in the course. For folks with an interest in questions of development, it is an interesting read. It is available at Amazon for $10, new, or $3 used [[link](https://www.amazon.com/More-Than-Good-Intentions-Improving/dp/0452297567/ref%3Dsr_1_1?ie%3DUTF8&qid%3D1495560260&sr%3D8-1&keywords%3Dmore%2Bthan%2Bgood%2Bintentions)].
 
 
 ## Articles
 
 -   We have made all the articles we read in the couse available in the repository. However, it is a *great* practice to get used to establishing a VPN to gain access to all the journal articles that are available through the library subscription service. Instructions for connecting are available on the UCB [library website](https://www.lib.berkeley.edu/using-the-libraries/vpn). Journal access is one of the greatest benefits to belonging to a University, we suggest you use it.
 
--   David has made a **great** resource that has suggestions for further reading. You can access it in this living [google doc](https://docs.google.com/document/d/1IMsGTHmklhvetfJJfEm9dhoFM7bvb-YOkN_6mAM8kFM/edit?usp%3Dsharing).
-
 
 # Office Hours (all times Pacific)
+
+We&rsquo;re trying to give students a predictable office hours schedule. To get this done, we&rsquo;re trying to hold a set of office hours from 3:00 - 4:00 Monday through Friday; and another set from 5:30 - 6:30 Monday through Friday. In addition, because we know that many times students are working on their homework over the weekend, we are scheduling an office hour for 5:30-6:30 on Sunday evening.
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -249,28 +252,21 @@ We use two books in this course, and read a third book in the second week. We re
 <tr>
 <td class="org-left">Monday</td>
 <td class="org-right">3:00-4:00</td>
-<td class="org-left">Alex</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Monday</td>
-<td class="org-right">5:30-6:30</td>
-<td class="org-left">David</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Tuesday</td>
-<td class="org-right">5:30-6:30</td>
 <td class="org-left">Scott</td>
 </tr>
 
 
 <tr>
+<td class="org-left">Tuesday</td>
+<td class="org-right">3:00-4:00</td>
+<td class="org-left">David</td>
+</tr>
+
+
+<tr>
 <td class="org-left">Wednesday</td>
-<td class="org-right">5:30-6:30</td>
-<td class="org-left">Alex</td>
+<td class="org-right">3:00-4:00</td>
+<td class="org-left">Micah</td>
 </tr>
 
 
@@ -282,36 +278,61 @@ We use two books in this course, and read a third book in the second week. We re
 
 
 <tr>
-<td class="org-left">Thursday</td>
-<td class="org-right">5:30-6:30</td>
-<td class="org-left">David</td>
+<td class="org-left">---</td>
+<td class="org-right">---</td>
+<td class="org-left">--</td>
 </tr>
 
 
 <tr>
-<td class="org-left">(Friday before PS)</td>
-<td class="org-right">4:00-5:00</td>
+<td class="org-left">Monday</td>
+<td class="org-right">5:30-6:30</td>
+<td class="org-left">Kineret</td>
+</tr>
+
+
+<tr>
+<td class="org-left">Tuesday</td>
+<td class="org-right">5:30-6:30</td>
 <td class="org-left">Alex</td>
 </tr>
 
 
 <tr>
-<td class="org-left">(Saturday after PS)</td>
-<td class="org-right">9:00-10:00a</td>
+<td class="org-left">Wednesday</td>
+<td class="org-right">5:30-6:30</td>
+<td class="org-left">Chris D</td>
+</tr>
+
+
+<tr>
+<td class="org-left">Thursday</td>
+<td class="org-right">5:30-6:30</td>
 <td class="org-left">Alex</td>
 </tr>
 
 
 <tr>
 <td class="org-left">Sunday</td>
-<td class="org-right">5:30 - 7:30</td>
-<td class="org-left">Chris</td>
+<td class="org-right">5:30-6:30</td>
+<td class="org-left">Chris D</td>
+</tr>
+
+
+<tr>
+<td class="org-left">---</td>
+<td class="org-right">---</td>
+<td class="org-left">---</td>
+</tr>
+
+
+<tr>
+<td class="org-left">Wednesday</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">Kineret</td>
 </tr>
 </tbody>
 </table>
-
--   In weeks where we have problem sets due, we will hold extra office hours on the Friday before the weekend. As well, when you are working through your project design, the instructors will schedule individual one-on-one conversations as necessary with student groups.
--   On Saturdays after we turn in problem sets, we will hold extra office hours to review the work that you&rsquo;ve done and the feedback that you&rsquo;ve received. For obvious reasons, you can only attend these Saturday OH if you have submitted your via PR.
 
 
 # Grading and Scoring
