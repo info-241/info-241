@@ -27,7 +27,7 @@ You and your team can work on *anything* for this class project. For some, this 
 
 * Presentation
 - During Week 14, we will ask you to present your findings to your peers for feedback that might help you improve your final paper. You should pitch the presentation toward what it is: a carefully thought out, but work-in-progress reporting of your experiment to a set of data science colleagues. 
-- See the document `/finalProject/presentationGuidelines.pdf` for more information about these presentations. 
+- See the document [[https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/final_project/presentation/presentationGuidelines.pdf][presentation guidelines]] for more information about these presentations. 
 
 * The Final Paper 
 - After Week 14, you will turn in a final report for your project. 
