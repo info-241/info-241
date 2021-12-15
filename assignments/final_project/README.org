@@ -34,4 +34,4 @@ You and your team can work on *anything* for this class project. For some, this 
 - See the document `/finalProject/projectGuidelines.org` for the most detailed information about what to complete for the project. 
 
 * Reimbursements
-- See the document `/finalProject/reimbursements.org` for how to submit reimbursements for the project. Upon approval by an instructor, each group has as much as $500 to spend on experiment supplies. 
+- See the document [[https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/final_project/reimbursements.org][for reimbursements]] in this folder for how to submit reimbursements for the project. Upon approval by an instructor, each group has as much as $500 to spend on experiment supplies. 
