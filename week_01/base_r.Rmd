@@ -11,8 +11,6 @@ Suppose a vector of the following form:
 
 ```{r}
 v <- c(1,2,3,4,6)
-v[v == 5] 
-v[v %in% 4:6]
 ```
 
 
