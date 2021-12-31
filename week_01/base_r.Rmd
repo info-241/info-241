@@ -11,6 +11,8 @@ Suppose a vector of the following form:
 
 ```{r}
 v <- c(1,2,3,4,6)
+v[v == 5] 
+v[v %in% 4:6]
 ```
 
 
@@ -27,7 +29,7 @@ If a vector is one-dimensional, then we can either:
 And so, 
 
 - `v[v == 2]` Will print only the values that meet the test.
-- `v[v == 6]` Will not print anything
+- `v[v == 5]` Will not print anything (while `v[v == 6]` will return `6`).
 - `v[v %in% 1:3]` uses the set-based `%in%` operator which looks for existence in a range.  
 
 `data.frames` are just collections of vectors.
