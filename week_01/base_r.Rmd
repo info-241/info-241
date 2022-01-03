@@ -116,7 +116,7 @@ df[df$id %in% 1:2 | df$type == "E", ]
 ```
 
 # Formula Notation 
-The formula tilde: `~` is a common thread through R. Most base funcitons that involve the comparison of some feature by some other feature have a built in method that is based on the formula tilde.
+The formula tilde: `~` is a common thread through R. Most base functions that involve the comparison of some feature by some other feature have a built in method that is based on the formula tilde.
 
 For example, in the data.frame `df` from above, if we wanted to compare the values for ids greater than 10 to those ten and below, we might use the following call:
 
@@ -130,7 +130,7 @@ Suppose we wanted a box plot:
 boxplot(value ~ id > 10, data = df)
 ```
 
-Or a test for similarity of varaince, on both side of the `> 10` split:
+Or a test for similarity of variance, on both side of the `> 10` split:
 
 ```{r} 
 var.test(value ~ id > 10, data = df)
