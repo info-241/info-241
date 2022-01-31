@@ -59,7 +59,7 @@ This course introduces students to experimentation in data science. The course p
 <td class="org-right">4</td>
 <td class="org-left">Blocking and Clustering</td>
 <td class="org-left">FE 3.6.1, 3.6.2, 4.4, 4.5; <a href="https://search.ebscohost.com/login.aspx?direct=true&amp;db=nlebk&amp;AN=2371491&amp;site=ehost-live&amp;ebv=EB&amp;ppid=pp_C1">PoE</a>, Ch. 11-13</td>
-<td class="org-left">(O): <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Cameron_Miller_Cluster_Robust_October152013.pdf">Cluster Estimator</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Moore.2012.pdf">Block</a><a href="https://cran.r-project.org/web/packages/blockTools/index.html">Tools</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/abadie_2017.pdf">When to Cluster</a></td>
+<td class="org-left">(O): FE Appendix B, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Cameron_Miller_Cluster_Robust_October152013.pdf">Cluster Estimator</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Moore.2012.pdf">Block</a><a href="https://cran.r-project.org/web/packages/blockTools/index.html">Tools</a>, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/abadie_2017.pdf">When to Cluster</a></td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/final_project/three_project_ideas.md">Three Project Ideas</a></td>
 </tr>
 
@@ -68,7 +68,7 @@ This course introduces students to experimentation in data science. The course p
 <td class="org-right">5</td>
 <td class="org-left">Covariates and Regression</td>
 <td class="org-left">MM 1, FE 4.1-3, MM 2, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/MHE_chapter_2.pdf">MHE p. 16-24</a></td>
-<td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Opower.pdf">Opower</a> (O): FE Appendix B (p. 453), <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/morgan_rubin_2012.pdf">rerandomization</a></td>
+<td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Opower.pdf">Opower</a> (O): <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/morgan_rubin_2012.pdf">rerandomization</a></td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/final_project/two_page_description.md">Two Page Description</a></td>
 </tr>
 
