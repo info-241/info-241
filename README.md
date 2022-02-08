@@ -68,7 +68,7 @@ This course introduces students to experimentation in data science. The course p
 <td class="org-right">5</td>
 <td class="org-left">Covariates and Regression</td>
 <td class="org-left">MM 1, FE 4.1-3, MM 2, <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/MHE_chapter_2.pdf">MHE p. 16-24</a></td>
-<td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Opower.pdf">Opower</a> (O): <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/morgan_rubin_2012.pdf">rerandomization</a></td>
+<td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Opower.pdf">Opower</a> (O):  <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/morgan_rubin_2012.pdf">rerandomization</a></td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/assignments/final_project/two_page_description.md">Two Page Description</a></td>
 </tr>
 
