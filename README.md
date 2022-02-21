@@ -94,7 +94,7 @@ This course introduces students to experimentation in data science. The course p
 <tr>
 <td class="org-right">8</td>
 <td class="org-left">Noncompliance</td>
-<td class="org-left">FE 5</td>
+<td class="org-left">FE:5, 6.0-6.1, 6.5.4, 6.6</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/GerberGreen.2005.pdf">G&amp;G 2005</a>; <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/trochim_donnelly_ch_7.pdf">TD, Ch 7</a>; <a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/trochim_donnelly_ch_9.pdf">TD, Ch 9</a></td>
 <td class="org-left"><a href="https://classroom.github.com/a/gimNIQzB">PS 3</a></td>
 </tr>
