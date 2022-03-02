@@ -294,7 +294,7 @@ We&rsquo;re trying to give students a predictable office hours schedule. To get 
 <tr>
 <td class="org-left">Tuesday</td>
 <td class="org-right">5:30-6:30</td>
-<td class="org-left">Alex</td>
+<td class="org-left">Conor</td>
 </tr>
 
 
