@@ -63,7 +63,7 @@ And so, is one if and only if:
 - The `year` is 1988 or later **AND** the `state` is California. 
 
 ```{r} 
-d[ , treat := I(year > 1987) * I(is_california == 'California') * 1]
+d[ , treat := (year > 1987) * (is_california == 'California') * 1]
 ```
 
 Notice that I'm using a small trick -- rather than casting this to a numeric feature using `as.numeric`, instead I'm multiplying the Boolean result that we get from the two tests by `1`. This will force an implicit casting to numeric from the Boolean. 
