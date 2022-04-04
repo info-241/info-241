@@ -116,7 +116,7 @@ There is a similar construct in a data table.
 dt[ , list(value, type)] # which produces the same output
 ``` 
 
-Why are those in a list, rather than a character vector? Don't get too lost in it just yet, but a *huge* benefit is that we're going to be able to perform functions against columns. Since those columns might return something that has as different shape than what we started with, we're going to use the more flexible list structure, than the character vector structure. 
+Why are those in a list, rather than a character vector? Don't get too lost in it just yet, but a *huge* benefit is that we're going to be able to perform functions against columns. Since those columns might return something that has as different shape than what we started with, we're going to use the more flexible list structure, rather than the character vector structure. 
 
 Note that in a `data.table` we do NOT quote the variable names. Note too that typing `list()`  could get a little old, so there is a *strongly recommended* alias to this call: `.()`
 
@@ -164,7 +164,7 @@ dt[ , var(value)]
 ```
 But, other actions -- such as plotting a histogram, or running a regression, are also simply functions applied to columns. So these, too can work in the column space.
 
-``` 
+``` {r}
 dt[ , hist(value)]
 dt[ , lm(value ~ type)]
 ```
