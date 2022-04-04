@@ -1,0 +1,51 @@
+#+TITLE: Design Thoughts 
+#+DATE: \today
+#+AUTHOR: 241 Teaching Team
+#+OPTIONS: texht:t toc:nil
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS:
+#+LATEX_HEADER:
+#+LATEX_HEADER_EXTRA:
+
+* Smelly Patients 
+Medical doctors often have to complete some research as a part of getting their degrees. On of Alex's friends said one time, "When I was on my emergency department rotation, I worked with a large number of folks who were using the emergency department as a backstop for their health care. A small number of these folks, well, smelled bad. And, despite my desire to provide the same high level of care to everyone, I worry that I was treating these folks differently than others. I'd like to draw up an experiment that would let me evalute this."
+- What is the causal question? 
+- What are the groups?
+- How would you randomize? 
+- What would you propose as a treatment? When you think about the treatment that you propose, what are the ways, if any, that this treatment might violate the exclusion restriction? (How) Should you either: 
+  1. Design a test to identify this violation;
+  2. Change your treatment to let you evaluate just the question that you're interested in; or,
+  3. Re-define your outcome?
+You could do all of these, none of these, or some of these, just talk about why you would choose one over another. 
+- What comparison would you make?
+- Are there any targeting considerations? Non-equivalent group considerations?
+- Are there any concerns that the non-equivalent groups (smelly vs. not) might have differential health outcomes? What would you do about this at the design stage? What would you do about this at the analysis stage? 
+- Ultimately, write out using our grammar what your design is, the treatments, the comparisons, and assess whether your experiment /really/ tests what it set out to test.
+
+* Website Engagement
+Suppose that you are in charge of optimizing the website for a company. [Set aside that the notion of a one, true (Highlander?) website. You meet with your creative team, you build a new version, and develop a randomization system that serves the following: 
+
+- A control page on the even seconds and a treatment page on the odd seconds;
+- The site is sufficiently dynamic that you can place people in different conditions back to back and they won't violate within-subjects experimental assumptions (just take this as given). 
+
+Great. You're stoked, you're implementing your 241 knowledge, and when you look at the numbers, it looks like there is an effect! Booh-yeah. So, as you're getting ready to go and present your results you anticipate the praise and promotion that you're going to receive. Heck, you figure that this is such a long-standing win that when your kids are old enough, the admission committee at Berkeley will still remember your name, so they'll easily be admitted... 
+
+... Then, in a crushing blow, in the presentation to management that occurs right before yours you see that unbeknownst to you Chet was also running an optimization experiment. Egad! It wasn't the /exact/ same as yours, but nonetheless, now when you present your results you have to defend them against the claim that it was "Chets' experiment that caused the change in outcomes, not yours." 
+
+1. Suppose that Chet is randomizing via a randomizer that is tossing a coin at the time of page-load. The outcome data is what it is, it doesn't change now that you know Chet was also running an experiment. How does learning that Chet was running an expriment at the same time change your interpretation of your results?
+2. Suppose that Chet is randomizing via a randomizer, but that he wanted unequal distribution of treatment and control. On even seconds, he assigns 80% of traffic to control. On odd seconds he assigns 50% of trafic to control. (The rest in each case go to treatment.) Now, how does learning that Chet was running an experiment at the same time change your interpretation of results?
+3. Suppose that Chet is randomizing via seconds, and is assigning his treatment on odd seconds, and control on even seconds. Now, how does laerning that Chet was running an expriment at the same time change your interpretation of results?
+
+* Gneezy and List 
+How long can you continue to bonus workers and get higher wages from them? 
+
+Think about the Gneezy and List 2006 experiment that randomly gave bonuses to individuals and then examined their labor output. They found that the day of the bonus, those who received bonuses worked harder than those who did not. But, the also found that the next day, there was not a lingering effect. 
+
+- What is the authors' design? 
+
+Suppose that you want to design an experiment to learn when this flips over and individuals begin to resent /not/ receiving a bonus, rather than appreciating receiving a bonus. How would you design such a study? How sensitive to spillover must you be, and how would you do this? 
+
+- What would be your design? 
+
+/If mapping this onto a real-world context helps, consider the following: What is your expectation for a holiday bonus from your employer this year? If your employer fails to meet this expectation, is your productivity going to go down? If you are the employer, do you have to give more this year than last year?/
+
