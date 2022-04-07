@@ -150,7 +150,7 @@ This course introduces students to experimentation in data science. The course p
 <td class="org-left">Final Thoughts</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/readings/Freedman_1991.pdf">Freedman</a></td>
-<td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/blob/main/finalProject/presentationGuidelines.pdf">Presentation</a></td>
+<td class="org-left"><a href="https://github.com/UC-Berkeley-I-School/mids-w241/tree/main/assignments/final_project/presentation">Presentation</a></td>
 </tr>
 
 
@@ -294,7 +294,7 @@ We&rsquo;re trying to give students a predictable office hours schedule. To get 
 <tr>
 <td class="org-left">Tuesday</td>
 <td class="org-right">5:30-6:30</td>
-<td class="org-left">Conor</td>
+<td class="org-left">Alex</td>
 </tr>
 
 
