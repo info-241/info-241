@@ -1,0 +1,66 @@
+#+TITLE: Gun Control Debate
+#+AUTHOR: 241 Teaching Team
+#+DATE: \today
+#+OPTIONS: texht:t toc:nil
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS:
+#+LATEX_HEADER:
+#+LATEX_HEADER_EXTRA:
+* The Set Up
+Recently --- for the last decade or more --- there has been considerable political discussion about individuals' Second Amendment rights.[fn:1] Gun violence has caused incredible harm to communities. Its blight disproportionately affects communities of color: one estimate finds that Black Americans experience 10 times the number of gun homicides, and 18 times the number of incedents of gun violence.
+
+* What We're Interested In 
+There are a lot of arguments that are out there. Some are normative, some historical, some preferential. As a human and a citizen, we have preferences over outcomes, but as /scientists/ we have a responsibility to pose a question that can be adjucated empirically.
+If one were to boil the debate down to its most basic claims, it certainly sounds like a causal question: /Would enacting tougher gun-control legislation cause a reduction in the harm from violent acts?/
+
+* For Both Groups
+You are going to think about the evidence that might exist that would enable us to adjudicate whether we should enact some form of legislation that would make it harder to own guns. We are not concerned in the policy, what it does, or how it does it. This means: don't get bogged down in the minutia of building a /particular/ policy. 
+
+** Consider the following points:
+
+- What is the causal quantity (\tau) that we are interested in?
+- Although there have, to date, been no studies that have been intentionally designed to identify the causal effects of some policy, there have been attempts in the past to reduce gun use in some areas.
+- Although the details of particular instances are not important, Chicago is one area that has restricted some forms of hand-gun ownership. At other points, some states have enacted reductions. Or, alternatively, some countries have enacted large-scale buy back (Australia) or prohibitions in the first place (Japan).
+  - What is the most that we learn from these forms of policy interventions?
+  - What is the least that we learn from these forms of policy interventions?
+  - How do you reason about how informative these interventions are about the effects of the policy that you might propose /here/ and /now/?
+- What are the outcomes that we are interested in? 
+- What types of studies might have been rolled out in the past?
+  - What does the design of such a studyd look like?
+  - What are the concerns with a design of that particular form? 
+  - AKA: What are the strengths of the types of past designs? What are the limitations?
+- How would you structure a pro-restriction argument (again, not focusing on the particular details of a specific plan) to try and convince the group that does not want reductions?
+
+* Pro Gun Control: We Should Enact Some Policy That Makes It Harder To Have Guns
+With the common understanding of Section 3.1.1 as the back drop:
+- Craft the strongest argument that you can for /why/ we should, given the present observational evidence, enact some law that makes it harder to people to own guns.
+- We don't particularly care for sentimental arguments or arguments based on a morality that appeals to (a) fairness; (b) a higher being; or (c) constitutional protections. These are might be a useful way to have an argument, but they are not amenable to a scientific answer.
+- Consider the responses that the "con" group will bring forward, and try to spike these arguments.
+
+* Con (We Should Not Enact Some Policy That Makes It Harder To Have Guns)
+With this as the back drop: 
+- Craft the strongest argument that you can for /why/ we should NOT, given the present observational evidence, enact some law that makes it harder for people to own guns.
+- We don't particularly care for sentimental arguments or arguments based on a morality that appeals to (a) fairness; (b) a higher being; or (c) constitutional protections. These are might be a useful way to have an argument, but they are not amenable to a scientific answer.
+- Consider the types of arguments that the "pro" group is going to make, and your responses. 
+
+* Now Design a Federal Intervention 
+- Imagine that your group is Executive, Legislature, and Courts for a day.
+- With this ultimate power, design a federal policy to generate the kind of causal evidence that would allow us to come down on one side or another of this debate:
+  - Suppose that the politically feasible policy would institute a buy-back program at 150% of the 2020 marketplace value.
+  - What are the units that you would randomize? How would you randomize them?
+  - What are the primary and secondary outcomes that are the focus of your study? 
+  - What is the time scale of your study?
+  - Do you have concerns about: attrition, non-compliance, spillover, displacement, failed randomization, selection? How can you mitigate those, or how can you build a test for their presence?
+  - Draw out the grammar of your intervention with: M, N, R, O, X.
+  - What are the strengths and weaknesses of your:
+    - Design
+    - Intervention 
+
+
+
+* Footnotes
+
+[fn:1] Hold aside the statments made by the Republican Presidential nominee about the "Second Amendment People" doing something to the Democratic Presidential nominee... 
+
+[fn:2] Why are there two clauses? Why are they formed in such a way? Were the Framers of the Constitution actively /trying/ to confuse us? Is there a treasure map on the back of the Declaration of Independence?  What is the relationship between original intent and interpretative law? And so on and so on...
+

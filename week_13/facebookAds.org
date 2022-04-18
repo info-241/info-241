@@ -1,5 +1,5 @@
 #+TITLE: Facebook In-Video Ads 
-#+AUTHOR: Alex, Micah and Dan
+#+AUTHOR: 241 Teaching Team
 #+DATE: \today
 #+LATEX_CLASS: article
 #+LATEX_CLASS_OPTIONS:
