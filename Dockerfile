@@ -4,15 +4,15 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     zlib1g-dev \
   && install2.r --error \
-      curl \
-      # Rcurl \
-      R.utils \
+      curl       \
+      # Rcurl    \
+      R.utils    \
       data.table \
-      magrittr \
-      stargazer \
-      patchwork \
-      sandwich \
-      lmtest \
-      # lfe \
-      AER \
-      ri
+      magrittr   \
+      stargazer  \
+      patchwork  \
+      sandwich   \
+      lmtest     \
+      lfe        \
+      AER        \
+      ri         \
