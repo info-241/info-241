@@ -10,6 +10,7 @@ RUN apt-get update \
       data.table \
       magrittr \
       stargazer \
+      patchwork \
       sandwich \
       lmtest \
       # lfe \
