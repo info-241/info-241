@@ -36,9 +36,9 @@ Who are the humans that the team is going to recruit to participate in their exp
 
 When you submit this two-page description of the project, you will also schedule time for a 20-minute meeting with your section instructor. As a group, your team and instructor will work-together to push the project forward. 
 
-- Alex scheduling link: [[link](https://calendly.com/d-alex-hughes/241-experiment-check-in)
-- Micah scheduling link: 
-- Scott scheduling link: 
+- Scott scheduling link:
+- David scheduling link: 
+- Conor scheduling link: 
 
 
 
