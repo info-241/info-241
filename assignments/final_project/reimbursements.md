@@ -2,7 +2,7 @@
 
 Each project group, with the approval of the instructor, can spend up to $500 to purchase experiment materials. This might include the copies to make paper copies of surveys, the cost of shipping if you were providing free shipping to subjects to see if this induced increased purchases, AWS server space, or wages for subject's time. Before you spend this money, *please* talk with the instructor to ensure that your spending can be defended to the I School front office. We won't let you be left holding the bag for a charge, but that means that we instructors are internalizing the risk! 
 
-When it comes time to complete the reimbursements proces, do the following: 
+When it comes time to complete the reimbursements process, do the following: 
 
 -   Complete the following [form](https://docs.google.com/forms/d/e/1FAIpQLSfH0QO5mmPhMMM2KYncJJ4BE_ZtrCZvVmeftO3E621yL1Q4qA/viewform?usp=sf_link), which we will use to batch the reimbursement.
 

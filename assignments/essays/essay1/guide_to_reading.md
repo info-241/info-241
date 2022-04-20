@@ -1,14 +1,14 @@
 # Guide to Reading 
 
-It can be daunting to read academic, and academic-related papers. But, beacuse academics are incentivised to write complete, whole arguments; the writing in academic papers is often more complete than can be found through other media (e.g. Twitter, blogs, etc.). We'll write this guide as though you're reading papers for _Experiments and Causality_, but you can probably modify your approach for others fields as well. 
+It can be daunting to read academic, and academic-related papers. But, because academics are incentivised to write complete, whole arguments; the writing in academic papers is often more complete than can be found through other media (e.g. Twitter, blogs, etc.). We'll write this guide as though you're reading papers for _Experiments and Causality_, but you can probably modify your approach for others fields as well. 
 
-The balance that professionals _necessairily_ have to strike is between reading the complete argument, and reading the argument quickly. Tim Slade (a TA for the course in the Summer 2021 term) proposed three levels of reading: 
+The balance that professionals _necessarily_ have to strike is between reading the complete argument, and reading the argument quickly. Tim Slade (a TA for the course in the Summer 2021 term) proposed three levels of reading: 
 
 - A five minute read; 
 - An hour-long read; and, 
 - A week-long read. 
 
-The idea is this: For parts of a problem landscape that you are already familiar with, many new papers make contributions that you can readily incorporate into what you already know. As someone who works to evaluate government programs around education policy, Tim can see a new study come out, quickly identify the contribution that it makes to what he already knows, and move on. However, this ability comes with practice, and with famialiarity with the topic. 
+The idea is this: For parts of a problem landscape that you are already familiar with, many new papers make contributions that you can readily incorporate into what you already know. As someone who works to evaluate government programs around education policy, Tim can see a new study come out, quickly identify the contribution that it makes to what he already knows, and move on. However, this ability comes with practice, and with familiarity with the topic. 
 
 In the rest of this short primer, we provide you with a quick attempt to guide your reading. 
 
@@ -33,17 +33,17 @@ Although this last point might feel quite self-centered (it is...) relating what
 
 # An hour-long read 
 
-In an hour long read, you've decicded that this paper affects your own work enough that you'd like to be able to talk with some precision about it. 
+In an hour long read, you've decided that this paper affects your own work enough that you'd like to be able to talk with some precision about it. 
 
-- No longer are you satisfied to undertand the main point that the authors make; you want to know more about that main point. 
+- No longer are you satisfied to understand the main point that the authors make; you want to know more about that main point. 
   - What is the context for this result? 
   - What are the limitations to the breadth of what we can learn form this result?
 -  How, specifically, did the authors generate the result that they did? 
   - What were the experimental methods that they used? 
 - How did the authors move from concept to data? 
-  - How did they measure the concept they were interseted in? What are the strengths and limitations of this form of measurment? 
+  - How did they measure the concept they were interested in? What are the strengths and limitations of this form of measurement? 
 - How did the authors move from data to conclusions? 
-  - Because all statistics are arguments for the most appropriate way to summarise data, how have the authors chosen to summarise their data? 
+  - Because all statistics are arguments for the most appropriate way to summarize data, how have the authors chosen to summarize their data? 
   - Why is this a good (or a bad idea)?
   - Are there other possible summaries that the authors' could have chosen? What might we have learned if they had? 
 

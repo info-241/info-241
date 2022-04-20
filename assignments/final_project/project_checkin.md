@@ -17,7 +17,7 @@ So frequently, this is the crux of any experiment: _What should we actually do?_
 
 ## Experiment Design 
 
-Does the team have a clear experiment design? When, relative to treatment-assignment will subjects be measured? Before? After? Many times? Are there any concerns that people will opt-out of the treatment condition that you assign to them? Are there any concerns that people may opt-out of participating in your experiment? Are there any concenrs that people will _forget_ they are a part of your experiment? 
+Does the team have a clear experiment design? When, relative to treatment-assignment will subjects be measured? Before? After? Many times? Are there any concerns that people will opt-out of the treatment condition that you assign to them? Are there any concerns that people may opt-out of participating in your experiment? Are there any concerns that people will _forget_ they are a part of your experiment? 
 
 ## Measurement Design 
 
