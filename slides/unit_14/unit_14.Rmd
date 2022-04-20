@@ -41,8 +41,8 @@ class: inverse, center, middle
 - Data analysis allows for making decisions
 - Decisions involve counterfactuals
   - Existing in the state of the world where one has done X or Y
-  - Eg. should women receive hormone replacement therapy (HRT) or not?
-  - Eg. Should prices be raised or not?
+  - E.g. should women receive hormone replacement therapy (HRT) or not?
+  - E.g. Should prices be raised or not?
 - Observational data: Compare units with different $X$ values
 
   
@@ -331,7 +331,7 @@ class: inverse, middle, center
 # Omitted Variable Bias
 #### Unobserved heterogeneity big problem with experiments
 - Incinerator example
-  - Researchers had done regression adjustment (ie. "controlled for")
+  - Researchers had done regression adjustment (e.g. "controlled for")
 
 #### Matching won't always show unobserved differences
 - Can't measure everything
@@ -363,7 +363,7 @@ class: inverse, middle, center
 
 
 - Propensity score can be wrong for many units
-  - Eg. underweight poor women have 80% chance of treatment
+  - E.g. underweight poor women have 80% chance of treatment
   - Possible some have 99% chance of treatment due to poor health
   - Other group could have 10% chance
   - Therefore, unclear what is true chance of being treated
@@ -517,7 +517,7 @@ class: inverse, middle, center
 ---
 # Ethics
 #### Common argument: Withholding treatment from people in certain situations would be unethical
-- Eg. bed nets to protect people from malaria
+- E.g. bed nets to protect people from malaria
 
 
 #### Two potential responses:
