@@ -94,7 +94,7 @@ Some light practice
 
 ```
 
-- How would you pull the rows that *either* have an id that is in the set `1:2` **OR** have a type that is equal to `E`? (Hint: You can combine the statements ith the logical operator `|` which reads as inclusive OR)
+- How would you pull the rows that *either* have an id that is in the set `1:2` **OR** have a type that is equal to `E`? (Hint: You can combine the statements with the logical operator `|` which reads as inclusive OR)
 
 ```{r}
 
@@ -147,7 +147,7 @@ and so on ... and so on...
 
 Let's unpack this just a little bit. Inside each of these calls are at least three parts:
 1. the LHS of the tilde, which is the outcome variable;
-2. the RHS (which we're inputting as a logical test that is being evalutated at run time
+2. the RHS (which we're inputting as a logical test that is being evaluated at run time
 3. the data that we're using.
 4. oh, there are four: the tilde.
 

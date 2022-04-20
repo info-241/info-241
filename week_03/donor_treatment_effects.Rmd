@@ -37,13 +37,13 @@ ate
 
 2. Assess, using randomization inference, whether this effect is a _surprising_ effect, or instead if this effect could just have arisen from randomization error. 
 
-In doing so, **do not** simply copy code from the async, or from another notebook; actually think about the algorithm that you want to performn, and write it from scratch. 
+In doing so, **do not** simply copy code from the async, or from another notebook; actually think about the algorithm that you want to perform, and write it from scratch. 
 
 What are the steps to any Randomization Inference Task? 
 
 1. Conduct the experiment, using random assignment to produce two unbiased samples of the desired test statistic. 
 2. Compute the desired test statistic (here the ATE) on this experimental data.
-3. Suppose that the sharp null hypothesis is true, thereby solving the *missing data* problem that is at the heart of the fundimental problem of causal inference, and permitting the complete observation of all potential outcomes under the supposition of the sharp null were true. 
+3. Suppose that the sharp null hypothesis is true, thereby solving the *missing data* problem that is at the heart of the fundamental problem of causal inference, and permitting the complete observation of all potential outcomes under the supposition of the sharp null were true. 
 4. Repeatedly sample the treatment assignment vector and under each assignment, for each sample, compute the test statistic in the same manner as in step 1. 
 5. Compare the measured treatment effect to the distribution of treatment effects under the sharp null supposition and directly draw a p-value. 
 
@@ -69,4 +69,4 @@ You can do it! There are ways that involve loops that are pretty easy to think a
 
 4. Compare the two-sided p-value against the p-value that you generate from a two-tailed t-test. If these p-values are the same, would this be a positive or a negative characteristic of randomization inference? If these p-values are different, why would they be different? Don't go looking all over hill-and-dale for the call for a t-test, it is at `t.test`. 
 
-5. Which of the two of these inferrential methods do you prefer, randomization inference or a t-test, and why? Ease of use is not an acceptable answer. 
+5. Which of the two of these inferential methods do you prefer, randomization inference or a t-test, and why? Ease of use is not an acceptable answer. 
