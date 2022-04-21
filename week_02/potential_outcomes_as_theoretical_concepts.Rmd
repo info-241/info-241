@@ -162,7 +162,7 @@ mean_y0        <- 0 # d[ , mean(y_0)]
 mean_control_Y <- 0 # obs[treat==0, mean(Y)]
 ```
 
-The mean of `y0` is `r round(mean_y0, 3)`, and the menace of control Y is `r round(mean_control_Y, 3)`. 
+The mean of `y0` is `r round(mean_y0, 3)`, and the mean of control Y is `r round(mean_control_Y, 3)`. 
 
 Conduct the same comparison among the treatment group. 
 *Don't simply copy paste code; there's benefit in thinking about the queries and functions*. Type out each segment, even though its slower. 
