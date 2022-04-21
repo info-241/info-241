@@ -23,7 +23,7 @@ Generating ideas is hard. Especially if you haven't had to think about causal qu
 ### A few examples of past projects
 
 - Do default values change donation amounts?
-- Do "made in China" tags increase sales on Trump Flag
+- Do "made in China" tags increase sales on Trump Flag?
 - Do "wear facial covering" signs increase compliance to facial covering guidelines?
 - Does the word "natural" increase sales in facebook marketplace?
 - Does sleeping alone rather than with a partner lead to better sleep?
