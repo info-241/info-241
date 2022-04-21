@@ -10,7 +10,7 @@ rm(list = ls())
 
 ## load packages
 library(foreign)                        # for reading in strange file types
-library(data.table)                     # another popular pacakge is haven. 
+library(data.table)                     # another popular package is haven. 
 library(stargazer)
 
 path <- "~/MIDS/w241/w241/week_05/"
@@ -34,7 +34,7 @@ load_and_clean_data <- function(path, file) {
   cat(sprintf('So, we have lost %.f percent by dropping.\n', 100*(nrows_at_read-nrows_after_dropping) / nrows_at_read))
   
   return(d)
-  }
+}
 
 d <- load_and_clean_data(path = path, file = file)
 
@@ -54,15 +54,15 @@ randomization_inference <- function(data, outcome_variable, treatment_indicator)
   ## a function if you want to access a variable by name. 
   ## so, something like: data[ , get(outcome_variable)]
   
-  }
+}
 
 ri_results <- replicate(
   n = 1000, 
   expr = randomization_inference(
-    ata = d, 
+    data = d, 
     outcome_variable = y1_nts, 
     treatment_indicator = incentive
-    ) 
+  ) 
 ) 
 
 mean(ri_results > ate)
@@ -77,7 +77,7 @@ ate_plot <- ggplot() +
   )
 
 ate_plot
-  
+
 ##
 ## What happens if we rescale the outcome to be the difference between 
 ##
@@ -102,8 +102,8 @@ ri_results_rescaled <- replicate(
     data = 'fill this in', 
     outcome_variable = 'fill this in',
     treatment_indicator = 'fill this in'
-    )
-  ) 
+  )
+) 
 
 mean(ri_results_rescaled > ate_rescaled)
 
@@ -111,7 +111,7 @@ mean(ri_results_rescaled > ate_rescaled)
 ## you can reuse code from earlier.
 
 ##
-## can we do it with regresion?
+## can we do it with regression?
 ##
 
 d <- read.dta(paste0(mypath, file))
