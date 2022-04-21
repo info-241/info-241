@@ -55,6 +55,18 @@ The article is here: https://link.springer.com/article/10.1007/s10584-016-1670-9
 
 Submit your ideas on Gradescope.
 
+# A few examples of past projects
+
+- Do default values change donation amounts?
+- Do "made in China" tags increase sales on Trump Flag
+- Do "wear facial covering" signs increase compliance to facial covering guidelines?
+- Does the word "natural" increase sales in facebook marketplace?
+- Does sleeping alone rather than with a partner lead to better sleep?
+- Does drinking decaf coffee make me more tired over the long haul?
+- Do daily affirmations in the mirror improve feelings of self-worth?
+- How much water would potential hikers plan to take based on various scenarios?
+- Do people slow down when passing green-yellow plastic figures holding "slow" signs?
+
 # Feedback
 
 You will receive very quick, directional feedback from your instructor about whether each of the proposed ideas sound promising and interesting. With this feedback, the team can decide which proposal to pursue for their project. 

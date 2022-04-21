@@ -20,6 +20,12 @@ d <- fread('http://www.dropbox.com/s/wfao23f30ll9jo1/donation.csv?raw=1')
 ## )
 
 head(d)
+hist(d$Y, breaks=20)
+
+# Normal data
+# nd <- data.table(Y = c(rnorm(1000, 0, 1), rnorm(1000, 3, 1)),
+#                  Z = c(rep("T", 1000), rep("C", 1000)))
+# nd
 ```
 Here are the column definitions: 
 
@@ -31,7 +37,7 @@ Here are the column definitions:
 1. Assess whether the treatment _has an effect_. If so, what is that effect, on average? We'll give you the general structure of a solution, but you'll have to fill in the specifics. 
 
 ```{r}
-ate <- d[ , .(group_mean = ), keyby = .()][ , .('ate' = diff())]
+ate <- d[ , .(group_mean = mean(Y)), keyby = .(sample(Z))][ , .('ate' = diff(group_mean))]
 ate
 ```
 
@@ -53,6 +59,26 @@ You can do it! There are ways that involve loops that are pretty easy to think a
 
 ```{r}
 
+# Function
+ri <- function(simulations = 100) {
+  
+  # Bucket for test statistic (ATE)
+  res <- NA   
+  
+  # For every "possible randomization"
+  for(sim in 1:simulations) { 
+    # Fill the bucket with ATEs AFTER shuffle/permute/randomize/Z treatment vector, Z
+    res[sim] <- d[ , .(group_mean = mean(Y)), 
+                   keyby = .(sample(Z))][ , diff(group_mean)]
+  }
+  # Return the bag of test statistics
+  return(res)
+}
+
+# Run it
+sharp_null_dist <-ri(100000)
+
+
 ```
 
 # Questions for understanding 
@@ -60,13 +86,34 @@ You can do it! There are ways that involve loops that are pretty easy to think a
 1. Characterize the distribution of the sharp-null distribution of treatment effects. Talk about what, if anything, is notable about it, and what components of the data might be leading to any patterns that you note.
 
 ```{r}
-
+# sampling distribution
+hist(sharp_null_dist, breaks=100)
+abline(v=ate, col ="red")
 ```
 
 2. How many of the randomization inference loops are larger than the treatment effect that you calculated? How would you use this statement to construct a one-sided test, and an associated p-value? 
 
+```{r}
+# One sided p-value
+sum(sharp_null_dist>ate[[1]])/length(sharp_null_dist)
+```
+
+
 3. How many of the randomization inference loops are _more extreme_ (:metal:) than the treatment effect that you calculated? How would you use this statement to construct a two-sided test, and an associated p-value? 
+
+```{r}
+# Two sided p-value
+sum(abs(sharp_null_dist)>ate[[1]])/length(sharp_null_dist)
+```
 
 4. Compare the two-sided p-value against the p-value that you generate from a two-tailed t-test. If these p-values are the same, would this be a positive or a negative characteristic of randomization inference? If these p-values are different, why would they be different? Don't go looking all over hill-and-dale for the call for a t-test, it is at `t.test`. 
 
+```{r}
+t.test(Y~Z, data=d)
+```
+
 5. Which of the two of these inferrential methods do you prefer, randomization inference or a t-test, and why? Ease of use is not an acceptable answer. 
+
+
+
+

@@ -98,10 +98,10 @@ Please read [this article](https://www.nytimes.com/2007/09/16/magazine/16epidemi
 
 # Reading: Key Points 
 
-  - Causal questions are crucial in a varietey of areas 
+  - Causal questions are crucial in a variety of areas 
     - Business 
     - Public policy 
-    - Individual decisionmaking 
+    - Individual decision making 
   - Decisions should be concerned with counterfactuals 
     - We observe the state of the world if we have done `X`. What would we observed of we had done `not X`? Or, if we had done `Y`? 
   - This causal inference is difficult because we cannot observe _both_ of these states of the world. 

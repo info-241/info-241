@@ -269,6 +269,10 @@ stargazer(
 )
 ```
 
+- 1: is data measured from inside 6? On average, across all treatment and control.
+- 2: is data measured post treatment (1930)? On average before and after treatment.
+- 3: is data measured in district 6 and post-treatment?
+
 Notice how similar some of these pieces are very similar to what we've already seen. In particular, the first coefficients is **very** similar to the `difference_of_banks_in_business`. When we calculated it with the subset at first, we estimated a value of `r round(difference_of_banks_in_business, 2)`. When we estimated a value using the difference in differences regression, we estimated a value of `r round(coef(mod)['treatment_districtTRUE'], 2)`. Yay! 
 
 ```{r}
