@@ -20,6 +20,19 @@ Generating ideas is hard. Especially if you haven't had to think about causal qu
 3. **You might look a policies that are being proposed.**
    - Almost without exception, policies, rules, and laws are implemented with the intention of _causing_ a certain event to occur. Sometimes these policies have a good set of causal evidence to support their implementation; many times, they do not. 
 
+### A few examples of past projects
+
+- Do default values change donation amounts?
+- Do "made in China" tags increase sales on Trump Flag?
+- Do "wear facial covering" signs increase compliance to facial covering guidelines?
+- Does the word "natural" increase sales in facebook marketplace?
+- Does sleeping alone rather than with a partner lead to better sleep?
+- Does drinking decaf coffee make me more tired over the long haul?
+- Do daily affirmations in the mirror improve feelings of self-worth?
+- How much water would potential hikers plan to take based on various scenarios?
+- Do people slow down when passing green-yellow plastic figures holding "slow" signs?
+
+
 # Deliverable 
 
 ## A paper abstract of each idea 
