@@ -84,7 +84,7 @@ You will be unsurprised, then, to learn that the outcomes are quite sensible:
 ```{r first group-by}
 d[ , .(group_mean = mean(Y)), keyby = .(treat_condition)]
 ```
-Plot this set of averages so that you can see them to reason about. To do so, first, compute the values that we would like to show -- the mean, and the 95% confidence interval -- using `data.table`. Second, pass these into `ggplot`. For the averages, let's display them as a vertical column tha runs from zero to the point that we calculate in `group_mean`, and for the standard errors, let's add lines that range from the low-side to the high-side of the 95% confidence interval. 
+Plot this set of averages so that you can see them to reason about. To do so, first, compute the values that we would like to show -- the mean, and the 95% confidence interval -- using `data.table`. Second, pass these into `ggplot`. For the averages, let's display them as a vertical column that runs from zero to the point that we calculate in `group_mean`, and for the standard errors, let's add lines that range from the low-side to the high-side of the 95% confidence interval. 
 
 ```{r}
 sem <- function(x) {
@@ -161,7 +161,7 @@ Well, this looks pretty close to what we estimate above, but it isn't quite the 
 If you were *really* committed to producing the exact same estimate, you could, by suppressing the intercept in your model. 
 
 ```{r four-level model, without intercept}
-mod_2 <- d[ , lm(Y ~ -1 + treat_condition)] # the -1 supresses the intercept
+mod_2 <- d[ , lm(Y ~ -1 + treat_condition)] # the -1 suppresses the intercept
 coeftest(mod_2, vcovHC)
 ```
 

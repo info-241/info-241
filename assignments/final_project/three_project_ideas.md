@@ -11,7 +11,7 @@ Generating ideas is hard. Especially if you haven't had to think about causal qu
 1. **You might sit and have a think.** 
    - What are things that you do in your life that you are _certain_ are important? What makes you so certain they are important, and what would happen if you didn't have those things in your life? 
      - These thoughts might come from your daily, family, spiritual, educational, work, or other aspect of your life. 
-     - By way of example, you might believe that making your bed is important, or snoozing an alarm, or a children's bedtime routine, or a meditation is important to your wellbeing. Why are these things important? What would be different if they were to change? 
+     - By way of example, you might believe that making your bed is important, or snoozing an alarm, or a children's bedtime routine, or a meditation is important to your well being. Why are these things important? What would be different if they were to change? 
    - What are things that other people are _certain_ are important? What makes them so certain they are important, and what would happen if these things didn't exist? 
 2. **You might read or listen to the scientific news.**
    - What are people researching right now, and what do they suppose these things cause? 
@@ -58,7 +58,7 @@ The article is here: https://www.pnas.org/content/118/15/e2014602118 and the abs
 
 ### Example Two 
 
-Here is another example of an abstact of this form, published by Nick Obradovich and (the courses' very own) Scott Guenther at _Climactic Change_ in 2016. 
+Here is another example of an abstract of this form, published by Nick Obradovich and (the courses' very own) Scott Guenther at _Climactic Change_ in 2016. 
 
 The article is here: https://link.springer.com/article/10.1007/s10584-016-1670-9 and the abstract reads as the following: 
 

@@ -102,7 +102,7 @@ much_experiment[ , .(group_mean = mean(outcomes)),
     keyby = .(condition)][ , diff(group_mean)]
 ```
 
-With the experiment that we *actuallty* conducted, compute the ate. 
+With the experiment that we *actually* conducted, compute the ate. 
 
 ```{r compute the ate}
 ate <- d[ , mean(outcomes), keyby = .(condition)][ , diff(V1)]

@@ -13,7 +13,7 @@ The Tennessee STAR experiment is a shining example of a well run, well executed 
 library(data.table)                     # for data manipulation 
 library(foreign)                        # to read spss file 
 library(sandwich)                       # for creating robust SEs 
-library(lmtest)                         # for easy testing with robuse SEs
+library(lmtest)                         # for easy testing with robust SEs
 library(multiwayvcov)                   # for clustered SEs 
 library(stargazer)                      # for printing tables 
 
@@ -89,7 +89,7 @@ With the data mostly cleaned up and renamed, we can now take create the outcome 
 
 1. We are summing student's performance on each of the reading, math, and listening tests to create a single, composite score. 
 2. With this score, we are calculating the empirical cumulative distribution function (CDF) for each individual student compared to the entire set of students. An empirical CDF is really just a student's percentile. 
-3. We should note too, we aren't education experts, and aren't familiar with the Stanford Tests. (*Go Berkeley*). It might be more approprite to find a student's empirical CDF within each test and then, average these. Or it might not. 
+3. We should note too, we aren't education experts, and aren't familiar with the Stanford Tests. (*Go Berkeley*). It might be more appropriate to find a student's empirical CDF within each test and then, average these. Or it might not. 
 
 ## Create a student test percentile
 ```{r, results='hide'} 
@@ -128,9 +128,9 @@ summary_table <- d[ , .(
 
 In this summary statistics table, we have three difference groups, each corresponding to one of the treatments that students in classrooms were assigned to receive. The "REGULAR + AIDE CLASS" group is the group of classrooms that were the normal size, but were assigned to receive a teachers' aide; the "SMALL CLASS" are the classrooms that were capped at size 15; and, the "REGULAR CLASS" are the regular sized classrooms. 
 
-First, let's consider the `class_size` varible. If the treatment worked, then the classrooms that are in the treatment group should have at most 15 students in expectation. Indeed, it appears this is the case, with 15.1 students. Also, if the randomization worked, then the classroom size of the other classrooms should be roughly the same, since classes in these two groups were just randomly assiged either to receive an aide or not receive an aide. Indeed, they are quite close with `class_size`s of 22.7 and 22.3. 
+First, let's consider the `class_size` variable. If the treatment worked, then the classrooms that are in the treatment group should have at most 15 students in expectation. Indeed, it appears this is the case, with 15.1 students. Also, if the randomization worked, then the classroom size of the other classrooms should be roughly the same, since classes in these two groups were just randomly assigned either to receive an aide or not receive an aide. Indeed, they are quite close with `class_size`s of 22.7 and 22.3. 
 
-The other variables in this summary table, `free_lunch`, `white_asian`, and `percentile` are further checks to assess whether randomization was producing reasonably balanced groups. Although we cannot measure potential outcoems for the students in all of these groups (since they for at some of the groups these are unmeasureable because they will not be realized), what we *can* do is to check that our randomization proudced groups that look roughly the same *on observables*. Indeed, in this set, it appears that on observables the classroom groups are quite similar; and so, we don't have any indication that our randomization went awry, or that we have difference in the potential outcomes *before* treatment (which would be a form of experimenter induced selection bias). 
+The other variables in this summary table, `free_lunch`, `white_asian`, and `percentile` are further checks to assess whether randomization was producing reasonably balanced groups. Although we cannot measure potential outcomes for the students in all of these groups (since they for at some of the groups these are unmeasureable because they will not be realized), what we *can* do is to check that our randomization produced groups that look roughly the same *on observables*. Indeed, in this set, it appears that on observables the classroom groups are quite similar; and so, we don't have any indication that our randomization went awry, or that we have difference in the potential outcomes *before* treatment (which would be a form of experimenter induced selection bias). 
 
 ```{r, results='asis'}
 stargazer(summary_table, summary = FALSE, header = FALSE, 
@@ -152,7 +152,7 @@ diff_mean
 
 ``` 
 
-With this information, we can easily calculate the difference beween groups as well as the standard error of the treament effect (e.g. Field Experiments equation 3.6). Neat! 
+With this information, we can easily calculate the difference between groups as well as the standard error of the treatment effect (e.g. Field Experiments equation 3.6). Neat! 
 
 Here, we compare the difference between the `REGULAR + AIDE` and the `SMALL` against the `REGULAR` classes. 
 
@@ -177,7 +177,7 @@ m3 <- lm(percentile ~ treatment + race_wa + gender + free_lunch + school_id,
          data = d)
 ```
 
-Let's look quickly at the first model that we estimated, the two group difference between the treamtent and the control group. 
+Let's look quickly at the first model that we estimated, the two group difference between the treatment and the control group. 
 
 ```{r}
 stargazer(m1, m2, 
@@ -187,16 +187,16 @@ stargazer(m1, m2,
           add.lines = list(c("School Fixed Effects", "No", "Yes")))
 ``` 
 
-In `m1` rather than estimateing the means in each group, instead we're estimating the difference (the *ATE* ) beween the category listed in the model report and the reference category (which in this case we have set to be the "regular" classroom group). 
+In `m1` rather than estimating the means in each group, instead we're estimating the difference (the *ATE* ) between the category listed in the model report and the reference category (which in this case we have set to be the "regular" classroom group). 
 
 What we haven't done, is to correct the standard errors. This is in the next section. 
 
 # Correct the Standard Errors 
 There are a lot of reasons to suspect that students' performances might not satisfy the assumptions that go in to building normal, Gaussian distributions of the residuals. 
 
-+ One that immediatly comes to mind is that perhaps students who are assigned to treatment have greater variance in their outcomes than students who are assigned to control. This could happen if there are some students who really excel in the small classroom. 
++ One that immediately comes to mind is that perhaps students who are assigned to treatment have greater variance in their outcomes than students who are assigned to control. This could happen if there are some students who really excel in the small classroom. 
 + Another, that we aren't going to correct for in this document, but that we **certainly** should, is that the outcomes within a school might also be correlated in a way that our model is not accounting for. Including a fixed effect for each school effectively *de-means* the school effects so that we have a more precise estimate of the treatment effect within each school, but it doesn't address any of the *within* school correlation that might exist. 
-+ As we talk about in the course, if we have relatively high Inter-Cluster Correlation, then our standard errors are inappropriately enthuiastic about rejecting the null hypothesis (they're too small). This is because our standard errors are behaving as though we have `N` observations, when in fact functionally we might have (many) fewer useful observations. 
++ As we talk about in the course, if we have relatively high Inter-Cluster Correlation, then our standard errors are inappropriately enthusiastic about rejecting the null hypothesis (they're too small). This is because our standard errors are behaving as though we have `N` observations, when in fact functionally we might have (many) fewer useful observations. 
 
 ## Correct standard errors to be robust SEs 
 ```{r}
@@ -247,7 +247,7 @@ There is a general, three-step process for drawing inference.
 
 When our data meets the assumptions for Ordinary Least Squares regression, we can perform both of these at the same time because the $\hat{\beta}_{OLS} = (X'X)^{-1}(X'Y)$ solution has built into it a ready made computation for the standard errors for $\hat{\beta}$ which is $\hat{SE}_{OLS} = \hat{\sigma}(X'X)^{-1}$ where $\hat{\sigma}$ is drawn from the over sum of squared residuals, $\hat{\sigma} = \epsilon'\epsilon \equiv \sum \epsilon^{2}$. (As a notational convention the _hat_ [$\hat{.}$] means that we have estimated the quantity, rather than it being a theoretic quantity.)
 
-In general, though, we might not have these handy properties. In particular, if the errors are heteroskedastic---they have a different dispersion conditional on the $X$ values we are examining---or if they are clustered in some way, then we'll have to make a post-estimation correction to the standard errors. I'll just note here that standard errors are _always_ a function of the variance covariance matrix (in parciular, the square-root of the diagonal of this matrix). 
+In general, though, we might not have these handy properties. In particular, if the errors are heteroskedastic---they have a different dispersion conditional on the $X$ values we are examining---or if they are clustered in some way, then we'll have to make a post-estimation correction to the standard errors. I'll just note here that standard errors are _always_ a function of the variance covariance matrix (in particular, the square-root of the diagonal of this matrix). 
 
 Great... but what does this look like in practice? Three steps: 
 
@@ -286,9 +286,9 @@ stargazer(m1, m2, m3, type = "latex",
 ```
 
 # Clustered SEs 
-The last thing here is acknowledging that we've very likely got correlated potential outcomes within schools. Including a fixed effect term for each school removes the possiblity of inducing bias in our estimate. However, since we can't plausibly assume that the variance is the same within each of the individual school clusters, then failing to appropriately account for the empirical variance might lead us to estimate inappropriately small standard errors. Why would this be a problem? Well, if we want to falsely reject the null in only 5% of cases ($\alpha = 0.95$), then if we make the wrong assumptions we might falsely reject the null hypothesis at higher (or even lower rates). Typically, we aren't kept up at night if we're a little conservative in our estimates, but beign too *gung-ho* is a problem. 
+The last thing here is acknowledging that we've very likely got correlated potential outcomes within schools. Including a fixed effect term for each school removes the possibility of inducing bias in our estimate. However, since we can't plausibly assume that the variance is the same within each of the individual school clusters, then failing to appropriately account for the empirical variance might lead us to estimate inappropriately small standard errors. Why would this be a problem? Well, if we want to falsely reject the null in only 5% of cases ($\alpha = 0.95$), then if we make the wrong assumptions we might falsely reject the null hypothesis at higher (or even lower rates). Typically, we aren't kept up at night if we're a little conservative in our estimates, but being too *gung-ho* is a problem. 
 
-As noted in both *Field Experiments* and *Mostly Harmless Econometrics* the appropriate way to assess this is to calculate the estimated variance within each of the clusters and appropritely combine these estimtates. Conceptually this is pretty simple, but getting the maths just right can be a little particular. 
+As noted in both *Field Experiments* and *Mostly Harmless Econometrics* the appropriate way to assess this is to calculate the estimated variance within each of the clusters and appropriately combine these estimates. Conceptually this is pretty simple, but getting the maths just right can be a little particular. 
 
 
 ```{r}

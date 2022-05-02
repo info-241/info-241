@@ -146,7 +146,7 @@ Under the supposition of the sharp null hypothesis, RI distributions are in expe
 This makes writing a two-tailed test for the likelihood that a treatment effect **more extreme** than what we observed in our actual experiment if the sharp null were true straightforward: 
 
   - Make all RI ate simulations positive -- reflecting across the zero 
-    symmetri line using the absolute value function, `abs`. 
+    symmetry line using the absolute value function, `abs`. 
   - At the same time, ensure that the `ate` you have calculated falls 
     on the positive side of the real number line by also taking the 
     absolute value of the ate. 

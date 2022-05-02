@@ -3,7 +3,7 @@ This is the directory for assignments. Please write code relative to this reposi
 
 # Approach to these problem sets 
 
-Collaboration is **crucial**. The instructors benefited from working together as studetns (we were all students of the same UC San Diego PhD program); you will assuredly benefit from working together with your classmates.
+Collaboration is **crucial**. The instructors benefited from working together as students (we were all students of the same UC San Diego PhD program); you will assuredly benefit from working together with your classmates.
 
 - Set up regular working groups for the problem sets 
 - Talk about the problem sets in our **whole class** Slack channel

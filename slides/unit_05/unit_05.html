@@ -14,10 +14,10 @@
 class: center, middle, inverse, title-slide
 
 # w241: Experiments and Causality
-## Unit 5: Covariates and Regression
+## Covariates and Regression
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-05-24
+### Updated: 2022-04-20
 
 ---
 
@@ -125,7 +125,7 @@ class: inverse, center, middle
 - With only 4,000 subjects, it isn't possible to get precise measurements for any insurance plan.  Wide confidence intervals, and low power. 
 
 ## Fix it in post? Try not to.   
-- It **is** ossible to fix an experiment where you spread your observations to thin. 
+- It **is** possible to fix an experiment where you spread your observations to thin. 
   - Researchers pool together a number of treatments into four broad categories of health insurance plans: (1) catastrophic, (2) deductible, (3) coinsurance, and (4) free.
   - Pooling raises questions if pooling happens after the fact. 
 
@@ -189,7 +189,7 @@ class: inverse, center, middle
   - Consider *Mastering Metrics*  Table 1.3.  
   - 11 different covariates 
   - Individual t-tests for each covariate `\(\rightarrow\)` false-discovery problem? 
-- T-tests are often sufficient, but if covariates are correlated, t-tests could failt to reject *when they should*. 
+- T-tests are often sufficient, but if covariates are correlated, t-tests could fail to reject *when they should*. 
 - *Field Experiments* proposed method: 
   - Regress the binary treatment variable (0 for catastrophic, 1 for deductible) on the whole list of 11 covariates 
   - Interpret the regression F statistic to test the hypothesis that all 11 differences are jointly equal to zero.

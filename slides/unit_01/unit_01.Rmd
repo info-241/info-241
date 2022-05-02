@@ -51,7 +51,7 @@ Please read [this article](https://www.nytimes.com/2007/09/16/magazine/16epidemi
 ## The two results are not compatible
 
 - Which of these results do be _believe_ and why? 
-- HRT either increases, decreases, or doesn't change risk of heart attacks. How then can the Nurses' Health Study and Womens' Health Initiative disagree? 
+- HRT either increases, decreases, or doesn't change risk of heart attacks. How then can the Nurses' Health Study and Women's Health Initiative disagree? 
 
 ---
 
@@ -73,7 +73,7 @@ Please read [this article](https://www.nytimes.com/2007/09/16/magazine/16epidemi
 ## Unmeasured confound
 
   - Nurses' Health Study: Those who _choose_ to take HRT have different underlying health conditions and motivations than those who _choose not_ to take HRT. 
-  - Womens' Health Initiative: Those who _are assigned_ to undergo HRT are statistically indistinguishable form those who _are assigned_ **to not** undergo HRT. 
+  - Women's Health Initiative: Those who _are assigned_ to undergo HRT are statistically indistinguishable form those who _are assigned_ **to not** undergo HRT. 
   
 ---
 
@@ -203,7 +203,7 @@ sour_lemons %>%
 
   - Charging a different price every day
   - Charging more on a very hod day, and more lemonade sold
-    - Temperature is a confounding factor: like price, termperature also affects lemonade sales
+    - Temperature is a confounding factor: like price, temperature also affects lemonade sales
     - Might incorrectly assume the price increase (rather than the temperature) caused the increase in sales. 
   - One wouldn't learn the true effects of a price change if any factor that also influences sales is correlated with price change. 
   
@@ -244,11 +244,11 @@ lemons %>%
 
   - Nurses' Health Study on HRT: 
     - _Possible story_: Women who receive hormones generally tended to care more about their health, and/or follow doctors' recommendations. 
-    - Lower incedence of heart attacks possibly caused by _these_ factors, ratehr than HRT. 
+    - Lower incidence of heart attacks possibly caused by _these_ factors, rather than HRT. 
   - Lemonade stand data
     - The higher the price, the more lemonade sold
     - Turns out, the kid is a ruthless capitalist! They charged more when the temperature was higher. 
-    - Temperatuer is a confounding factor in this case. 
+    - Temperature is a confounding factor in this case. 
 ---
 
 # What is a natural experiment? 
@@ -273,9 +273,9 @@ lemons %>%
 ## Best 
 - Data from _naturally occurring experiments_ (i.e. situations where variation was produced by something like random assignment) 
   - Example: charter school lottery deciding applicant acceptance
-    - Data about applicants possibly analyzed to study causal effects of charte school education 
-    - Same characteristics in both groups, those who attened the charger school and those who did not
-  - Example: Vietnam draft lottery that causd some people to get more college education
+    - Data about applicants possibly analyzed to study causal effects of charter school education 
+    - Same characteristics in both groups, those who attended the charger school and those who did not
+  - Example: Vietnam draft lottery that caused some people to get more college education
     - Group that got more college education is otherwise identical to group that did not 
     
 ---
@@ -317,7 +317,7 @@ class: inverse, center, middle
   - Currency: Cash 
   - Question: How should one value a _Magic_ card? 
 - Beginning of _Magic_ auctions, with bids updated via email 
-- Cards sold -- auction closed -- if there were no price increasese in three days. 
+- Cards sold -- auction closed -- if there were no price increases in three days. 
 
 ---
 
@@ -341,7 +341,7 @@ class: inverse, center, middle
   - Importantly, there is _no_ value in this system that is beyond the assigned value. Does this match reality? 
 - With this setup, researchers can examine ascending-bid and sealed-bid auctions 
 - Find interesting violations of theory 
-- These lab violations raised the question: are these inconsistencies with theoretical predictions an artifact of the labratory, or are these more general when people are acting within a _real_ auction market? 
+- These lab violations raised the question: are these inconsistencies with theoretical predictions an artifact of the laboratory, or are these more general when people are acting within a _real_ auction market? 
 
 ---
 
@@ -349,7 +349,7 @@ class: inverse, center, middle
 
 1. English auctions: ascending bids 
 2. Sealed-bid auctions: one-time highest bids
-3. Dutch auctions: decending price clock 
+3. Dutch auctions: descending price clock 
 4. Vickrey's "second-price" auction: second-highest bid determines winner's price (like eBay proxy bidding)
 
 ---
@@ -359,10 +359,10 @@ class: inverse, center, middle
 - Strategic equivalence: strong prediction
   - Dutch and first-price auctions are strategically equivalent because they have the same amount of information 
   - English and second-price auctions are strategically equivalent under _private value_ (like those assigned in the lab)
-    - Thus, there is a dominant-strategy mechanism for trutheful revelation of valuations. 
-    - Regardless of others' strategies, one's own optimal stretegy is the same bid: bid my maximum willingness to pay 
+    - Thus, there is a dominant-strategy mechanism for truthful revelation of valuations. 
+    - Regardless of others' strategies, one's own optimal strategy is the same bid: bid my maximum willingness to pay 
 - General revenue equivalence: weaker prediction 
-  - Expected revenue of all four formats should be the ame if people are risk-neutral
+  - Expected revenue of all four formats should be the same if people are risk-neutral
   
 ---
 
@@ -370,7 +370,7 @@ class: inverse, center, middle
 
 ## Cox et al. (1982, 1983)
 
-- First price auctions raise more revenue than Dutch uactions 
+- First price auctions raise more revenue than Dutch auctions 
 
 ## Kagel et al (1987, 1993) 
 

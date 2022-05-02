@@ -31,10 +31,10 @@ summary(lm(Voted ~ Education + log(Income) + Age + Treated, data=data))
 # and it accounts for around 20% of our sample.
 table(data$MunicipalityID)
 
-# We are interested in whether there are heterogenous treatment effects across municipalities,
+# We are interested in whether there are heterogeneous treatment effects across municipalities,
 # and especially whether the treatment effect is different for the city compared to the rural municipalities in the hinterland.
 
-# In order to investigate the presence of heterogenous effects, we interact the treatment variable with municipality
+# In order to investigate the presence of heterogeneous effects, we interact the treatment variable with municipality
 mod <- lm(Voted ~ Education + log(Income) + Age + factor(MunicipalityID) + Treated + Treated:factor(MunicipalityID), data=data)
 summary(mod)
 
@@ -120,7 +120,7 @@ for(i in 1:1000){
 }
 
 threshold.finder <- function(threshold){
-  # This helper-function returnes TRUE if one or more of the p-values from the re-randomization
+  # This helper-function returns TRUE if one or more of the p-values from the re-randomization
   # trial is below a given threshold alpha, and FALSE otherwise (this is the family-wise hypothesis test)
   mean(apply(p.sims, 2, x <- function(x) any(x < threshold) ))
 }
@@ -128,7 +128,7 @@ threshold.finder <- function(threshold){
 # This creates a vector of possible threshold levels between 0 and 0.05
 thresholds <- seq(0, 0.05, length.out = 1000)
 
-# This runs the tresthold.finder() function on each of the possible threshold values that
+# This runs the threshold.finder() function on each of the possible threshold values that
 # we just created. It tells us the Family-wise Type I error rate for each threshold value
 FWER <- sapply(thresholds, threshold.finder)
 cbind(thresholds, FWER)
@@ -158,7 +158,7 @@ for(i in 1:s){
   mod <- lm(Voted ~ Education + log(Income) + Age + factor(MunicipalityID) + Treated + Treated:factor(MunicipalityID), data=re.data)
   p.values <- summary(mod)$coefficients[25:43,4]
   
-  # For each of the methods of caluclating p-values, the values of this trial is TRUE
+  # For each of the methods of calculating p-values, the values of this trial is TRUE
   # if we reject the null hypothesis for at least one site, and FALSE otherwise
   unadjusted.reject <- c(unadjusted.reject, any(p.values < 0.05))
   bonferroni.reject <- c(bonferroni.reject, any(p.adjust(p.values, "bonferroni") < 0.05))

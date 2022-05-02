@@ -54,6 +54,6 @@ Can you use these two quantities to produce a CACE?
 
 ## Second, let's do it using models
 
-1. Estiamte the ITT using a `lm` call. 
-2. Estiamte the ITT_d using a `lm` call. 
+1. Estimate the ITT using a `lm` call. 
+2. Estimate the ITT_d using a `lm` call. 
 3. Divide these coefficients. 

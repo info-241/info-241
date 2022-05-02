@@ -7,10 +7,10 @@
 #+LATEX_HEADER:
 #+LATEX_HEADER_EXTRA:
 * The Set Up
-Recently --- for the last decade or more --- there has been considerable political discussion about individuals' Second Amendment rights.[fn:1] Gun violence has caused incredible harm to communities. Its blight disproportionately affects communities of color: one estimate finds that Black Americans experience 10 times the number of gun homicides, and 18 times the number of incedents of gun violence.
+Recently --- for the last decade or more --- there has been considerable political discussion about individuals' Second Amendment rights.[fn:1] Gun violence has caused incredible harm to communities. Its blight disproportionately affects communities of color: one estimate finds that Black Americans experience 10 times the number of gun homicides, and 18 times the number of incidents of gun violence.
 
 * What We're Interested In 
-There are a lot of arguments that are out there. Some are normative, some historical, some preferential. As a human and a citizen, we have preferences over outcomes, but as /scientists/ we have a responsibility to pose a question that can be adjucated empirically.
+There are a lot of arguments that are out there. Some are normative, some historical, some preferential. As a human and a citizen, we have preferences over outcomes, but as /scientists/ we have a responsibility to pose a question that can be adjudicated empirically.
 If one were to boil the debate down to its most basic claims, it certainly sounds like a causal question: /Would enacting tougher gun-control legislation cause a reduction in the harm from violent acts?/
 
 * For Both Groups
@@ -26,7 +26,7 @@ You are going to think about the evidence that might exist that would enable us 
   - How do you reason about how informative these interventions are about the effects of the policy that you might propose /here/ and /now/?
 - What are the outcomes that we are interested in? 
 - What types of studies might have been rolled out in the past?
-  - What does the design of such a studyd look like?
+  - What does the design of such a study look like?
   - What are the concerns with a design of that particular form? 
   - AKA: What are the strengths of the types of past designs? What are the limitations?
 - How would you structure a pro-restriction argument (again, not focusing on the particular details of a specific plan) to try and convince the group that does not want reductions?
@@ -60,7 +60,7 @@ With this as the back drop:
 
 * Footnotes
 
-[fn:1] Hold aside the statments made by the Republican Presidential nominee about the "Second Amendment People" doing something to the Democratic Presidential nominee... 
+[fn:1] Hold aside the statements made by the Republican Presidential nominee about the "Second Amendment People" doing something to the Democratic Presidential nominee... 
 
 [fn:2] Why are there two clauses? Why are they formed in such a way? Were the Framers of the Constitution actively /trying/ to confuse us? Is there a treasure map on the back of the Declaration of Independence?  What is the relationship between original intent and interpretative law? And so on and so on...
 

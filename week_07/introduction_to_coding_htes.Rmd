@@ -36,7 +36,7 @@ d <- data.table(d)
 
 ```{r define functions}
 get_cluster_se <- function(model, cluster) { 
-  ## this is hardcoded against the apfschool code
+  ## this is hard coded against the apfschool code
   ## if generalized, it would have to take an additional argument.
   sqrt(diag(vcovCL(model, cluster = d[ , apfschoolcode])))
   }

@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ## Week 09: Spillovers in Experiments
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-07-29
+### Updated: 2022-04-20
 
 ---
 
@@ -40,7 +40,7 @@ class: inverse, center, middle
 
 Effects of one person's treatment on the outcome of another person
 - Regardless of whether the second person was treated
-- Eg. Person A in ad campain treatment discusses the ad with person B in the control group
+- E.g. Person A in ad campaign treatment discusses the ad with person B in the control group
 - When this interaction causes B to make a purchase she would not have made otherwise, this is **spillover**
 
 ---
@@ -70,7 +70,7 @@ class: inverse, center, middle
 ## Approach
 - Spot-check a fraction of each employee's reported donors
 - "Bad calls" are removed from the employee's bonus
-- Some of these may be employee bad luck (eg. donor changed mind), but some may be deliberate cheating
+- Some of these may be employee bad luck (e.g. donor changed mind), but some may be deliberate cheating
 - Minimize expensive spot-checks (callbacks)
 
 
@@ -87,7 +87,7 @@ class: inverse, center, middle
   
 ---
 # Results
-- When zero audited calls are reported back to an employee, the fraction of bad calls inreases by 3%
+- When zero audited calls are reported back to an employee, the fraction of bad calls increases by 3%
   - Baseline mean: 2%
   - Minimum rate to affect performance: 2%
   - No statistically significant difference between 2%, 5%, and 10%
@@ -121,13 +121,13 @@ class: inverse, center, middle
 **Question:** With spillovers, would we expect a simple randomized experiment to underestimate or overestimate the effect of changing the auditing policy?
 
 **Answer: ** Underestimate
-- Word-of-mounth effect makes 0% and 5% groups more similar and reduces estimated treatment effects
+- Word-of-mouth effect makes 0% and 5% groups more similar and reduces estimated treatment effects
 
 
 ---
 # What can we do to improve design?
 
-Randomize at work-site level (eg. different cities) instead of individual level
+Randomize at work-site level (e.g. different cities) instead of individual level
 - Distance between groups of employees minimizes chance of spillover
 - Represents clustered design (see *Field Experiments* 3.6.2)
 
@@ -141,21 +141,21 @@ Used in telemarketing example (Nagin et al 2002) to avoid spillover problems
   - Data collected at 25%
 - Cross-site variation in treatment provides basis for results
 - Within-site variation obtained by reshuffling treatments after six weeks
-  - Addresses concerns about everyone in a given treatment gropu having correlated behavior for reasons other than the treatment
+  - Addresses concerns about everyone in a given treatment group having correlated behavior for reasons other than the treatment
 
 
 ---
 # Advantages and Disadvantages
 
 ## Clustered Design Advantages:
-- Reduced word-of-mounth spillovers
+- Reduced word-of-mouth spillovers
 - Easier administration
 
 ## Clustered Design Disadvantages:
 - Less randomization
 - Less precision in estimated treatment effect
   - Due to possible correlation of outcomes within treatment
-  - Eg. perhaps rain is correlated with certain employee or donor behaviors
+  - E.g. perhaps rain is correlated with certain employee or donor behaviors
   - Clustered standard errors correctly estimate this uncertainty; regular standard errors are underestimated
   
   
@@ -167,7 +167,7 @@ Used in telemarketing example (Nagin et al 2002) to avoid spillover problems
 Make sure you understand the roommate example, specifically:
 - How ignoring spillover (externality) affects bias
 - New subscript notation on potential outcomes
-  - First subcript is roommate
+  - First subscript is roommate
   - Second subscript is treated individual (self)
   
   
@@ -283,15 +283,15 @@ class: inverse, center, middle
 # Making Assumptions
 
 Arbitrary assumptions about geographic extent of spillover can radically change estimates
-- Eg. what if spillover range is 750 m vs 500 m?
+- E.g. what if spillover range is 750 m vs 500 m?
 - What if not constant?
   - Linear decline
-  - Quadradic decline
+  - Quadratic decline
 
 Contrast with usual virtue of experiments: make measurements with minimal assumptions
 
 Assumption problems not unique to geography
-- Eg. social networks
+- E.g. social networks
 
 
 ---
@@ -315,7 +315,7 @@ class: inverse, center, middle
 
 - Lewis and Reiley (2014) estimate persistent effects of advertising in subsequent weeks
 
-- Without re-reandomization in second campaigns, we can't distinguish its separate effects
+- Without re-randomization in second campaigns, we can't distinguish its separate effects
 
 
 
@@ -361,8 +361,8 @@ class: inverse, center, middle
 # Findings
 - Treatment point estimates uniformly positive every week
 - Difference-in-difference assumption may have caused overestimation
-  - All obsvations based on same pre-period
-  - Overestimation due to pre-period differences will carry over to all subseguent weeks
+  - All observations based on same pre-period
+  - Overestimation due to pre-period differences will carry over to all subsequent weeks
 - Results show evidence of long-term effects of advertising
 
 
@@ -506,7 +506,7 @@ class: inverse, center, middle
 # Benefits of Waitlist Design
 
 - Allows experimentation
-- Allays concerns about witholding treatment
+- Allays concerns about withholding treatment
 - Can delay widespread treatment long enough to see effects in early treatment groups before administering to all groups
 - Long-run *and* simultaneous treatment effects
 
@@ -520,8 +520,8 @@ class: inverse, center, middle
 
 - All experiments aim for *Ceteris paribus* "all other things being equal" except treatment effect
 - Spillovers between subjects can bias results:
-  - Positive spillovers: underestimation (eg. I see ads and take my friend to the store)
-  - Negative spillovers: overestimation (eg. extra police divert crime to a difference area)
+  - Positive spillovers: underestimation (e.g. I see ads and take my friend to the store)
+  - Negative spillovers: overestimation (e.g. extra police divert crime to a difference area)
 - Clustered treatment can eliminate this bias
 - Within-subjects design can be valuable if treatment effects are limited in time
 - Stepped-wedge designs get variation both within and between subjects

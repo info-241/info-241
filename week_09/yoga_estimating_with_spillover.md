@@ -15,6 +15,6 @@ Set the following parameters to begin with: Set the *direct effect* to be 5, the
 For each of the following scenarios, consider the **True** and **Estimated** treatment effects. Why or why not, was the estimate biased? 
 
 1. At the baseline settings, what do you estimate? Is this estimate biased or accurate? Why or why not? 
-2. Now, set the `Spillover Radious` to be 3. This means, that although the spillover *actually* occuring up to 5 km, your model is making the substantive assumption that it only extends for 3km. What do you estimate? Why? 
+2. Now, set the `Spillover Radious` to be 3. This means, that although the spillover *actually* occurring up to 5 km, your model is making the substantive assumption that it only extends for 3km. What do you estimate? Why? 
 3. Before you change anything: what do you think would happen if you were to set the indirect effect to be 2 while keeping other options constant. Write this down, or say it aloud. Then, actually change the setting and observe if your prediction was correct. 
 4. If you expand the radius from 3 to 7, what will happen to your estimates, all else kept equal. Say it aloud! Then, make the change and see if what you learned was borne out. 

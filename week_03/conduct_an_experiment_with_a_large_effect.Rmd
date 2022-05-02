@@ -84,7 +84,7 @@ Recall the steps to conduct randomization inference.
 2.  Compute the desired test statistic (here the ATE) on this
     experimental data.
 3.  Suppose that the sharp null hypothesis is true, thereby solving the
-    *missing data* problem that is at the heart of the fundimental
+    *missing data* problem that is at the heart of the fundamental
     problem of causal inference, and permitting the complete observation
     of all potential outcomes under the supposition of the sharp null
     were true.
@@ -141,7 +141,7 @@ From the observed outcomes, create a randomization inference distribution of how
 
 ## 5. Generate a p-value
 
-Finally, generate a two sided p-value that makes a probabilisitc statement about the proportion of treatment assignments that could have produced a treatment effect larger than the observed `ate`, even if the sharp null hypothesis were true. 
+Finally, generate a two sided p-value that makes a probabilistic statement about the proportion of treatment assignments that could have produced a treatment effect larger than the observed `ate`, even if the sharp null hypothesis were true. 
 
 ```{r} 
 

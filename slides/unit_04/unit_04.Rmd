@@ -360,7 +360,7 @@ blocked_ate_by_women <- ggplot() +
 
 # P-values of Blocked vs. Normal Study 
 
-- Blocking allows for more precision (efficiency) by not conducting randomization where covaraites (e.g. sex) are very imbalanced
+- Blocking allows for more precision (efficiency) by not conducting randomization where covariates (e.g. sex) are very imbalanced
 - This means that your estimator will produce an estimate that is closer to the *true* causal effect
 - This is an estimate that is closer to the orange lines on the last slide
 
@@ -466,7 +466,7 @@ class: inverse, center, middle
 
 ```{r}
 classrooms_number <- 8
-students_number   <- 16 # this is MIDS, not kindergarden
+students_number   <- 16 # this is MIDS, not kindergarten
 
 classroom_ids_vector <- rep(x = 1:8, each = 16)
 classroom_ids_vector
@@ -580,7 +580,7 @@ experiment_data %>%
 - Similarly, **under the sharp null hypothesis** we assume that the potential outcomes to control that we *observe* for the people who are in the control group, $Y_{i}(0)|d_{i}=0$ are equal to the potential outcomes to treatment that we *do not observe* for the units in the control group, $Y_{i}(1)|d_{i}=0$
 
 ## Take care
-- Take care to notice how this statement of the sharp null hypothesis is different from the guarantees of apples-to-apples comparisions that are achieved through randomization
+- Take care to notice how this statement of the sharp null hypothesis is different from the guarantees of apples-to-apples comparisons that are achieved through randomization
 
 ---
 

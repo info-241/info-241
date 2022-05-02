@@ -44,7 +44,7 @@ theme_set(theme_minimal())
     
 ---
 
-class: inverse, cender, middle
+class: inverse, center, middle
 
 # Work Experience as a Covariate
 
@@ -496,7 +496,7 @@ plot_homoskedastic | plot_heteroskedastic | lucky_heteroskedastic
 - More similarity within each classroom than between classrooms
 - Changing 20 similar students from control group to treatment group moves potential Y for all 20 at once
   - Result: more variance than if 20 randomly chosen people had been moved
-- Clustered Standard Errorss account for lack of independence, asd RSEs account for heteroskedasticity
+- Clustered Standard Errors account for lack of independence, and RSEs account for heteroskedasticity
    - In Tennessee STAR experiment, CSEs are about three times larger than OLS standard errors
   - Further technical details, see MHE 8.2
   
@@ -508,7 +508,7 @@ plot_homoskedastic | plot_heteroskedastic | lucky_heteroskedastic
 - Best practice to always use *robust standard errors*
   - Do not assume homoskedastic errors 
   - Pay only a small penalty if we're incorrect (i.e. the data is *actually* homoskedastic) 
-- If treatment assignmet is clustered, **must** use clustered standard errors to avoid unintentionally overstating precision of estimates
+- If treatment assignment is clustered, **must** use clustered standard errors to avoid unintentionally overstating precision of estimates
 
 ---
 
