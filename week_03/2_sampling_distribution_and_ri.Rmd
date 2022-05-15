@@ -14,7 +14,7 @@ set.seed(1)
 
 # The sharp null through an Anodyne Example: Estrogen and Soybeans
 
-Suppose that e are working through the example of a randomized
+Suppose that we are working through the example of a randomized
 assignment of men and women to eat (or not eat) soybeans and we are
 measuring the level of estrogen present in each of their bloodstreams
 (perhaps in parts/million).
@@ -99,10 +99,10 @@ why this is true).
 
 Next, we create a vector of realized outcomes. first using the compact
 notation that Green and Gerber prefer using maths. For those randomized
-to treatment, we multiply the potential outcome to treatment time the
+to treatment, we multiply the potential outcome to treatment times the
 treatment vector (which is a 1 when they were assigned to treatment),
 and for those in control, into this vector we assign the potential
-outcome to control time the quantity `(1 - treatment)` which will be one
+outcome to control times the quantity `(1 - treatment)` which will be one
 when they are in the treatment group.
 
 ```{r}
@@ -132,7 +132,7 @@ that does so by looping through each row of the data.table to do so.
           }
       }
 
-# Conducting an experiment is sampling (once) the treatment vector
+# Conducting an experiment by sampling (once) the treatment vector
 
 Now that we have the data set up, we can begin to examine what the
 lecture is really about, what is the distribution of ATE that we observe
