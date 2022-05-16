@@ -84,8 +84,8 @@ We're trying to give students a predictable office hours schedule. To get this d
 | Monday    | 5:30-6:30 |              |
 | Tuesday   | 5:30-6:30 |              |
 | Wednesday | 5:30-6:30 |  Conor       |
-| Thursday  | 5:30-6:30 |              |
-| Sunday    | 5:30-6:30 |              |
+| Thursday  | 5:30-6:30 |  David       |
+| Sunday    | 5:30-6:30 |  David       |
 | ---       |       --- | --           |
 | Monday    |           |              |
 | Tuesday   |           |              |
