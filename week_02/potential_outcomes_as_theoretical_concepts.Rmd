@@ -77,7 +77,7 @@ Create people's potential outcomes to treatment, `y_1` as the sum of their `y_0`
 d[ , y_1 := ]
 ```
 
-And so, we can represent this **science table** -- the set of all potentially realizable outcomes, and also measurable covariates. 
+And so, we can represent this **science fiction table** -- the set of all potentially realizable outcomes, and also measurable covariates. 
 
 ```{r}
 head(d)
@@ -118,7 +118,7 @@ Make two final columns:
 
 Why are we only able to measure some of people's potential outcomes? As David has identified in the async videos, we're only able to measure the potential outcomes that are consistent with the treatment that we actually give people. 
 
-And, so, while the *science table* might contain information about each persons potential outcomes to treatment and control, the table of data that we're ever going to be able to generate has a more restricted set. Call this observable data set `obs`, and it is a subset of all the data that might be out there.
+And, so, while the *science fiction table* might contain information about each persons potential outcomes to treatment and control, the table of data that we're ever going to be able to generate has a more restricted set. Call this observable data set `obs`, and it is a subset of all the data that might be out there.
 
 ```{r}
 obs <- d[ , .(id, height, age, treat, Y)]

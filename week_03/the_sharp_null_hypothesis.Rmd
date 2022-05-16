@@ -69,7 +69,7 @@ ate
 
 # Producing a RI-based Assignment Distribution
 
-When we conduct an experiment, we make real specific subsets of the *science table* that Green and Gerber describe. Specifically, by randomly assigning some people to treatment and some to control, we produce and then measure two unbiased estimates of the population potential outcomes to treatment and potential outcomes to control. 
+When we conduct an experiment, we make real specific subsets of the *science fiction table* that Green and Gerber describe. Specifically, by randomly assigning some people to treatment and some to control, we produce and then measure two unbiased estimates of the population potential outcomes to treatment and potential outcomes to control. 
 
 As we have seen, in this particular randomization we generate a treatment effect of `r ate`. But, this is just *one* experiment that we've run; just a single sample from the treatment assignment vector. Knowing this, when we observe giving soybeans to people causes a treatment effect of `r ate`, when we present this to colleagues, are we able to trumpet this effect as the single, and absolute truth? 
 
@@ -119,7 +119,7 @@ Doesn't have any information about chance. Randomization Inference will provide 
 
 As we conduct it, randomization inference is intentionally circumspect about all of the *other* experiments that we could have conducted. 
 
-When we actually conduct the experiment, we lose the ability to observe the counterfactual potential outcomes -- the potential outcomes for the condition that subjects are not assigned to. To make this very clear, let's create a new objected called `d_experiment` that is a subset of the science table that contains only the data that is *actually* observable. 
+When we actually conduct the experiment, we lose the ability to observe the counterfactual potential outcomes -- the potential outcomes for the condition that subjects are not assigned to. To make this very clear, let's create a new objected called `d_experiment` that is a subset of the science fiction table that contains only the data that is *actually* observable. 
 
 ```{r}
 d_experiment <- d[ , .(id, outcomes, condition, group)]
