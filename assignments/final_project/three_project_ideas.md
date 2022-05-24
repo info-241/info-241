@@ -1,6 +1,6 @@
 # Three or Four Project Ideas 
 
-In this assignment, you and your team are going to propose three or four experiment ideas. Please propose one idea for each member of the team. After feedback from your instructor, your team will choose one of these three proposed ideas to continue to develop into your final project for this class for the semester. As such, the ideas that you propose should be _interesting_ to you, should be _feasible_ for you, and should __meet the requirements_ of the final project. 
+In this assignment, you and your team are going to propose three or four experiment ideas. Please propose one idea for each member of the team. After feedback from your instructor, your team will choose one of these three proposed ideas to continue to develop into your final project for this class for the semester. As such, the ideas that you propose should be _interesting_ to you, should be _feasible_ for you, and should _meet the requirements_ of the final project. 
 
 ## Where should I get ideas? 
 
@@ -19,6 +19,10 @@ Generating ideas is hard. Especially if you haven't had to think about causal qu
      - You can listen to science, economics, politics, or psychology podcasts.
 3. **You might look a policies that are being proposed.**
    - Almost without exception, policies, rules, and laws are implemented with the intention of _causing_ a certain event to occur. Sometimes these policies have a good set of causal evidence to support their implementation; many times, they do not. 
+4. **You might read Gerber A & Green D. 2012. *Field Experiments*. Appendix B**
+   - This Appendix includes Gerber & Green's thoughts on _Suggested Field Experiments
+for Class Projects_, broken into sections regarding _Crafting Your Own Experiment_ and _Suggested Experimental Topics for Practicum Exercises_.
+
 
 ### A few examples of past projects
 
