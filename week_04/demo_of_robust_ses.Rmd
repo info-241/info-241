@@ -33,7 +33,7 @@ Think about what such a strong prior would mean! You would have to:
 Here's the process when we're thinking about Standard Errors, and getting them
 right.
 
-1. Estimate your linear model. Whether this is gaussian (OLS), binomial (logit,probit), counting (Poisson), time to failure (exponential), or some other more esoteric form *IT DOESN'T MATTER* -- the estimation of coefficients is a distinct task from getting the uncertainty about those estimates correct.
+1. Estimate your linear model. Whether this is gaussian (OLS), binomial (logit, probit), counting (Poisson), time to failure (exponential), or some other more esoteric form *IT DOESN'T MATTER* -- the estimation of coefficients is a distinct task from getting the uncertainty about those estimates correct.
 2. Think about the data generating process. Does the assignment to treatment have any clustering to it? If not, then estimate robust standard errors. If yes, then estimate cluster-robust standard errors. Do the outcomes have some clustering to them? Are there groupings in the data? Then you should probably include a fixed-effect for each group, and also estimate cluster-robust standard errors.
 3. The estimation process is straightforward.
 
@@ -56,7 +56,7 @@ library(stargazer)
 Begin by loading the sample data 
 
 ```{r}
-rm(list = ls())
+# rm(list = ls())
 d <- fread(
   'https://www.kellogg.northwestern.edu/faculty/petersen/htm/papers/se/test_data.txt', 
   col.names = c('firmid', 'year', 'x', 'y'))
