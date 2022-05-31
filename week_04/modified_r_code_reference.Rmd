@@ -148,7 +148,7 @@ est_ate(outcomes_blocked, randomize_blocked()))
 # Compare ranges 
 source("http://ischool.berkeley.edu/~d.alex.hughes/code/pubPlot.R")
 plot(density(distribution_under_sharp_null), 
-     main = "Denisty of Outcomes", 
+     main = "Density of Outcomes", 
      lwd = 2, col="red", 
      ylim=c(0,.17))
 #distribution without blocking
