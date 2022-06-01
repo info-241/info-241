@@ -19,7 +19,7 @@ library(stargazer)                      # for printing tables
 
 options(digits=3)                       # limit the printed digits 
 
-rm(list = ls())
+# rm(list = ls())
 
 # set the path for your machine 
 path = "./"
@@ -308,10 +308,10 @@ sec3 <- sqrt(diag(cvcov3))
 
 And maybe print them near one another. 
 
-```{r, results='asis'}
+```{r}
 stargazer(m1, m1, m2, m2, m3, m3, 
           se = list(rse1, sec2, rse2, sec2, rse3, sec3),
-          type = "latex", 
+          type = "text", 
           omit = "school_id", 
           add.lines = list(c("SE flavor", "Rob.", "Cl. Rob.", "Rob.", "Cl.Rob", "Rob.", "Cl. Rob")), 
           title = "OLS Regression. Final Example.", 
@@ -324,3 +324,4 @@ stargazer(m1, m1, m2, m2, m3, m3,
           style = "apsr", 
           header = FALSE
 )
+```
