@@ -56,7 +56,7 @@ library(stargazer)
 Begin by loading the sample data 
 
 ```{r}
-rm(list = ls())
+# rm(list = ls())
 d <- fread(
   'https://www.kellogg.northwestern.edu/faculty/petersen/htm/papers/se/test_data.txt', 
   col.names = c('firmid', 'year', 'x', 'y'))
