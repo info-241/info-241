@@ -25,7 +25,7 @@
 
 - **Learning Objectives**: "At the end of this week's course of study, students will be able to:"
   - Clearly describe the objectives, and operation of the course. This includes methods of communication; and expectations for timing and delivery of assignments. 
-  - Appreciate the existance _and_ importance of causal questions in science, business, and data science applications. 
+  - Appreciate the existence _and_ importance of causal questions in science, business, and data science applications. 
 
 ## News articles with causal claims
 
@@ -66,7 +66,7 @@ Finally, please read the article we have titled _Predict or Cause_ by Susan Athe
 
 - **Learning Objectives**: "At the end of this week's course of study, students will be able to:" 
   - Make a clear statement about what it means for an input to **cause** a change in an outcome, using the language of potential outcomes. 
-  - Understand that theories that predict human behavior are less precise (and reliable) than theories that predict other behavior (i.e. physics); as a result, trial, sampling and measurment are necessary
+  - Understand that theories that predict human behavior are less precise (and reliable) than theories that predict other behavior (i.e. physics); as a result, trial, sampling and measurement are necessary
   - Understand that tightly controlled systems 
 
 ## Poor Economics 
@@ -170,7 +170,7 @@ Note that equation \[9.16\] only gives estimated coefficients, and lacks estimat
 
 This is a nice article that both demonstrates treatment effects using the language that we have built in this course, and also the issues that exist when conditioning on ``bad controls.''
 -  Section 1: Introduces the problem
--  Section 2: Can be skipped -- it just decribes how prevalent conditioning on post-treatment controls (i.e. bad controls) happens in political science
+-  Section 2: Can be skipped -- it just describes how prevalent conditioning on post-treatment controls (i.e. bad controls) happens in political science
 -  Section 3: Ensure that you can map how we move from the causal notation into the notation of the causal graph in Figures 1 and 2. Do you find this notation useful? Additionally, how does dropping observations based on post-treatment measured variables "ruin" the randomization? Can you follow along with the method of argument in section 3.4? Here, the authors are generating simulated data that has *no* treatment effect (on Y) but does have a treatment effect on the bad-control. How does this show the dangers of bad controls?
 -  Section 4: These are instructive examples of when people make a mistake and condition on post-treatment variables (the first example by Dickson, Gordon and Huber (2015)); and do NOT make the mistake (our very own Broockman and Butler (2015)). 
 
@@ -190,7 +190,7 @@ We’ve assigned two readings this week. Several sections of an academic article
 ## Muralidharan and Sundararaman (Journal of Political Economy, 2011)
 There’s no need to read [*the paper*](http://www.jstor.org/stable/10.1086/659655) before class. We’ve already read a good description of the experiment in the textbook. The main reason we refer to the original paper is so that we can see the full set of results (including standard errors!).
 
-We are going to practice reproducing the HTEs obtained by the authors, using original data we’ve obtained from them. Our goal is to estimate heterogenous effects of the incentive treatment by teacher education. That is, we will want to reproduce Column 5 of Table 6A in the paper. You'll need to pay attention to the fact that in the table, they only report three coefficients of interest, but they actually include some other covariates in the specification.
+We are going to practice reproducing the HTEs obtained by the authors, using original data we’ve obtained from them. Our goal is to estimate heterogeneous effects of the incentive treatment by teacher education. That is, we will want to reproduce Column 5 of Table 6A in the paper. You'll need to pay attention to the fact that in the table, they only report three coefficients of interest, but they actually include some other covariates in the specification.
 
 And here you can download the [*full dataset (35MB)*](https://drive.google.com/file/d/0B_Qj0otlErJqTWZsM0VLMVR4ZmM/view?usp=sharing) from Muralidharan and Sundararaman. You will also find [*these variable definitions*](https://docs.google.com/a/davidreiley.com/document/d/15vZWNovMaKnNaMYiIykuMia6nauGesq6VXJ-awfhct0/edit) useful for the exercise we’re about to do.
 
@@ -241,7 +241,7 @@ Questions to think about during your reading (and in Breakout 1):
 - This notational system is _another_ notational system. But, what might be the benefits of abstracting up from potential outcomes to a "_design based_" system? 
 - You can mostly ignore the "Quasi-Experiment" section.
 - What are the letters or the vocabulary in this design notation mean? R? O? X? N?
-- What are these "threats" that keep coming up in the two-group experiment design section? (If you're unsure, you can look back into the Internal Validity section). Why is a two-group design robust to conerns about history (something else in the world happens that causes our difference), or unit maturation (units change over time), or testing and instrumentation, while a one-group (i.e. no control group) would not be?
+- What are these "threats" that keep coming up in the two-group experiment design section? (If you're unsure, you can look back into the Internal Validity section). Why is a two-group design robust to concerns about history (something else in the world happens that causes our difference), or unit maturation (units change over time), or testing and instrumentation, while a one-group (i.e. no control group) would not be?
 
 ## Incomplete Control over Treatment
 
@@ -297,7 +297,7 @@ Think about the following discussion questions to guide your reading of the arti
 - How does the booting of Uber in Austin, Tx perform a nice "cluster randomization" for us? Are there spillover concerns? Are there other inference concerns?
 - What is the *core* nature of the difficulty with giving people "prime-time" or "rush" pricing if you're trying to estimate the price elasticity of users?
 - What is the *specific* nature of the interference or spillover in the Lyft article?
-- Challenge question: How would you calculate the emprirical change in the likelihood of rides under this spillover? Is this even possible?
+- Challenge question: How would you calculate the empirical change in the likelihood of rides under this spillover? Is this even possible?
 - How does the bias-variance chart presented in the Lyft article strike you? 
 
 ## Spillovers in team projects
@@ -320,7 +320,7 @@ In a breakout session with your team, we’ll ask you to brainstorm spillovers t
 -   What’s the “placebo test” here?
 -   Why do the results of this “placebo test” make us doubt Krueger’s original conclusion?
 -   What is the difference between a placebo test and a placebo design?
--   Think about one of the observational studies you originally critiquest in Week 2.  What placebo test might be conducted to suggest that the correlations weren’t causal?
+-   Think about one of the observational studies you originally critiqued in Week 2.  What placebo test might be conducted to suggest that the correlations weren’t causal?
 
 ## Simonsohn, Nelson, and Simmons (2014), [*P-curve: a key to the file drawer*](../readings/Simonsohn.2014.pdf).
 
@@ -349,7 +349,7 @@ We have prepared a [*document*](https://docs.google.com/a/davidreiley.com/docume
     - What is the design of the study?
     - What is the forcing variable?
     - What is the discontinuity?
-- Do you believe that being on one side or another of the cuttoff is
+- Do you believe that being on one side or another of the cutoff is
   _plausibly_ random? Why or why not? What are the major strengths
   and weaknesses of this as a form of "exogenation"?
 - What is the confound between start age and age at test taking? Why
@@ -359,7 +359,7 @@ We have prepared a [*document*](https://docs.google.com/a/davidreiley.com/docume
   quantity that they are estimating is _causal_? If so, for whom? If
   not, why not?
 - "In each regression, we include school fixed effects, so that we
-  are effectively making comparisons among studetns in the same
+  are effectively making comparisons among students in the same
   school." What do the authors mean? How does this work? Why is this
   sometimes called a "within estimator"?
 - Why would a "simple" OLS estimator of the School Starting Age
@@ -369,7 +369,7 @@ We have prepared a [*document*](https://docs.google.com/a/davidreiley.com/docume
   this check reported? Does the manipulation check seem to pass or
   fail?
 - What is the concern with systematic manipulation around the
-  cuttoff? What is the McCrary test for this?
+  cutoff? What is the McCrary test for this?
 - "Because our estimates are defined by variation around the January
   1st thresh- old, they are necessarily local estimates." What is
   meant by this sentence on page 23. 
@@ -423,10 +423,10 @@ x
     2.
     3.
     4.
-- B&G suggest a second four-item way to intead reason about generalizability. 
+- B&G suggest a second four-item way to instead reason about generalizability. 
     - What are these four steps?
     - B&G then illustrate these steps with little more than examples. Can you instead describe what each step means?
-	- Now, suppose that you're the decision-maker who has to decide whether to run the experiment signs about towel re-use in Arizona (now for a third trial). How woud you use the four-step framework to evaluate whether to run another experiment?  
+	- Now, suppose that you're the decision-maker who has to decide whether to run the experiment signs about towel re-use in Arizona (now for a third trial). How would you use the four-step framework to evaluate whether to run another experiment?  
 - Throughout the async, David Broockman highlights the extreme difficulty in generating data that tests mechanisms. So, isn't the Bates and Glennerster argument tantamount to saying, "Just think about this impossible thing that you're never going to be able to measure?" Or, can you use their framework profitably to generalize to other contexts? 
 
 ## [*Allcott and Rogers*](https://drive.google.com/file/d/0BxwM1dZBYvxBR0QwVWc5WmliVjg/view?usp=sharing)
@@ -476,12 +476,12 @@ x
 -   Brainstorm examples of experiments that you would like to convince your employers to run.
     -   What is the research question?
     -   What design do you propose?
--   Choose one of the proposed experiments, and collaborate to come up with an argument that will be convincing to the relevant decisionmaker. Consider the following questions:
+-   Choose one of the proposed experiments, and collaborate to come up with an argument that will be convincing to the relevant decision maker. Consider the following questions:
     -   Why is the question important to the business?
     -   What will be perceived as costly about the experiment?
     -   Are there stakeholders who might not want to know the true answer?
     -   Who in the organization needs to make better decisions based on the answer?
-    -   Can you quantify the hypothesized value of the better decisionmaking?
+    -   Can you quantify the hypothesized value of the better decision making?
 
 ## In Class Discussions
 
@@ -501,7 +501,7 @@ x
 **Discussion of [*Freedman reading*](../readings/freedman.1991.pdf)**
 -   What does Freedman mean by “shoe leather”?
 -   What did John Snow learn by applying shoe leather?
--   At the bottom of page 306, Freedman says “Testing one model on 24 different data sets could open a serious enquiry… Testing 24 models on one data set is less serious.” Restate this idea in your own words. Relate this idea to one of the important concepts we’ve discussed in the course.
+-   At the bottom of page 306, Freedman says “Testing one model on 24 different data sets could open a serious inquiry… Testing 24 models on one data set is less serious.” Restate this idea in your own words. Relate this idea to one of the important concepts we’ve discussed in the course.
 -   Is “shoe leather” really necessary in the era of Big Data? Why or why not?
 
 ## Final questions and wrap-up

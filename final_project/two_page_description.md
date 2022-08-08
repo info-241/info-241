@@ -38,7 +38,7 @@ When you submit this two-page description of the project, you will also schedule
 
 - Scott scheduling link:
 - David scheduling link: 
-- Conor scheduling link: 
+- Conor scheduling link: https://calendly.com/conorhealy-ucb
 
 
 

@@ -8,7 +8,7 @@
 #+LATEX_HEADER_EXTRA:
 
 * Smelly Patients 
-Medical doctors often have to complete some research as a part of getting their degrees. On of Alex's friends said one time, "When I was on my emergency department rotation, I worked with a large number of folks who were using the emergency department as a backstop for their health care. A small number of these folks, well, smelled bad. And, despite my desire to provide the same high level of care to everyone, I worry that I was treating these folks differently than others. I'd like to draw up an experiment that would let me evalute this."
+Medical doctors often have to complete some research as a part of getting their degrees. On of Alex's friends said one time, "When I was on my emergency department rotation, I worked with a large number of folks who were using the emergency department as a backstop for their health care. A small number of these folks, well, smelled bad. And, despite my desire to provide the same high level of care to everyone, I worry that I was treating these folks differently than others. I'd like to draw up an experiment that would let me evaluate this."
 - What is the causal question? 
 - What are the groups?
 - How would you randomize? 
@@ -32,9 +32,9 @@ Great. You're stoked, you're implementing your 241 knowledge, and when you look 
 
 ... Then, in a crushing blow, in the presentation to management that occurs right before yours you see that unbeknownst to you Chet was also running an optimization experiment. Egad! It wasn't the /exact/ same as yours, but nonetheless, now when you present your results you have to defend them against the claim that it was "Chets' experiment that caused the change in outcomes, not yours." 
 
-1. Suppose that Chet is randomizing via a randomizer that is tossing a coin at the time of page-load. The outcome data is what it is, it doesn't change now that you know Chet was also running an experiment. How does learning that Chet was running an expriment at the same time change your interpretation of your results?
-2. Suppose that Chet is randomizing via a randomizer, but that he wanted unequal distribution of treatment and control. On even seconds, he assigns 80% of traffic to control. On odd seconds he assigns 50% of trafic to control. (The rest in each case go to treatment.) Now, how does learning that Chet was running an experiment at the same time change your interpretation of results?
-3. Suppose that Chet is randomizing via seconds, and is assigning his treatment on odd seconds, and control on even seconds. Now, how does laerning that Chet was running an expriment at the same time change your interpretation of results?
+1. Suppose that Chet is randomizing via a randomizer that is tossing a coin at the time of page-load. The outcome data is what it is, it doesn't change now that you know Chet was also running an experiment. How does learning that Chet was running an experiment at the same time change your interpretation of your results?
+2. Suppose that Chet is randomizing via a randomizer, but that he wanted unequal distribution of treatment and control. On even seconds, he assigns 80% of traffic to control. On odd seconds he assigns 50% of traffic to control. (The rest in each case go to treatment.) Now, how does learning that Chet was running an experiment at the same time change your interpretation of results?
+3. Suppose that Chet is randomizing via seconds, and is assigning his treatment on odd seconds, and control on even seconds. Now, how does learning that Chet was running an experiment at the same time change your interpretation of results?
 
 * Gneezy and List 
 How long can you continue to bonus workers and get higher wages from them? 

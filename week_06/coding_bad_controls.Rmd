@@ -101,7 +101,7 @@ d[D==1, Y := y0 + tau]
 
 # Finally, Estimate Causal Effects 
 
-In the world that we've occupied to this point, whether we *do* or *do not* condition on a variable, an experiment that we've executed that has successfully randomized the treatment should produce a reliable causal estimate. That is, in this setup, **if we estimate a model, it should provide us with an unbiased estiamte of $\tau$, or 2.**. 
+In the world that we've occupied to this point, whether we *do* or *do not* condition on a variable, an experiment that we've executed that has successfully randomized the treatment should produce a reliable causal estimate. That is, in this setup, **if we estimate a model, it should provide us with an unbiased estimate of $\tau$, or 2.**. 
 
 ```{r}
 unconditional_model <- d[ , lm(Y ~ D)]
@@ -158,7 +158,7 @@ Create a bad control that is correlated with treatment
 d[ , bc  := 2 + 3 * D + rnorm(n = .N, mean = 0)]
 ```
 
-And, finally, reate the observed outcomes. 
+And, finally, create the observed outcomes. 
 ```{r} 
 d[D == 0, Y := y0 + bc]
 d[D == 1, Y := y0 + bc + tau]
@@ -170,10 +170,10 @@ d[D == 1, Y := y0 + bc + tau]
 
 When we are thinking about the causal model here, we're saying, "I think that the conditional expectation of Y depends on the treatment status". But, maybe I think I want to also control for the variable bc. 
 
-In fact, we can estimate a reliable causal effect for *either* `D` on `Y`, *or* `D` on `bc`, but not the two togheter. 
+In fact, we can estimate a reliable causal effect for *either* `D` on `Y`, *or* `D` on `bc`, but not the two together. 
 
 
-First, the caual effect of `D` on `Y` in \autoref{goodModel}. 
+First, the causal effect of `D` on `Y` in \autoref{goodModel}. 
 ```{r, results='asis'}
 m1 <- lm(Y ~ D, data = d)
 stargazer(m1, type = 'latex', label = 'goodModel', header = F)
@@ -193,7 +193,7 @@ m3 <- lm(Y ~ D + bc, data = d)
 stargazer(m3, type = 'latex', label = 'badModel', header = F)
 ``` 
 
-Now we're left with an under-estiamte of the causal effect of `D` on `Y`, and we've got some estimate of the effect of `bc` on `Y`. But, when we built the data, there wasn't such an effect! In fact, what is in here is the relationship between `y0` and `Y`, but through a mangled causal pipeline. 
+Now we're left with an under-estimate of the causal effect of `D` on `Y`, and we've got some estimate of the effect of `bc` on `Y`. But, when we built the data, there wasn't such an effect! In fact, what is in here is the relationship between `y0` and `Y`, but through a mangled causal pipeline. 
 
 The thing of it is, depending on the relationship between the bad control and the treatment, and the bad control and the treatment, there's *just no structured way to know* which direction the bias is going to be when you include a bad control. 
 
@@ -211,13 +211,13 @@ What if we build an example that is a little more complicated, but that fits wit
 
 Suppose that people have potential outcomes to earnings, and they are deciding whether they want to pursue a MIDS degree or not. We've been working on this one for a while.
 
-The Dean, in her wisdom, agrees to let current students and 241 faculty run an expriment where they randomly admit people to the program. Hurrah! We can evaluate this! And we can make a causal claim. 
+The Dean, in her wisdom, agrees to let current students and 241 faculty run an experiment where they randomly admit people to the program. Hurrah! We can evaluate this! And we can make a causal claim. 
 
 Suppose we have the following as a setup: 
 
-- Some students live in Bay Area. Because wages are stupid here (so are mortages), these students are paid *on average* $25,000 more than people who do not live in the Bay Area. 
+- Some students live in Bay Area. Because wages are stupid here (so are mortgages), these students are paid *on average* $25,000 more than people who do not live in the Bay Area. 
 - The *true* state of the world is that graduating with a MIDS degree leads individuals to earn $50,000 more, on average, if they graduate with a MIDS degree than if they didn't. This isn't a selection effect, but instead is actually the causal effect. 
-- There are some students who are *really* motivated to get that job at Pintrest. And, they think that actually have a shot at it once they're in MIDS! So, of the folks who are admitted, suppose that 25% of them move to the Bay Area. None of the people who are not admitted to MIDS move to the Bay Area. 
+- There are some students who are *really* motivated to get that job at Pinterest. And, they think that actually have a shot at it once they're in MIDS! So, of the folks who are admitted, suppose that 25% of them move to the Bay Area. None of the people who are not admitted to MIDS move to the Bay Area. 
 
 We could make data that is consistent with this story, right? Suppose that we have 500 students, at baseline the mean earnings for people who live in SF is \$75,000 and the mean earnings for people who do not live in SF is \$50,000. Furthermore, at baseline, 25% of the students live in SF. 
 
@@ -292,7 +292,7 @@ d[lives_in_sf_before == 0 & lives_in_sf_after == 1,
 d[lives_in_sf_before == 0 & lives_in_sf_after == 0, 
   y1 := y0 + rnorm(.N, 50000, 10000)]
 
-## And for the people who already lived in SF, they get the treatmetn effect 
+## And for the people who already lived in SF, they get the treatment effect 
 d[lives_in_sf_before == 1, 
   y1 := y0 + rnorm(.N, 50000, 10000)]
 
@@ -314,7 +314,7 @@ d[ , y1 := y0 + rnorm(.N, 50000, 10000)]
 ##d[lives_in_sf_before == 0 & lives_in_sf_after == 0, 
 ##  y1 := y0 + rnorm(.N, 50000, 10000)]
 
-## And for the people who already lived in SF, they get the treatmetn effect 
+## And for the people who already lived in SF, they get the treatment effect 
 ##d[lives_in_sf_before == 1, 
 ##  y1 := y0 + rnorm(.N, 50000, 10000)]
 

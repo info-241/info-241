@@ -14,9 +14,9 @@
 * The Setup
 Suppose you've completed w241 & MIDS -- the sun shines brighter, the birds chirp louder, you sleep is more complete -- and you've landed a job on a great data science team at MySpace. Or, for the purposes of this example, Facebook. 
 
-The company, in pursuit of sales revenue, has determined that it would like to insert video advertisements /inside/ videos that are of a certain length. The idea here is that more even than advertisements that roll before a video begins to play, that an advertisement that rolls /inside/ the video will be very likely to be seen *and* viwed by the viewers. 
+The company, in pursuit of sales revenue, has determined that it would like to insert video advertisements /inside/ videos that are of a certain length. The idea here is that more even than advertisements that roll before a video begins to play, that an advertisement that rolls /inside/ the video will be very likely to be seen *and* viewed by the viewers. 
 
-It is your teams job to produce the evaluation that will determine whether this new delivery system goes before the full userbase. The determination will be made in terms of changes in revenue with a one-year time horizon, so you need not worry about events or changes that might occur beyond that horizon. 
+It is your teams job to produce the evaluation that will determine whether this new delivery system goes before the full user base. The determination will be made in terms of changes in revenue with a one-year time horizon, so you need not worry about events or changes that might occur beyond that horizon. 
 
 * What you've got to report back 
 You've got three groups of people who will be *very* interested in the results of this experiment. 

@@ -5,7 +5,7 @@ output: github_document
 ---
 
 ```{r, include=FALSE}
-rm(list = ls())
+# rm(list = ls())
 ```
 
 
@@ -55,7 +55,7 @@ cheat_experiment <- function(experiment_size, number_of_experiments, crit_val) {
     ## no treatment effect at all, the longer we look at the experiment, 
     ## the more likely we are to call a winner. 
     ## --- 
-    ## - The outter loop works through each of the *simulations* which is 
+    ## - The outer loop works through each of the *simulations* which is 
     ##   an experiment.  
     ## - The inner loop checks each of the rows in that particular
     ##   experiment. 
@@ -77,14 +77,14 @@ cheat_experiment <- function(experiment_size, number_of_experiments, crit_val) {
     for(i in  4:experiment_size) {
       ## we need to build this inner loop so that we can check 
       ## for the p-value after every new piece of data comes in 
-      ## this is additional compared ot the last function, but 
+      ## this is additional compared to the last function, but 
       ## doesn't change the core nature of the function
       p_val[i] <- t.test(y1[1:i], y0[1:i])$p.value
       }
 
     ## in the first function we returned whether the p-value at the
     ## end of the test was smaller than the critical value. here 
-    ## wer're going to check to see if *any* of the p-values are 
+    ## we're going to check to see if *any* of the p-values are 
     ## smaller than the p-value. after all, that would be our trigger
     ## to stop the test. 
     reject[sim] <- any(p_val < crit_val, na.rm = TRUE)

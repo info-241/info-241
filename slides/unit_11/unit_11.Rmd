@@ -49,7 +49,7 @@ class: inverse, center, middle
 # New Implementation Problems
 - Randomization system doesn't work as intended
 - Treatment not delivered or not received
-  - Eg. letters not read or emails not opened
+  - E.g. letters not read or emails not opened
 - Unintended effects of treatment
 
 
@@ -67,7 +67,7 @@ class: inverse, center, middle
 #### Websites
 - Changes to a site cause users to act differently
 - User activity often normalizes after adjusting to change
-  - Eg. Change in purchase flow might cause **temporary** conversion increase
+  - E.g. Change in purchase flow might cause **temporary** conversion increase
 
 
 ---
@@ -163,7 +163,7 @@ class: inverse, center, middle
 # Placebo Tests
 #### If experiment/experimentation system works, there should be **no difference** in a variable
 
-- Difference in variable suggests a problem with the sytsem
+- Difference in variable suggests a problem with the system
 - **A/A test:** Tests a treatment against itself to detect any difference in outcome
 - **Traditional placebo test:** Checks other outcomes that treatment shouldn't affect
 
@@ -179,7 +179,7 @@ In-house system randomly directed to page A or B when page A loaded
 - Issues:
   - Load time was longer for treatment group
   - Treatment code didn't run on all web browsers. Some users directed to treatment page, but when it didn't load their purchase assigned to control group
-  - Unrealized manipulations, Eg. delay loading web page
+  - Unrealized manipulations, E.g. delay loading web page
   - *Page A consistently bested B despite being identical* 
   - Redirect delay and issues made the treatment perform better, not the content
 
@@ -239,7 +239,7 @@ class: inverse, center, middle
   - Control group: received no letters
   - Did constituents receive letters? Did they learn their legislator's positions?
   - Asked people if they recalled recently receiving a letter from legislator
-  - People in treatment group more likely to report having received letter, understand legilator's position
+  - People in treatment group more likely to report having received letter, understand legislator's position
   - Can't use this information in estimation
 
 
@@ -279,7 +279,7 @@ class: inverse, center, middle
   - Reason: vendor truncated data by number of sales
   - Treatment group sales data lost
 - This is an example of a problem that would never be expected, but there are all kinds of small things like this that could go wrong
-- Really important to check covariable balance as a sanity check
+- Really important to check covariate balance as a sanity check
 
 
 ---
@@ -312,7 +312,7 @@ class: inverse, center, middle
 - Conduct placebo test and show practices failing
 - Present potential conclusions experiment could produce and ways this could chance practices
 - Tell story of why causal inference from observational data might be wrong
-  - Eg. Playing outside improves children's eyesight
+  - E.g. Playing outside improves children's eyesight
   - How did people receive treatment?
   - What's different about those people? What are the reasons?
 
@@ -321,7 +321,7 @@ class: inverse, center, middle
 # Increase Perceived Benefits (cont'd)
 
 ### "Investment in information for future decisions"
-- Eg. Firm worries that holding back advertising for sake of experimenting will cost them money
+- E.g. Firm worries that holding back advertising for sake of experimenting will cost them money
 - Short-term costs pay off in future
 - Down payment
 
@@ -337,7 +337,7 @@ class: inverse, center, middle
 ---
 # Decrease Perceived Costs
 
-### Administration, unfairness, giving up potential gains from treatment (eg. ads)
+### Administration, unfairness, giving up potential gains from treatment (e.g. ads)
 
 ### Delay for some units
 - Randomize order of mailings
@@ -346,8 +346,8 @@ class: inverse, center, middle
   
 ### Limited resources
 - Example: Charity gives 5,000 bed nets to people in Africa
-  - Witholding bed nets seems morally questionable
-  - Expanding population creates control group without witholding bed nets
+  - Withholding bed nets seems morally questionable
+  - Expanding population creates control group without withholding bed nets
   
 ### Experimentation as investment in information
 
@@ -363,7 +363,7 @@ class: inverse, center, middle
 - Try pilot studies
 - System should produce covariate balance
 - Parameters should look as expected
-  - Eg. 80/20 treatment/control split
+  - E.g. 80/20 treatment/control split
   - Example: Internet explorer skewed data
 - Understand parameters for power analysis
 - When creating a system, studies should be useful

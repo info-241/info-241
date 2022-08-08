@@ -23,4 +23,4 @@ The `nbgitpuller` is a small tool that is designed to keep your materials in syn
 The first time that you use the `nbgitpuller` link it may require as many as 60 seconds or so to complete the merging. But, after the first time, it will only pull differences. This means that the server should start, in general, in 30 seconds or less.
 
 # Do Some Short Yoga! 
-Head [here](http://r.datahub.berkeley.edu/hub/user-redirect/git-pull?repo=https://github.com/UCB-MIDS/w241&branch=master&urlpath=rstudio) and navigate to `week_01>reintroduction_to_r.Rmd` to work on an exercize.
+Head [here](http://r.datahub.berkeley.edu/hub/user-redirect/git-pull?repo=https://github.com/UCB-MIDS/w241&branch=master&urlpath=rstudio) and navigate to `week_01>reintroduction_to_r.Rmd` to work on an exercise.

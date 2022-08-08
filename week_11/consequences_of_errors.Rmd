@@ -162,7 +162,7 @@ That's quite enough goofing around... show us what we really want!
 
 # Plot these 
 
-Let's plot these with two plots that are overlayed upon each other. To do so, we'll first use the standard `plot` function, and then we'll use the `points` function which allows us to add points to a plot. 
+Let's plot these with two plots that are overlaid upon each other. To do so, we'll first use the standard `plot` function, and then we'll use the `points` function which allows us to add points to a plot. 
 
 Just like `data.table` the `%>%` operator has chosen to pass things from place to place using `lists()` (more on that later). But, it also acknowledges that typing `list()` a bunch of times makes code uglier than normal R. 
 

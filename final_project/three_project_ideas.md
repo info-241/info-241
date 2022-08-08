@@ -1,6 +1,6 @@
 # Three or Four Project Ideas 
 
-In this assignment, you and your team are going to propose three or four experiment ideas. Please propose one idea for each member of the team. After feedback from your instructor, your team will choose one of these three proposed ideas to continue to develop into your final project for this class for the semester. As such, the ideas that you propose should be _interesting_ to you, should be _feasible_ for you, and should __meet the requirements_ of the final project. 
+In this assignment, you and your team are going to propose three or four experiment ideas. Please propose one idea for each member of the team. After feedback from your instructor, your team will choose one of these three proposed ideas to continue to develop into your final project for this class for the semester. As such, the ideas that you propose should be _interesting_ to you, should be _feasible_ for you, and should _meet the requirements_ of the final project. 
 
 ## Where should I get ideas? 
 
@@ -11,7 +11,7 @@ Generating ideas is hard. Especially if you haven't had to think about causal qu
 1. **You might sit and have a think.** 
    - What are things that you do in your life that you are _certain_ are important? What makes you so certain they are important, and what would happen if you didn't have those things in your life? 
      - These thoughts might come from your daily, family, spiritual, educational, work, or other aspect of your life. 
-     - By way of example, you might believe that making your bed is important, or snoozing an alarm, or a children's bedtime routine, or a meditation is important to your wellbeing. Why are these things important? What would be different if they were to change? 
+     - By way of example, you might believe that making your bed is important, or snoozing an alarm, or a children's bedtime routine, or a meditation is important to your well being. Why are these things important? What would be different if they were to change? 
    - What are things that other people are _certain_ are important? What makes them so certain they are important, and what would happen if these things didn't exist? 
 2. **You might read or listen to the scientific news.**
    - What are people researching right now, and what do they suppose these things cause? 
@@ -19,6 +19,23 @@ Generating ideas is hard. Especially if you haven't had to think about causal qu
      - You can listen to science, economics, politics, or psychology podcasts.
 3. **You might look a policies that are being proposed.**
    - Almost without exception, policies, rules, and laws are implemented with the intention of _causing_ a certain event to occur. Sometimes these policies have a good set of causal evidence to support their implementation; many times, they do not. 
+4. **You might read Gerber A & Green D. 2012. *Field Experiments*. Appendix B**
+   - This Appendix includes Gerber & Green's thoughts on _Suggested Field Experiments
+for Class Projects_, broken into sections regarding _Crafting Your Own Experiment_ and _Suggested Experimental Topics for Practicum Exercises_.
+
+
+### A few examples of past projects
+
+- Do default values change donation amounts?
+- Do "made in China" tags increase sales on Trump Flag?
+- Do "wear facial covering" signs increase compliance to facial covering guidelines?
+- Does the word "natural" increase sales in facebook marketplace?
+- Does sleeping alone rather than with a partner lead to better sleep?
+- Does drinking decaf coffee make me more tired over the long haul?
+- Do daily affirmations in the mirror improve feelings of self-worth?
+- How much water would potential hikers plan to take based on various scenarios?
+- Do people slow down when passing green-yellow plastic figures holding "slow" signs?
+
 
 # Deliverable 
 
@@ -45,7 +62,7 @@ The article is here: https://www.pnas.org/content/118/15/e2014602118 and the abs
 
 ### Example Two 
 
-Here is another example of an abstact of this form, published by Nick Obradovich and (the courses' very own) Scott Guenther at _Climactic Change_ in 2016. 
+Here is another example of an abstract of this form, published by Nick Obradovich and (the courses' very own) Scott Guenther at _Climactic Change_ in 2016. 
 
 The article is here: https://link.springer.com/article/10.1007/s10584-016-1670-9 and the abstract reads as the following: 
 

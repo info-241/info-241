@@ -104,7 +104,7 @@ class: inverse, center, middle
 - The required assumption is that the random process cannot affect the outcome in any way other than the treatment being examined
   - This assumption is no problem in many examples such as the KIPP lottery
 - However, serving in Vietnam may affect earnings in ways unrelated to schooling
-  - Eg. PTSD may reduce earnings, which would underestimate returns to schooling
+  - E.g. PTSD may reduce earnings, which would underestimate returns to schooling
 - In the next example, David Broockman will describe a natural experiment where the exclusion restriction might be violated
 
 
@@ -450,12 +450,12 @@ class: inverse, center, middle
 
 ####Ex ante: before the event
 - People are aware of the threshold and can try to get above it
-- Eg. Latin honors
+- E.g. Latin honors
   - Effect of honors on success in labor market
   - Awareness of threshold results in better students just above cutoff
   
 #### Ex post: after the event
-- Eg. Elections of Black mayors in the 1970s
+- E.g. Elections of Black mayors in the 1970s
 - Black candidates disproportionately lost by slim margins
 - Manipulations make analysis difficult
 
@@ -466,7 +466,7 @@ class: inverse, center, middle
 
 
 ####**Smoothness (McCrary test)**
-- Eg. effects of minimum-wage laws on unemployment
+- E.g. effects of minimum-wage laws on unemployment
 - Comparison between states based on margin of vote passing
   
 ---
@@ -481,11 +481,11 @@ knitr::include_graphics(path='./figures/figure11_11.png')
   - Does covariate balance hold up based on early measurements?
 
 #### **Smoothness (McCrary test)**
-- Eg. effects of minimum-wage laws on unemployment
+- E.g. effects of minimum-wage laws on unemployment
 - Comparison between states based on margin of vote passing
 - Can't directly compare bills due to differences in kinds of bills that just pass and just fail
 - Check for proportion of observations in running variable
-  - Eg. fraction of yes votes vs treatment variable
+  - E.g. fraction of yes votes vs treatment variable
 - Passage of regression discontinuity check doesn't guarantee assumptions hold
 - Check for lack of covariate balance, lack of smoothness
 
@@ -524,9 +524,9 @@ class: inverse, middle, center
 # Difference in Differences
 ## Effects of Federal Reserve Lending Policy to Mississippi Banks
 ----
-- It is difficult to do a field experiment on monitary policy
+- It is difficult to do a field experiment on monetary policy
 - Instead we look for a natural experiment
-  - In 1930, the Federal Reserve Bank of Atlanta (6th District) chose to provide much more credit to troubled banks than did the St. Lous Fed (8th District)
+  - In 1930, the Federal Reserve Bank of Atlanta (6th District) chose to provide much more credit to troubled banks than did the St. Louis Fed (8th District)
   - The state of Mississippi was divided almost equally between the two districts
 
 ---
@@ -539,7 +539,7 @@ class: inverse, middle, center
   - We might be tempted to conclude that easy lending caused more banks to close
   - BUT before the crisis, 30 fewer banks were open in the 6th District
 - We must account for this baseline difference
-- This is what DiD does by subtracting the before-after difference in the treatment group from the before-after difference in the psuedo-control group
+- This is what DiD does by subtracting the before-after difference in the treatment group from the before-after difference in the pseudo-control group
 
 
 ---
@@ -625,7 +625,7 @@ $$Y_{dt}=167-\underset{(8.8)}{29} \cdot TREAT_d - \underset{(7.6)}{49}\cdot POST
 $$Y_{dt}=167-\underset{(8.8)}{29} \cdot TREAT_d - \underset{(7.6)}{49}\cdot POST_t +\underset{(10.7)}{20.5} \cdot (TREAT_d * POST_t)+e_{dt}$$
 
 - The coefficient of 20.5 on the interaction term is the estimated causal effect of easy lending policy to troubled banks
-  - Eg. the difference in the post-period vs the pre-period in the treatment group, relative to the difference in the comparison group
+  - E.g. the difference in the post-period vs the pre-period in the treatment group, relative to the difference in the comparison group
 - Next, David Broockman will share some additional examples of DiD
 
 
@@ -743,7 +743,7 @@ class: inverse, middle, center
 # DiD Example: Advertising and Prices
 
 - Rhode Island (RI) banned advertising prices of alcohol
-  - Will firms offer less competetive pricing as a result?
+  - Will firms offer less competitive pricing as a result?
 - Could compare RI alcohol prices to those in Connecticut and Massachusetts (MA)
   - Other conditions between states might differ
 - RI ended advertising ban
@@ -782,7 +782,7 @@ class: inverse, middle, center
   - Why some places have incinerators while others don't?
   - Ideal experiment: randomly assign location of incinerators
   - Incinerators tend to be built in bad neighborhoods where property values are lower to begin with
-  - Unobserved heterogeneity (Eg. bad construction or recently built development)
+  - Unobserved heterogeneity (E.g. bad construction or recently built development)
 
 
 ---
@@ -804,7 +804,7 @@ class: inverse, middle, center
 - Home prices near incinerator could have had lower baseline resulting from pre-existing differences
 - **DiD protects from false conclusions drawn from simple before/after approach**
 - Vulnerabilities still exist
-  - Eg. demographic changes could lead to incinertor being built in the first place
+  - E.g. demographic changes could lead to incinerator being built in the first place
 
 
 

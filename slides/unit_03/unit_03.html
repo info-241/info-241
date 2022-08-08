@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ## Unit 3
 ### David Reiley, David Broockman, D. Alex Hughes
 ### UC Berkeley, School of Information
-### Updated: 2021-09-01
+### Updated: 2022-04-20
 
 ---
 
@@ -144,8 +144,8 @@ randomize(units_per_group = 4)
 ```
 
 ```
-## [1] "Control"   "Control"   "Treatment" "Treatment" "Treatment" "Treatment"
-## [7] "Control"   "Control"
+## [1] "Treatment" "Treatment" "Control"   "Control"   "Control"   "Treatment"
+## [7] "Treatment" "Control"
 ```
 
 ```r
@@ -153,7 +153,7 @@ randomize(units_per_group = 4)
 ```
 
 ```
-## [1] "Treatment" "Control"   "Control"   "Treatment" "Control"   "Control"  
+## [1] "Treatment" "Treatment" "Control"   "Control"   "Control"   "Control"  
 ## [7] "Treatment" "Treatment"
 ```
 
@@ -228,13 +228,13 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned)
 
 ```
 ## $tg_mean
-## [1] 36
-## 
-## $cg_mean
 ## [1] 35
 ## 
+## $cg_mean
+## [1] 36
+## 
 ## $ate
-## [1] 1
+## [1] -1
 ```
 
 ```r
@@ -243,7 +243,7 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned)[['ate']]
 ```
 
 ```
-## [1] 1
+## [1] -1
 ```
 
 ---
@@ -288,7 +288,7 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned_one)[['ate']]
 ```
 
 ```
-## [1] 7.5
+## [1] 4.1
 ```
 
 ```r
@@ -297,7 +297,7 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned_two)[['ate']]
 ```
 
 ```
-## [1] -3.9
+## [1] -8.1
 ```
 
 ```r
@@ -306,7 +306,7 @@ estimate_ate(y_values = outcomes, treatment = treatment_assigned_three)[['ate']]
 ```
 
 ```
-## [1] 4
+## [1] -5.8
 ```
 
 ---
@@ -380,7 +380,7 @@ mean(abs(sharp_null) &gt; abs(experimental_ate))
 ```
 
 ```
-## [1] 0.8512
+## [1] 0.863
 ```
 
 ---
@@ -451,8 +451,8 @@ outcomes
 ```
 
 ```
-##  [1] 26  2 28 29  5  6  7  8 34 35 11 12 38 39 40 16 42 43 19 45 76 52 78 79 80
-## [26] 56 57 58 59 60 86 62 63 89 65 91 67 68 94 95
+##  [1] 26  2 28 29  5  6 32  8 34 10 11 12 38 14 15 16 17 18 44 20 76 52 78 54 55
+## [26] 56 82 83 84 85 86 87 63 89 65 91 67 93 94 95
 ```
 
 ```r
@@ -464,7 +464,7 @@ experimental_ate_big_effect
 ```
 
 ```
-## [1] 20.7
+## [1] 39.4
 ```
 
 ---
@@ -515,7 +515,7 @@ mean(abs(sharp_null_big_effect) &gt; abs(experimental_ate_big_effect))
 ```
 
 ```
-## [1] 0.0166
+## [1] 0
 ```
 
 ---

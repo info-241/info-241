@@ -10,7 +10,7 @@ First, we create a grouping variable with two groups, one called "Man", and anot
 group <- c(rep("Man",20),rep("Woman",20))
 ``` 
 
-To these groups, we assign silly, but schematically heplful *potential outcomes* to treatment and control. We say that, by some chance, we sampled men into our study that had estrogen ppm levels that ranged from 1-20, in perfect increments. Also, what luck, but we sampled women into the study that had estrogen levels that ranged from 51-70. So, the women have on average higher estrogen beginning the study. 
+To these groups, we assign silly, but schematically helpful *potential outcomes* to treatment and control. We say that, by some chance, we sampled men into our study that had estrogen ppm levels that ranged from 1-20, in perfect increments. Also, what luck, but we sampled women into the study that had estrogen levels that ranged from 51-70. So, the women have on average higher estrogen beginning the study. 
 
 ```{r}
 po_control <- c(seq(from = 1, to = 20), seq(from = 51, to = 70))
@@ -42,7 +42,7 @@ randomize()
 
 With our randomization function in hand, we can now set up our vector of treatment assignments. This is simply storing the results of our function randomize in a vector object called treatment. 
 
-What happens when you run this next cell a few times? Are you satisfied that you're getting a distribution of treatment assignemnts that is 50-50 every time? 
+What happens when you run this next cell a few times? Are you satisfied that you're getting a distribution of treatment assignments that is 50-50 every time? 
 
 ```{r}
 treatment <- randomize() #Conduct randomization for this experiment
@@ -58,9 +58,9 @@ table(group, randomize())
 ```
 
 
-Recall that we are setting up an experiment that has **no** effect. As Green and Gerber point out in *Field Experiments* in the case of the sharp-null, we are actually testing against the possiblity that we observe both the potential outcomes! (As a comprehension check, explain why this is true).
+Recall that we are setting up an experiment that has **no** effect. As Green and Gerber point out in *Field Experiments* in the case of the sharp-null, we are actually testing against the possibility that we observe both the potential outcomes! (As a comprehension check, explain why this is true).
 
-Next, we create a vector of realized outcomes, first using the compact notation that Green and Gerber prefer using maths. For those randomized to treamtent, we multiply the potential outcome to treatment time the treatment vector (which is a 1 when they were assigned to treatment), and for those in control, into this vector we assign the potential outcome to control time the quantity `(1 - treatment)` which will be one when they are in the treatment group. 
+Next, we create a vector of realized outcomes, first using the compact notation that Green and Gerber prefer using maths. For those randomized to treatment, we multiply the potential outcome to treatment time the treatment vector (which is a 1 when they were assigned to treatment), and for those in control, into this vector we assign the potential outcome to control time the quantity `(1 - treatment)` which will be one when they are in the treatment group. 
 
 ```{r}
 outcomes <- po_treatment * treatment + po_control*(1-treatment)
@@ -97,7 +97,7 @@ table(outcomes == outcomesV2)
 table(outcomes == outcomesV3)
 ```
 
-To my eye, the clarity of either the math version or the vector subset version are much more transparent in what they're accomplishing -- they have the added benefit of working more quickly in R if you have a large number of opertaions to run. 
+To my eye, the clarity of either the math version or the vector subset version are much more transparent in what they're accomplishing -- they have the added benefit of working more quickly in R if you have a large number of operations to run. 
 
 # Ok so we've got our data set up. Now what? 
 Now that we have the data set up, we can begin to examine what the lecture is really about, what is the distribution of ATE that we observe due to the different possibly assignments to treatment and control. A few points to remember: 
@@ -123,7 +123,7 @@ ate <- est_ate(outcomes, treatment)
 ate 
 ```
 
-**What gives!** We created this data such that there is *exactly* zero treament effect.  Note, even more specifically than creating the data so that there was no *average treatment effect* we constructed this so that there was no effect at all -- this is at the potential outcomes level! Recall that P(0) = P(1).  
+**What gives!** We created this data such that there is *exactly* zero treatment effect.  Note, even more specifically than creating the data so that there was no *average treatment effect* we constructed this so that there was no effect at all -- this is at the potential outcomes level! Recall that P(0) = P(1).  
 
 # How big is that difference likely to be on average?
 We can figure out what would happen if we did this same randomization a few of times. 
@@ -134,7 +134,7 @@ est_ate(outcomes, randomize())
 est_ate(outcomes, randomize())
 ``` 
 
-So, what we're seeing is that there are some slightly different outcomes to different trement regimes. We can do this, a bunch more times using the `replicate` function. Specifically, do this 5,000 to get a sense of the distribution
+So, what we're seeing is that there are some slightly different outcomes to different treatment regimes. We can do this, a bunch more times using the `replicate` function. Specifically, do this 5,000 to get a sense of the distribution
 
 ```{r}
 distribution_under_sharp_null <- replicate(5000, est_ate(outcomes, randomize()))
@@ -163,13 +163,13 @@ abline(v = ate, col = "blue")
 
 As it turns out, that was pretty similar to what we saw in our draw! In fact, what we've got here is pretty likely to turn up by chance. 
 
-Following David B. statment, we can really easily draw a probability of seeing an ATE of a given size under the repeated randomization regime. 
+Following David B. statement, we can really easily draw a probability of seeing an ATE of a given size under the repeated randomization regime. 
 
 ```{r}
 m <- mean(ate <= distribution_under_sharp_null) #p-value
 m
 ``` 
-And so we we see that there is a `r m` probability of observing an ATE of this size, given the repreated randomization regime, under the sharp null hypothesis. 
+And so we we see that there is a `r m` probability of observing an ATE of this size, given the repeated randomization regime, under the sharp null hypothesis. 
 
 #Simulate an experiment with a large effect
 
@@ -229,11 +229,11 @@ plot(density(p_values, from = 0, to = 1), xlim = c(0,1),
      main = "Density of p-values \n t = 0") # uniform distribution
 # how often is p_value under 0.05 when there is no effect?
 ``` 
-That line is kind of warbeling around as a result of statistical noise, but more or less, we have a horizontal line -- or at the very least, a line that would not be very informative if we had to place a bet about where on the range the p-value is most likely to lie. 
+That line is kind of warbling around as a result of statistical noise, but more or less, we have a horizontal line -- or at the very least, a line that would not be very informative if we had to place a bet about where on the range the p-value is most likely to lie. 
 
 In fact, if we look at the average p-value from this distribution, we see that it is `r mean(p_values < 0.05)`. This means that the *average* probability of seeing a treatment size of size $\hat{ATE}$ under the sharp null hypothesis, across all 5,000 of our replications is `r mean(p_values < 0.05)`. That is really, *really* likely. 
 
-What happens if we incrase the effect size in our simulated study? Now, we're moving from a simulation that supposes there is no effect of soy on estrogen levels to a simulation that supposes there is a 10 unit increase in the estrogen levels of subjects who are treated with soy. 
+What happens if we increase the effect size in our simulated study? Now, we're moving from a simulation that supposes there is no effect of soy on estrogen levels to a simulation that supposes there is a 10 unit increase in the estrogen levels of subjects who are treated with soy. 
 
 ```{r}
 p_values <- replicate(1000, simulate_study(10))
@@ -291,9 +291,9 @@ get_power <- function(baseline, effect_size, sample_size) {
 
 Functions set, let's roll! 
 
-First: What is the effect on our power if we incrase the effect size of the treatment that we are administering? In an experiment, we might be able to accomplish this incrased effect size by increasing the *dosage* or the intensity of the treatment that we're administering.  However, we should note two things: 
+First: What is the effect on our power if we increase the effect size of the treatment that we are administering? In an experiment, we might be able to accomplish this increased effect size by increasing the *dosage* or the intensity of the treatment that we're administering.  However, we should note two things: 
 
-1. The actual treatment effect $(\tau_{i})$ is an effect that is a parameter of the *real* world, something that is onobserved
+1. The actual treatment effect $(\tau_{i})$ is an effect that is a parameter of the *real* world, something that is unobserved
 2. We can't actually manipulate $\tau_{i}$ per unit application -- but rather, we can increase the units applied. 
 
 ```{r}
@@ -305,7 +305,7 @@ get_power(baseline = .1, effect_size = .2, 100)
 get_power(baseline = .1, effect_size = .25, 100)
 ``` 
 
-Second: let's work with the other lever that we actually *can* pull, mainipulating the effect size. Even if we can't move $\tau$, we can enroll 1x, 5x, or 50x the number of people in our study. 
+Second: let's work with the other lever that we actually *can* pull, manipulating the effect size. Even if we can't move $\tau$, we can enroll 1x, 5x, or 50x the number of people in our study. 
 
 ```{r}
 # Increasing sample size

@@ -3,9 +3,9 @@ title: "Regression Discontinuity"
 output: github_document
 ---
 
-**Regression Discontinuity Designs** (RDD) generate inferences about causal quanitites that *very* nearly meet conditions that are produced by an experiment that has been explicitly randomized. Namely, if falling "just above" or "just below" the threshold where a **policy** is applied occurs at random, then at least for some people the efect of this policy is causally identified. 
+**Regression Discontinuity Designs** (RDD) generate inferences about causal quantities that *very* nearly meet conditions that are produced by an experiment that has been explicitly randomized. Namely, if falling "just above" or "just below" the threshold where a **policy** is applied occurs at random, then at least for some people the effect of this policy is causally identified. 
 
-Broadly there are two strategies for estimating RDD estimates: Subset data to only use data that is very near the cuttoff or fit a model whose assumptions permit inference at the cuttoff. 
+Broadly there are two strategies for estimating RDD estimates: Subset data to only use data that is very near the cutoff or fit a model whose assumptions permit inference at the cutoff. 
 
 # Create Data 
 
@@ -60,7 +60,7 @@ In this case, suppose that the threshold occurs at whether the running variable 
 d[ , Y := ifelse(running > 5, y_0 + tau, y_0)]
 ```
 
-If someone has a value greated than 5 on the running variable, then they receive the treatment. And so, although it isn't *strictly* necessary, we can encode this information into a concise variable. 
+If someone has a value greater than 5 on the running variable, then they receive the treatment. And so, although it isn't *strictly* necessary, we can encode this information into a concise variable. 
 
 ```{r}
 d[ , treat := 1 * (running > 5)]
@@ -74,13 +74,13 @@ head(d)
 
 What do we know about this data?
 
-- There is *definately* some non-experimental relationship between covariates and the outcome.
+- There is *definitely* some non-experimental relationship between covariates and the outcome.
 
 ```{r}
 covariate_model <- d[ , lm(Y ~ covariate)]
 summary(covariate_model)$coefficients
 ```
-- There is also *definaetely* some non-experimental relationship between the covariates and the **treatment** policy being implemented. 
+- There is also *definitely* some non-experimental relationship between the covariates and the **treatment** policy being implemented. 
 
 ```{r}
 treatment_model <- d[ , lm(treat ~ covariate)]
@@ -113,7 +113,7 @@ Before you scroll down to the section, consider this question:
 Imagine two cases: 
 
 1. You use the entire data table that you have built to this point; 
-2. You use the following subset of the data table: the subset where the `running` variable falls within one unit of the treatment cuttoff: that is, `running > 4 & running < 6`. 
+2. You use the following subset of the data table: the subset where the `running` variable falls within one unit of the treatment cutoff: that is, `running > 4 & running < 6`. 
 
 Will one of these two scenarios have more variance in the `running` variable? If so, which? 
 
@@ -125,7 +125,7 @@ Will one of these two scenarios have more variance in the `treat` variable? If s
 
 No seriously, don't peek! Think about them first! 
 
-By compressing the range on the running variable, there is just less variance in the running variable. Because the running and covariate are correalted with one another, there is also less variance in the covariate. 
+By compressing the range on the running variable, there is just less variance in the running variable. Because the running and covariate are correlated with one another, there is also less variance in the covariate. 
 
 **But** because we are ensuring that we have coverage on both sides of the place where the policy is applied, we have no reduction in the amount of variance in the *treatment* indicator. 
 
@@ -142,7 +142,7 @@ d[running > 4 & running < 6,
     treat_var     = var(treat))]
 ```
 
-What if we get *really* close to the cuttoff? 
+What if we get *really* close to the cutoff? 
 
 ```{r}
 d[running > 4.9 & running < 5.1,

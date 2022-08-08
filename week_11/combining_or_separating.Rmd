@@ -66,9 +66,9 @@ I'll start it for you.
 
 ```{r precision weighting ate}
 precision_weighted_ate <- function(mu_1, se_1, mu_2, se_2){
-  ## this funciton takes arguments for means and standard deviations
+  ## this function takes arguments for means and standard deviations
   ## for two studies that are to be analyzed as a fixed-effects 
-  ## meta anlaysis 
+  ## meta analysis 
   scale_1 <- (1 / se_1^2) / ((1/se_1^2) + (1/se_2^2))
   scale_2 # fill this <- 
   

@@ -16,11 +16,11 @@ set.seed(3)
 
 In this section we're going to talk about power, which is the probability that the test we set up will *correctly* reject the null hypothesis. Said another way, what is the probability that our p-value is small, given our p-value *should* be small? 
 
-As a preliminary exercize, let's determine how much power a t-test has to reject a null hypothesis. We're first going to hard-code the entire process; after we've run this once, we can think about how we might generalize the code to accept arguments rather than hard-coded parameters. 
+As a preliminary exercise, let's determine how much power a t-test has to reject a null hypothesis. We're first going to hard-code the entire process; after we've run this once, we can think about how we might generalize the code to accept arguments rather than hard-coded parameters. 
 
 # Assumptions about the World 
 
-Especially when you are conducting power analysis *before* you ahve conducted your experiment there are large parts of what you need to know that you have not observed.
+Especially when you are conducting power analysis *before* you have conducted your experiment there are large parts of what you need to know that you have not observed.
 
 1. What are the distribution of outcomes in the control group?
 2. How large is the treatment effect? 
@@ -89,7 +89,7 @@ In this *particular* sample of data, we observe that there was a p-value of `r p
 
 To provide a fuller understanding of how able this test to reject the null hypothesis, we need to repeatedly sample from our population and conduct the randomization inference process to conduct our test and produce p-values. 
 
-Doing so takes the entire process to this point, and repeates it several times. 
+Doing so takes the entire process to this point, and repeats it several times. 
 
 ```{r}
 p_values <- NA 
@@ -273,9 +273,9 @@ power_test_t()$power
 
 ## Increase Effect Size
 
-What is the effect on our power if we incrase the effect size of the treatment that we are administering? In an experiment, we might be able to accomplish this incrased effect size by increasing the *dosage* or the intensity of the treatment that we're administering.  However, we should note two things: 
+What is the effect on our power if we increase the effect size of the treatment that we are administering? In an experiment, we might be able to accomplish this increased effect size by increasing the *dosage* or the intensity of the treatment that we're administering.  However, we should note two things: 
 
-1. The actual treatment effect $(\tau_{i})$ is an effect that is a parameter of the *real* world, something that is onobserved before you run your experiment
+1. The actual treatment effect $(\tau_{i})$ is an effect that is a parameter of the *real* world, something that is unobserved before you run your experiment
 2. Increasing the treatment effect often ends up feeling like being simply being more hopeful
 
 ```{r}
@@ -294,7 +294,7 @@ power_test_t(
 
 ## Increase sample size 
 
-What about working with a lever that we actually *can* pull, mainipulating the study size. 
+What about working with a lever that we actually *can* pull, manipulating the study size. 
 
 Even if we can't move $\tau$, we can enroll 1x, 5x, or 50x the number of people in our study. 
 

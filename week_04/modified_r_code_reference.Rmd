@@ -62,7 +62,7 @@ sim_normal_study <- function() {
 }
 ```
 
-If we call this function once, the function returns back the estimated average treatment effect in the simulated study and the number of women that were assiged to treatment (out of the possible 20). 
+If we call this function once, the function returns back the estimated average treatment effect in the simulated study and the number of women that were assigned to treatment (out of the possible 20). 
 
 ```{r}
 s1 <- sim_normal_study()
@@ -81,7 +81,7 @@ plot(results,
 abline(v = 0, col = "blue", lwd = 2)
 ``` 
 
-We set the study up so that we *know* there is no treatment effect. And, when we have 10 women who we randomize into control we, indeed, recover this absense of an effect. Our estimates for the ATE seem pretty well centered around zero. 
+We set the study up so that we *know* there is no treatment effect. And, when we have 10 women who we randomize into control we, indeed, recover this absence of an effect. Our estimates for the ATE seem pretty well centered around zero. 
 
 But, there is a clearly linear relationship between the number of women that we have enrolled and our estimated ATE. If, through our simple random assignment procedure we sampled 12 of twenty women to be in the treatment condition -- which is pretty likely -- we would estimate an ATE of about 10! 
 
@@ -148,7 +148,7 @@ est_ate(outcomes_blocked, randomize_blocked()))
 # Compare ranges 
 source("http://ischool.berkeley.edu/~d.alex.hughes/code/pubPlot.R")
 plot(density(distribution_under_sharp_null), 
-     main = "Denisty of Outcomes", 
+     main = "Density of Outcomes", 
      lwd = 2, col="red", 
      ylim=c(0,.17))
 #distribution without blocking
@@ -183,7 +183,7 @@ summary(with_block_lm)
 
 # Clustering
 
-Sometime there are design, practical, or ethical constrains that mean that although we can observe the outcome of treatment for each individual, we can't acutally *individually* assign each student to a treatment/control level. 
+Sometime there are design, practical, or ethical constrains that mean that although we can observe the outcome of treatment for each individual, we can't actually *individually* assign each student to a treatment/control level. 
 
 This leads to a bit of a trick situation -- we have observations occurring at one level, but assignment happening at another level. The least efficient solution would be to aggregate up to the highest level, but this throws away a lot of the information in our data when it rolls it into a first central moment. 
 
@@ -191,7 +191,7 @@ Instead, we can cluster our analysis.
 
 In the lecture, we present two examples: 
 
-1. **School day length**: We can observe the schooling performance at the individaul level, but we can't randomly assign Timmy to have a long day and Tommy to have a short day. 
+1. **School day length**: We can observe the schooling performance at the individual level, but we can't randomly assign Timmy to have a long day and Tommy to have a short day. 
 2. **Broadcast Advertising**: We can observe the purchasing behavior of each individual, but if we are making an ad-buy in *SF Weekly* we can't individually give Teddy more ads than Zach. 
 
 In the remaining code, we'll operate as if we are dealing with the schooling example. 
@@ -235,7 +235,7 @@ classroom_level_noise <- rnorm(n = length(all_classrooms),
 classroom_level_noise
 ```
 
-But of course, there is more noise in classroom-level outcomes than just the wing of the school the classroom is located. There is also noise that is associated with the individual *students* who are in the classrooom too! Let's build that in to the students. In the next lines, we create a student-level outcomes to control variable that is random noise at the individual level, **plus** random noise that was grouped at the classroom level. 
+But of course, there is more noise in classroom-level outcomes than just the wing of the school the classroom is located. There is also noise that is associated with the individual *students* who are in the classroom too! Let's build that in to the students. In the next lines, we create a student-level outcomes to control variable that is random noise at the individual level, **plus** random noise that was grouped at the classroom level. 
 
 ```{r}
 student_outcomes_control <- rnorm(length(classroom_ids)) + classroom_level_noise[classroom_ids]
@@ -252,7 +252,7 @@ Let's add in a uniform treatment effect (this is the sharp treatment?).
 student_outcomes_treat <- student_outcomes_control + 0.75
 ``` 
 
-Alright! The data is set up. Or very nearly so. The last step here is to randomize at the classroom level.  Here, we write a little function that will create a vector of 1s and 0s (Treatment and Control) for those classrooms that are in the treatment condition. Since we're assigning in equal proporstions to treatment and control, we are going to sample the `all_classrooms` object and pick 1/2 of them to be in the treatment condition.
+Alright! The data is set up. Or very nearly so. The last step here is to randomize at the classroom level.  Here, we write a little function that will create a vector of 1s and 0s (Treatment and Control) for those classrooms that are in the treatment condition. Since we're assigning in equal proportions to treatment and control, we are going to sample the `all_classrooms` object and pick 1/2 of them to be in the treatment condition.
 
 ```{r}
 randomize_clustered <- function() {
@@ -267,13 +267,13 @@ randomize_clustered()
 randomize_clustered()
 ``` 
 
-If you wanted to see the classroom ids next to these assigment vector, you could just hack the two `classroom_ids` and `randomize_clustered()` together using `table`. 
+If you wanted to see the classroom ids next to these assignment vector, you could just hack the two `classroom_ids` and `randomize_clustered()` together using `table`. 
 
 ```{r}
 table(randomize_clustered(), classroom_ids)
 ```
 
-Now that we're sure it "works", let's actually make the treament assignment vector, and the potential outcomes to treatment and control. 
+Now that we're sure it "works", let's actually make the treatment assignment vector, and the potential outcomes to treatment and control. 
 
 ```{r}
 treat <- randomize_clustered()
@@ -305,13 +305,13 @@ legend("topright", legend = c("right"),
 
 ``` 
 
-And we can pull out the p-value under the randomization inference framework by examineing the percent of the values that occur at a place that is smaller/larger than the p-value we observe using `mean(ate < distribution_under_sharp_null)` which evaluates to `r mean(ate < distribution_under_sharp_null)`. 
+And we can pull out the p-value under the randomization inference framework by examining the percent of the values that occur at a place that is smaller/larger than the p-value we observe using `mean(ate < distribution_under_sharp_null)` which evaluates to `r mean(ate < distribution_under_sharp_null)`. 
 
 ## What if we ignore clustering?
 
-At this point -- after doing the reading and participating in the async material -- you might be thinking, "But guys, having to estimate the weighted ATE for every cluster, and then aggregate it back into an estimate for the whole popluation is hard. And that SE formula with groups? C'mon..."
+At this point -- after doing the reading and participating in the async material -- you might be thinking, "But guys, having to estimate the weighted ATE for every cluster, and then aggregate it back into an estimate for the whole population is hard. And that SE formula with groups? C'mon..."
 
-And you're right, it is more work when we have grouping in our data that diverge from the case of simple random assignment across a homogeneous population. However, if you ignore the clustering that exists in your data, you may (read: "are likely to") badly misstate the treatment effect because your estimator undering ignoring the clustering is not guaranteed to be an unbiased estimator. 
+And you're right, it is more work when we have grouping in our data that diverge from the case of simple random assignment across a homogeneous population. However, if you ignore the clustering that exists in your data, you may (read: "are likely to") badly misstate the treatment effect because your estimator ignoring the clustering is not guaranteed to be an unbiased estimator. 
 
 Here we show this by creating a function that will randomize our data ignoring the classroom structure. 
 
@@ -346,14 +346,14 @@ abline(v = ate, lwd = 2, col = "blue")
 mean(ate < distribution_under_sharp_null_wrong) #p-value
 ``` 
 
-Under the *wrong* setup, we have an innappropriately tight distribution surrounding the ATE under the sharp null. This will lead to us rejecting the null hypothesis that there is no effect in cases where we should *not* actually reject that null hypothesis. This is Type-1 error. 
+Under the *wrong* setup, we have an inappropriately tight distribution surrounding the ATE under the sharp null. This will lead to us rejecting the null hypothesis that there is no effect in cases where we should *not* actually reject that null hypothesis. This is Type-1 error. 
 
 Another way you might think about it is that if you fail to account for clustering, if you intend only commit Type-1 error in 5% of the cases by random chance (aka $\alpha = 0.05$), you will actually be committing an error at a much higher rate. 
 
-Why does this happen? There are a number of reasons you might be innappropriately *too precise*. 
+Why does this happen? There are a number of reasons you might be inappropriately *too precise*. 
 
 1. You're behaving as if you have `n` subjects, but you really have something that is much closer to `k` subjects where `k` is the number of clusters in your data. 
-2. You're ignoring classroom level noise that might be leading to different outcomes. If there are different propinquities for some classrooms to do better, or have higher potential outcomes, then because you've got a small number of `k`, you're going to be wrong! 
+2. You're ignoring classroom level noise that might be leading to different outcomes. If there are different propensities for some classrooms to do better, or have higher potential outcomes, then because you've got a small number of `k`, you're going to be wrong! 
 
 ```{r}
 #No cluster level noise
