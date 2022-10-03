@@ -4,7 +4,7 @@ An experiment's **power** is the probability that it rejects the null hypothesis
 
 The deliverable of this power analysis should take the following form: 
 
-- It should be no more than two printed pages when compiled. 
+- It should be no more than a few printed pages when compiled. 
 - It should produce its report from source code (i.e. and .Rmd file) that can be shared and run by a collaborator. 
 
 There are many tools to aid conducting a power analysis. We list several here here as a reference for the future: 
