@@ -81,15 +81,15 @@ We're trying to give students a predictable office hours schedule. To get this d
 
 | *Day*     |    *Time* | *Instructor* |
 |-----------+-----------+--------------|
-| Monday    | 5:30-6:30 |  Scott       |
-| Tuesday   | 5:30-6:30 |  Greg        |
-| Wednesday | 5:30-6:30 |  David       |
-| Thursday  | 5:30-6:30 |  Alex        |
+| Monday    | 5:30-6:30 |  Preethi     |
+| Tuesday   | 5:30-6:30 |  David R.    |
+| Wednesday | 5:30-6:30 |  David W.    |
+| Thursday  | 5:30-6:30 |  Scott       |
 | ---       |       --- | --           |
-| Monday    | 3:00-4:00 |  Max         |
+| Monday    | 3:00-4:00 |  Iris        |
+| Tuesday   | 12:00-1:00|  Scott       |
 | Thursday  | 8:00-9:00 |  Scott       |
-| Friday    | 1:00-2:00 |  Alex        |
-| Friday    | 3:00-4:00 |  Scott       |
+
 
 * Grading and Scoring
 
