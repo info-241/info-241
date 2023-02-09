@@ -120,11 +120,9 @@ When doing the reading on Lewis and Rao for live session, please consider the fo
 
 # Week 5: Covariates and Regression
 
-## Teams for Final Project
--   This week, your assignment will be to read each of your classmates’ project proposals and vote for the ones you would most like to work on for the semester.
--   Please make sure that the Essay 2 forum contains a link to your revised project proposal. If your Draft link is outdated, please delete your original forum post and replace it with an updated one, so that your classmates will be able to read the best version of your proposal.
--   Please visit the link to the Google Form for the voting exercise ASAP and make sure that your paper topic is listed. We took all topics from the list of messages in the Essay 2 forum. If your topic is not listed, please email the instructor ASAP.
--   Before Week 6 live session, make sure to submit your votes on the form.
+## Final Project Introductions
+-   This week groups submit their 2-page proposal for their final project experiment. 
+-   We will take a few minutes at the beginning of class to allow groups to introduce their project idea to the rest of the class. 
 
 ## Opower reading assignment
 
