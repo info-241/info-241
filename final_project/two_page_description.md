@@ -34,12 +34,4 @@ Who are the humans that the team is going to recruit to participate in their exp
 
 # Feedback Returned from Instructor 
 
-When you submit this two-page description of the project, you will also schedule time for a 20-minute meeting with your section instructor. As a group, your team and instructor will work-together to push the project forward. 
-
-- Scott scheduling link:
-- David scheduling link: 
-- Conor scheduling link: https://calendly.com/conorhealy-ucb
-
-
-
-
+You are welcome to schedule a time to debrief with your instructor when you submit this two-page description of the project, but we will leave it to individual groups whether or not the current proposal warrants face-to-face feedback to push the project forward. 
