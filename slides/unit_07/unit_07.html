@@ -13,11 +13,21 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # w241: Experiments and Causality
+]
+.subtitle[
 ## Heterogeneous Treatment Effects
+]
+.author[
 ### David Reiley, David Broockman, D. Alex Hughes
+]
+.institute[
 ### UC Berkeley, School of Information
-### Updated: 2022-04-20
+]
+.date[
+### Updated: 2023-02-21
+]
 
 ---
 
@@ -93,7 +103,7 @@ While reading, consider, "Do different groups have different treatment effects?"
 
 # Example: Congressional Responsiveness
 
-## Test groups
+## Test Groups
 1. Members of Congress from the North; and, 
 2. Members of Congress from the South
 
@@ -107,7 +117,7 @@ While reading, consider, "Do different groups have different treatment effects?"
 
 # Example: eBay Shipping Policies 
 
-## Test groups 
+## Test Groups 
 - Buyers of high-priced items 
 - Buyers of low-priced items
 
@@ -204,32 +214,24 @@ class: inverse, center, middle
 
 ---
 
-class: center
-
-## Standard Format of Results 
+# Standard Format of Results 
 
 
-```
-## 
-## ========================================
-##                  Dependent variable:    
-##              ---------------------------
-##                         Score           
-## ----------------------------------------
-## Treatment              1.01***          
-##                        (0.03)           
-##                                         
-## Constant               1.05***          
-##                        (0.20)           
-##                                         
-## ----------------------------------------
-## Observations             100            
-## R2                      0.90            
-## Adjusted R2             0.90            
-## F Statistic    848.90*** (df = 1; 98)   
-## ========================================
-## Note:        *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01
-```
+&lt;table style="text-align:center"&gt;&lt;tr&gt;&lt;td colspan="2" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;&lt;em&gt;Dependent variable:&lt;/em&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td colspan="1" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;Score&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="2" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;Treatment&lt;/td&gt;&lt;td&gt;0.99&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;(0.04)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;Constant&lt;/td&gt;&lt;td&gt;1.05&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;(0.22)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="2" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;Observations&lt;/td&gt;&lt;td&gt;100&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.88&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;Adjusted R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.88&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;F Statistic&lt;/td&gt;&lt;td&gt;749.35&lt;sup&gt;***&lt;/sup&gt; (df = 1; 98)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="2" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/td&gt;&lt;td style="text-align:right"&gt;&lt;sup&gt;*&lt;/sup&gt;p&lt;0.1; &lt;sup&gt;**&lt;/sup&gt;p&lt;0.05; &lt;sup&gt;***&lt;/sup&gt;p&lt;0.01&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
 
 ---
 
@@ -513,7 +515,7 @@ class: inverse, center, middle
 
 $$
 `\begin{aligned}
-  -0.244 +  &amp; 0.138 \times 3 &amp;&amp;= 0.19 \\ 
+  -0.224 +  &amp; 0.138 \times 3 &amp;&amp;= 0.19 \\ 
   \text{Incentive} + &amp;  \text{Incentive}\times \text{Bachelors} &amp;&amp;=\text{Treatment effect} \\ 
 \end{aligned}`
 $$
@@ -660,7 +662,7 @@ class: inverse, center, middle
 - Found higher sales revenue from older people who watched advertisements
 - *Buuuuut...* results didn't replicate in a second experiment.
 
-&lt;img src="./figures/lewis_reiley_2014.png" width="610" style="display: block; margin: auto;" /&gt;
+&lt;img src="./figures/lewis_reiley_2014.png" style="display: block; margin: auto;" /&gt;
 
 
 &lt;!-- ![](./figures/lewis_reiley_2014.png) --&gt;
@@ -783,6 +785,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
