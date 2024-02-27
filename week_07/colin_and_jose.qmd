@@ -1,0 +1,52 @@
+---
+title: "Colin and Jose"
+---
+
+```{r}
+library(googlesheets4)
+library(data.table)
+library(tidyverse)
+library(magrittr)
+library(ggplot2)
+library(patchwork)
+library(magrittr)
+```
+
+# Read Data 
+
+```{r}
+d <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1LeXRtBozf_LEHQr3G9QVr3fX7XbEIUD-gU-L7E5kq5o/edit#gid=0")
+dt <- data.table(d)
+```
+
+```{r}
+dt[ , .(mean_response = mean(Response)), by = .(Name, Grammar)]
+```
+
+# Compute the Effect of Grammar Only
+
+```{r}
+
+```
+
+# Compute the Effect of Name Only 
+
+```{r}
+
+```
+
+# What is it about names that make people racist? 
+
+> Fill this in.
+
+# How can we evaluate this? 
+
+```{r}
+
+```
+
+# Are the Results Different By Legislator Ethnicity? 
+
+```{r}
+dt[ , mean(Response), keyby = .(Legislator, Grammar, Name)]
+```
