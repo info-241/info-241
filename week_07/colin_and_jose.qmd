@@ -20,7 +20,7 @@ dt <- data.table(d)
 ```
 
 ```{r}
-dt[ , .(mean_response = mean(Response)), by = .(Name, Grammar)]
+
 ```
 
 # Compute the Effect of Grammar Only
@@ -48,5 +48,5 @@ dt[ , .(mean_response = mean(Response)), by = .(Name, Grammar)]
 # Are the Results Different By Legislator Ethnicity? 
 
 ```{r}
-dt[ , mean(Response), keyby = .(Legislator, Grammar, Name)]
+
 ```
