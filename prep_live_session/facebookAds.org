@@ -12,7 +12,7 @@
 #+OPTIONS: toc:nil
 
 * The Setup
-Suppose you've completed w241 & MIDS -- the sun shines brighter, the birds chirp louder, you sleep is more complete -- and you've landed a job on a great data science team at MySpace. Or, for the purposes of this example, Facebook. 
+Suppose you've completed w241 & MIMS -- the sun shines brighter, the birds chirp louder, you sleep is more complete -- and you've landed a job on a great data science team at MySpace. Or, for the purposes of this example, Facebook. 
 
 The company, in pursuit of sales revenue, has determined that it would like to insert video advertisements /inside/ videos that are of a certain length. The idea here is that more even than advertisements that roll before a video begins to play, that an advertisement that rolls /inside/ the video will be very likely to be seen *and* viewed by the viewers. 
 
