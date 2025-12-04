@@ -1,6 +1,6 @@
 # Poster Session Guidance 
 
-For the Spring 2024 semester, we are going to conduct our final presentations as a group "poster" session. Here's what this means: 
+For the Fall 2025 semester, we are going to conduct our final presentations as a group "poster" session. Here's what this means: 
 
 1. We will divide ourselves into two groups: (a) a "California Blue" group; and, (b) a "Golden Bears" group. Each group will contain about four teams. 
 2. For the first 35 minutes of Week 14, the California Blue teams will present their work in the form of a "poster" session while the Golden Bears teams will be the audience for the session. 
